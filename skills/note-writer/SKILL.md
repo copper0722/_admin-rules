@@ -153,7 +153,7 @@ publish: false              # boolean opt-in gate. NEVER true unless Copper sets
 # ── 教科書專用 ──
 Book: "/ref/{topic_path}/_textbooks/{BookTitle}/MOC_{BookTitle}.md"
 Chapter: "15"
-PDF: "ref/{topic_path}/_textbooks/{BookTitle}/{Ch}/source.pdf"
+PDF: "raw/{topic_path}/_textbooks/{BookTitle}/{Ch}/source.pdf"
 
 # ── 文獻 / 指引 / 報告專用 ──
 citationKey: "Author2026Word"
@@ -161,7 +161,7 @@ journal: "Journal Name"
 year: 2026
 DOI: "10.xxxx/xxxxx"
 PMID: "12345678"
-PDF: "ref/articles/{citationKey}/source.pdf"
+PDF: "raw/articles/{citationKey}/source.pdf"
 
 # ── 選填 ──
 FB社團: ""
@@ -228,11 +228,11 @@ Note quality = faithful rendering of source PLUS optional callout-boxed Taiwan a
 
 | input source | output note path |
 |---|---|
-| `ref/articles/{key}/raw.md` (journal article) | `proj/note/articles/{key}.md` |
-| `ref/.../_textbooks/{Book}/{Ch}/raw.md` (textbook chapter) | `proj/note/textbooks/{Book}/{Ch}.md` |
+| `raw/articles/{key}/raw.md` (journal article) | `proj/note/articles/{key}.md` |
+| `raw/.../_textbooks/{Book}/{Ch}/raw.md` (textbook chapter) | `proj/note/textbooks/{Book}/{Ch}.md` |
 | Other (interactive «寫筆記» on PDF/wiki/report) | `proj/note/{semantically-appropriate-subfolder}/{name}.md` |
 
-**Never write notes to `ref/`**. ref/ holds raw.md + source.pdf + sidecars only (machine source layer). Copper-readable note belongs in proj/note/ where Spotlight discovery works.
+**Never write notes to `raw/`**. ref/ holds raw.md + source.pdf + sidecars only (machine source layer). Copper-readable note belongs in proj/note/ where Spotlight discovery works.
 
 **Required frontmatter field `parent:`** points back to the source raw.md so reverse lookup works: `parent: /ref/articles/{key}/raw.md` (vault-root absolute).
 
@@ -240,7 +240,7 @@ Note quality = faithful rendering of source PLUS optional callout-boxed Taiwan a
 * `generated`: The date the note was generated (not the same as a user-managed `created` date).
 * Omit inapplicable fields entirely (don't leave empty lines).
 * `Book` uses vault-root absolute path to the book's MOC file.
-* `PDF` **REQUIRED** for both textbook and journal articles. Use vault-relative path (e.g. `ref/articles/NEJM_NEJMcps2510060/source.pdf`). Cross-device compatible via Dropbox sync. If PDF not yet in vault, write `pending` as placeholder.
+* `PDF` **REQUIRED** for both textbook and journal articles. Use vault-relative path (e.g. `raw/articles/NEJM_NEJMcps2510060/source.pdf`). Cross-device compatible via Dropbox sync. If PDF not yet in vault, write `pending` as placeholder.
 * Tags: **flat names only** (no `_s/` or `_t/` prefix). Hierarchy managed in tags.db, not tag strings.
 
 If the document doesn't provide full citation details, fill in what's available and leave the rest blank rather than guessing.
@@ -410,7 +410,7 @@ After writing the note, assemble the sidecar folder. All related files for this 
 # Articles: ref/articles/{citationKey}/
 # Textbook chapters: ref/books/{BookTitle}/{citationKey}/
 
-SIDECAR="ref/articles/{citationKey}"
+SIDECAR="raw/articles/{citationKey}"
 mkdir -p "$SIDECAR"
 
 # Move raw transcript from staging
@@ -429,7 +429,7 @@ After assembly, the sidecar should contain:
 - `source.pdf` — original PDF (if available)
 - `*.png` / `*.jpg` — extracted figures
 
-The note at `ref/articles/{citationKey}.md` can reference sidecar files via standard links:
+The note at `raw/articles/{citationKey}.md` can reference sidecar files via standard links:
 - `![Fig 1](/proj/note/articles/{citationKey}/fig1.png)` — embed figure
 - `[Raw transcript](/proj/note/articles/{citationKey}/raw.md)` — link to raw transcript
 - `[PDF](/proj/note/articles/{citationKey}/source.pdf)` — link to PDF

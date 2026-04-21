@@ -144,5 +144,5 @@ cm1 CC CANNOT:
 
 - Law §2.16 (three central daily agents)
 - `admin/governance.md` §5 (admin loop) + §6.5 (cm1 as auditor)
-- `ref/skills/audit/SKILL.md` (the weekly L1-L4 audit owned by vault-steward — different scope, different cadence)
+- `raw/skills/audit/SKILL.md` (the weekly L1-L4 audit owned by vault-steward — different scope, different cadence)
 - `admin/_dispatch_hm4_redundancy_purge_20260418.md` Phase 4.7 (original spec)

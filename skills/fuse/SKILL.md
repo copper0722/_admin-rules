@@ -17,7 +17,7 @@ Fuse N independent LLM reports (Deep Research outputs) on the same question into
 
 Copper asks a question that warrants multi-LLM DR. Before dispatching, CC:
 
-1. **Vault gap scan** — Explore agent scans `wiki/`, `ref/`, `proj/note/`, `proj/fb/` (exclude `copper/`, `BoAn/`, `_archive/`, `.git/`) for existing coverage. Output → `proj/wiki/fuse/{topic}_{YYYYMMDD}/gap_analysis.md`:
+1. **Vault gap scan** — Explore agent scans `wiki/`, `raw/`, `proj/note/`, `proj/fb/` (exclude `copper/`, `BoAn/`, `_archive/`, `.git/`) for existing coverage. Output → `proj/wiki/fuse/{topic}_{YYYYMMDD}/gap_analysis.md`:
    - Tier-1 (direct topic hits), Tier-2 (adjacent), Tier-3 (passing mentions clustered)
    - FB public-facing audience baseline (what has Copper already communicated to ~100K FB?)
    - Systematic absences (what the prompt MUST fill)

@@ -3,7 +3,7 @@ name: journal-download
 description: "DEPRECATED — merged into /crawler skill (ref/skills/crawler/SKILL.md). All triggers now route to /crawler. MANDATORY TRIGGERS: /journal-download, download journal, 下載期刊, download OA, download open access, get this week's papers."
 ---
 
-> **⚠️ DEPRECATED: This skill is merged into `/crawler` (`ref/skills/crawler/SKILL.md`).** Use `/crawler` for all browser automation including journal downloads. This file kept for reference only.
+> **⚠️ DEPRECATED: This skill is merged into `/crawler` (`raw/skills/crawler/SKILL.md`).** Use `/crawler` for all browser automation including journal downloads. This file kept for reference only.
 
 # Journal PDF Download Skill
 
@@ -264,4 +264,4 @@ proj/journal/
 
 ## Reference
 
-Full browser automation protocol: `/crawler` skill (`ref/skills/crawler/SKILL.md`)
+Full browser automation protocol: `/crawler` skill (`raw/skills/crawler/SKILL.md`)

@@ -176,7 +176,7 @@ PDF → DEDUP CHECK → MinerU → raw.md (sidecar, type: raw)
 6. Log every dedup decision
 
 **STEP 0B — EDITION CHECK (textbooks only):**
-1. Check `ref/books/` for all editions of same textbook
+1. Check `raw/books/` for all editions of same textbook
 2. If newer edition exists in vault → do NOT process older edition
 3. Processing order = **year DESC** (newest first, always)
 
@@ -210,7 +210,7 @@ Steps:
    - **Remove references/bibliography** section at end of chapter (numbered reference list `[1]`, `[2]`... or `References` heading). These are not useful in raw.md — the source PDF has them if needed. raw.md = content only.
    - **Truncate at next chapter heading** if boundary page included: if raw.md has two chapter-level headings (`# 35 ...` followed by `# 36 ...`), delete everything from second heading onwards.
 6. Determine identity:
-   - Has DOI → citationKey → `ref/articles/{citationKey}/raw.md`
+   - Has DOI → citationKey → `raw/articles/{citationKey}/raw.md`
    - No DOI, has project → `proj/{project}/data/{name}/raw.md`
    - No DOI, no project → `kb/{topic}/raw.md`
 7. Move PDF to sidecar as `source.pdf`
@@ -255,7 +255,7 @@ Steps:
 
 ## Hard Rules (card-level, all agents)
 
-**HR-3 TEXTBOOK = LATEST EDITION ONLY.** If newer edition of same textbook exists in vault (`ref/books/`), do NOT wikify older. Archive superseded editions (§1.3).
+**HR-3 TEXTBOOK = LATEST EDITION ONLY.** If newer edition of same textbook exists in vault (`raw/books/`), do NOT wikify older. Archive superseded editions (§1.3).
 
 **HR-4 PROCESSING ORDER = YEAR DESC.** Newest content first. Textbooks: 2026 before 2024. Articles: 2026 before 2021. Newer supersedes older.
 
@@ -306,7 +306,7 @@ For journal articles + guidelines, wiki evaluation includes full EBM + causal in
 **Deep methodology reference (when appraising complex studies):**
 - `wiki/methodology/wiki_causal_inference.md` — full Hernán digest
 - `wiki/methodology/wiki_research_methods_ebm.md` — full Guyatt digest
-- `ref/books/Hernan_WhatIf/causal_inference_critical_appraisal_checklists.md` — 70+ checklist items
+- `raw/books/Hernan_WhatIf/causal_inference_critical_appraisal_checklists.md` — 70+ checklist items
 
 ### Source Type Detection (auto)
 
