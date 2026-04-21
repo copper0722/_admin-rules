@@ -1,14 +1,20 @@
-# The Law v0.6 (2026-04-21 Phase 8)
+# The Law v0.7 (2026-04-21)
 
 lang=zh-TW TW-academic (no PRC). tone=rational no-pleasantries. restate-in-domain before-answering. reasoning=argue-against→counter→conclude. causal=foundation; correlation≠causation; any causal claim→check counterfactual/confounding/collider/competing-risk/time-zero; Hernán "What If"=source (`raw/books/Hernan_WhatIf/causal_inference_critical_appraisal_checklists.md`).
 
 ## §0 Central Doctrine
 
-Pipeline: **reference → raw.md+img → wiki ∥ short note → complete note**. Steps 1-4 auto; step 5 Copper-trigger («寫筆記»). Short+complete共用 `proj/note/articles/{key}.md` (Copper 2026-04-20). raw.md in `raw/{topic}/{key}/raw.md` (git-tracked); paired binary in `_sidecar/{key}/source.pdf + images/` (Phase 4 flat model, Dropbox-synced; raw.md frontmatter `sidecar: {key}`). Frontmatter `parent: /raw/{topic}/{key}/raw.md` 反向指源. raw.md=CC reads (replaces PDF); PDF=Copper reads. Fulltext-only: wiki+short note 只做 fulltext; TOC/abstract → `wiki/journal_digests/` 候選池. Wiki+short note 同時從 raw.md 產出 (one pass, two outputs).
+**Vault = Wiki = LLM self-maintained knowledge graph.** 整個 `~/repos/Vault/` IS the wiki; top-level 分類 (`raw/ wiki/ proj/ admin/ cloud/ copper/ _*/`) 僅是組織切面，不是層級。所有 .md 默認 **m2m** (compressed English, agent-read)。Copper 人眼讀者唯二 surface: (1) `proj/note/articles/{key}.md` (zh-TW reading notes, Obsidian vault root)；(2) Dropbox/Vault_Binary/ 的 PDF 原檔。其餘 agent-internal — Copper 不讀、只互動指揮。
 
-Model mandate: **note = Opus only (never Sonnet/Haiku/Codex/Gemma)**. 僅此一條強制 model tier. 其他 step 的 tier = vault-steward 判斷 + cost-optimize. `/note-writer` SKILL.md protocol mandatory; sub-agent producing note MUST read SKILL.md first.
+**Wiki 生長兩條路 (agent 自主，兩者同權)**：
 
-Detailed flow: Vault §9.3. vault-steward enforces compliance daily.
+1. **Source-feed pipeline**: Copper 餵 source → `_inbox/` → MinerU/OCR → `raw.md + img` → `_sidecar/{key}/source.pdf + images/` (Dropbox) 配對 `raw/{topic}/{key}/raw.md` (git, frontmatter `sidecar: {key}`) → wiki 綜述 + 候選 `proj/note/articles/{key}.md` (frontmatter `parent: /raw/{topic}/{key}/raw.md`). Steps 1-4 auto; step 5 («寫筆記») Copper-trigger. Fulltext-only; TOC/abstract → `wiki/journal_digests/` 候選池.
+
+2. **Dialogue distillation**: Copper ↔ agent 對話產生 (a) 新 insight (b) 跨主題連結 (c) 修正舊觀點 → agent **當場**寫進相應 wiki 位置；不只進 handover/memory。每輪對話 = 潛在 wiki update 源。Agent 責任：識別 + 即時編碼；找不到既有 topic file 則新建；末端 check「剛才有沒有值得固化的？」
+
+Model mandate: **note = Opus only**. `/note-writer` SKILL.md mandatory. Wiki update preferred Opus；cheap tier (Sonnet/Haiku) 允許當 only 做 boilerplate / cross-link insertion 時。
+
+Detailed flow: Vault §9.3. vault-steward enforces daily.
 
 ## Definitions
 
@@ -25,12 +31,12 @@ Path schema (Phase 8, 2026-04-21): **Vault = `~/repos/Vault/` git clone** (GitHu
 
 ## §1 Principles
 
-§1.1 M2M compressed English for agent-read files; zh-TW for user-facing. Efficiency first, no waste.
+§1.1 Vault 默認 m2m (compressed English, agent-read). 唯 `proj/note/articles/*.md` + Dropbox PDF 給 Copper (zh-TW/original). Agent-facing text = efficient, no filler, no decorative prose.
 §1.2 Cross-device sync = `.md` only.
 §1.3 No delete; archive→`_archive/` (.md MUST zip). Content cleanup (done TODOs, stale entries) = normal.
 §1.4 Git=changelog; mtime=ground truth.
 §1.5 Unwritten=forgotten. Persist within session.
-§1.6 Knowledge escalation: Copper Q→agent A→save wiki `.md`. Card=functional, not kb storage.
+§1.6 Card = functional (rules/dispatch/status), NOT kb storage. Knowledge → wiki (§0 path 2 dialogue distillation); dispatch → folder CLAUDE.md.
 §1.7 Teamwork: admin holds context+strategy, sub-agents execute. Context-first.
 §1.8 Save raw first, clean later. Never discard input during ingestion.
 §1.9 System logs in `_data/` (Category A plain-text since 2026-04-18): `handover.jsonl` (session continuity, /handover), `bugs.tsv` (issue tracker, /bug), `journals.tsv` (journal registry). No fix without bug_id. No session end without handover.
