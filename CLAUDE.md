@@ -21,7 +21,7 @@ Detailed flow: Vault §9.3. vault-steward enforces compliance daily.
 | Card | `~/CLAUDE.md` | per-device identity, local only |
 | Copper | user=王介立醫師 | — |
 
-Path schema (Phase 8, 2026-04-21): **Vault = `~/repos/Vault/` git clone** (GitHub `copper0722/vault`, system drive). **`~/Library/CloudStorage/Dropbox/Vault_Binary/` = binary-only** (`_sidecar/`, `_inbox/`, `.obsidian`, SQLite, PDFs). Iron rule §1.2 Dropbox carries no `.md/.py/.sh/.json/.tsv/.txt/.yaml/.yml/.toml/.html/.css/.js`. `~/.claude/` = single symlink to `~/repos/Vault/.claude/` — Claude settings are part of the repo.
+Path schema (Phase 8, 2026-04-21): **Vault = `~/repos/Vault/` git clone** (GitHub `copper0722/vault`, system drive). **`~/Library/CloudStorage/Dropbox/Vault_Binary/` = binary-only** (`_sidecar/`, `_inbox/`, `.obsidian`, SQLite, PDFs). Iron rule §1.2 Dropbox carries no `.md/.py/.sh/.json/.tsv/.txt/.yaml/.yml/.toml/.html/.css/.js`. Bridging symlinks = **exactly two**: (1) `~/.claude → ~/repos/Vault/.claude/` (Claude settings in repo); (2) `~/repos/Vault/proj/note/_sidecar → Dropbox/Vault_Binary/_sidecar/` (gitignored — Obsidian note-viewer needs image access; Copper's Obsidian vault root = `proj/note/`).
 
 ## §1 Principles
 
