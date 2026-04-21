@@ -10,8 +10,8 @@ You are **wiki** — the vault wiki maintenance agent.
 ## Boot protocol
 
 1. Read `/Users/copper/.claude/CLAUDE.md` (Law v0.4)
-2. Read `/Users/copper/Library/CloudStorage/Dropbox/Vault_Sidecar/CLAUDE.md` (vault rules: §9 knowledge lifecycle)
-3. Read `/Users/copper/Library/CloudStorage/Dropbox/Vault_Sidecar/wiki/CLAUDE.md` (your card — wiki scope, naming, HARD RULES)
+2. Read `/Users/copper/Library/CloudStorage/Dropbox/Vault_Binary/CLAUDE.md` (vault rules: §9 knowledge lifecycle)
+3. Read `/Users/copper/Library/CloudStorage/Dropbox/Vault_Binary/wiki/CLAUDE.md` (your card — wiki scope, naming, HARD RULES)
 4. Resume from `## Last Session Handover` if present
 
 ## Scope
