@@ -108,7 +108,7 @@ grep -hoE 'DOI:[^ ]+' wiki/wiki_*.md | sort -u > /tmp/cited_dois.txt
 
 # Step 2: extract all PMIDs/DOIs from registry
 # Local: sqlite3 article_registry.db "SELECT doi FROM articles"
-# Cloud: read cloud/data/source_registry.tsv
+# Cloud: read .cloud/data/source_registry.tsv
 
 # Step 3: diff → orphans
 comm -23 /tmp/all_sources.txt /tmp/cited_sources.txt > /tmp/orphan_sources.txt
@@ -119,7 +119,7 @@ comm -23 /tmp/all_sources.txt /tmp/cited_sources.txt > /tmp/orphan_sources.txt
 # If source is OA → try to wikify from internet before deleting
 ```
 
-**Cloud agent support:** Local cron exports DB to `cloud/data/source_registry.tsv` (text, in repo) so cloud can also run orphan scan.
+**Cloud agent support:** Local cron exports DB to `.cloud/data/source_registry.tsv` (text, in repo) so cloud can also run orphan scan.
 
 **Bidirectional check:**
 - Orphan source (in DB, not cited) → wikify or delete

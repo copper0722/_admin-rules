@@ -165,7 +165,7 @@ Helper auto-fills `id` and `created_at`.
 
 - **hm4** (Dropbox-native sync): direct JSONL read/append.
 - **cm1** (SMB mount `/Volumes/dropbox-personal/Vault/`): direct JSONL read; append ONLY if no concurrent hm4 writer (rare — cm1 is typically read-only auditor).
-- **Cloud CC** (sandbox, no filesystem): reads JSONL via clone in the GitHub mirror (`cloud/data/handovers.jsonl`); appends via PENDING md block in `_data/handover.db.md` if direct append unavailable — local `handover-md-sync.py --drain` consumes next cycle.
+- **Cloud CC** (sandbox, no filesystem): reads JSONL via clone in the GitHub mirror (`.cloud/data/handovers.jsonl`); appends via PENDING md block in `_data/handover.db.md` if direct append unavailable — local `handover-md-sync.py --drain` consumes next cycle.
 
 Legacy SQLite master (`_data/handover.db`) retired 2026-04-18 per dispatch Phase 1.1. No reader should touch it; zipped copy in `_archive/handover_sqlite_retired_20260418.zip` for 30 days then deleted per Law §1.3.
 
