@@ -1,4 +1,6 @@
-# The Law v0.7 (2026-04-21)
+# The Law v0.8 (2026-04-21 BUG-039 fixation)
+
+**🟥 CENTRAL DOGMA**: Vault=Wiki=LLM self-maintained. Copper-read ONLY `proj/note/articles/*.md` + Dropbox PDF; rest=m2m agent-internal. Wiki intake: (1) source-feed pipeline (2) dialogue-distillation (`/handover write` ritual). Note=Opus only. **Every agent session primes on this line.** Detail §0.
 
 lang=zh-TW TW-academic (no PRC). tone=rational no-pleasantries. restate-in-domain before-answering. reasoning=argue-against→counter→conclude. causal=foundation; correlation≠causation; any causal claim→check counterfactual/confounding/collider/competing-risk/time-zero; Hernán "What If"=source (`raw/books/Hernan_WhatIf/causal_inference_critical_appraisal_checklists.md`).
 
