@@ -129,7 +129,7 @@ comm -23 /tmp/all_sources.txt /tmp/cited_sources.txt > /tmp/orphan_sources.txt
 
 | source | output | placement |
 |---|---|---|
-| PDF (academic, has DOI) | note.md (via /note-writer) | ref/articles/{citationKey}/ |
+| PDF (academic, has DOI) | note.md (via /note-writer) | raw/articles/{citationKey}/ |
 | PDF (project, no DOI) | raw.md → note.md | proj/{project}/data/ sidecar |
 | URL / webpage | .md extract | proj/ or kb/ by topic |
 | Email / text | .md capture | proj/ or kb/ by topic |
@@ -146,7 +146,7 @@ PDF is NEVER the primary entity. .md = first-class citizen. PDF = sidecar attach
    - PDF → Mode A-PDF
    - URL → Mode A-URL
    - Text block → Mode A-Text
-3. Determine destination: has DOI? → ref/articles/. Has project? → proj/. Else → kb/
+3. Determine destination: has DOI? → raw/articles/. Has project? → proj/. Else → kb/
 
 ### Mode A-PDF — MANDATORY PIPELINE: PDF → raw.md → note/wiki
 
@@ -169,7 +169,7 @@ PDF → DEDUP CHECK → MinerU → raw.md (sidecar, type: raw)
    - `_data/textbooks.db` → `SELECT * FROM editions WHERE series_id = ? AND edition = ?` (for textbook chapters, check chapters_raw)
    - `proj/journal/data/journal.db` → `SELECT doi FROM articles WHERE doi = ?`
    - `_data/agent_lookup.db` → search by DOI key
-   - `ls ref/articles/` → folder names contain citationKey
+   - `ls raw/articles/` → folder names contain citationKey
 3. DOI/uid already exists → **SKIP entirely** (don't re-MinerU, don't re-wikify)
 4. No DOI (gov docs, textbook chapters) → check title similarity in existing wiki .md
 5. **After processing**: UPDATE `article_registry.db` (set status, vault_raw_path, vault_wiki_path). For textbooks: UPDATE `textbooks.db` chapters_raw count.

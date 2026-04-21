@@ -50,12 +50,12 @@ Start at L{N} (state from admin/_admin_state.md `last_audit_level`):
 - Dispatch status: [x]>3d clean, [ ] no activity 7d flag
 - Stale paths, wrong counts, removed features
 
-### L3 — Structure (ref/, kb/, proj/*, copper/)
+### L3 — Structure (raw/, kb/, proj/*, copper/)
 - Folder >15 items → flag condense
 - §9.1 missing summary (.md >500L without summary: frontmatter)
 - §9.2 oversized (.md >2000L → flag split)
 - Broken wikilinks
-- Frontmatter integrity (ref/articles/: title, citationKey, tags)
+- Frontmatter integrity (raw/articles/: title, citationKey, tags)
 - Non-.md violations outside sidecar/data/
 - §10.10 misplaced files, unprocessed raw, semantic duplicates
 

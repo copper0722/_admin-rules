@@ -59,7 +59,7 @@ Run each check → record finding if violated.
 | 9 | `*.snapshot.tsv` age | `ls _data/*.snapshot.tsv -l`; flag if mtime >36h |
 | 10 | `.obsidian/` conflicts on cm1 | `find /Volumes/dropbox-personal/Vault/.obsidian -name '*衝突*' \| wc -l`; flag >10 |
 | 11 | broken symlinks | `find /Volumes/dropbox-personal/Vault -type l ! -exec test -e {} \; -print \| head -30` |
-| 12 | root pollution | `ls /Volumes/dropbox-personal/Vault/ \| grep -vE '^(_|admin/\|ref/\|proj/\|wiki/\|copper/\|BoAn/\|cloud/\|repos/\|CLAUDE\.md\|AGENTS\.md\|dashboard\.html\|dashboard-data\.json)$'` |
+| 12 | root pollution | `ls /Volumes/dropbox-personal/Vault/ \| grep -vE '^(_|admin/\|raw/\|proj/\|wiki/\|copper/\|BoAn/\|cloud/\|repos/\|CLAUDE\.md\|AGENTS\.md\|dashboard\.html\|dashboard-data\.json)$'` |
 | 13 | bug backlog trend | count `open` bugs; flag if >10 or any older than 30d |
 | 14 | handover agent silence | any agent with `agent='X'` that ran yesterday but no row today in `handover.jsonl` |
 

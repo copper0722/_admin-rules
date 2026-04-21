@@ -151,7 +151,7 @@ publish: false              # boolean opt-in gate. NEVER true unless Copper sets
 # publish_to: nephro-cme    # enum: textbook-notes | nephro-cme. ONLY set when publish: true.
 
 # ── 教科書專用 ──
-Book: "/ref/{topic_path}/_textbooks/{BookTitle}/MOC_{BookTitle}.md"
+Book: "/raw/{topic_path}/_textbooks/{BookTitle}/MOC_{BookTitle}.md"
 Chapter: "15"
 PDF: "raw/{topic_path}/_textbooks/{BookTitle}/{Ch}/source.pdf"
 
@@ -232,9 +232,9 @@ Note quality = faithful rendering of source PLUS optional callout-boxed Taiwan a
 | `raw/.../_textbooks/{Book}/{Ch}/raw.md` (textbook chapter) | `proj/note/textbooks/{Book}/{Ch}.md` |
 | Other (interactive «寫筆記» on PDF/wiki/report) | `proj/note/{semantically-appropriate-subfolder}/{name}.md` |
 
-**Never write notes to `raw/`**. ref/ holds raw.md + source.pdf + sidecars only (machine source layer). Copper-readable note belongs in proj/note/ where Spotlight discovery works.
+**Never write notes to `raw/`**. raw/ holds raw.md + source.pdf + sidecars only (machine source layer). Copper-readable note belongs in proj/note/ where Spotlight discovery works.
 
-**Required frontmatter field `parent:`** points back to the source raw.md so reverse lookup works: `parent: /ref/articles/{key}/raw.md` (vault-root absolute).
+**Required frontmatter field `parent:`** points back to the source raw.md so reverse lookup works: `parent: /raw/articles/{key}/raw.md` (vault-root absolute).
 
 * `note_version`: Always use the version string shown above. When this skill is updated, the version string here will change — all new notes will carry the new version, making it easy to identify notes that need rewriting.
 * `generated`: The date the note was generated (not the same as a user-managed `created` date).
@@ -395,7 +395,7 @@ Write tags into:
      c. POST: `curl -s -X POST -H "Zotero-API-Key: {key}" -H "Content-Type: application/json" -d '[{full item}]' "https://api.zotero.org/users/19195374/items"`
    - Never create items with only title+DOI — always use CrossRef for full metadata.
    - **Tags MUST be identical** between frontmatter and Zotero. Write SAME tags to both in the same pass. Never let them diverge.
-   - **Mutual linkage**: after creating/finding Zotero item, PATCH its `url` field with vault path `/ref/articles/{citationKey}`. `zotero://` URL scheme deprecated.
+   - **Mutual linkage**: after creating/finding Zotero item, PATCH its `url` field with vault path `/raw/articles/{citationKey}`. `zotero://` URL scheme deprecated.
 
 ### Summary (§9.1 — superseded by Take Home Message)
 
@@ -407,8 +407,8 @@ After writing the note, assemble the sidecar folder. All related files for this 
 
 ```bash
 # Determine corpus path
-# Articles: ref/articles/{citationKey}/
-# Textbook chapters: ref/books/{BookTitle}/{citationKey}/
+# Articles: raw/articles/{citationKey}/
+# Textbook chapters: raw/books/{BookTitle}/{citationKey}/
 
 SIDECAR="raw/articles/{citationKey}"
 mkdir -p "$SIDECAR"
@@ -437,7 +437,7 @@ The note at `raw/articles/{citationKey}.md` can reference sidecar files via stan
 ### Mutual linkage update
 
 After sidecar assembly, update Zotero `url` field to include the correct vault-relative path:
-`/ref/articles/{citationKey}` (vault-root path)
+`/raw/articles/{citationKey}` (vault-root path)
 
 ---
 
