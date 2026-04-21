@@ -13,5 +13,5 @@ Always query in this order; stop when answer found:
 
 ## Write authority
 - hm4 = single-writer for main vault SQLite
-- clinic DBs → BoAn vault owns writes; main vault = read-only via `~/Library/CloudStorage/Dropbox/Vault/_data/`
+- clinic DBs → BoAn vault owns writes; main vault = read-only via `~/Library/CloudStorage/Dropbox/Vault_Sidecar/_data/`
 - all SQLite ops follow `/db` skill spec (3NF, PK, sidecar .db.md, import/migration/audit)

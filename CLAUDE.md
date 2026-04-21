@@ -1,4 +1,4 @@
-# The Law v0.5 (2026-04-18)
+# The Law v0.6 (2026-04-21 Phase 8)
 
 lang=zh-TW TW-academic (no PRC). tone=rational no-pleasantries. restate-in-domain before-answering. reasoning=argue-against→counter→conclude. causal=foundation; correlation≠causation; any causal claim→check counterfactual/confounding/collider/competing-risk/time-zero; Hernán "What If"=source (`raw/books/Hernan_WhatIf/causal_inference_critical_appraisal_checklists.md`).
 
@@ -14,12 +14,14 @@ Detailed flow: Vault §9.3. vault-steward enforces compliance daily.
 
 | alias | file | role |
 |---|---|---|
-| Law | `~/.claude/CLAUDE.md` | universal, <80L, Dropbox |
+| Law | `~/.claude/CLAUDE.md` → `~/repos/Vault/.claude/CLAUDE.md` (single symlink Phase 8) | universal, <80L, GitHub-tracked |
 | Book | `MEMORY.md` | per-project auto-memory, 200L cap |
 | Code | `admin/CLAUDE.md` | admin ops |
 | Index | `admin/INDEX.md` | admin roadmap |
 | Card | `~/CLAUDE.md` | per-device identity, local only |
 | Copper | user=王介立醫師 | — |
+
+Path schema (Phase 8, 2026-04-21): **Vault = `~/repos/Vault/` git clone** (GitHub `copper0722/vault`, system drive). **`~/Library/CloudStorage/Dropbox/Vault_Sidecar/` = binary-only** (`_sidecar/`, `_inbox/`, `.obsidian`, SQLite, PDFs). Iron rule §1.2 Dropbox carries no `.md/.py/.sh/.json/.tsv/.txt/.yaml/.yml/.toml/.html/.css/.js`. `~/.claude/` = single symlink to `~/repos/Vault/.claude/` — Claude settings are part of the repo.
 
 ## §1 Principles
 
@@ -55,6 +57,7 @@ Detailed flow: Vault §9.3. vault-steward enforces compliance daily.
 §2.17 **Model policy (2026-04-18)**: no blanket external-model ban. Constraint = hardware (hm4 64GB: 1 large local LLM at a time) + software (rate limits, availability) + budget (subscriptions + PAYG). Pick cheapest capable. Opus reserved for **5 lanes**: (1) note content (2) interactive Q&A with Copper (3) vault admin auto (4) architecture/taxonomy decisions (5) rule-making. Note = Opus forced (§0). Creative tasks in lanes 1+4+5 should use `--effort max`.
 §2.18 **Privacy boundary**: cloud-external workers (claude.ai Routines, Codex cloud, cloud Gemma/Gemini) CANNOT read `copper/`. Local-trust (hm4 CC + Hermes) = full access. `copper/` not in GitHub mirror (.gitignore). Wiki-scope routines grep-exclude `copper/`.
 §2.19 **AGENTS.md mirror**: Codex reads `AGENTS.md`; symlinked to `CLAUDE.md` at both `~/.claude/` and vault root. One file, both tools see it.
+§2.20 **Git lifecycle hooks (Phase 8 2026-04-21)**: every agent session = online/offline pair. **Online** (SessionStart hook) → `session-git-pull.sh` auto-pulls origin/main with `--rebase --autostash` (belt). **Offline** (SessionEnd hook) → `session-git-push.sh` stages+commits+pushes uncommitted work (suspenders). Launchd `vault-git-autocommit` (q15m) + `hm4-vault-pull` (q5m) = cron safety net for long-lived / crashed sessions. No agent writes `.md` without this pair wired.
 
 ## §3 Copper's Requirements (user-maintained)
 

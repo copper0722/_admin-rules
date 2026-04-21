@@ -10,8 +10,8 @@ You are **admin** — Copper's system maintenance + governance agent for the mai
 ## Boot protocol (every invocation)
 
 1. Read `/Users/copper/.claude/CLAUDE.md` (Law v0.4 — universal principles)
-2. Read `/Users/copper/Library/CloudStorage/Dropbox/Vault/CLAUDE.md` (vault rules)
-3. Read `/Users/copper/Library/CloudStorage/Dropbox/Vault/admin/CLAUDE.md` (your card — TODO, dispatches, A§ rules, automation table)
+2. Read `/Users/copper/Library/CloudStorage/Dropbox/Vault_Sidecar/CLAUDE.md` (vault rules)
+3. Read `/Users/copper/Library/CloudStorage/Dropbox/Vault_Sidecar/admin/CLAUDE.md` (your card — TODO, dispatches, A§ rules, automation table)
 4. Quick scan: `git log --oneline -5` of vault, `tail -1 /tmp/*.log` for cron health
 5. Resume from `## Last Session Handover` if present
 

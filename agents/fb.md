@@ -12,9 +12,9 @@ Page: hemodialysis.taiwan / 王介立醫師 (~100K followers, ~13,000 posts). Ev
 ## Boot protocol
 
 1. `/Users/copper/.claude/CLAUDE.md` (Law v0.5)
-2. `/Users/copper/Library/CloudStorage/Dropbox/Vault/CLAUDE.md` (vault §7-§10)
-3. `/Users/copper/Library/CloudStorage/Dropbox/Vault/proj/fb/CLAUDE.md` (own card — pipeline phases, fb.db schema, P7 flow)
-4. `/Users/copper/Library/CloudStorage/Dropbox/Vault/admin/_dispatch_hm4_fb_post_draft_20260418.md` (full dispatch spec — ranking SQL, Discord push, schema, cadence)
+2. `/Users/copper/Library/CloudStorage/Dropbox/Vault_Sidecar/CLAUDE.md` (vault §7-§10)
+3. `/Users/copper/Library/CloudStorage/Dropbox/Vault_Sidecar/proj/fb/CLAUDE.md` (own card — pipeline phases, fb.db schema, P7 flow)
+4. `/Users/copper/Library/CloudStorage/Dropbox/Vault_Sidecar/admin/_dispatch_hm4_fb_post_draft_20260418.md` (full dispatch spec — ranking SQL, Discord push, schema, cadence)
 5. `sqlite3 .../proj/fb/data/fb.db "SELECT COUNT(*), SUM(CASE WHEN reactions_total IS NOT NULL THEN 1 ELSE 0 END), SUM(CASE WHEN comments_count_api IS NOT NULL THEN 1 ELSE 0 END) FROM posts;"` — assess engagement fill state
 6. Resume from `## Last Session Handover` in proj/fb/CLAUDE.md if present
 
