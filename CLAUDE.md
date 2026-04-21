@@ -4,17 +4,17 @@ lang=zh-TW TW-academic (no PRC). tone=rational no-pleasantries. restate-in-domai
 
 ## §0 Central Doctrine
 
-**Vault = Wiki = LLM self-maintained knowledge graph.** 整個 `~/repos/Vault/` IS the wiki; top-level 分類 (`raw/ wiki/ proj/ admin/ cloud/ copper/ _*/`) 僅是組織切面，不是層級。所有 .md 默認 **m2m** (compressed English, agent-read)。Copper 人眼讀者唯二 surface: (1) `proj/note/articles/{key}.md` (zh-TW reading notes, Obsidian vault root)；(2) Dropbox/Vault_Binary/ 的 PDF 原檔。其餘 agent-internal — Copper 不讀、只互動指揮。
+**Vault=Wiki=LLM self-maintained**. Repo root IS wiki; top-level subtrees (`raw/ wiki/ proj/ admin/ cloud/ copper/ _*/`) = facets not layers. All `.md` m2m-compressed English default. Copper-read ONLY: (1) `proj/note/articles/*.md` (zh-TW, Obsidian vault root); (2) Dropbox PDF. Rest=agent-internal.
 
-**Wiki 生長兩條路 (agent 自主，兩者同權)**：
+**Two intake paths (agent-autonomous, equal weight)**:
 
-1. **Source-feed pipeline**: Copper 餵 source → `_inbox/` → MinerU/OCR → `raw.md + img` → `_sidecar/{key}/source.pdf + images/` (Dropbox) 配對 `raw/{topic}/{key}/raw.md` (git, frontmatter `sidecar: {key}`) → wiki 綜述 + 候選 `proj/note/articles/{key}.md` (frontmatter `parent: /raw/{topic}/{key}/raw.md`). Steps 1-4 auto; step 5 («寫筆記») Copper-trigger. Fulltext-only; TOC/abstract → `wiki/journal_digests/` 候選池.
+1. **Source-feed**: Copper→`_inbox/`→MinerU/OCR→`raw.md + _sidecar/{key}/source.pdf+images/` (Dropbox) + `raw/{topic}/{key}/raw.md` (git, FM `sidecar:{key}`) → wiki synth ∥ candidate `proj/note/articles/{key}.md` (FM `parent:/raw/{topic}/{key}/raw.md`). Step 5 (`寫筆記`) Copper-trigger. Fulltext-only; TOC/abstract→`wiki/journal_digests/` pool.
 
-2. **Dialogue distillation**: Copper ↔ agent 對話產生 (a) 新 insight (b) 跨主題連結 (c) 修正舊觀點 → agent **當場**寫進相應 wiki 位置；不只進 handover/memory。每輪對話 = 潛在 wiki update 源。Agent 責任：識別 + 即時編碼；找不到既有 topic file 則新建；末端 check「剛才有沒有值得固化的？」
+2. **Dialogue distillation**: Copper↔agent→`/handover write` 3-part ritual at session end (§2.9): `/wiki` extract→update `wiki/wiki_*.md`; `/method` →`memory/feedback_*.md`; JSONL append. Auto daily 5AM (§2.12). Spec: `raw/skills/handover/SKILL.md`.
 
-Model mandate: **note = Opus only**. `/note-writer` SKILL.md mandatory. Wiki update preferred Opus；cheap tier (Sonnet/Haiku) 允許當 only 做 boilerplate / cross-link insertion 時。
+Model: **note=Opus only**; `/note-writer` SKILL.md mandatory. Wiki-update Opus-preferred; cheap tier OK for boilerplate/cross-link.
 
-Detailed flow: Vault §9.3. vault-steward enforces daily.
+Flow detail: Vault §9.3. Enforce: vault-steward daily.
 
 ## Definitions
 
@@ -40,7 +40,7 @@ Path schema (Phase 8, 2026-04-21): **Vault = `~/repos/Vault/` git clone** (GitHu
 §1.7 Teamwork: admin holds context+strategy, sub-agents execute. Context-first.
 §1.8 Save raw first, clean later. Never discard input during ingestion.
 §1.9 System logs in `_data/` (Category A plain-text since 2026-04-18): `handover.jsonl` (session continuity, /handover), `bugs.tsv` (issue tracker, /bug), `journals.tsv` (journal registry). No fix without bug_id. No session end without handover.
-§1.10 **Card token discipline**: every CLAUDE.md auto-loads at session start; cost = session × size. Hold only rules the reader needs. Subfolder-specific rules → subfolder CLAUDE.md (loaded only when CC works in that subfolder). Historical / rationale / schedule detail → git log / handover.jsonl / admin/ cards / `_archive/`, NEVER in a card a non-owner reads.
+§1.10 **Card rule**: all `CLAUDE.md` = m2m, compressed English, no prose. Load cost = session×size. Canonical format+audit spec: `admin/governance.md §Card-Format`. Subfolder-specific → subfolder CLAUDE.md. History/rationale → git log / handover.jsonl / `_archive/`.
 
 ## §2 Agent Rules
 
@@ -52,7 +52,7 @@ Path schema (Phase 8, 2026-04-21): **Vault = `~/repos/Vault/` git clone** (GitHu
 §2.6 Never end silently.
 §2.7 Chat input (doc/text) → save vault first, then process.
 §2.8 Session start → `/remote-control`.
-§2.9 Handover: `/handover write` → append `_data/handover.jsonl` via `handover_jsonl_io.py`. SessionStart hook auto-injects latest. Significant decisions → write to folder CLAUDE.md live. `mem` keyword → capture to card now.
+§2.9 Handover (`raw/skills/handover/SKILL.md`): `/handover write` = **three-part ritual** — (1) `/wiki` scan transcript 抽 wiki-worthy content update `wiki/wiki_*.md` (§0 path 2); (2) `/method` 抓 methodology correction → `memory/feedback_*.md`; (3) append `_data/handover.jsonl` via `handover_jsonl_io.py`. SessionStart hook auto-injects latest. Significant decisions → folder CLAUDE.md live. `mem` keyword → capture to card now.
 §2.10 Retrieval order: (1) own card (2) handover.jsonl (3) grep vault (4) web. Vault first, web last. `recall {topic}` → check own card; missing → fix card.
 §2.11 Boot/reboot = re-read Law+Book+Card+resume. NOT /exit.
 §2.12 Daily 5AM cycle: `/loop 30m` → at 5AM → `/handover write` → `/clear` → reboot.
