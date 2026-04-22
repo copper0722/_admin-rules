@@ -1,8 +1,8 @@
 ---
 type: data
 name: wiki
-description: "Wikify any source into vault .md. PDF/URL/text/email → structured .md in vault. Core principle: if not .md, it's forgotten. MANDATORY TRIGGERS: /wiki, wikify, 維基化, 'convert to md', 'save to vault', or drops a PDF/URL."
-argument-hint: "[path to PDF | URL | 'text:...' | 'inbox']"
+description: "Wikify any source into vault .md. PDF/mp3/URL/text/email → verbatim raw.md → wiki + note. Core principle: if not .md, it's forgotten. Same fidelity pipeline (Law §9.3) for every source type. MANDATORY TRIGGERS: /wiki, wikify, 維基化, 'convert to md', 'save to vault', or drops a PDF/mp3/audio/URL."
+argument-hint: "[path to PDF | mp3/m4a/wav | URL | 'text:...' | 'inbox']"
 ---
 
 # /wiki — Wikify Pipeline
@@ -128,26 +128,29 @@ comm -23 /tmp/all_sources.txt /tmp/cited_sources.txt > /tmp/orphan_sources.txt
 
 ## Entity Hierarchy
 
-| source | output | placement |
-|---|---|---|
-| PDF (academic, has DOI) | note.md (via /note-writer) | raw/articles/{citationKey}/ |
-| PDF (project, no DOI) | raw.md → note.md | proj/{project}/data/ sidecar |
-| URL / webpage | .md extract | proj/ or kb/ by topic |
-| Email / text | .md capture | proj/ or kb/ by topic |
-| Transcript | .md structured | proj/ or copper/ |
+| source | transcription tool | verbatim output | placement |
+|---|---|---|---|
+| PDF (academic, has DOI) | **MinerU on hm4** | raw.md + images/ → note via `/note-writer` | raw/{topic}/{citationKey}/ + `_sidecar/{key}/source.pdf` |
+| PDF (textbook chapter) | **MinerU on hm4** | raw.md + images/ | raw/{topic}/{BookEdition}_Ch{NN}/ + `_sidecar/{key}/source.pdf` |
+| PDF (project, no DOI) | MinerU | raw.md | `proj/{project}/data/{name}/raw.md` |
+| **mp3 / m4a / wav** (podcast, lecture, meeting) | **whisper-cpp on hm4** (Metal, `ggml-medium.en.bin`) | raw.md verbatim transcript | raw/{topic}/{citationKey}/ + `_sidecar/{key}/source.mp3` |
+| URL / webpage | WebFetch + DOM clean | .md extract | proj/ or kb/ by topic |
+| Email / text | direct parse | .md capture | proj/ or kb/ by topic |
+| Transcript (existing .txt) | direct ingest | .md structured | proj/ or copper/ |
 
-PDF is NEVER the primary entity. .md = first-class citizen. PDF = sidecar attachment.
+Binary source (PDF/mp3/wav) is NEVER the primary entity. `.md` = first-class citizen. Binary = sidecar attachment under `_sidecar/{key}/`. **Same principle, different tool**: PDF → MinerU; audio → whisper-cpp; both run on hm4 (M4 Pro Metal + 64GB RAM = hardware-pinned transcription tier). Law §9.3 Principle of Fidelity applies equally — no wiki/note synthesis until verbatim raw.md exists.
 
 ## Workflow
 
-### Mode A: Single file (`/wiki /path/to/file.pdf`)
+### Mode A: Single file (`/wiki /path/to/file.{pdf,mp3,m4a,wav,...}`)
 
 1. Validate input exists (not 0 bytes, not iCloud placeholder)
-2. Detect source type:
-   - PDF → Mode A-PDF
+2. Detect source type by extension + MIME:
+   - `.pdf` → Mode A-PDF (MinerU on hm4)
+   - `.mp3` / `.m4a` / `.wav` / `.ogg` / `.flac` → **Mode A-Audio (whisper-cpp on hm4)**
    - URL → Mode A-URL
    - Text block → Mode A-Text
-3. Determine destination: has DOI? → raw/articles/. Has project? → proj/. Else → kb/
+3. Determine destination: has DOI? → raw/{topic}/{citationKey}/. Has project? → proj/. Else → kb/
 
 ### Mode A-PDF — MANDATORY PIPELINE: PDF → raw.md → note/wiki
 
@@ -224,6 +227,89 @@ Steps:
 9. If Copper requests → also generate note.md via /note-writer (on demand)
 10. Report: raw.md path, wiki.md path, line count, fixes applied
 
+### Mode A-Audio — MANDATORY PIPELINE: mp3/wav → raw.md (same as PDF)
+
+**Never skip raw.md.** Every audio file must go through whisper-cpp on hm4 first. No direct audio→note. Same Principle of Fidelity as PDF (Law §9.3).
+
+```
+mp3/wav → DEDUP CHECK → ssh+cat push to hm4 _sidecar/{key}/source.mp3
+                              ↓
+                      ffmpeg -ar 16000 -ac 1 -c:a pcm_s16le → source.wav
+                              ↓
+                      whisper-cli --model ggml-medium.en.bin --file source.wav
+                              ↓
+                      verbatim transcript → raw.md (Pattern B frontmatter)
+                              ↓
+                      ┌───────┴───────┐
+                note.md (/note-writer)  wiki.md update/create (M2M)
+```
+
+**Canonical implementation**: `~/repos/Vault/.script/audio-to-raw.sh` encapsulates the full 5-step pipeline; prefer calling this over manually orchestrating ssh + ffmpeg + whisper-cli.
+
+```bash
+~/repos/Vault/.script/audio-to-raw.sh \
+    --mp3 /path/to/source.mp3 \
+    --key {citationKey} \
+    --topic {topic_path} \
+    --title "{title}" \
+    [--journal ... --doi ... --speakers ... --tags ... --source-type podcast|lecture|meeting]
+```
+
+**STEP 0 — DEDUP CHECK** (before transcribing):
+1. Compute sha256 of source.mp3 → check `_data/article_registry.db` for existing sidecar
+2. If DOI known (e.g., Annals On Call podcast has DOI 10.7326/ANNALS-*) → same dedup as Mode A-PDF
+3. If same `citationKey` already exists in raw tree → SKIP (don't re-transcribe)
+
+**STEP 1 — Transfer to hm4**: `ssh+cat` (scp / rsync blocked by Synology DSM SFTP restrictions for some paths; ssh+cat always works). Target: `~/Library/CloudStorage/Dropbox/Vault_Binary/_sidecar/{key}/source.mp3`.
+
+**STEP 2 — Convert to WAV**: `ffmpeg -y -i source.mp3 -ar 16000 -ac 1 -c:a pcm_s16le source.wav`. whisper-cli requires 16kHz mono PCM.
+
+**STEP 3 — Transcribe on hm4** (whisper-cpp Metal):
+- Model: `~/whisper-models/ggml-medium.en.bin` (1.4GB, English; alternatives: `large-v3` 3GB higher quality, `base.en` 150MB fast-draft)
+- Command: `whisper-cli --model {model} --file source.wav --output-txt --language en --threads 8`
+- Throughput: M4 Pro Metal ≈ **11× realtime** (29min audio → 2.5min wall). Run `nohup ... &` + poll PID until exit.
+- Output: `source.wav.txt` (plain text) + optional `source.wav.srt` (timestamp-aligned).
+
+**STEP 4 — Write raw.md** with Pattern B frontmatter:
+```yaml
+---
+citationKey: {key}
+uid: "doi:{DOI if available}"
+sidecar: {key}
+type: raw
+title: "..."
+source_type: podcast            # or: lecture / meeting / interview / conference_talk
+journal: "..."                   # for Annals On Call / NEJM podcast / JAMA Audio etc
+year: YYYY
+speakers: "Name1, Name2"
+generated: YYYY-MM-DD
+agent: whisper-cpp/ggml-medium.en
+tags: [...]
+summary: "..."
+---
+
+# {Title}
+
+**Source**: `/_sidecar/{key}/source.mp3`
+**Transcript**: whisper-cpp + {model} on hm4.
+
+---
+
+## Verbatim Transcript
+
+{whisper output, leading spaces stripped}
+```
+
+**STEP 5 — Cleanup + dispatch** (same as PDF):
+- Remove intermediate `source.wav` from hm4 (~54MB redundant; can regenerate from mp3)
+- Rename `source.wav.txt` → `transcript.txt` on hm4 sidecar
+- Simultaneous wiki evaluation (same as Mode A-PDF step 8): scan existing wiki/ for topic match; update or create
+- Optional note.md via `/note-writer` short mode on Copper request
+
+**Hardware pinning**: audio transcription is **hm4-only** (M4 Pro Metal). cm1 (M1 16GB, SMB-only vault) cannot run whisper-cpp efficiently + doesn't have the model weights. Other devices MUST dispatch to hm4 via ssh.
+
+**Tool choice note (2026-04-22)**: MacWhisper GUI retired as primary workflow on hm4 (not installed as of this session). whisper-cpp CLI = canonical. `whisper-sync.py` still exports from legacy MacWhisper SQLite when a MacWhisper session exists (backward compat). MacWhisper 2 (paid GUI) may be installed later for single-file hand-triggered use cases; pipeline layer (`audio-to-raw.sh`) stays CLI-first.
+
 ### Mode A-URL
 
 1. Fetch content via web fetch
@@ -239,13 +325,17 @@ Steps:
 
 ### Mode B: Inbox triage (`/wiki inbox`)
 
-1. `ls _inbox/` — list all unprocessed files
+Canonical inbox = `~/Library/CloudStorage/Dropbox/_inbox/` (top-level Dropbox per Law §7.5 2026-04-22).
+
+1. List all unprocessed files at canonical inbox (cm1 via `ssh home-mm4 'ls ~/Library/CloudStorage/Dropbox/_inbox/'`; hm4 local ls).
 2. For each file:
-   - PDF → queue for Mode A-PDF
-   - .md already → review, move to destination
-   - Other → convert to .md
-3. Process queue sequentially
-4. Report: N files wikified, destinations
+   - `.pdf` → queue for **Mode A-PDF** (MinerU)
+   - `.mp3` / `.m4a` / `.wav` → queue for **Mode A-Audio** (whisper-cpp)
+   - `.md` already → review frontmatter, route to proper vault path
+   - `.docx` / `.html` → convert to .md first, then route as text source
+   - Other binary → investigate or move to `proj/{p}/data/` with metadata
+3. Process queue sequentially (hm4 does actual transcription — cm1 can orchestrate via ssh).
+4. Report: N files wikified by type, destinations.
 
 ### Mode C: Batch (`/wiki batch /path/to/folder/`)
 

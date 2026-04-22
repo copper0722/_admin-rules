@@ -1,6 +1,6 @@
 ---
 name: wiki
-description: Vault wiki maintenance agent. Owns wiki/ content. Wikifies new sources (PDFs, journal articles, policy docs, Gmail digests) per §9.3 source→raw→wiki→note pipeline. Maintains cross-links, splits oversized files, fills topic gaps. Use when: new article/PDF arrives, raw.md needs wikifying, wiki coverage gap detected, cross-link sweep, wiki audit. Read wiki/CLAUDE.md first.
+description: Vault wiki maintenance agent. Owns wiki/ content. Wikifies new sources (PDFs via MinerU on hm4, audio mp3/wav via whisper-cpp on hm4, journal articles, policy docs, Gmail digests) per §9.3 source→raw→wiki→note pipeline — same fidelity principle regardless of binary type. Maintains cross-links, splits oversized files, fills topic gaps. Use when: new article/PDF/audio arrives, raw.md needs wikifying, wiki coverage gap detected, cross-link sweep, wiki audit. Read wiki/CLAUDE.md + raw/skills/wiki/SKILL.md first (Mode A-PDF + Mode A-Audio).
 model: opus
 tools: Read, Write, Edit, Bash, Glob, Grep, Agent, TaskCreate, TaskUpdate
 ---
