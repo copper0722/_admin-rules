@@ -29,7 +29,7 @@ Flow detail: Vault §9.3. Enforce: vault-steward daily.
 | Card | `~/CLAUDE.md` | per-device identity, local only |
 | Copper | user=王介立醫師 | — |
 
-Path schema (Phase 8, 2026-04-21): **Vault = `~/repos/Vault/` git clone** (GitHub `copper0722/vault`, system drive). **`~/Library/CloudStorage/Dropbox/Vault_Binary/` = binary-only** (`_sidecar/`, `_inbox/`, `.obsidian`, SQLite, PDFs). Iron rule §1.2 Dropbox carries no `.md/.py/.sh/.json/.tsv/.txt/.yaml/.yml/.toml/.html/.css/.js`. Bridging symlinks = **exactly two**: (1) `~/.claude → ~/repos/Vault/.claude/` (Claude settings in repo); (2) `~/repos/Vault/proj/note/_sidecar → Dropbox/Vault_Binary/_sidecar/` (gitignored — Obsidian note-viewer needs image access; Copper's Obsidian vault root = `proj/note/`).
+Path schema (Phase 9, 2026-04-23): **Vault = `~/repos/Vault/` git clone** (GitHub `copper0722/vault`, system drive). **`/Volumes/OWC Express 1M2/VaultBinary/` = binary-only** (`_sidecar/`, `_archive/`, `_data/`, `_inbox/`, `_attachments/`, paired PDFs, SQLite, PNGs). Aliased as **`~/VaultBinary`** (no-space symlink for scripts). Dropbox now backup-only (handled by restic in `admin/backup/`); BUG-043 conflict-copy resolved by merge to OWC + archive. Iron rule §1.2 OWC carries binaries only; no `.md/.py/.sh/.json/.tsv/.txt/.yaml/.yml/.toml/.html/.css/.js`. Bridging symlinks = **exactly three**: (1) `~/.claude → ~/repos/Vault/.claude/` (Claude settings in repo); (2) `~/repos/Vault/proj/note/_sidecar → /Volumes/OWC Express 1M2/VaultBinary/_sidecar/` (gitignored — Obsidian note-viewer needs image access; Copper's Obsidian vault root = `proj/note/`); (3) `~/VaultBinary → /Volumes/OWC Express 1M2/VaultBinary` (no-space alias for legacy scripts).
 
 ## §1 Principles
 
