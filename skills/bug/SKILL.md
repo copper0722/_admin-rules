@@ -1,4 +1,6 @@
 ---
+generated: false
+type: data
 name: bug
 description: "Vault issue tracker — report, fix, and close bugs in _data/bugs.tsv (Category A plain text since 2026-04-18). Use when agent finds vault malformation, broken config, bad data, or user says /bug."
 ---

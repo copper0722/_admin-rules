@@ -1,4 +1,6 @@
 ---
+generated: false
+type: data
 name: journal-download
 description: "DEPRECATED — merged into /crawler skill (raw/skills/crawler/SKILL.md). All triggers now route to /crawler. MANDATORY TRIGGERS: /journal-download, download journal, 下載期刊, download OA, download open access, get this week's papers."
 ---

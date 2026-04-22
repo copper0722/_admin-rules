@@ -1,4 +1,6 @@
 ---
+generated: false
+type: data
 name: db
 description: "Database management skill. Use when creating, modifying, querying, or auditing any SQLite database in the vault. Covers schema design, 3NF enforcement, sidecar docs, rebuild scripts, and import protocols. MANDATORY TRIGGERS: /db, create table, new database, schema change, import data, db audit, 建資料庫, add column, migration."
 ---

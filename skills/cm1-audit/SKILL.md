@@ -1,4 +1,6 @@
 ---
+generated: false
+type: data
 name: cm1-audit
 description: "cm1 independent daily drift audit → dispatch to hm4. Designed for cm1 (SMB/NAS-mounted vault; SQLite writes unreliable over this mount so cm1 defaults to dispatch-hm4 for DB work). Use when Copper opens clinic Mac mini and types /cm1-audit, OR when launchd fires."
 argument-hint: "[today|weekly|since=YYYY-MM-DD]"

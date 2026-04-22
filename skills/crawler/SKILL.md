@@ -1,4 +1,6 @@
 ---
+generated: false
+type: data
 name: crawler
 description: "Browser automation + journal download. Safari AppleScript for web scraping, PDF download, Cloudflare bypass. Maintains website 攻略 wiki. MANDATORY TRIGGERS: /crawler, scrape, crawl, 爬蟲, download from website, extract web data, browser automation, /journal-download, download journal, 下載期刊, download OA."
 argument-hint: "[URL | 'describe what to scrape']"

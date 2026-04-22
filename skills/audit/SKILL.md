@@ -1,4 +1,6 @@
 ---
+generated: false
+type: data
 name: audit
 description: "Sequential vault audit loop L1→L2→L3→L4→L1... Each level fixes previous findings then audits own scope. Cron or manual. MANDATORY TRIGGERS: /audit, audit, vault audit, weekly audit."
 argument-hint: "[L1|L2|L3|L4|loop|all]"

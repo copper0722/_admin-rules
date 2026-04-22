@@ -1,4 +1,6 @@
 ---
+generated: false
+type: data
 name: wiki
 description: "Wikify any source into vault .md. PDF/URL/text/email → structured .md in vault. Core principle: if not .md, it's forgotten. MANDATORY TRIGGERS: /wiki, wikify, 維基化, 'convert to md', 'save to vault', or drops a PDF/URL."
 argument-hint: "[path to PDF | URL | 'text:...' | 'inbox']"
