@@ -1,5 +1,4 @@
 ---
-generated: false
 type: data
 name: handover
 description: "Session handover — read or write records in `_data/handover.jsonl` (Category A plain-text master, since 2026-04-18). Use when user says /handover, 'handover', 'session end', '交接', '收工', /ho, /HO. Write mode triggers THREE-part ritual: /wiki (knowledge extraction) + /method (methodology reflection) + /handover (JSONL append)."

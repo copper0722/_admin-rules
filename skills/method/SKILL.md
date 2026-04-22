@@ -1,5 +1,4 @@
 ---
-generated: false
 type: data
 name: method
 description: "Reflect on methodology corrections in this session — extract lessons from Copper's guidance on literature appraisal, data citation, source verification. Update wiki methodology. MANDATORY TRIGGERS: /method, 反省文獻, method reflect, 方法論反省."

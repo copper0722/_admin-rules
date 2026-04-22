@@ -1,5 +1,4 @@
 ---
-generated: false
 type: data
 name: gmail-secretary
 description: "信件秘書：每小時讀 inbox，逐 thread 判斷行動（待回覆、截止日、預約）→ Calendar 通知 + skill dispatch，再 Gmail-as-state 歸檔。僅由 claude.ai Routines 觸發。MANDATORY TRIGGERS：gmail-secretary、信件秘書、信件處理、inbox 處理、email triage、收信。"

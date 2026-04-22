@@ -1,5 +1,4 @@
 ---
-generated: false
 type: data
 name: zot
 description: Deep-read a Zotero item — get fulltext, digest, create vault note. Use when the user provides a citationKey, Zotero item key, or says "讀這篇", "深讀". On-demand, not batch.

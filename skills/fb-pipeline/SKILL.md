@@ -1,5 +1,4 @@
 ---
-generated: false
 type: data
 name: fb-pipeline
 description: "FB post → quality article + TLC slide pipeline. Picks 1 unprocessed post from fb.db, writes polished article + appends Marp slide. MANDATORY TRIGGERS: /fb-pipeline, fb pipeline, process fb post, 寫文章, fb article."

@@ -1,5 +1,4 @@
 ---
-generated: false
 type: data
 name: new-folder
 description: "Create new vault folder with §10.9 standard CLAUDE.md card + _archive/. Use when user says /new-folder, 'create folder', '建資料夾', 'new project', or needs a new vault directory."

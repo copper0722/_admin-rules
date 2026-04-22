@@ -1,5 +1,4 @@
 ---
-generated: false
 type: data
 name: fuse
 description: "Fuse multiple LLM reports on the same topic into a single consensus wiki entry. MANDATORY TRIGGERS: /fuse, 融合, merge reports, 合併報告, synthesize, combine DR outputs, fuse reports, wiki 品質升級."
