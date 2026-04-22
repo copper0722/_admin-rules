@@ -107,7 +107,7 @@ For sites behind paywall — Safari renders PDF inline, Cmd+S saves actual file.
 ```bash
 DOI="NEJMoa2100842"
 PDF_URL="https://www.nejm.org/doi/pdf/10.1056/$DOI"
-OUTDIR="$HOME/Library/CloudStorage/Dropbox/Vault/_inbox"
+OUTDIR="$HOME/Library/CloudStorage/Dropbox/_inbox"
 FNAME="${DOI}.pdf"
 
 osascript -e "

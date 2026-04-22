@@ -260,7 +260,7 @@ mp3/wav → DEDUP CHECK → ssh+cat push to hm4 _sidecar/{key}/source.mp3
 2. If DOI known (e.g., Annals On Call podcast has DOI 10.7326/ANNALS-*) → same dedup as Mode A-PDF
 3. If same `citationKey` already exists in raw tree → SKIP (don't re-transcribe)
 
-**STEP 1 — Transfer to hm4**: `ssh+cat` (scp / rsync blocked by Synology DSM SFTP restrictions for some paths; ssh+cat always works). Target: `~/Library/CloudStorage/Dropbox/Vault_Binary/_sidecar/{key}/source.mp3`.
+**STEP 1 — Transfer to hm4**: `ssh+cat` (scp / rsync blocked by Synology DSM SFTP restrictions for some paths; ssh+cat always works). Target: `~/VaultBinary/_sidecar/{key}/source.mp3` (Phase 9 OWC path).
 
 **STEP 2 — Convert to WAV**: `ffmpeg -y -i source.mp3 -ar 16000 -ac 1 -c:a pcm_s16le source.wav`. whisper-cli requires 16kHz mono PCM.
 
@@ -381,7 +381,7 @@ tell application \"System Events\"
     delay 0.3
     keystroke \"g\" using {command down, shift down}
     delay 1
-    keystroke \"$HOME/Library/CloudStorage/Dropbox/Vault/_inbox/\"
+    keystroke \"$HOME/Library/CloudStorage/Dropbox/_inbox/\"
     keystroke return
     delay 1
     keystroke return
