@@ -117,7 +117,7 @@ Dispatch: admin/_dispatch_hm4_audit_YYYYMMDD.md
 
 ## Scheduling (revised 2026-04-18 16:00 — Copper directive)
 
-**launchd daily 03:00 TST** (`admin/launchd/cm1/com.copper.cm1-audit.plist` → `cm1-audit.sh` → this skill). Requires: cm1 powered on + logged in + SMB mount `/Volumes/dropbox-personal/Vault/` mounted at 03:00.
+**launchd daily 03:00 TST** (`admin/schedule-audit/plists/cm1/com.copper.cm1-audit.plist` → `cm1-audit.sh` → this skill). Requires: cm1 powered on + logged in + SMB mount `/Volumes/dropbox-personal/Vault/` mounted at 03:00.
 
 Why 03:00: runs BEFORE 04:00 hm4 vault-steward. vault-steward reads this audit's dispatch file and executes fixes in same overnight window. hm4-morning-review (06:00) reads the combined output.
 
