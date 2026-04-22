@@ -39,7 +39,7 @@ Default mode = `manual` (if omitted). Examples: `dd:auto`, `plan:manual`, `bug` 
 
 1. `{type}` required. `{date}` required (creation date). `{source}` optional.
 2. Agent writing TODOs MUST use this format. Old format encountered → convert on touch.
-3. `vault-todo.py` = sole scanner. Path: `repos/vault-scripts/vault-todo.py`.
+3. `vault-todo.py` = sole scanner. Path: `.script/vault-todo.py`.
 4. Completed items: keep 30 days, then may be cleared.
 5. TODOs live in `## TODO` section of CLAUDE.md (§10.9 card structure).
 
