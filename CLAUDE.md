@@ -65,8 +65,14 @@ Path schema (Phase 9, 2026-04-23): **Vault = `~/repos/Vault/` git clone** (GitHu
 §2.17 **Model policy (2026-04-18)**: no blanket external-model ban. Constraint = hardware (hm4 64GB: 1 large local LLM at a time) + software (rate limits, availability) + budget (subscriptions + PAYG). Pick cheapest capable. Opus reserved for **5 lanes**: (1) note content (2) interactive Q&A with Copper (3) vault admin auto (4) architecture/taxonomy decisions (5) rule-making. Note = Opus forced (§0). Creative tasks in lanes 1+4+5 should use `--effort max`.
 §2.18 **Privacy boundary**: cloud-external workers (claude.ai Routines, Codex cloud, cloud Gemma/Gemini) CANNOT read `copper/`. Local-trust (hm4 CC + Hermes) = full access. `copper/` not in GitHub mirror (.gitignore). Wiki-scope routines grep-exclude `copper/`.
 §2.19 **AGENTS.md mirror**: Codex reads `AGENTS.md`; symlinked to `CLAUDE.md` at both `~/.claude/` and vault root. One file, both tools see it.
-§2.20 **Git lifecycle hooks (Phase 8 2026-04-21)**: every agent session = online/offline pair. **Online** (SessionStart hook) → `session-git-pull.sh` auto-pulls origin/main with `--rebase --autostash` (belt). **Offline** (SessionEnd hook) → `session-git-push.sh` stages+commits+pushes uncommitted work (suspenders). Cron safety net (device-scoped): cm1 runs launchd `com.copper.cm1-vault-autocommit` (q15m) + `com.copper.cm1-vault-pull` (q3m); hm4 currently has no launchd cron — relies on SessionEnd hook alone (audit 2026-04-24: `~/Library/LaunchAgents/` contains no vault/git plists on hm4). No agent writes `.md` without this pair wired.
+§2.20 **Git lifecycle hooks (Phase 8 2026-04-21)**: every agent session = online/offline pair. **Online** (SessionStart hook) → `session-git-pull.sh` auto-pulls origin/main `--rebase --autostash` (belt). **Offline** (SessionEnd hook) → `session-git-push.sh` stages+commits+pushes (suspenders). Cron safety net per Mac device (audit 2026-04-24 post-deploy): hm4 / hmj / cm1 each load launchd `com.copper.vault-git-autocommit` (q10m StartInterval 600) + `com.copper.{hm4,hmj,cm1}-vault-pull` (q3m StartInterval 180). No agent writes `.md` without this pair wired.
 
-## §3 Copper's Requirements (user-maintained)
+## §3 Cross-Device Coop (Tailscale mesh, 2026-04-24)
 
-§3.1 我丟檔到 _Inbox，Key Takeaway 要貼到 Slack 成為獨立 thread
+§3.1 **Mesh+SSH**: hm4/hmj/cm1/mbp/mba/clinic + boan-nas on Tailscale MagicDNS; key-auth no password; agents SSH-delegate freely for routine infra (`feedback_agent_ssh_all_devices`). Escalate cost/copper-personal/BoAn/public-binding to Copper.
+§3.2 **Capability owners (never build a local copy — SSH the owner)**: hm4=admin+MinerU+Zotero+Gmail/Calendar MCP+Ollama server (qwen3.6:27b, gemma4); hmj=OWC SMB server+Hermes REPL+major cron (Phase 9b); cm1=BoAn NOTE worker+PG fallback writer; clinic=BoAn Windows NOTE+EMR; boan-nas=backup target. Full matrix + access patterns + offline fallbacks: `admin/runbooks/cross-device-coop.md`.
+§3.3 **Parity baseline (Macs, audit daily)**: `.zshenv` PATH (`/opt/homebrew/bin:~/.local/bin`) + `.tmux.conf` (mouse+pbcopy+M-arrow) + `~/.claude → vault/.claude` symlink + `~/repos/Vault/` clone + launchd `vault-git-autocommit` (q10m) + `{host}-vault-pull` (q3m). Device extras in runbook.
+
+## §4 Copper's Requirements (user-maintained)
+
+§4.1 我丟檔到 _Inbox，Key Takeaway 要貼到 Slack 成為獨立 thread
