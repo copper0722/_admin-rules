@@ -10,7 +10,7 @@ lang=zh-TW TW-academic (no PRC). tone=rational no-pleasantries. restate-in-domai
 
 **Two intake paths (agent-autonomous, equal weight)**:
 
-1. **Source-feed**: Copper→`_inbox/`→MinerU/OCR→`raw.md + _sidecar/{key}/source.pdf+images/` (Dropbox) + `raw/{topic}/{key}/raw.md` (git, FM `sidecar:{key}`) → wiki synth ∥ candidate `proj/note/articles/{key}.md` (FM `parent:/raw/{topic}/{key}/raw.md`). Step 5 (`寫筆記`) Copper-trigger. Fulltext-only; TOC/abstract→`wiki/journal_digests/` pool.
+1. **Source-feed**: Copper→`_inbox/`→MinerU/OCR→`raw.md + _sidecar/{key}/source.pdf+images/` (Dropbox) + `raw/{topic}/{key}/raw.md` (git, FM `sidecar:{key}`) → wiki synth ∥ candidate `proj/note/articles/{key}.md` (FM `parent:/raw/{topic}/{key}/raw.md`). Step 5 (`寫筆記`) Copper-trigger. Fulltext-only; TOC/abstract→`proj/journal/digests/` pool.
 
 2. **Dialogue distillation**: Copper↔agent→`/handover write` 3-part ritual at session end (§2.9): `/wiki` extract→update `wiki/wiki_*.md`; `/method` →`memory/feedback_*.md`; JSONL append. Auto daily 5AM (§2.12). Spec: `raw/skills/handover/SKILL.md`.
 
