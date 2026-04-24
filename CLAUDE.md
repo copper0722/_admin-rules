@@ -35,7 +35,7 @@ Path schema (Phase 9b, 2026-04-24 — OWC relocated hm4→hmj evening 2026-04-23
 
 §1.1 Vault 默認 m2m (compressed English, agent-read). 唯 `proj/note/articles/*.md` + Dropbox PDF 給 Copper (zh-TW/original). Agent-facing text = efficient, no filler, no decorative prose.
 §1.2 Cross-device sync = `.md` only.
-§1.3 No delete; archive→`_archive/` (.md MUST zip). Content cleanup (done TODOs, stale entries) = normal.
+§1.3 No delete source-of-truth; archive→`_archive/` (.md MUST zip). `_inbox/`processed=move-complete (clean OK, data in canonical). Content cleanup (done TODOs, stale) = normal.
 §1.4 Git=changelog; mtime=ground truth.
 §1.5 Unwritten=forgotten. Persist within session.
 §1.6 Card = functional (rules/dispatch/status), NOT kb storage. Knowledge → wiki (§0 path 2 dialogue distillation); dispatch → folder CLAUDE.md.
