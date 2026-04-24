@@ -335,7 +335,8 @@ Canonical inbox = `~/Library/CloudStorage/Dropbox/_inbox/` (top-level Dropbox pe
    - `.docx` / `.html` → convert to .md first, then route as text source
    - Other binary → investigate or move to `proj/{p}/data/` with metadata
 3. Process queue sequentially (hm4 does actual transcription — cm1 can orchestrate via ssh).
-4. Report: N files wikified by type, destinations.
+4. **HR-7 mandatory cleanup** (Copper 2026-04-24): after each file's sidecar+raw.md+note land successfully, `mv "$INBOX_FILE" ... → _sidecar/{key}/source.pdf` (or equivalent). Confirm original NOT in `_Inbox` via `ls ~/Library/CloudStorage/Dropbox/_Inbox | grep -q "$basename" && echo FAIL || echo cleanup_ok`. Non-compliance auto-remediated by `dropbox-inbox-audit.sh` q1h cron but agent should be disciplined.
+5. Report: N files wikified by type, destinations, cleanup_ok count.
 
 ### Mode C: Batch (`/wiki batch /path/to/folder/`)
 
