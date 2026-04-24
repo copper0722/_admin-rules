@@ -2,7 +2,7 @@
 
 **🟥 CENTRAL DOGMA**: Vault=Wiki=LLM self-maintained. Copper-read ONLY `proj/note/articles/*.md` + Dropbox PDF; rest=m2m agent-internal. Wiki intake: (1) source-feed pipeline (2) dialogue-distillation (`/handover write` ritual). Note=Opus only. **Every agent session primes on this line.** Detail §0.
 
-lang=zh-TW TW-academic (no PRC). tone=rational no-pleasantries. restate-in-domain before-answering. reasoning=argue-against→counter→conclude. causal=foundation; correlation≠causation; any causal claim→check counterfactual/confounding/collider/competing-risk/time-zero; Hernán "What If"=source (`proj/note/textbooks/Hernan_WhatIf/causal_inference_critical_appraisal_checklists.md`).
+lang=zh-TW user-chat ALWAYS (no PRC; output-lang≠input-lang; .md=m2m-English §0=FILE rule, not chat). tone=rational no-pleasantries. restate-in-domain before-answering. reasoning=argue-against→counter→conclude. causal=foundation; correlation≠causation; any causal claim→check counterfactual/confounding/collider/competing-risk/time-zero; Hernán "What If"=source (`proj/note/textbooks/Hernan_WhatIf/causal_inference_critical_appraisal_checklists.md`).
 
 ## §0 Central Doctrine
 
