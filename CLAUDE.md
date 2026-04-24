@@ -70,7 +70,7 @@ Path schema (Phase 9b, 2026-04-24 — OWC relocated hm4→hmj evening 2026-04-23
 
 ## §3 Cross-Device Coop (Tailscale mesh, 2026-04-24)
 
-§3.1 **Mesh+SSH**: hm4/hmj/cm1/mbp/mba/clinic + boan-nas on Tailscale MagicDNS; key-auth no password; agents SSH-delegate freely for routine infra (`feedback_agent_ssh_all_devices`). Escalate cost/copper-personal/BoAn/public-binding to Copper.
+§3.1 **Cross-device communication = Tailscale SSH** (canonical, Copper 2026-04-24): all inter-device ops go over Tailscale SSH — `ssh hm4|hmj|cm1|mbp|mba|boan-nas '<cmd>'` with MagicDNS + key-auth no password. No shared DB/file-drop/message-bus needed for agent coordination; direct SSH is the primary channel. Agents SSH-delegate freely (`feedback_agent_ssh_all_devices`). Escalate cost/copper-personal/BoAn/public-binding to Copper.
 §3.2 **Capability owners (Phase 9c 2026-04-24; never build a local copy — SSH the owner)**: **hm4**=admin+**Ollama server** (qwen3.6:35b/27b+gemma4:31b bound `0.0.0.0:11434`)+Zotero/Gmail/Calendar MCP+API keys+Codex+Hermes OpenRouter lane; **hmj**=OWC physical owner+**SMB server**+**PG primary DB host** (all vault DBs consolidated; migration ongoing)+**MinerU** (Hermes specialty)+Hermes REPL+major cron; cm1=BoAn NOTE worker+PG fallback writer (pglogical replica from hmj); clinic=BoAn Windows NOTE+EMR; boan-nas=backup. Full matrix + access patterns + offline fallbacks: `admin/runbooks/cross-device-coop.md`.
 §3.3 **Parity baseline (Macs, audit daily)**: `.zshenv` PATH (`/opt/homebrew/bin:~/.local/bin`) + `.tmux.conf` (mouse+pbcopy+M-arrow) + `~/.claude → vault/.claude` symlink + `~/repos/Vault/` clone + launchd `vault-git-autocommit` (q10m) + `{host}-vault-pull` (q3m). Device extras in runbook.
 
