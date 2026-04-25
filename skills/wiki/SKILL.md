@@ -244,10 +244,10 @@ mp3/wav → DEDUP CHECK → ssh+cat push to hm4 _sidecar/{key}/source.mp3
                 note.md (/note-writer)  wiki.md update/create (M2M)
 ```
 
-**Canonical implementation**: `~/repos/Vault/.script/audio-to-raw.sh` encapsulates the full 5-step pipeline; prefer calling this over manually orchestrating ssh + ffmpeg + whisper-cli.
+**Canonical implementation**: `~/repos/_admin-private/.script/audio-to-raw.sh` encapsulates the full 5-step pipeline; prefer calling this over manually orchestrating ssh + ffmpeg + whisper-cli.
 
 ```bash
-~/repos/Vault/.script/audio-to-raw.sh \
+~/repos/_admin-private/.script/audio-to-raw.sh \
     --mp3 /path/to/source.mp3 \
     --key {citationKey} \
     --topic {topic_path} \
