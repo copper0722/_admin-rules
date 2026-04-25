@@ -11,6 +11,7 @@ This doc is **canonical** for hierarchy + tag SOP. Other refs (`medwiki-raw/CLAU
 3. **`_-prefix` exempt** from topic rules (`_archive/_data/_sidecar/_translations/_system/_index.md` etc.)
 4. **3-way mirror invariant**: `medwiki-raw/{path}` ≡ `medwiki/{path}` ≡ Zotero collection (raw/wiki/Zotero hierarchies aligned)
 5. **All structured data → PG `vault_main`**; no `.tsv`/`.db` canonical (skill-bundled `.csv` opt-out exception)
+6. **Layer purity** (Copper 2026-04-26): `medwiki/` = purely extremely m2m (compressed English, machine retrieval). Any Copper-read content (zh-TW prose, journal club discussion, reading guide, learning summary, weekly tracker) → `~/repos/note/`. `note/` = Copper-readable; `medwiki-raw/` = verbatim source; `medwiki/` = synthesis-for-machine. Cross-layer migration ≠ delete (preserve original layer if reused).
 
 ## §2 Topic-tree (§8.10 a-h, resurrected)
 
