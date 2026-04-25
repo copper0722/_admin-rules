@@ -56,20 +56,20 @@ Insert one record to PG `handover` table on hmj (schema below). If PG unreachabl
 
 ---
 
-## STORAGE
+## STORAGE (Phase-9d 2026-04-25)
 
-**Primary — PG (2026-04-23 migration, Copper directive)**:
-- Table `handover` in database `vault_main` on hmj (Tailscale `hmj`, IP `100.111.214.15`, port 5432). [Phase-9b consolidation 2026-04-24; pre-Phase-9b db was `vault_test` scaffold.]
-- Replicated via pglogical `sub_from_hm1` to cm1 (replication set `test_set`, `synchronize_data := true`).
-- Writer: any local CC session using `.script/db-exporters/handover_pg_io.py`.
-- Reader: `.script/handover-read.py` (SessionStart hook) — tries PG first, falls back to jsonl.
-- Migration source: 384 records imported from jsonl on 2026-04-23; future records PG-primary.
+**Primary — PG `vault_test.handover` on hmj:5432**:
+- Tailscale IP `100.111.214.15`, MagicDNS `hmj`, user `copper`, no password.
+- Replicated via pglogical `sub_from_hm1` → cm1 (replication set `test_set`).
+- Schema: `id int PK, date date, device text, agent text, operator text, role text NOT NULL, topic text, completed text, decisions text, blocked text, next_priorities text, created_at timestamptz`. 522 rows as of 2026-04-25 21:26.
+- Writer + reader: `~/repos/_admin-private/.script/db-exporters/handover_pg_io.py` (auto-discovers psql binary across Homebrew paths).
+- Manual read (SessionStart hook killed 2026-04-25): `~/repos/_admin-private/.script/handover-read.py`. Agent invokes at start of every session.
+- 392-row jsonb-style `vault_main.handover` exists from a mid-migration attempt; **ignore** until reconciled. Reconciliation deferred.
 
-**Fallback — `_data/handover.jsonl`**:
-- Append-only, UTF-8, one JSON object per line. Legacy Category A plain-text master per Law §8.4.
-- Used by: cloud CC (claude.ai Routines — no PG reach) + any local CC where PG is unreachable.
-- Periodic reconciliation pending: jsonl lines appended by cloud CC need occasional import into PG so local sessions see cloud activity. (TODO, not yet scripted.)
-- SQLite `handover.db` (pre-2026-04-18) retired copy: `_archive/handover_sqlite_retired_20260418.zip`.
+**Fallback — `_admin-private/_data/handover.jsonl`** (offline / cloud CC only):
+- Used when PG unreachable (Tailscale blip, hmj down, claude.ai Routines no PG).
+- `handover_pg_io.py` auto-falls back via `handover_jsonl_io.py`.
+- Bridge script TODO: drain cloud-CC jsonl appends back into PG.
 
 | Field | Type | Description |
 |---|---|---|
@@ -120,9 +120,9 @@ Driven by `handover-read.py` (SessionStart hook). Filters by role derived from `
 
 Interactive read (from shell or skill):
 ```bash
-python3 ~/Vault/repos/vault-scripts/db-exporters/handover_jsonl_io.py latest --role admin
-python3 ~/Vault/repos/vault-scripts/db-exporters/handover_jsonl_io.py tail -n 3 --role admin
-python3 ~/Vault/repos/vault-scripts/db-exporters/handover_jsonl_io.py tail -n 3 --agent vault-steward
+python3 ~/repos/_admin-private/.script/db-exporters/handover_pg_io.py latest --role admin
+python3 ~/repos/_admin-private/.script/db-exporters/handover_pg_io.py tail -n 3 --role admin
+python3 ~/repos/_admin-private/.script/db-exporters/handover_pg_io.py tail -n 3 --agent vault-steward
 ```
 
 ---
@@ -133,7 +133,7 @@ python3 ~/Vault/repos/vault-scripts/db-exporters/handover_jsonl_io.py tail -n 3 
 2. Append one record via the helper script (uses `fcntl.flock` for append-safety):
 
 ```bash
-python3 ~/Vault/repos/vault-scripts/db-exporters/handover_jsonl_io.py append <<'JSON'
+python3 ~/repos/_admin-private/.script/db-exporters/handover_pg_io.py append <<'JSON'
 {
   "date": "2026-04-18",
   "device": "hm4",
