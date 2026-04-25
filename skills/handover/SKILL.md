@@ -61,7 +61,7 @@ Insert one record to PG `handover` table on hmj (schema below). If PG unreachabl
 **Primary — PG `vault_main.handover` on hmj:5432**:
 - Tailscale IP `100.111.214.15`, MagicDNS `hmj`, user `copper`, no password.
 - Replicated via pglogical `sub_from_hm1` → cm1 (replication set `test_set`).
-- Schema: `id int PK, date date, device text, agent text, operator text, role text NOT NULL, topic text, completed text, decisions text, blocked text, next_priorities text, created_at timestamptz, to_do text, bug text, dont text`. (`to_do`/`bug`/`dont` added 2026-04-25 22:55: every cron writes handover; Codex daily review fixes blocked/bug/to_do; `dont` records what reviewer rejected so agents don't retry.)
+- Schema: `id int PK, date date, device text, agent text, operator text, role text NOT NULL, topic text, completed text, decisions text, blocked text, next_priorities text, created_at timestamptz, to_do text, bug text, done text, comment text`. Review pattern (Copper 2026-04-25): every cron writes handover; Codex daily review picks up `blocked`/`bug`/`to_do`, fixes them, writes back `done` (what was reviewed+fixed) and `comment` (free-form, e.g. "can't fix because external dependency X").
 - Writer + reader: `~/repos/_admin-private/.script/db-exporters/handover_pg_io.py` (auto-discovers psql binary across Homebrew paths).
 - Manual read (SessionStart hook killed 2026-04-25): `~/repos/_admin-private/.script/handover-read.py`. Agent invokes at start of every session.
 - 2026-04-25 21:50 reconciliation: vault_test.handover (522 multi-col) migrated into vault_main.handover; old jsonb table archived as `handover_jsonb_archive_20260425`. vault_test.handover dropped. PG canonical = vault_main everywhere now (handover + bugs + journals + queues + state).
