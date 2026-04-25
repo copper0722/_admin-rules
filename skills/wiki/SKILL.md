@@ -327,7 +327,7 @@ summary: "..."
 
 Canonical inbox = `~/Library/CloudStorage/Dropbox/_inbox/` (top-level Dropbox per Law §7.5 2026-04-22).
 
-1. List all unprocessed files at canonical inbox (cm1 via `ssh home-mm4 'ls ~/Library/CloudStorage/Dropbox/_inbox/'`; hm4 local ls).
+1. List all unprocessed files at canonical inbox (cm1 via `ssh hm4 'ls ~/Library/CloudStorage/Dropbox/_inbox/'`; hm4 local ls).
 2. For each file:
    - `.pdf` → queue for **Mode A-PDF** (MinerU)
    - `.mp3` / `.m4a` / `.wav` → queue for **Mode A-Audio** (whisper-cpp)

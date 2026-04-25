@@ -59,7 +59,7 @@ Insert one record to PG `handover` table on hmj (schema below). If PG unreachabl
 ## STORAGE
 
 **Primary — PG (2026-04-23 migration, Copper directive)**:
-- Table `handover` in database `vault_test` on hmj (tailnet `home-mm4`, IP `100.111.214.15`, port 5432).
+- Table `handover` in database `vault_main` on hmj (Tailscale `hmj`, IP `100.111.214.15`, port 5432). [Phase-9b consolidation 2026-04-24; pre-Phase-9b db was `vault_test` scaffold.]
 - Replicated via pglogical `sub_from_hm1` to cm1 (replication set `test_set`, `synchronize_data := true`).
 - Writer: any local CC session using `.script/db-exporters/handover_pg_io.py`.
 - Reader: `.script/handover-read.py` (SessionStart hook) — tries PG first, falls back to jsonl.
