@@ -1,0 +1,6 @@
+.DS_Store
+*.swp
+.trash/
+
+# Backup branches
+.git.broken-*/
