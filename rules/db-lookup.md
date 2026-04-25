@@ -9,7 +9,7 @@ Always query in this order; stop when answer found:
 4. individual .db via path returned from above
 5. file search → `rg` / `find`
 6. bibliographic metadata → Zotero API + frontmatter (citations.db deleted)
-7. **System masters** (Law §1.9, Vault §8.4 Category A): `_data/handover.jsonl` (session continuity), `_data/bugs.tsv` (vault issue tracker), `_data/journals.tsv` (journal registry) — plain text, not data lookup. Agents read/write via `/handover` and `/bug` skills or the helpers in `.script/db-exporters/`.
+7. **System ledgers** (Law §1.9): PG `vault_main` on hmj:5432 — `handover` (session continuity, /handover), `bugs` (vault issue tracker, /bug), `journals` (journal registry), `schedule_registry` (cron + launchd). Per Copper directive 2026-04-25 these moved out of `_data/*.{tsv,jsonl}` and are now PG-canonical. Agents INSERT to hmj (pglogical replicates to cm1); JSONL/TSV files are stale snapshots used only by cloud CC + offline laptops, drained back to PG by bridge script.
 
 ## Write authority
 - hm4 = single-writer for main vault SQLite

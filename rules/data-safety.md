@@ -16,6 +16,7 @@
 - filesystem mtime = real-time ground truth; trust mtime over commit timestamps
 
 ## Session continuity (§1.9)
-- `/handover write` → append `_data/handover.jsonl` (Category A plain-text master since 2026-04-18)
-- SessionStart hook auto-injects latest handover into context
+- `/handover write` → INSERT into PG `vault_main.handover` on hmj:5432 (canonical since 2026-04-25; pglogical→cm1)
+- Local-only fallback: `_data/handover.jsonl` for cloud CC + offline mbp/mba; bridge script drains to PG when device reconnects
+- SessionStart hook auto-injects latest handover into context (reads PG primary, falls back to JSONL)
 - Folder CLAUDE.md = rules + status board, not handover data
