@@ -12,6 +12,10 @@ This doc is **canonical** for hierarchy + tag SOP. Other refs (`medwiki-raw/CLAU
 4. **3-way mirror invariant**: `medwiki-raw/{path}` ≡ `medwiki/{path}` ≡ Zotero collection (raw/wiki/Zotero hierarchies aligned)
 5. **All structured data → PG `vault_main`**; no `.tsv`/`.db` canonical (skill-bundled `.csv` opt-out exception)
 6. **Layer purity** (Copper 2026-04-26): `medwiki/` = purely extremely m2m (compressed English, machine retrieval). Any Copper-read content (zh-TW prose, journal club discussion, reading guide, learning summary, weekly tracker) → `~/repos/note/`. `note/` = Copper-readable; `medwiki-raw/` = verbatim source; `medwiki/` = synthesis-for-machine. Cross-layer migration ≠ delete (preserve original layer if reused).
+7. **Layer organization style** (Copper 2026-04-26):
+   - `medwiki/` flat-friendly (machine doesn't need human nav; agent uses tags + grep)
+   - `medwiki-raw/` topic-tree §8.10 strict (3-way mirror, source organization)
+   - `note/` **user-friendly Obsidian hierarchy required** (Copper browses via Obsidian; flat = poor UX). DO NOT flatten note/. Build user-friendly folder tree (e.g. `note/{specialty}/{disease}/{key}.md` or by reading-program / journal / textbook source).
 
 ## §2 Topic-tree (§8.10 a-h, resurrected)
 
@@ -134,6 +138,7 @@ This is the §2(b) 同心圓 + §5.3 tag→path workflow in action.
 2. **medwiki/_wiki-rules-merge-pending.md (162L)**: orphan from medwiki/wiki/ flatten 2026-04-25; merge content into medwiki/CLAUDE.md, then rm.
 3. **medwiki-raw/CLAUDE.md L50 stale**: still says "lowercase_snake with UPPERCASE acronyms" — outdated by §8.10(c) revision 2026-04-22 to all-lowercase. Update.
 4. **Stale § references throughout**: `§8.10`, `§10.2`, `§9.1`, `§10.9` cited in many .md files but canonical doc was lost in Phase-9c split. After this rule consolidates, update refs to point at `_admin-rules/rules/folder-and-tag.md` (this doc) for hierarchy+tag rules, or other resurrected rule docs.
+5. **note/ flat (drift from §1.7)**: note repo currently flat (citationKey-named .md at root, including 12 just-imported `*_zh.md` translations). Per §1.7 needs Obsidian-friendly hierarchy. cm1 agent design + apply (probably `note/{specialty}/{disease}/{key}.md`). Don't flatten further.
 
 ### Mid-priority TODO
 
