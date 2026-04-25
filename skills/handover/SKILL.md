@@ -58,13 +58,13 @@ Insert one record to PG `handover` table on hmj (schema below). If PG unreachabl
 
 ## STORAGE (Phase-9d 2026-04-25)
 
-**Primary — PG `vault_test.handover` on hmj:5432**:
+**Primary — PG `vault_main.handover` on hmj:5432**:
 - Tailscale IP `100.111.214.15`, MagicDNS `hmj`, user `copper`, no password.
 - Replicated via pglogical `sub_from_hm1` → cm1 (replication set `test_set`).
 - Schema: `id int PK, date date, device text, agent text, operator text, role text NOT NULL, topic text, completed text, decisions text, blocked text, next_priorities text, created_at timestamptz`. 522 rows as of 2026-04-25 21:26.
 - Writer + reader: `~/repos/_admin-private/.script/db-exporters/handover_pg_io.py` (auto-discovers psql binary across Homebrew paths).
 - Manual read (SessionStart hook killed 2026-04-25): `~/repos/_admin-private/.script/handover-read.py`. Agent invokes at start of every session.
-- 392-row jsonb-style `vault_main.handover` exists from a mid-migration attempt; **ignore** until reconciled. Reconciliation deferred.
+- 2026-04-25 21:50 reconciliation: vault_test.handover (522 multi-col) migrated into vault_main.handover; old jsonb table archived as `handover_jsonb_archive_20260425`. vault_test.handover dropped. PG canonical = vault_main everywhere now (handover + bugs + journals + queues + state).
 
 **Fallback — `_admin-private/_data/handover.jsonl`** (offline / cloud CC only):
 - Used when PG unreachable (Tailscale blip, hmj down, claude.ai Routines no PG).
