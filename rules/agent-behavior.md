@@ -23,7 +23,7 @@
 - auto: significant decisions/changes → write to folder CLAUDE.md
 - keyword: Copper says `mem` → capture to folder CLAUDE.md immediately
 - **§2.12 daily 5AM cycle**: every new session sets `/loop 30m` → at 5AM: `/handover write` → /clear → reboot.
-- **§2.13 PIM access rules**: AppleScript-first (0 token). Calendar = Google Calendar MCP (AppleScript auth unreliable). **MCP = fallback** for all PIM when AppleScript fails. Priority: AppleScript → MCP. On CC update → test AppleScript; if broken → fall back to MCP silently.
+- **§2.13 PIM access rules**: Token-saving first. PIM/GUI automation is AppleScript-first via stable TCC broker (`CopperTCCBroker.app`). Scheduled jobs must not use Claude-owned raw `osascript`. Priority: broker AppleScript → API/MCP fallback → manual. On broker failure, write `handover.blocked`.
 
 ## Retrieval before answering (§2.10)
 - factual question → search before saying "I don't know"
