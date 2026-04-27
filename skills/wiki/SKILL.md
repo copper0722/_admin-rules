@@ -522,12 +522,15 @@ This is a corpus/bootstrap workflow, not a single-PDF `/note-writer` task.
 5. **Extraction pipeline**:
    - For large textbooks (>500 pages or multi-volume corpora), **split chapters first, then run MinerU per chapter**. Do not OCR an entire 1000+ page volume into one raw.md.
    - Use PDF TOC/bookmarks or contents-page parsing to create `chapter_manifest.json` with chapter id, title, page range, chapter PDF path, SHA256, and `raw_target` before OCR.
+   - Create a lightweight repo-tracked status mirror (`..._extraction_status.json` or equivalent) from the git-ignored sidecar manifest so a future/cloud agent can still see `chapters_total`, `raw_exists`, `pending_mineru`, and `chapter_pdfs_missing_or_remote` even when the binary sidecar is absent.
+   - Add a small repo-tracked status script (for example `scripts/{corpus}_status.py`) that first reads the live sidecar manifest when present, then falls back to the committed status mirror. It should print pending counts and optionally list pending chapter IDs.
+   - Put a `NEXT_AGENT_README.md` or equivalent sentinel inside the git-ignored sidecar itself, pointing back to the committed workflow/status files. This helps local agents landing in the sidecar understand that PDFs may be intentionally un-MinerU'd.
    - Start with one representative/high-priority chapter using MinerU on hm4 when available: `mineru -p '{chapter_pdf}' -o {raw_workdir} -m auto -b pipeline`.
    - Run long MinerU jobs in background with completion notification; do not block the user for an entire textbook corpus.
    - Add local extraction workdirs such as `**/_mineru_runs/` to `.gitignore`; never commit large intermediate OCR outputs unless deliberately promoted to raw `.md`.
    - For mechanical raw proofreading after MinerU, Gemma-class cheap/cloud/local models are acceptable if constrained to OCR cleanup only; synthesis remains a separate higher-reasoning pass.
 6. **Commit small metadata, not binaries**:
-   - Commit/push `_index.md`, markdown manifest, `.gitignore` changes, and the originating secretary/project note.
+   - Commit/push `_index.md`, markdown manifest, committed extraction status mirror, status script, `.gitignore` changes, and the originating secretary/project note.
    - Verify `git status` does not include sidecar PDFs or MinerU run directories.
    - Pull/sync to other reachable machines when this is infrastructure for future agents; note unreachable hosts explicitly.
 7. **Report state clearly**:
