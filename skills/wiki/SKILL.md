@@ -520,9 +520,12 @@ This is a corpus/bootstrap workflow, not a single-PDF `/note-writer` task.
    - Create `~/repos/medwiki-raw/clinical_medicine/{SPECIALTY}/_index.md` for raw/source staging.
    - Include purpose, tags, source corpus, pipeline state, and next-step checklist.
 5. **Extraction pipeline**:
-   - Start with one representative/high-priority volume or chapter using MinerU on hm4 when available: `mineru -p '{pdf}' -o {raw_workdir} -m auto -b pipeline`.
+   - For large textbooks (>500 pages or multi-volume corpora), **split chapters first, then run MinerU per chapter**. Do not OCR an entire 1000+ page volume into one raw.md.
+   - Use PDF TOC/bookmarks or contents-page parsing to create `chapter_manifest.json` with chapter id, title, page range, chapter PDF path, SHA256, and `raw_target` before OCR.
+   - Start with one representative/high-priority chapter using MinerU on hm4 when available: `mineru -p '{chapter_pdf}' -o {raw_workdir} -m auto -b pipeline`.
    - Run long MinerU jobs in background with completion notification; do not block the user for an entire textbook corpus.
    - Add local extraction workdirs such as `**/_mineru_runs/` to `.gitignore`; never commit large intermediate OCR outputs unless deliberately promoted to raw `.md`.
+   - For mechanical raw proofreading after MinerU, Gemma-class cheap/cloud/local models are acceptable if constrained to OCR cleanup only; synthesis remains a separate higher-reasoning pass.
 6. **Commit small metadata, not binaries**:
    - Commit/push `_index.md`, markdown manifest, `.gitignore` changes, and the originating secretary/project note.
    - Verify `git status` does not include sidecar PDFs or MinerU run directories.
