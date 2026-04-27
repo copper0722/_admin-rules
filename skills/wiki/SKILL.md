@@ -498,6 +498,42 @@ When user pastes content + says "丟進去/整理/file this/歸檔":
 3. Dedup: scan target folder for ≥50% overlap → merge into existing, else create new
 4. Tag: if kb/ → extract tag cloud → frontmatter `tags: [...]`
 
+## Mode G: Specialty Clinical Medicine LLM-wiki Bootstrapping
+
+**Trigger:** The user asks to build a high-quality specialty CME/LLM-wiki for an external team, to ingest a textbook corpus as sidecar, or to open a new `clinical_medicine/{specialty}` folder (e.g. ENT, cardiology, endocrinology).
+
+This is a corpus/bootstrap workflow, not a single-PDF `/note-writer` task.
+
+1. **Orient to existing repo structure first**:
+   - Check `~/repos/medwiki/AGENTS.md` and `~/repos/medwiki-raw/AGENTS.md` if present.
+   - Search both repos for the target specialty before creating folders.
+   - If the task originates from an invitation/project, read and update the relevant `~/repos/secretary/{talk|copper|tsn|...}` note so the strategic purpose is recorded.
+2. **Sidecar corpus ingest**:
+   - Put large source PDFs under `~/repos/medwiki-raw/_sidecar/{SPECIALTY}_{CorpusName}_{YYYY}/` (or the active sidecar path declared by the repo card). `_sidecar/` is intentionally git-ignored.
+   - For Google Drive folders, install/use `gdown` when appropriate: `python3 -m pip install --user gdown`; then `python3 -m gdown --folder '{url}' -O {sidecar_dir} --remaining-ok`.
+   - Verify downloaded files with `ls -lh`, page counts, and SHA256 before proceeding.
+3. **Manifest first**:
+   - Use PyMuPDF (`fitz`) to write `manifest.json` in the sidecar with file name, bytes, page count, SHA256, PDF metadata, and TOC sample.
+   - Create a committed markdown manifest in `~/repos/medwiki-raw/clinical_medicine/{SPECIALTY}/..._sidecar_manifest.md` summarizing the corpus and pointing to the sidecar path.
+4. **Open canonical folders**:
+   - Create `~/repos/medwiki/clinical_medicine/{SPECIALTY}/_index.md` for synthesized wiki pages.
+   - Create `~/repos/medwiki-raw/clinical_medicine/{SPECIALTY}/_index.md` for raw/source staging.
+   - Include purpose, tags, source corpus, pipeline state, and next-step checklist.
+5. **Extraction pipeline**:
+   - Start with one representative/high-priority volume or chapter using MinerU on hm4 when available: `mineru -p '{pdf}' -o {raw_workdir} -m auto -b pipeline`.
+   - Run long MinerU jobs in background with completion notification; do not block the user for an entire textbook corpus.
+   - Add local extraction workdirs such as `**/_mineru_runs/` to `.gitignore`; never commit large intermediate OCR outputs unless deliberately promoted to raw `.md`.
+6. **Commit small metadata, not binaries**:
+   - Commit/push `_index.md`, markdown manifest, `.gitignore` changes, and the originating secretary/project note.
+   - Verify `git status` does not include sidecar PDFs or MinerU run directories.
+   - Pull/sync to other reachable machines when this is infrastructure for future agents; note unreachable hosts explicitly.
+7. **Report state clearly**:
+   - Sidecar path and files downloaded.
+   - Created medwiki/medwiki-raw paths.
+   - Git commits pushed.
+   - Background pipeline session id and current state.
+   - Any unreachable machine or blocked next step.
+
 ## Supersedes
 
 This skill replaces `/pdf2md`, `/med-read`, `/appraise`, `/condense` (all absorbed 2026-04-12). Old triggers route here.
