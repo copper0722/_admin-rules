@@ -27,7 +27,15 @@ _tx() {
     return 1
   fi
   local session="${app}_${target}"
-  local cmd="$app $*"
+  local cmd
+  case $app in
+    claude)
+      cmd="ulimit -Hn 2048 2>/dev/null; ulimit -Sn 2048 2>/dev/null; exec claude --dangerously-skip-permissions $*"
+      ;;
+    codex|hermes)
+      cmd="exec $app $*"
+      ;;
+  esac
 
   if [ "$target" = "$DEVICE" ]; then
     if [ -n "$TMUX" ]; then
@@ -37,7 +45,7 @@ _tx() {
       tmux new-session -As "$session" -c "$HOME/repos" "$cmd"
     fi
   else
-    ssh -t "$target" "tmux new-session -As '$session' -c \$HOME/repos '$cmd'"
+    ssh -t "$target" "tmux new-session -As '$session' -c \$HOME/repos \"$cmd\""
   fi
 }
 
