@@ -32,8 +32,11 @@ _tx() {
     claude)
       cmd="ulimit -Hn 2048 2>/dev/null; ulimit -Sn 2048 2>/dev/null; exec claude --dangerously-skip-permissions $*"
       ;;
-    codex|hermes)
-      cmd="exec $app $*"
+    codex)
+      cmd="exec codex $*"
+      ;;
+    hermes)
+      cmd="hermes update; exec hermes $*"
       ;;
   esac
 
