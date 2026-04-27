@@ -7,7 +7,7 @@ This doc is **canonical** for hierarchy + tag SOP. Other refs (`medwiki-raw/CLAU
 ## §1 Universal invariants
 
 1. **dir = topic, file = article** (no `{key}/raw.md` wrapper; flat `{key}.md`)
-2. **lowercase including acronyms** (revised 2026-04-22 from old UPPERCASE: `ckd`/`esrd`/`aki`/`nejm`)
+2. **lowercase_snake words; medical acronyms preserve UPPERCASE** — `ESRD`/`CKD`/`AKI`/`HD`/`HDx`/`PD`/`ENT`/`COPD`/`OSA`/`OME`/`AOM`/`NEJM`/`JAMA`/`RCT` etc. stay uppercase as Copper writes them. Non-acronym words lowercase_snake (`hypertension`, `dialysis`, `otolaryngology`, `nephrology`). Reverted 2026-04-28 from the wrong 2026-04-22 "all-lowercase including acronyms" revision per Copper directive ("像我都命名 ESRD/HD/HDx").
 3. **`_-prefix` exempt** from topic rules (`_archive/_data/_sidecar/_translations/_system/_index.md` etc.)
 4. **3-way mirror invariant**: `medwiki-raw/{path}` ≡ `medwiki/{path}` ≡ Zotero collection (raw/wiki/Zotero hierarchies aligned)
 5. **All structured data → PG `vault_main`**; no `.tsv`/`.db` canonical (skill-bundled `.csv` opt-out exception)
@@ -26,7 +26,7 @@ This doc is **canonical** for hierarchy + tag SOP. Other refs (`medwiki-raw/CLAU
 - cross-cutting **topic** (whole sub-domain spans ≥2 parents) → **symlink**: canonical in primary parent + symlink in others
 - example: `nutrition/sport_nutrition/` canonical + `sport/sport_nutrition` symlink
 - siblings MUST be mutually exclusive; if not → ascend
-(c) all-lowercase including acronyms.
+(c) lowercase_snake for non-acronym words; medical acronyms UPPERCASE — see §1.2.
 (d) **Data-driven depth** — top-level skeleton predefined: `basic_medicine/clinical_medicine/medical_statistics/nutrition/research_method/sport/public_health/ai/`. Sub-folder open ONLY when ≥**15-20** entries warrant (§10.2 threshold, revised 2026-04-22 from 30). <15 entries → flat `.md` under parent. Hard depth ceiling **5 levels**.
 (e) Each topic folder has `_index.md` (script-regeneratable, agent retrieval landing).
 (f) **On-touch migration**: legacy flat files grandfathered, migrate when edited; NEW content goes directly into tree.
