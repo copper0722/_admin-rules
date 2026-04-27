@@ -510,8 +510,9 @@ This is a corpus/bootstrap workflow, not a single-PDF `/note-writer` task.
    - If the task originates from an invitation/project, read and update the relevant `~/repos/secretary/{talk|copper|tsn|...}` note so the strategic purpose is recorded.
 2. **Sidecar corpus ingest**:
    - Put large source PDFs under `~/repos/medwiki-raw/_sidecar/{SPECIALTY}_{CorpusName}_{YYYY}/` (or the active sidecar path declared by the repo card). `_sidecar/` is intentionally git-ignored.
+   - Before downloading, resolve and record the real binary target: `readlink ~/repos/medwiki-raw/_sidecar`, `readlink ~/VaultBinary`, and `mount | grep -E 'OWC|VaultBinary'`. On hm4 this may be an SMB mount to hmj OWC (`~/VaultBinary-mnt/VaultBinary`); on hmj it may be the local APFS volume (`/Volumes/OWC Express 1M2/VaultBinary`). Do not assume the displayed repo path is local disk.
    - For Google Drive folders, install/use `gdown` when appropriate: `python3 -m pip install --user gdown`; then `python3 -m gdown --folder '{url}' -O {sidecar_dir} --remaining-ok`.
-   - Verify downloaded files with `ls -lh`, page counts, and SHA256 before proceeding.
+   - Verify downloaded files with `ls -lh`, page counts, SHA256, and `stat` mtimes before proceeding. For multi-device/SMB sidecars, verify both the repo symlink path and the resolved OWC path when reachable.
 3. **Manifest first**:
    - Use PyMuPDF (`fitz`) to write `manifest.json` in the sidecar with file name, bytes, page count, SHA256, PDF metadata, and TOC sample.
    - Create a committed markdown manifest in `~/repos/medwiki-raw/clinical_medicine/{SPECIALTY}/..._sidecar_manifest.md` summarizing the corpus and pointing to the sidecar path.
