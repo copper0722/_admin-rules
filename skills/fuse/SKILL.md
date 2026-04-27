@@ -10,7 +10,11 @@ Fuse N independent LLM reports (Deep Research outputs) on the same question into
 
 **Council vs Fuse**: Council = adversarial debate → judge picks winner. Fuse = collaborative synthesis → merge best of all into one with provenance preserved. `/fuse` ≠ `/council`.
 
-**Scope change (v2, 2026-04-20)**: Step 0 + Step 4 added. Session artifacts moved from per-output sidecar to dedicated `proj/wiki/fuse/{topic}_{YYYYMMDD}/` workspace under the wiki mega-project. See [`/proj/wiki/fuse/CLAUDE.md`](/proj/wiki/fuse/CLAUDE.md) for workspace rules + status state machine. (A first-pass scaffold at root `_fuse/` was retired same day per Copper directive: fuse is a workflow under wiki, not a vault primitive like `_inbox/ _archive/ _data/`.)
+**Scope change (v3, 2026-04-27 — Copper directive)**: **Canonical fuse session path = `note/fuse/{topic}_{YYYYMMDD}/`** (NOT `proj/wiki/fuse/...` per old v2; NOT colocated with consumer scope). Reasoning: fuse session contains zh-TW WIP reasoning + sourced LLM outputs that match note/ Obsidian-readable layer privacy contract. Consumer scopes (e.g., `secretary/tsn/.../{topic}/`) get **symlinks** pointing back to canonical, never copies — to prevent drift between consumer-side workspace and master.
+
+**Symlink convention**: `{consumer_scope}/_fuse_session_{YYYYMMDD}` → `~/repos/note/fuse/{topic}_{YYYYMMDD}/`. Use absolute symlink path so it survives consumer-scope rename.
+
+(Earlier v2 path `proj/wiki/fuse/...` retired with proj/ wrapper retire 2026-04-25. v1 root `_fuse/` retired 2026-04-20.)
 
 ## Standard Workflow (5 steps)
 
