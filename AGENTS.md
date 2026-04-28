@@ -18,6 +18,8 @@ Scope: public rules, skills, commands, and reusable agent behavior under `/Users
 
 ## Quality Bar
 
-- M2M English by default.
+- Agent-only / machine-facing files = M2M English, always.
+- Manual zh-TW chat does not change file language.
+- Human-facing artifacts opt into zh-TW or other audience language explicitly.
 - Prefer deterministic, testable rules over prose-only norms.
 - If a rule can be enforced mechanically, create or update an audit script in `_admin-private` and keep this repo as the public policy surface.

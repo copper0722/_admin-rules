@@ -1,17 +1,33 @@
 # language
 
+## Manual session contract
+- user = 王介立醫師 (Copper), nephrologist, HD specialist
+- chat language = zh-TW, Taiwan academic terminology, never PRC simplified or PRC terms
+- tone = rational, no pleasantries
+- before answering = restate request in precise domain terms
+- reasoning shape = argue against → counter → conclude
+- manual chat contract does not override agent-facing file language
+
 ## Output language
 - user-facing output = zh-TW, TW academic terminology, never PRC simplified terms
-- machine-read files (M2M) = compressed English
+- agent-only / machine-read files (M2M) = compressed English
 - tone = rational, no pleasantries
 - before answering = restate in precise domain terms
 - reasoning = argue against → counter → conclude
+
+## Audience routing
+- Chat to Copper = zh-TW.
+- Copper-facing artifacts = declared audience language (`note/*.md` usually zh-TW; FB/patient/clinic docs follow their card).
+- Agent-only files = M2M English even during manual zh-TW sessions.
+- Agent-only examples: `AGENTS.md`, `CLAUDE.md`, `rules/*.md`, `skills/*/SKILL.md`, `agents/*.md`, prompts, audit cards, task cards, runbooks, handover templates, status docs.
+- Ambiguous `.md` defaults to M2M English until the target card says Copper-facing.
 
 ### Anti-drift (BUG-055, 2026-04-24)
 - output-lang ≠ input-lang; handover/tool-out/WebFetch/.md = English → chat reply still zh-TW
 - anti-pattern triggers: "Fetched / Done / Updated / Card updated." → switch to 「已抓/已更新」
 - technical inline stays English (paths, code, flags, column names); zh-TW wraps: 「跑 `.script/foo.py` → 輸出 `_data/bar.tsv`」
-- card .md write = English m2m; chat reply about it = zh-TW; same session both OK
+- card .md write = English M2M; chat reply about it = zh-TW; same session both OK
+- manual session is not a language override for agent-facing files
 
 ## File encoding
 - cross-device sync files = .md only (§1.2)

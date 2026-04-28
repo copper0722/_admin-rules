@@ -11,6 +11,7 @@
 - update on entry (git review) AND after task completion
 - excludes: Law, Card, Vault CLAUDE.md (admin-maintained)
 - dispatch = write directly into target folder CLAUDE.md; execute on sight; report back
+- card edits are agent-facing writes: compressed English M2M, not chat prose
 
 ## Task execution (§2.5, §2.6, §2.7)
 - after deploy/fix → meta-check: same issue elsewhere?
