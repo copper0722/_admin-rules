@@ -16,6 +16,15 @@ This doc is **canonical** for hierarchy + tag SOP. Other refs (`medwiki-raw/CLAU
    - `medwiki/` flat-friendly (machine doesn't need human nav; agent uses tags + grep)
    - `medwiki-raw/` topic-tree §8.10 strict (3-way mirror, source organization)
    - `note/` **user-friendly Obsidian hierarchy required** (Copper browses via Obsidian; flat = poor UX). DO NOT flatten note/. Build user-friendly folder tree (e.g. `note/{specialty}/{disease}/{key}.md` or by reading-program / journal / textbook source).
+8. **Self-contained folder names — globally unique, scope-bearing** (Copper directive 2026-04-28). Folder leaf name MUST stand alone and identify its knowledge scope; path-based disambiguation does NOT satisfy this.
+   - **Pattern**: `{topic}({scope})` when the bare topic name is ambiguous across the vault.
+   - **Example**: `nephrology/HTN(nephrology)/` ← not `nephrology/hypertension/`, because `cardiology/HTN(cardiology)/` also exists and a grep / fulltext search / tag-only retrieval cannot disambiguate by leaf alone.
+   - **Acronym-UPPERCASE rule still applies inside the qualified name** (§1.2): `HTN(nephrology)` not `htn(nephrology)`; `Tx(nephrology)` not `tx(nephrology)`.
+   - **Scope = specialty / discipline owning the topic instance**, not the organ or stage. `HTN(nephrology)` = "hypertension as nephrology problem" = hypertensive kidney disease + BP target in CKD/dialysis. `HTN(cardiology)` = primary HTN epidemiology + cardiovascular target. Mirror the parent specialty path, not subdomain.
+   - **When optional**: when the bare topic name is itself unambiguous and contains its scope (e.g., `CKD/`, `AKI/`, `KDIGO/` — the K/A/K letters already say kidney/Kidney Disease), no `(scope)` suffix needed. Borderline cases: `pediatric/`, `transplant/`, `anemia/` are NOT unambiguous → MUST be qualified.
+   - **Three-way mirror invariant** (§1.4): `medwiki-raw/{...}/HTN(nephrology)/` ≡ `medwiki/{...}/HTN(nephrology)/` ≡ Zotero collection name. All three layers carry the same scoped name.
+   - **PG registry as authority** — see §11 below. PK = `folder_name`. INSERT before `mkdir`; uniqueness violation = bug.
+9. **PG `folder_registry` is canonical for raw/wiki folder identity** (Copper directive 2026-04-28). Every `medwiki-raw/` and `medwiki/` topic folder must have one row in `vault_main.folder_registry`; `folder_name` (PK) must match the on-disk leaf name. Schema in §11.
 
 ## §2 Topic-tree (§8.10 a-h, resurrected)
 
@@ -164,3 +173,93 @@ This is the §2(b) 同心圓 + §5.3 tag→path workflow in action.
 - Pre-Phase-9c archived source: `_admin-private/_archive/_pre-split-vault-archive-20260425-151136/CLAUDE.md` §8.10/§10.2/§10.3/§8.6/§8.8
 
 After this doc lands as canonical, scattered §8.10/§10.2 refs in skills/cards should be updated to `_admin-rules/rules/folder-and-tag.md` (no more drift).
+
+## §11 PG `folder_registry` (Copper directive 2026-04-28)
+
+Canonical registry of every `medwiki-raw/` and `medwiki/` topic folder.
+`folder_name` is the unique identifier (PK), satisfying §1.8 self-contained
+naming. INSERT must precede `mkdir`; uniqueness violation = bug.
+
+### Schema
+
+```sql
+CREATE TABLE vault_main.folder_registry (
+    folder_name        TEXT PRIMARY KEY,
+                       -- Self-contained leaf name; either bare topic
+                       -- (e.g., 'CKD') or scoped 'topic(scope)' form
+                       -- (e.g., 'HTN(nephrology)'). Globally unique.
+    raw_path           TEXT,
+                       -- Path under medwiki-raw root, NULL if no raw mirror.
+                       -- e.g., 'clinical_medicine/internal_medicine/nephrology/HTN(nephrology)'
+    wiki_path          TEXT,
+                       -- Path under medwiki root, NULL if no wiki mirror.
+    parent_folder_name TEXT REFERENCES vault_main.folder_registry(folder_name)
+                       ON UPDATE CASCADE,
+                       -- Self-FK to enable hierarchy navigation; NULL for
+                       -- top-level (basic_medicine / clinical_medicine / ...)
+    lemma              TEXT NOT NULL,
+                       -- Bare topic without scope. For 'HTN(nephrology)' this
+                       -- is 'HTN'. For 'CKD' this is 'CKD'. Used for grouping
+                       -- across scopes.
+    scope              TEXT,
+                       -- Parenthesized scope, NULL when folder_name has no
+                       -- '(scope)'. For 'HTN(nephrology)' this is 'nephrology'.
+    specialty          TEXT,
+                       -- Top-level clinical specialty owning the folder
+                       -- (nephrology / cardiology / hematology / ...).
+    entry_count_raw    INT DEFAULT 0,
+                       -- Cached count of .md files directly in raw_path.
+    entry_count_wiki   INT DEFAULT 0,
+    description        TEXT,
+                       -- Optional one-line scope description.
+    created_at         TIMESTAMPTZ DEFAULT NOW(),
+    updated_at         TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX folder_registry_lemma_idx     ON vault_main.folder_registry(lemma);
+CREATE INDEX folder_registry_specialty_idx ON vault_main.folder_registry(specialty);
+CREATE INDEX folder_registry_parent_idx    ON vault_main.folder_registry(parent_folder_name);
+```
+
+### Workflow
+
+1. Agent wants to create new topic folder → INSERT row first (atomic; if PK
+   violation, the name is taken — pick scoped form or pick a different
+   lemma).
+2. Then `mkdir` + add `_index.md` per §2(e).
+3. Same `folder_name` row covers both raw and wiki; populate `raw_path` /
+   `wiki_path` as each layer is created.
+4. Rename → `UPDATE folder_registry SET folder_name=…, raw_path=…, wiki_path=…
+   WHERE folder_name=<old>` + `git mv` both layers + propagate to children
+   via `parent_folder_name` ON UPDATE CASCADE.
+5. Audit `folder_registry_drift` (priority TBD): walk `medwiki-raw/` +
+   `medwiki/` tree, compare to table, surface (a) folders without a row,
+   (b) rows without a folder, (c) `entry_count_*` mismatches.
+
+### Initial seeding
+
+Bulk INSERT from current tree at rule-adoption time (2026-04-28). Subsequent
+agent writes flow through registry-first protocol.
+
+### Naming examples (canonical)
+
+| folder_name | raw_path | lemma | scope | specialty |
+|---|---|---|---|---|
+| `clinical_medicine` | `clinical_medicine` | `clinical_medicine` | NULL | NULL |
+| `internal_medicine` | `clinical_medicine/internal_medicine` | `internal_medicine` | NULL | NULL |
+| `nephrology` | `clinical_medicine/internal_medicine/nephrology` | `nephrology` | NULL | `nephrology` |
+| `CKD` | `clinical_medicine/internal_medicine/nephrology/CKD` | `CKD` | NULL | `nephrology` |
+| `AKI` | `clinical_medicine/internal_medicine/nephrology/AKI` | `AKI` | NULL | `nephrology` |
+| `HTN(nephrology)` | `clinical_medicine/internal_medicine/nephrology/HTN(nephrology)` | `HTN` | `nephrology` | `nephrology` |
+| `HTN(cardiology)` | `clinical_medicine/internal_medicine/cardiology/HTN(cardiology)` | `HTN` | `cardiology` | `cardiology` |
+| `transplant(nephrology)` | `clinical_medicine/internal_medicine/nephrology/transplant(nephrology)` | `transplant` | `nephrology` | `nephrology` |
+
+### Known collisions audit (2026-04-28 snapshot — to resolve via §1.8)
+
+| collision lemma | paths | proposed scoped names |
+|---|---|---|
+| `hypertension` (×2) | `nephrology/hypertension`, `cardiology/hypertension` | `HTN(nephrology)`, `HTN(cardiology)` |
+| `transplant` (×2) | `nephrology/transplant`, `nephrology/CKD/transplant` (single file) | `transplant(nephrology)`; nested folder consolidate up |
+| `anemia` (×2) | `hematology/anemia`, `nephrology/CKD/anemia` | `anemia(hematology)`, `anemia(CKD)` |
+| `symptoms` (×3) | `neurology/symptoms`, `internal_medicine/symptoms`, `gastroenterology/symptoms` | `symptoms(neurology)`, etc. |
+| `nephrology` (×2) | `internal_medicine/nephrology` (adult), `pediatrics/nephrology` (pediatric) | `nephrology(adult)`, `nephrology(pediatric)` — heavy rename, defer |
