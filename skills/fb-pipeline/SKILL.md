@@ -1,10 +1,12 @@
 ---
 type: data
 name: fb-pipeline
-description: "FB post → quality article + TLC slide pipeline. Picks 1 unprocessed post from fb.db, writes polished article + appends Marp slide. MANDATORY TRIGGERS: /fb-pipeline, fb pipeline, process fb post, 寫文章, fb article."
+description: "FB page operations: post → quality article + TLC slide pipeline, Graph API token diagnostics, and Page messaging capability checks. MANDATORY TRIGGERS: /fb-pipeline, fb pipeline, process fb post, 寫文章, fb article, FB token, Facebook Graph API, 粉專私訊, Page inbox."
 ---
 
 # FB Content Pipeline
+
+Use this skill for Facebook Page work around Copper's TLC/王介立醫師 page: content pipeline, Graph API operations, token/permission diagnostics, comments/engagement, and Page inbox capability checks.
 
 Process ONE Facebook post from fb.db → polished article + TLC slide.
 
@@ -107,6 +109,31 @@ All vault slides = HTML. Single growing file, open in browser = instant presenta
 ```
 
 Keyboard nav: ← → arrows. Slide counter in corner.
+
+## Facebook Graph API diagnostics
+
+Use this section when Copper asks about FB tokens, Graph API access, Page comments/engagement, Page inbox, or fan-page private messages.
+
+1. First search the `secretary/fb` card/docs for the current canonical token path. As of 2026-04, the Page token is documented at `~/.local/share/deck/fb_page_token.json`.
+2. Never print token values. It is safe to print non-secret metadata: JSON keys, `page_id`, `page_name`, `fan_count`, `expires`, and permission names.
+3. Validate basic Page access before diagnosing a specific feature:
+   ```bash
+   python3 - <<'PY'
+   import json, urllib.parse, urllib.request
+   from pathlib import Path
+   p = Path('~/.local/share/deck/fb_page_token.json').expanduser()
+   data = json.loads(p.read_text())
+   token = data['page_token']
+   page = data['page_id']
+   url = 'https://graph.facebook.com/v19.0/' + page + '?' + urllib.parse.urlencode({
+       'fields': 'name,fan_count',
+       'access_token': token,
+   })
+   print(urllib.request.urlopen(url, timeout=20).read().decode())
+   PY
+   ```
+4. For Page inbox/private-message management, test `/{page_id}/conversations` with fields like `id,updated_time,snippet,unread_count,message_count,participants`. If Graph API returns `(#200) Requires permission: pages_messaging or User associated with the Page access token does not have an appropriate role on the Page`, the existing token can manage posts/engagement but cannot manage inbox. Copper needs a Page token with `pages_messaging` and appropriate Page role/app review before Hermes can triage or reply to Page private messages.
+5. Medical fan-page private messages should default to triage, digest, and reply drafts. Do not auto-send individualized medical advice; if replies are enabled, keep low-risk canned routing replies or ask Copper to approve drafts.
 
 ## DB Path
 `~/Vault/proj/fb/data/fb.db`
