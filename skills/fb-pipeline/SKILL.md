@@ -135,5 +135,44 @@ Use this section when Copper asks about FB tokens, Graph API access, Page commen
 4. For Page inbox/private-message management, test `/{page_id}/conversations` with fields like `id,updated_time,snippet,unread_count,message_count,participants`. If Graph API returns `(#200) Requires permission: pages_messaging or User associated with the Page access token does not have an appropriate role on the Page`, the existing token can manage posts/engagement but cannot manage inbox. Copper needs a Page token with `pages_messaging` and appropriate Page role/app review before Hermes can triage or reply to Page private messages.
 5. Medical fan-page private messages should default to triage, digest, and reply drafts. Do not auto-send individualized medical advice; if replies are enabled, keep low-risk canned routing replies or ask Copper to approve drafts.
 
+## Meta Business domain verification / Page messaging blockers
+
+Use this section when `pages_messaging` is blocked by Meta Developer setup, Business Manager domain verification, or a vendor-managed clinic website/domain.
+
+Class of task: diagnosing whether Copper can satisfy Meta Business domain verification and `pages_messaging` prerequisites using existing local website repos, DNS access, or vendor CMS automation.
+
+1. Record the Meta app + business context without secrets:
+   - app name / app ID
+   - Business Manager ID/name
+   - Page ID/name
+   - domain verification URL
+   - exact Graph API error text
+2. Check the current Page token metadata only, never the token value:
+   - `~/.local/share/deck/fb_page_token.json`
+   - keys present, `page_id`, `page_name`, `expires`, permission names
+3. Check DNS before assuming CMS access is enough:
+   ```bash
+   DOMAIN='example.com'
+   for q in NS A CNAME TXT; do dig +short $q "$DOMAIN"; done
+   for q in A CNAME TXT; do dig +short $q "www.$DOMAIN"; done
+   ```
+   Existing third-party verification TXT records (Google, Meta, etc.) imply someone previously had DNS control; identify whether that is the user, registrar, or vendor.
+4. Inspect the website repo/class of CMS before attempting changes:
+   - Read the website repo's `AGENTS.md` or equivalent project card first.
+   - CMS article/body publishing, static-page body editing, or image upload does NOT imply domain verification capability.
+5. Evaluate Meta's three verification routes explicitly:
+   - DNS TXT: preferred; requires registrar/DNS access or vendor action.
+   - HTML file at domain root: only works if a file can be served exactly at `https://domain/<verification-file>.html`; uploads to vendor asset paths or image-only file managers usually do not qualify.
+   - Meta tag in homepage `<head>`: only works if the CMS/vendor exposes global template/head editing; injecting meta tags into article/about body is unlikely to pass.
+6. For vendor/white-label CMS sites, do not assume repo publishing can solve verification. Document the likely blocker and ask the domain controller/vendor for the DNS TXT record:
+   ```text
+   Please add a Meta Business domain verification TXT record.
+   Host/Name: @
+   Type: TXT
+   Value: <Meta verification value>
+   TTL: default / 1 hour
+   ```
+7. Persist the audit in the relevant project repo/note rather than relying on chat memory. Include: DNS observations, CMS capabilities, rejected verification paths, and exact next action.
+
 ## DB Path
 `~/Vault/proj/fb/data/fb.db`
