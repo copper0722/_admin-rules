@@ -502,6 +502,16 @@ When user pastes content + says "丟進去/整理/file this/歸檔":
 
 **Trigger:** The user asks to build a high-quality specialty CME/LLM-wiki for an external team, to ingest a textbook corpus as sidecar, or to open a new `clinical_medicine/{specialty}` folder (e.g. ENT, cardiology, endocrinology).
 
+### Taxonomy routing for cross-cutting clinical concepts
+
+Before creating a disease/specialty-local folder, decide whether the concept is truly owned by that specialty or is a cross-cutting method/policy domain:
+
+- Clinical tools or measurements used beyond one specialty (e.g. body composition monitoring, frailty scales, exercise testing) → prefer `clinical_medicine/assessment_methods/{concept}/` in both `medwiki` and `medwiki-raw`, then link from specialty pages as needed.
+- Reimbursement, regulation, health insurance, device payment, national policy, or payer-system topics → prefer a top-level peer domain such as `health_insurance_reimbursement/{topic}/` rather than burying it under `clinical_medicine/`.
+- Disease/specialty paths may contain symlinks or index links back to the canonical cross-cutting folder, e.g. `clinical_medicine/internal_medicine/nephrology/ckd/esrd/dialysis_reimbursement -> ../../../../../health_insurance_reimbursement/dialysis_reimbursement`.
+- If the source material is pending from a human/vendor and facts are incomplete, create a small `_index.md` plus a pending-source page with explicit source gaps; do not invent reimbursement details via unsourced synthesis.
+- Mirror the same routing in `medwiki-raw`; verify symlink case-sensitive paths (`ckd` vs `CKD`) in each repo before committing.
+
 This is a corpus/bootstrap workflow, not a single-PDF `/note-writer` task.
 
 1. **Orient to existing repo structure first**:
