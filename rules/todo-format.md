@@ -1,11 +1,11 @@
 ---
 name: todo
-description: "TODO format and management. Use when writing, reading, or scanning TODOs in any CLAUDE.md card. Also use when agent needs to understand type/mode system. MANDATORY TRIGGERS: /todo, write TODO, add task, vault-todo, scan todos, TODO format."
+description: "TODO format and management. Use when writing, reading, or scanning TODOs in any AGENTS.md card. Also use when agent needs to understand type/mode system. MANDATORY TRIGGERS: /todo, write TODO, add task, vault-todo, scan todos, TODO format."
 ---
 
 # TODO Format
 
-Standard format for all CLAUDE.md TODO items. Scanned by `vault-todo.py` and dashboard `/api/todos`.
+Standard format for all `AGENTS.md` TODO items. Scanned by `vault-todo.py` and dashboard `/api/todos`.
 
 ## Format
 
@@ -41,7 +41,7 @@ Default mode = `manual` (if omitted). Examples: `dd:auto`, `plan:manual`, `bug` 
 2. Agent writing TODOs MUST use this format. Old format encountered → convert on touch.
 3. `vault-todo.py` = sole scanner. Path: `.script/vault-todo.py`.
 4. Completed items: keep 30 days, then may be cleared.
-5. TODOs live in `## TODO` section of CLAUDE.md (§10.9 card structure).
+5. TODOs live in `## TODO` section of `AGENTS.md` (§10.9 card structure).
 
 ## /burn Behavior
 

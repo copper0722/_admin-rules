@@ -1,16 +1,18 @@
 # agent-behavior
 
 ## Boot / session start (§2.2, §2.8, §2.11)
-- read Law + Book (MEMORY.md) + Card (~/CLAUDE.md) on boot/reboot
+- read Law (`/Users/copper/repos/AGENTS.md`) + Book (MEMORY.md) + current `AGENTS.md` card on boot/reboot
 - enable /remote-control; Copper accesses via https://claude.ai/code
-- session end = /handover → write `## Last Session Handover` to folder CLAUDE.md
+- session end = /handover → write durable PG handover; update folder `AGENTS.md` only for reusable state/rules
 - next session reads card → seamless resume; NOT /exit
 
 ## Card maintenance (§2.3, §2.4)
-- folder CLAUDE.md = living report + dispatch board
+- card = `AGENTS.md`; Law = `/Users/copper/repos/AGENTS.md`
+- `CLAUDE.md` = Claude auto-injection shim/symlink, not editable card
+- folder `AGENTS.md` = living report + dispatch board
 - update on entry (git review) AND after task completion
-- excludes: Law, Card, Vault CLAUDE.md (admin-maintained)
-- dispatch = write directly into target folder CLAUDE.md; execute on sight; report back
+- excludes: root Law card unless user explicitly asks
+- dispatch = write directly into target folder `AGENTS.md`; execute on sight; report back
 - card edits are agent-facing writes: compressed English M2M, not chat prose
 
 ## Task execution (§2.5, §2.6, §2.7)
@@ -21,14 +23,14 @@
 ## Session persistence (§2.9)
 - `/handover write` → append `_data/handover.jsonl` (plain-text, one JSON object per line; auto id + created_at)
 - SessionStart hook auto-reads latest handover → injected into context
-- auto: significant decisions/changes → write to folder CLAUDE.md
-- keyword: Copper says `mem` → capture to folder CLAUDE.md immediately
+- auto: significant reusable decisions/rules → write to folder `AGENTS.md`
+- keyword: Copper says `mem` → capture to folder `AGENTS.md` immediately
 - **§2.12 daily 5AM cycle**: every new session sets `/loop 30m` → at 5AM: `/handover write` → /clear → reboot.
 - **§2.13 PIM access rules**: Token-saving first. PIM/GUI automation is AppleScript-first via stable TCC broker (`CopperTCCBroker.app`). Scheduled jobs must not use Claude-owned raw `osascript`. Priority: broker AppleScript → API/MCP fallback → manual. On broker failure, write `handover.blocked`.
 
 ## Retrieval before answering (§2.10)
 - factual question → search before saying "I don't know"
-- order: (1) own folder CLAUDE.md → (2) aiko/memory/event-log.md → (3) aiko/memory-briefing.md → (4) grep vault → (5) web search
+- order: (1) own folder `AGENTS.md` → (2) aiko/memory/event-log.md → (3) aiko/memory-briefing.md → (4) grep vault → (5) web search
 - vault first, web last; non-specific question = Copper knows it's in vault
 - `recall {topic}` → check own card; missing → fix card
 
