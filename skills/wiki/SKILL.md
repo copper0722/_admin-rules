@@ -13,6 +13,18 @@ Any source → structured .md → vault. The vault is a private Wikipedia operat
 
 Wiki section (`wiki/`) = M2M knowledge cache maintained entirely by machine. Auto-iterating. Agents have **FULL AUTHORITY** over all wiki .md — create, update, merge, split, restructure, delete without Copper approval. No human in the loop. Wiki quality is the agent's responsibility. This is the one section of the vault where agents are autonomous owners, not assistants.
 
+## Model Routing
+
+Wiki synthesis/wikify/content mutation is Claude Opus-only. Use Opus for any
+source-derived wiki prose, summary, key points, clinical interpretation,
+evidence grading, causal appraisal, merge/split judgment, or contradiction
+resolution.
+
+Non-Opus scripts/agents may fetch sources, run MinerU/whisper, materialize
+raw.md, update manifests/indexes, and perform mechanical link/path repairs.
+They must leave `pending_opus_wiki` state instead of writing source-derived
+wiki text.
+
 ## Wiki Article Standard Format
 
 Every `wiki/wiki_*.md` file MUST follow this structure:
@@ -218,11 +230,12 @@ Steps:
    - No DOI, has project → `proj/{project}/data/{name}/raw.md`
    - No DOI, no project → `kb/{topic}/raw.md`
 7. Move PDF to sidecar as `source.pdf`
-8. **Simultaneous wiki evaluation** (not a separate step):
-   - CC reads the cleaned raw.md
+8. **Simultaneous wiki evaluation** (not a separate step; Opus-only):
+   - Claude Opus reads the cleaned raw.md
    - Scans existing `wiki/` for related topic
    - Match found → UPDATE existing wiki .md (append new findings, revise if contradicted)
    - No match → CREATE new wiki .md in `wiki/`
+   - Non-Opus automation must stop at raw.md + manifest/index + queue state.
    - This is ONE step with raw.md creation, not a batch job later
 9. If Copper requests → also generate note.md via /note-writer (on demand)
 10. Report: raw.md path, wiki.md path, line count, fixes applied
