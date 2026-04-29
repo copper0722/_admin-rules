@@ -44,7 +44,9 @@ Checklist:
 5. Do not resolve a critical control-plane finding merely because an RCA/report exists. Require runtime proof: active scheduler, corrected PG ownership/metadata, sentinel coverage, and at least one observed closed-loop cycle where output is produced, consumed, repaired, and reviewed.
 6. Write a follow-up handover documenting the independent review and whether the finding remains open.
 
-For Codex-Claude closed-loop incidents specifically, verify: independent Codex launchd (no Claude token dependency), mutually exclusive Claude-vs-Codex task selectors, `llm_handover_review`/repair-loop tasks owned by Codex, `codex_closed_loop_health` script-lane sentinel, and a later Codex review after Claude repair before resolving the finding.
+For Codex-Claude closed-loop incidents specifically, verify: independent Codex launchd (no Claude token dependency), mutually exclusive Claude-vs-Codex task selectors, `llm_handover_review`/repair-loop semantic tasks owned by Codex, `codex_closed_loop_health` script-lane sentinel, and a later Codex review after Claude repair before resolving the finding.
+
+Ownership pitfall: do not classify tasks by `task_name ILIKE '%codex%'` alone. Some `codex_*` rows are mechanical/script health checks (e.g., bootstrap-integrity handlers) and must stay on the script lane; only semantic outside-auditor rows should carry `audit_config.model='codex'` and be claimable by `codex-outside-auditor`. After bulk metadata repair, verify both counts: Codex semantic rows all have `model=codex`, and script rows with codex in the name are not accidentally moved into the Codex LLM lane.
 
 ## Add new audit
 
