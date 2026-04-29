@@ -7,16 +7,26 @@ argument-hint: "[URL | 'describe what to scrape']"
 
 # /crawler — Browser Automation Protocol
 
-CC agents use Safari + AppleScript to interact with websites. Zero LLM token for data access. This skill documents the universal protocol.
+CC agents drive browsers to interact with websites. Zero LLM token for data access. Two engine paths now coexist (agent-browser is preferred for paywall-heavy + cron use; Safari AppleScript remains for ad-hoc keystroke-driven flows).
 
-## Why Safari + AppleScript
+## Engine matrix
 
-| method | cost | Cloudflare | auth/subscription | use when |
-|---|---|---|---|---|
-| **curl / wget** | 0 token | ❌ blocked | ❌ no | OA content, APIs, no protection |
-| **Safari + AppleScript** | 0 token | ✅ bypass | ✅ logged in | paywalls, Cloudflare, JS-rendered |
-| **WebFetch** | LLM token | ❌ blocked | ❌ no | quick fetch, no Cloudflare |
-| **Computer Use** | high token | ✅ | ✅ | CAPTCHA, login, last resort |
+| method | cost | Cloudflare | auth/subscription | TCC | cron-safe | use when |
+|---|---|---|---|---|---|---|
+| **curl / wget** | 0 token | ❌ blocked | ❌ no | n/a | ✅ | OA content, APIs, no protection |
+| **agent-browser CDP** (real Chrome Beta + persistent profile) | 0 token | ✅ via cf_clearance cookie | ✅ via session cookies | n/a (CDP, no AppleScript) | ✅ | **default for paywall journals + cron**: NEJM, JAMA, JASN, CJASN, KI |
+| **Safari + AppleScript** | 0 token | ✅ if pre-passed | ✅ logged in | needs Automation TCC | ⚠️ TCC-fragile | legacy / ad-hoc; Cmd+S keystroke flows |
+| **WebFetch** | LLM token | ❌ blocked | ❌ no | n/a | ✅ | quick fetch, no Cloudflare |
+| **Computer Use** | high token | ✅ | ✅ | n/a | ❌ | CAPTCHA, login, last resort |
+
+## Why agent-browser became the default for paywall journals (2026-04-29)
+
+Findings while building NEJM auto-download (`medwiki-raw/scripts/NEJM/`):
+- Chrome for Testing trips Cloudflare Turnstile loops AND Google OAuth blocks ("瀏覽器可能有安全疑慮"). **Chrome Beta** (real Google channel) does not.
+- Chrome 119+ disables `--remote-debugging-port` on the **default user-data-dir** for security; you MUST point `--user-data-dir` at an isolated path (e.g. `~/.chrome-beta-cdp/`).
+- agent-browser `--cdp 9222` attaches to that real Chrome Beta → real fingerprint, real cookies → CF + paywall pass once you log in once.
+- `agent-browser eval --stdin` returns the JS expression's value (object → JSON object; string → JSON-encoded string). Use a plain expression, not `() => …` (the function itself becomes the return value, serialized as `{}`).
+- macOS AppleScript Automation TCC granular permission (Automation → Google Chrome) is brittle across Mac restarts; CDP path bypasses TCC entirely.
 
 **Two pathways:**
 
@@ -360,14 +370,18 @@ When agent encounters a new site:
 
 ## Existing Scripts
 
-| script | site | pattern |
+| script | site | engine |
 |---|---|---|
-| `nejm-weekly-download.sh` | nejm.org | Pattern 2 + 3 |
-| `nhi-page-monitor.py` | nhi.gov.tw | Pattern 1 + 6 |
-| `nhi-announcement-scraper.py` | nhi.gov.tw | Pattern 1 + 2 |
-| `nhi-regulation-scraper.py` | nhi.gov.tw | Pattern 1 + 2 |
-| `tfda-news-scraper.py` | fda.gov.tw | Pattern 1 + 2 |
-| `tfda-sitelist-scraper.py` | fda.gov.tw | Pattern 1 + 2 |
+| `medwiki-raw/scripts/NEJM/grab-current.sh` | nejm.org | **agent-browser CDP** — grab whatever NEJM article is in the current Chrome Beta tab → `_sidecar/{slug}/` + `_unclassified/{slug}.md`. See `pipelines/NEJM/AGENTS.md`. |
+| `medwiki-raw/scripts/NEJM/grab-doi.sh DOI` | nejm.org | **agent-browser CDP** — navigate + grab |
+| `medwiki-raw/scripts/NEJM/enqueue-toc.sh` | nejm.org | **agent-browser CDP** — scrape TOC → PG `public.nejm_queue` (manual; triggered via `/nejm-issue` skill) |
+| `medwiki-raw/scripts/NEJM/drain-queue.sh` | nejm.org | **agent-browser CDP** — q5min: claim 1, download, mark `downloaded`. Triggered by `quality_audit_tasks.nejm-drain` task-train job (cadence_minutes=5, target_host=hm4). |
+| `nejm-weekly-download.sh` | nejm.org | Safari + Cmd+S (legacy; superseded by `nejm/`) |
+| `nhi-page-monitor.py` | nhi.gov.tw | Safari Pattern 1 + 6 |
+| `nhi-announcement-scraper.py` | nhi.gov.tw | Safari Pattern 1 + 2 |
+| `nhi-regulation-scraper.py` | nhi.gov.tw | Safari Pattern 1 + 2 |
+| `tfda-news-scraper.py` | fda.gov.tw | Safari Pattern 1 + 2 |
+| `tfda-sitelist-scraper.py` | fda.gov.tw | Safari Pattern 1 + 2 |
 
 ## Journal Download (merged from /journal-download)
 
@@ -395,9 +409,14 @@ _inbox/                             ← downloads land here first
 
 | job | schedule | scope | script |
 |---|---|---|---|
-| NEJM weekly | Thu 7AM | full issue (subscription) | `nejm-weekly-download.sh` |
+| `nejm-toc-thursday` | Thu 08:30 TST | scrape current weekly issue → `public.nejm_queue` | `nejm/enqueue-toc.sh --current-issue` |
+| `nejm-drain-morning` | 09:30 daily TST | pop 5, sequential download, random 60-180s gap | `nejm/drain-queue.sh --batch 5` |
+| `nejm-drain-noon` | 14:30 daily TST | pop 5 (batch 2/3) | `nejm/drain-queue.sh --batch 5` |
+| `nejm-drain-evening` | 20:30 daily TST | pop 5 (batch 3/3); 15/day cap | `nejm/drain-queue.sh --batch 5` |
 | Nature weekly OA | planned | OA only, filtered | — |
 | Science weekly OA | planned | Free Access, filtered | — |
+
+NEJM auto-download is registered in `public.schedule_registry` (4 rows; `job_name` LIKE `nejm-%`) and loaded as launchd user agents on hm4. Each batch does a pre-flight auth probe (navigate to `nejm.org/`, run `auth-check.js`, abort & release claims if CF challenge or sign-in link visible). Day-cap enforced via `nejm_queue.downloaded_at` count. Block events logged to `public.nejm_log`.
 
 ## Usage
 
