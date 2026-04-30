@@ -42,7 +42,7 @@
 - admin CC 的排程 stewardship routines（`admin/cloud-routines/*.md` prompts 驅動，launchd fires `steward-wiki` / `steward-note` / `steward-repos`）**可** orchestrate 4 種 worker: self (CC Opus/Sonnet) + Codex + cloud Gemma 4 + local Gemma 4
 - 目的：cost-aware 分派（code review → Codex；web-grounded search → cloud Gemma；pattern match → local Gemma；EBM/Causal 判斷 → CC 自己）
 - 範圍：僅限 `steward-*` 系列 launchd job；其他 agent session 仍受默認規則
-- 呼叫方式：`codex exec`、`python3 ~/repos/Vault/.script/gemma-cloud.py -g`、`curl localhost:11434/api/generate`
+- 呼叫方式由 private ops repo 定義；public rules must not hardcode private script paths or credentials.
 - Hermes 自用路徑不受影響
 
 ## Compute hygiene

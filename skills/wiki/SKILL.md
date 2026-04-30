@@ -101,10 +101,10 @@ Wiki .md should read like a professional medical reference, not a blog or summar
 
 ### Source lifecycle
 
-Every source (OA or not) must be in `article_registry.db` (local) AND cited in at least one wiki .md `## Sources` section.
+Every source (OA or not) must be in the configured source registry AND cited in at least one wiki .md `## Sources` section.
 
 ```
-Source enters system → article_registry.db (local DB, doi/pmid/is_oa/status)
+Source enters system -> source registry (doi/pmid/is_oa/status)
   → wiki .md cites it in ## Sources (PMID:xxx Author2024 — finding)
   → source is "alive" = cited by wiki
 
@@ -119,9 +119,7 @@ Orphan source = in DB but NOT cited by any wiki .md
 grep -hoE 'PMID:[0-9]+' wiki/wiki_*.md | sort -u > /tmp/cited_pmids.txt
 grep -hoE 'DOI:[^ ]+' wiki/wiki_*.md | sort -u > /tmp/cited_dois.txt
 
-# Step 2: extract all PMIDs/DOIs from registry
-# Local: sqlite3 article_registry.db "SELECT doi FROM articles"
-# Cloud: read .cloud/data/source_registry.tsv
+# Step 2: extract all PMIDs/DOIs from the configured source registry
 
 # Step 3: diff → orphans
 comm -23 /tmp/all_sources.txt /tmp/cited_sources.txt > /tmp/orphan_sources.txt
@@ -142,15 +140,15 @@ comm -23 /tmp/all_sources.txt /tmp/cited_sources.txt > /tmp/orphan_sources.txt
 
 | source | transcription tool | verbatim output | placement |
 |---|---|---|---|
-| PDF (academic, has DOI) | **MinerU on hm4** | raw.md + images/ → note via `/note-writer` | raw/{topic}/{citationKey}/ + `_sidecar/{key}/source.pdf` |
-| PDF (textbook chapter) | **MinerU on hm4** | raw.md + images/ | raw/{topic}/{BookEdition}_Ch{NN}/ + `_sidecar/{key}/source.pdf` |
+| PDF (academic, has DOI) | **MinerU on configured runtime** | raw.md + images/ -> note via `/note-writer` | raw/{topic}/{citationKey}/ + `_sidecar/{key}/source.pdf` |
+| PDF (textbook chapter) | **MinerU on configured runtime** | raw.md + images/ | raw/{topic}/{BookEdition}_Ch{NN}/ + `_sidecar/{key}/source.pdf` |
 | PDF (project, no DOI) | MinerU | raw.md | `proj/{project}/data/{name}/raw.md` |
-| **mp3 / m4a / wav** (podcast, lecture, meeting) | **whisper-cpp on hm4** (Metal, `ggml-medium.en.bin`) | raw.md verbatim transcript | raw/{topic}/{citationKey}/ + `_sidecar/{key}/source.mp3` |
+| **mp3 / m4a / wav** (podcast, lecture, meeting) | **whisper-cpp on configured runtime** | raw.md verbatim transcript | raw/{topic}/{citationKey}/ + `_sidecar/{key}/source.mp3` |
 | URL / webpage | WebFetch + DOM clean | .md extract | proj/ or kb/ by topic |
 | Email / text | direct parse | .md capture | proj/ or kb/ by topic |
 | Transcript (existing .txt) | direct ingest | .md structured | proj/ or copper/ |
 
-Binary source (PDF/mp3/wav) is NEVER the primary entity. `.md` = first-class citizen. Binary = sidecar attachment under `_sidecar/{key}/`. **Same principle, different tool**: PDF → MinerU; audio → whisper-cpp; both run on hm4 (M4 Pro Metal + 64GB RAM = hardware-pinned transcription tier). Law §9.3 Principle of Fidelity applies equally — no wiki/note synthesis until verbatim raw.md exists.
+Binary source (PDF/mp3/wav) is NEVER the primary entity. `.md` = first-class citizen. Binary = sidecar attachment under `_sidecar/{key}/`. **Same principle, different tool**: PDF -> MinerU; audio -> whisper-cpp; runtime selection belongs in the private project card. Law §9.3 Principle of Fidelity applies equally - no wiki/note synthesis until verbatim raw.md exists.
 
 ## Workflow
 
@@ -158,8 +156,8 @@ Binary source (PDF/mp3/wav) is NEVER the primary entity. `.md` = first-class cit
 
 1. Validate input exists (not 0 bytes, not iCloud placeholder)
 2. Detect source type by extension + MIME:
-   - `.pdf` → Mode A-PDF (MinerU on hm4)
-   - `.mp3` / `.m4a` / `.wav` / `.ogg` / `.flac` → **Mode A-Audio (whisper-cpp on hm4)**
+   - `.pdf` -> Mode A-PDF (MinerU on configured runtime)
+   - `.mp3` / `.m4a` / `.wav` / `.ogg` / `.flac` -> **Mode A-Audio (whisper-cpp on configured runtime)**
    - URL → Mode A-URL
    - Text block → Mode A-Text
 3. Determine destination: has DOI? → raw/{topic}/{citationKey}/. Has project? → proj/. Else → kb/
@@ -242,10 +240,10 @@ Steps:
 
 ### Mode A-Audio — MANDATORY PIPELINE: mp3/wav → raw.md (same as PDF)
 
-**Never skip raw.md.** Every audio file must go through whisper-cpp on hm4 first. No direct audio→note. Same Principle of Fidelity as PDF (Law §9.3).
+**Never skip raw.md.** Every audio file must go through the configured transcription runtime first. No direct audio->note. Same Principle of Fidelity as PDF (Law §9.3).
 
 ```
-mp3/wav → DEDUP CHECK → ssh+cat push to hm4 _sidecar/{key}/source.mp3
+mp3/wav -> DEDUP CHECK -> stage in configured sidecar `{key}/source.mp3`
                               ↓
                       ffmpeg -ar 16000 -ac 1 -c:a pcm_s16le → source.wav
                               ↓
@@ -257,10 +255,10 @@ mp3/wav → DEDUP CHECK → ssh+cat push to hm4 _sidecar/{key}/source.mp3
                 note.md (/note-writer)  wiki.md update/create (M2M)
 ```
 
-**Canonical implementation**: `~/repos/_admin-private/.script/audio-to-raw.sh` encapsulates the full 5-step pipeline; prefer calling this over manually orchestrating ssh + ffmpeg + whisper-cli.
+**Canonical implementation**: use the private runtime helper declared by the active repo card; public rules must not publish private helper paths, hostnames, or mount topology.
 
 ```bash
-~/repos/_admin-private/.script/audio-to-raw.sh \
+audio-to-raw \
     --mp3 /path/to/source.mp3 \
     --key {citationKey} \
     --topic {topic_path} \
@@ -269,18 +267,18 @@ mp3/wav → DEDUP CHECK → ssh+cat push to hm4 _sidecar/{key}/source.mp3
 ```
 
 **STEP 0 — DEDUP CHECK** (before transcribing):
-1. Compute sha256 of source.mp3 → check `_data/article_registry.db` for existing sidecar
+1. Compute sha256 of source.mp3 -> check the configured source registry for an existing sidecar
 2. If DOI known (e.g., Annals On Call podcast has DOI 10.7326/ANNALS-*) → same dedup as Mode A-PDF
 3. If same `citationKey` already exists in raw tree → SKIP (don't re-transcribe)
 
-**STEP 1 — Transfer to hm4**: `ssh+cat` (scp / rsync blocked by Synology DSM SFTP restrictions for some paths; ssh+cat always works). Target: `~/VaultBinary/_sidecar/{key}/source.mp3` (Phase 9 OWC path).
+**STEP 1 — Stage source audio**: place the file in the sidecar path declared by the active private repo card. Public rules must not hardcode private hostnames, mounts, or transport workarounds.
 
 **STEP 2 — Convert to WAV**: `ffmpeg -y -i source.mp3 -ar 16000 -ac 1 -c:a pcm_s16le source.wav`. whisper-cli requires 16kHz mono PCM.
 
-**STEP 3 — Transcribe on hm4** (whisper-cpp Metal):
-- Model: `~/whisper-models/ggml-medium.en.bin` (1.4GB, English; alternatives: `large-v3` 3GB higher quality, `base.en` 150MB fast-draft)
-- Command: `whisper-cli --model {model} --file source.wav --output-txt --language en --threads 8`
-- Throughput: M4 Pro Metal ≈ **11× realtime** (29min audio → 2.5min wall). Run `nohup ... &` + poll PID until exit.
+**STEP 3 — Transcribe with the configured local engine**:
+- Model and device selection belong in the private runtime card.
+- Command shape: `whisper-cli --model {model} --file source.wav --output-txt --language en --threads {n}`
+- Run bounded background jobs with durable logs and poll until exit.
 - Output: `source.wav.txt` (plain text) + optional `source.wav.srt` (timestamp-aligned).
 
 **STEP 4 — Write raw.md** with Pattern B frontmatter:
@@ -304,7 +302,7 @@ summary: "..."
 # {Title}
 
 **Source**: `/_sidecar/{key}/source.mp3`
-**Transcript**: whisper-cpp + {model} on hm4.
+**Transcript**: whisper-cpp + {model}.
 
 ---
 
@@ -314,14 +312,14 @@ summary: "..."
 ```
 
 **STEP 5 — Cleanup + dispatch** (same as PDF):
-- Remove intermediate `source.wav` from hm4 (~54MB redundant; can regenerate from mp3)
-- Rename `source.wav.txt` → `transcript.txt` on hm4 sidecar
+- Remove intermediate `source.wav` when it can be regenerated from mp3
+- Rename `source.wav.txt` -> `transcript.txt` in the sidecar
 - Simultaneous wiki evaluation (same as Mode A-PDF step 8): scan existing wiki/ for topic match; update or create
 - Optional note.md via `/note-writer` short mode on Copper request
 
-**Hardware pinning**: audio transcription is **hm4-only** (M4 Pro Metal). cm1 (M1 16GB, SMB-only vault) cannot run whisper-cpp efficiently + doesn't have the model weights. Other devices MUST dispatch to hm4 via ssh.
+**Hardware pinning**: device/model selection is deployment-specific and belongs in the private runtime card.
 
-**Tool choice note (2026-04-22)**: MacWhisper GUI retired as primary workflow on hm4 (not installed as of this session). whisper-cpp CLI = canonical. `whisper-sync.py` still exports from legacy MacWhisper SQLite when a MacWhisper session exists (backward compat). MacWhisper 2 (paid GUI) may be installed later for single-file hand-triggered use cases; pipeline layer (`audio-to-raw.sh`) stays CLI-first.
+**Tool choice note**: pipeline layer should remain CLI-first for reproducibility. GUI tools are manual fallback only.
 
 ### Mode A-URL
 
@@ -338,17 +336,17 @@ summary: "..."
 
 ### Mode B: Inbox triage (`/wiki inbox`)
 
-Canonical inbox = `~/Library/CloudStorage/Dropbox/_inbox/` (top-level Dropbox per Law §7.5 2026-04-22).
+Canonical inbox path is declared by the project-local private card.
 
-1. List all unprocessed files at canonical inbox (cm1 via `ssh hm4 'ls ~/Library/CloudStorage/Dropbox/_inbox/'`; hm4 local ls).
+1. List all unprocessed files at the configured inbox with bounded commands.
 2. For each file:
    - `.pdf` → queue for **Mode A-PDF** (MinerU)
    - `.mp3` / `.m4a` / `.wav` → queue for **Mode A-Audio** (whisper-cpp)
    - `.md` already → review frontmatter, route to proper vault path
    - `.docx` / `.html` → convert to .md first, then route as text source
    - Other binary → investigate or move to `proj/{p}/data/` with metadata
-3. Process queue sequentially (hm4 does actual transcription — cm1 can orchestrate via ssh).
-4. **HR-7 mandatory cleanup** (Copper 2026-04-24): after each file's sidecar+raw.md+note land successfully, `mv "$INBOX_FILE" ... → _sidecar/{key}/source.pdf` (or equivalent). Confirm original NOT in `_Inbox` via `ls ~/Library/CloudStorage/Dropbox/_Inbox | grep -q "$basename" && echo FAIL || echo cleanup_ok`. Non-compliance auto-remediated by `dropbox-inbox-audit.sh` q1h cron but agent should be disciplined.
+3. Process queue sequentially with the configured runtime.
+4. Mandatory cleanup: after each file's sidecar+raw.md+note land successfully, move the original into the sidecar source path or equivalent archive. Confirm the inbox copy is gone with a bounded check.
 5. Report: N files wikified by type, destinations, cleanup_ok count.
 
 ### Mode C: Batch (`/wiki batch /path/to/folder/`)
@@ -375,34 +373,9 @@ Canonical inbox = `~/Library/CloudStorage/Dropbox/_inbox/` (top-level Dropbox pe
 - Every PDF without .md sidecar = not wikified = invisible to system
 - /note-writer handles academic PDF→teaching note (higher quality, more token). /wiki handles bulk conversion.
 
-## AppleScript — Safari PDF Download
+## Public Download Boundary
 
-```bash
-# Navigate to PDF URL and save via Cmd+S (subscription required)
-osascript -e "
-tell application \"Safari\"
-  activate
-  open location \"https://www.nejm.org/doi/pdf/10.1056/NEJMoa2100842\"
-  delay 6
-end tell
-tell application \"System Events\"
-  tell process \"Safari\"
-    keystroke \"s\" using {command down}
-    delay 2
-    keystroke \"a\" using {command down}
-    delay 0.2
-    keystroke \"NEJMoa2100842.pdf\"
-    delay 0.3
-    keystroke \"g\" using {command down, shift down}
-    delay 1
-    keystroke \"$HOME/Library/CloudStorage/Dropbox/_inbox/\"
-    keystroke return
-    delay 1
-    keystroke return
-    delay 2
-  end tell
-end tell"
-```
+For public rules, PDF download examples are limited to open-access or otherwise clearly licensed files. Subscription or authenticated source acquisition is a private workflow and must not be documented in this public repo.
 
 ## Mode D: EBM Appraisal (absorbed from /med-read, 2026-04-12)
 
@@ -528,20 +501,20 @@ Before creating a disease/specialty-local folder, decide whether the concept is 
 This is a corpus/bootstrap workflow, not a single-PDF `/note-writer` task.
 
 1. **Orient to existing repo structure first**:
-   - Check `~/repos/medwiki/AGENTS.md` and `~/repos/medwiki-raw/AGENTS.md` if present.
+   - Check the project `AGENTS.md` files if present.
    - Search both repos for the target specialty before creating folders.
-   - If the task originates from an invitation/project, read and update the relevant `~/repos/secretary/{talk|copper|tsn|...}` note so the strategic purpose is recorded.
+   - If the task originates from an invitation/project, record strategic purpose in the owning private project note.
 2. **Sidecar corpus ingest**:
-   - Put large source PDFs under `~/repos/medwiki-raw/_sidecar/{SPECIALTY}_{CorpusName}_{YYYY}/` (or the active sidecar path declared by the repo card). `_sidecar/` is intentionally git-ignored.
-   - Before downloading, resolve and record the real binary target: `readlink ~/repos/medwiki-raw/_sidecar`, `readlink ~/VaultBinary`, and `mount | grep -E 'OWC|VaultBinary'`. On hm4 this may be an SMB mount to hmj OWC (`~/VaultBinary-mnt/VaultBinary`); on hmj it may be the local APFS volume (`/Volumes/OWC Express 1M2/VaultBinary`). Do not assume the displayed repo path is local disk.
+   - Put large source PDFs under the active sidecar path declared by the project card. `_sidecar/` should be git-ignored.
+   - Before downloading, resolve and record the real binary target using the project resolver. Do not assume the displayed repo path is local disk.
    - For Google Drive folders, install/use `gdown` when appropriate: `python3 -m pip install --user gdown`; then `python3 -m gdown --folder '{url}' -O {sidecar_dir} --remaining-ok`.
-   - Verify downloaded files with `ls -lh`, page counts, SHA256, and `stat` mtimes before proceeding. For multi-device/SMB sidecars, verify both the repo symlink path and the resolved OWC path when reachable.
+   - Verify downloaded files with `ls -lh`, page counts, SHA256, and `stat` mtimes before proceeding. For multi-device sidecars, verify both the repo symlink path and the resolved binary path when reachable.
 3. **Manifest first**:
    - Use PyMuPDF (`fitz`) to write `manifest.json` in the sidecar with file name, bytes, page count, SHA256, PDF metadata, and TOC sample.
-   - Create a committed markdown manifest in `~/repos/medwiki-raw/clinical_medicine/{SPECIALTY}/..._sidecar_manifest.md` summarizing the corpus and pointing to the sidecar path.
+   - Create a committed markdown manifest summarizing the corpus and pointing to the sidecar path.
 4. **Open canonical folders**:
-   - Create `~/repos/medwiki/clinical_medicine/{SPECIALTY}/_index.md` for synthesized wiki pages.
-   - Create `~/repos/medwiki-raw/clinical_medicine/{SPECIALTY}/_index.md` for raw/source staging.
+   - Create the project-local synthesized wiki index for the specialty/topic.
+   - Create the project-local raw/source staging index for the specialty/topic.
    - Include purpose, tags, source corpus, pipeline state, and next-step checklist.
 5. **Extraction pipeline**:
    - For large textbooks (>500 pages or multi-volume corpora), **split chapters first, then run MinerU per chapter**. Do not OCR an entire 1000+ page volume into one raw.md.
@@ -549,12 +522,12 @@ This is a corpus/bootstrap workflow, not a single-PDF `/note-writer` task.
    - Create a lightweight repo-tracked status mirror (`..._extraction_status.json` or equivalent) from the git-ignored sidecar manifest so a future/cloud agent can still see `chapters_total`, `raw_exists`, `pending_mineru`, and `chapter_pdfs_missing_or_remote` even when the binary sidecar is absent.
    - Add a small repo-tracked status script (for example `scripts/{corpus}_status.py`) that first reads the live sidecar manifest when present, then falls back to the committed status mirror. It should print pending counts and optionally list pending chapter IDs.
    - Put a `NEXT_AGENT_README.md` or equivalent sentinel inside the git-ignored sidecar itself, pointing back to the committed workflow/status files. This helps local agents landing in the sidecar understand that PDFs may be intentionally un-MinerU'd.
-   - Start with one representative/high-priority chapter using MinerU on hm4 when available: `mineru -p '{chapter_pdf}' -o {raw_workdir} -m auto -b pipeline`.
+   - Start with one representative/high-priority chapter using MinerU when available: `mineru -p '{chapter_pdf}' -o {raw_workdir} -m auto -b pipeline`.
    - Run long MinerU jobs in background with completion notification; do not block the user for an entire textbook corpus.
    - Add local extraction workdirs such as `**/_mineru_runs/` to `.gitignore`; never commit large intermediate OCR outputs unless deliberately promoted to raw `.md`.
    - For mechanical raw proofreading after MinerU, Gemma-class cheap/cloud/local models are acceptable if constrained to OCR cleanup only; synthesis remains a separate higher-reasoning pass.
 6. **Commit small metadata, not binaries**:
-   - Commit/push `_index.md`, markdown manifest, committed extraction status mirror, status script, `.gitignore` changes, and the originating secretary/project note.
+   - Commit/push `_index.md`, markdown manifest, committed extraction status mirror, status script, `.gitignore` changes, and the originating project note.
    - Verify `git status` does not include sidecar PDFs or MinerU run directories.
    - Pull/sync to other reachable machines when this is infrastructure for future agents; note unreachable hosts explicitly.
 7. **Report state clearly**:

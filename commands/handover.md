@@ -1,4 +1,6 @@
-Read `/Users/copper/repos/_admin-rules/skills/handover/SKILL.md` and execute the skill. Arguments: $ARGUMENTS
+Read the local `skills/handover/SKILL.md` and execute the skill. Arguments: $ARGUMENTS
 
-If no arguments or just `/handover` → READ mode (show latest handover from PG `vault_test.handover` on hmj).
-If arguments contain "write" → WRITE mode (full three-part ritual: /wiki + /method + INSERT to PG).
+If no arguments or just `/handover` -> READ mode from the configured private handover backend.
+If arguments contain `write` -> WRITE mode using the configured private handover backend.
+
+Public repos must not document private database names, hostnames, credentials, or local-only fallback paths.

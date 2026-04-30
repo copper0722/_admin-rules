@@ -387,16 +387,11 @@ Assign **flat** tags based on article content. NO prefix (`_s/`, `_t/` abolished
 
 Write tags into:
 1. **Note frontmatter** `tags:` field (already in the note)
-2. **Zotero** via API:
-   - Search item: `curl -s -H "Zotero-API-Key: {key}" "https://api.zotero.org/users/19195374/items/top?q={title_words}&format=json&limit=5"`
-   - If found → PATCH tags: `curl -s -X PATCH -H "Zotero-API-Key: {key}" -H "Content-Type: application/json" -H "If-Unmodified-Since-Version: {ver}" -d '{"tags":[{"tag":"xxx"},{"tag":"yyy"}]}' "https://api.zotero.org/users/19195374/items/{itemKey}"`
-   - **If NOT found → create from DOI** (auto-fill metadata):
-     a. Get metadata: `curl -s "https://api.crossref.org/works/{DOI}" | jq '.message'`
-     b. Map to Zotero: title, creators(firstName+lastName), publicationTitle, volume, issue, pages, date, DOI
-     c. POST: `curl -s -X POST -H "Zotero-API-Key: {key}" -H "Content-Type: application/json" -d '[{full item}]' "https://api.zotero.org/users/19195374/items"`
-   - Never create items with only title+DOI — always use CrossRef for full metadata.
-   - **Tags MUST be identical** between frontmatter and Zotero. Write SAME tags to both in the same pass. Never let them diverge.
-   - **Mutual linkage**: after creating/finding Zotero item, PATCH its `url` field with vault path `/raw/articles/{citationKey}`. `zotero://` URL scheme deprecated.
+2. **Citation manager**, if configured by the private runtime:
+   - Never publish API keys, user IDs, token paths, or account identifiers in public rules.
+   - Search by DOI/title through the configured private helper.
+   - If creating a new item, use Crossref or publisher metadata rather than title-only stubs.
+   - Tags MUST be identical between frontmatter and citation-manager metadata.
 
 ### Summary (§9.1 — superseded by Take Home Message)
 
