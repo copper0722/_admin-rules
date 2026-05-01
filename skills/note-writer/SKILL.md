@@ -194,36 +194,53 @@ Past agents repeatedly injected wiki-style synthesis into notes despite this rul
 
 If a chapter's KEY TAKEAWAYS or body contains any of the above patterns INLINE (mixed with textbook content), the note is **contaminated** and must be rewritten faithfully from raw.md.
 
-#### Permitted callout exception (Copper 2026-04-20 PM clarification)
+#### Permitted callout exception (Copper 2026-04-20 PM, hardened 2026-05-01)
 
-Taiwan-specific practice notes / regional guideline addenda MAY be added IF AND ONLY IF they live in an Obsidian callout block that visually + semantically marks them as NOT-from-textbook:
+Non-source content MAY be added IF AND ONLY IF it lives in an Obsidian callout block that meets the three-bucket convention defined in `medwiki/note/AGENTS.md` "Layer scope (hard line — note ≠ wiki)" §. Card is the authority; this section reproduces the canonical form for Taiwan addenda only:
 
 ```markdown
-> [!note]+ 台灣實務補遺｜Taiwan-specific Practice Notes
+> [!note]- 台灣實務補遺<!>｜Taiwan-specific Practice Notes
+> **台灣實務補遺**（curator: {name}, {YYYY-MM-DD}; 非 raw.md 原文；已 vet）
+>
 > - 健保 P0402C 慢性腎臟病前期照護給付：...
 > - cystatin C 自費 NT$ 500-800/次
 > - 多數實驗室仍報 MDRD（2024 KDIGO 已建議 CKD-EPI 2021）
+>
+> — Taiwan-practice supplement, not source
 ```
 
-Or any equivalent callout label like `> [!info]+ 補遺` / `> [!tip]+ 台灣臨床脈絡`. The callout type isn't strict — what matters is:
-- Block-level callout (`> [!type]`), NOT inline insertion
-- Title contains "補遺" / "Taiwan" / "台灣" / "addenda" or similar non-source marker
-- Position: after the relevant section ends, NOT mixed into bullet lists
+Hard requirements (all three or it is contaminated):
+- Block-level `> [!note]-` (the `-` modifier — collapsed by default; `+` and plain forbidden, per Copper directive 2026-04-27 reinforced 2026-05-01).
+- Title contains the literal greppable token `台灣實務補遺<!>` (bucket T). LLM batch-added content goes to bucket L (`LLM 補充<!>`); Copper interactive Q&A goes to bucket C (`額外插入筆記<!>`).
+- First content line states provenance per the bucket's template in the card.
+- Position: after the relevant section ends, NOT mixed into bullet lists.
 
 **Default = take it out.** When in doubt whether to keep a Taiwan addendum, REMOVE it. Wiki layer is the proper home for regional gloss; note layer should err toward textbook fidelity. Callout is a permission, not a requirement.
 
-Pattern detection regex (cm1 cleanup uses; matches CONTAMINATED inline patterns, NOT permitted callouts):
+Pattern detection regex (cm1 cleanup uses; matches CONTAMINATED inline patterns, NOT permitted callouts in buckets C/L/T):
 
 ```
-<!-- audit
-\[GRADE:
-反向因果|共同原因混淆|時間零|collider|competing risk|immortal time
-^## 2026 Update|^## Modern Evidence|^## 證據更新
-^- .*台灣 NHI P040[0-9]C  (台灣 NHI inline in bullet — strip; in callout — OK)
+<!-- audit                                                          # HTML audit comment
+\[GRADE:                                                            # inline GRADE label
+反向因果|共同原因混淆|時間零|collider|competing risk|immortal time   # causal vocab not in source
+^## 2026 Update|^## Modern Evidence|^## 證據更新                    # forbidden synthesis H2
+^## EBM 評析|^## GRADE 證據等級|^## PICO|^## Bias                    # forbidden synthesis H2
+^## Taiwan Applicability|^## 台灣適用性                              # forbidden regional gloss H2
+^- .*台灣 NHI P040[0-9]C  (inline bullet — strip; bucket-T callout — OK)
 ^- .*健保 P040[0-9]C       (same)
 ```
 
-Note quality = faithful rendering of source PLUS optional callout-boxed Taiwan addenda. Anchor rule (caveat/quantitative/decision-hinge) draws ONLY from textbook's own data, not external grading.
+Permitted callout markers (greppable, must coexist with `[!note]-` collapsed modifier):
+
+```
+額外插入筆記<!>     # bucket C — Copper Q&A
+LLM 補充<!>         # bucket L — LLM batch-added (audit / sweep / market data / GRADE / Taiwan policy)
+台灣實務補遺<!>     # bucket T — curator-vetted Taiwan addenda
+```
+
+Contam-cleanup action: forbidden inline → strip OR fold into bucket-L callout (LLM batch-added) with provenance line; forbidden H2 sections → fold entire section into bucket-L callout. Never delete content silently; always preserve in a callout marked with date and reason.
+
+Note quality = faithful rendering of source PLUS optional collapsed-callout supplements (C/L/T). Anchor rule (caveat/quantitative/decision-hinge) draws ONLY from textbook's own data, not external grading.
 
 ### Output path (Copper 2026-04-20 layer split)
 
