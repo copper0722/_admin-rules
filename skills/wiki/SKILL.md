@@ -1,7 +1,7 @@
 ---
 type: data
 name: wiki
-description: "Wikify any source into vault .md. PDF/mp3/URL/text/email → verbatim raw.md → wiki + note. Core principle: if not .md, it's forgotten. Same fidelity pipeline (Law §9.3) for every source type. MANDATORY TRIGGERS: /wiki, wikify, 維基化, 'convert to md', 'save to vault', or drops a PDF/mp3/audio/URL."
+description: "Wikify any source into vault .md. PDF/mp3/URL/text/email/social-media → verbatim raw.md → wiki. Core principle: if not .md, it's forgotten. Same fidelity pipeline (Law §9.3) for every source type. /wikify alias = Mode A-Manual (zero-binary scattered manual input: FB/Line/IG/Threads quote, screenshot, manual text). MANDATORY TRIGGERS: /wiki, /wikify, wikify, 維基化, 'convert to md', 'save to vault', drops a PDF/mp3/audio/URL, or pastes social-media post / screenshot / 零散文字."
 argument-hint: "[path to PDF | mp3/m4a/wav | URL | 'text:...' | 'inbox']"
 ---
 
@@ -328,11 +328,78 @@ summary: "..."
 3. Structure as .md with source URL in frontmatter
 4. Write to proj/ or kb/ by topic
 
-### Mode A-Text
+### Mode A-Manual — `/wikify` (zero-binary scattered manual input)
 
-1. Parse input text
-2. Structure as .md
-3. Write to appropriate folder
+**Trigger**: Copper pastes scattered manual input directly into chat — most commonly a social-media post (Facebook / Line / Instagram / Threads / X), a screenshot of a chat / lab report / 公告, a transcribed quote, or a free-form note. There is no PDF, no audio, no URL the agent must fetch — the source text and any embedded image content arrive inline in the conversation. `/wikify` is the dedicated alias; `/wiki text:...` and bare paste also route here.
+
+**Why a separate mode**: Mode A-PDF and Mode A-Audio assume a binary source artefact and a transcription tool (MinerU / whisper-cpp). Manual social-media input has no binary worth keeping by default — the screenshot is a vehicle for text, not a primary source. The fidelity contract therefore shifts: **embedded image content must be OCR / multimodal-extracted into raw.md verbatim text**, not stored as a sidecar binary, unless Copper explicitly asks to keep the original screenshot. (Copper directive 2026-05-02: "影像直接文字化進 raw".)
+
+**Steps:**
+
+1. **Verbatim capture**. Preserve the source text exactly: zh-TW characters, emoji, hashtags, line breaks, ASCII-art, the author's spacing. Do **not** rewrite, condense, or "clean up" — the raw layer's job is to be a faithful mirror. If the platform conventions are part of the message (e.g. FB-style short-line layout), preserve them inside a fenced block.
+
+2. **Inline image text-extraction**. For each screenshot or pasted image:
+   - Read the image with the multimodal Read tool.
+   - Transcribe every legible token into a section of raw.md, structured by what the image is (e.g. `## Screenshot N — patient FB private message`, `## Screenshot N — lab report block`).
+   - Tabular data (lab reports, prescription tables) → reproduce as markdown table. Preserve H/L flags, units, reference ranges when visible.
+   - Note explicitly which fields are illegible / partly redacted; do not guess values.
+   - Do **not** create a sidecar binary by default. If Copper asks to keep the original ("收 sidecar"), copy to `_sidecar/{citationKey}/source.{png,jpg}` with sha256 in the filename and add `sidecar: {citationKey}` to frontmatter.
+
+3. **Source identity (uid scheme)**. Manual sources do not have DOI / ISBN / PMID. Use platform-prefixed uids:
+   - `fb:{author_handle}:{topic_slug}` — Facebook post (e.g. `fb:SuYining2026:thalassemia_carrier`)
+   - `line:{thread_id_or_author}:{topic_slug}` — Line message
+   - `ig:{author_handle}:{topic_slug}` — Instagram
+   - `threads:{author_handle}:{topic_slug}` — Threads / X
+   - `manual:{topic_slug}` — Copper's own free-form text with no platform anchor
+
+4. **Frontmatter scheme** (Pattern C — manual / social-media):
+   ```yaml
+   ---
+   type: raw
+   citationKey: {AuthorYear}_{platform}_{topic_slug}
+   uid: {fb|line|ig|threads|manual}:{handle}:{topic_slug}
+   source_type: fb_expert_opinion | fb_post_quote | line_message | ig_post | threads_post | manual_text
+   platform: facebook | line | instagram | threads | manual
+   author: {name}
+   author_role: {credentials / institution if known}
+   title: {post title or first line}
+   post_date: YYYY-MM-DDTHH:MM±HH:MM   # if known; else YYYY-MM only
+   post_url: https://...                # if available
+   captured_date: YYYY-MM-DD
+   captured_by: copper-manual-input
+   fidelity_notes: |
+     Embedded image content was OCR-transcribed verbatim into raw.md
+     (per Copper directive 2026-05-02). No sidecar binary kept by default.
+   specialty: [<one or more domain tags>]
+   topic: {topic_slug}
+   tags: [<flat tag list>]
+   cross_ref:
+     textbook:
+       - {BookKey}: {raw path to chapter}
+     cited_in_post:
+       - "{citation as printed in source}"
+   agent: claude-opus-4-7-manual-wikify
+   generated: YYYY-MM-DD
+   ---
+   ```
+
+5. **MANDATORY textbook cross-reference**. Manual social-media sources frequently make clinical claims (e.g. "X is a textbook-level fact"). Before wikifying, the agent picks the most relevant vault-resident textbook chapter from the Vault Textbook Reference Index (below), reads it, and either confirms or contradicts the claim with a citable line range. The cross-reference goes into a `## Cross-reference — {Book} {Edition} Ch{NN}` section of raw.md with quoted lines. If no vault textbook covers the topic, fall back to vault-resident review articles or report a citation gap.
+
+6. **Topic placement** per medwiki §10.9 (raw/wiki/note share `{topic_path}` skeleton):
+   - Folder = topic collection (a disease, organ system, methodology), not article shape.
+   - For social-media expert opinions about a clinical topic, place under the same topic folder as the corresponding textbook chapter, e.g. a thalassemia-screening FB post goes to `raw/clinical_medicine/internal_medicine/hematology/anemia(hematology)/{citationKey}.md` next to `Harrison22e_Ch103.md`.
+   - When the topic is genuinely cross-cutting (policy, reimbursement, screening program), use the cross-cutting top-level peer per `protocol/wiki_classification_sop.md`.
+
+7. **Wiki synthesis**. Per medwiki/CLAUDE.md "Wikify Content Boundary":
+   - Default = source-faithful synthesis. Do **not** auto-add EBM A1-A11 / PICO / GRADE / Hernán-causal-check sections just because the source is clinical.
+   - If multiple sources on the same topic exist (textbook chapter + this manual source + cited papers), produce one consolidated wiki .md combining them. Cite the manual source in `## Sources` as `fb:{handle}:{topic_slug} — {author} {date} — {one-line of what it added}`.
+   - The wiki entry must surface the textbook cross-reference inline; do not bury it.
+
+8. **Report**. Print: raw.md path, wiki.md path (if created or updated), the textbook chapter consulted for cross-reference, any citation gap (PMIDs to fill later), and any binary kept on Copper's request.
+
+### Mode A-URL → Mode A-Text shim
+
+The thin "parse → structure → write" workflow above remains for plain text snippets that do not warrant the Mode A-Manual scaffolding (e.g. a 3-line gloss, an internal memo). Anything that is recognisably a social-media post, contains screenshots, or makes externally-citable clinical claims should escalate to Mode A-Manual.
 
 ### Mode B: Inbox triage (`/wiki inbox`)
 
@@ -537,8 +604,52 @@ This is a corpus/bootstrap workflow, not a single-PDF `/note-writer` task.
    - Background pipeline session id and current state.
    - Any unreachable machine or blocked next step.
 
+## Vault Textbook Reference Index
+
+When wikifying any source (especially Mode A-Manual), the agent must pick a
+vault-resident textbook chapter to cross-reference clinical claims. This index
+is the LLM's mental map of "what books are in the vault". It is a snapshot;
+authoritative inventory will live in the textbooks PG table once that lands.
+Verify presence with `find ~/repos/medwiki/raw -name '<Prefix>*.md' | head`
+before citing a specific chapter.
+
+| Specialty / scope | Textbook | Latest edition in vault | Year | Raw mirror prefix | Sidecar prefix |
+|---|---|---|---|---|---|
+| Internal medicine (definitive) | Harrison's Principles of Internal Medicine | 22e | 2025 | `raw/clinical_medicine/internal_medicine/2025_Harrison_22e/` + topic-distributed `Harrison22e_Ch*.md` under `clinical_medicine/{specialty}/` | `_sidecar/Harrison22e_Ch*` |
+| Internal medicine (pocket) | Pocket Medicine | 9e | 2026 | inbound | `_sidecar/2026_PocketMedicine_9e` |
+| Therapeutics quick-ref | Washington Manual of Medical Therapeutics | 38e | recent | `raw/.../{topic}/WashingtonManual38e_*.md` | per-chapter |
+| Nephrology (definitive) | Brenner & Rector's The Kidney | 12e | recent | `raw/clinical_medicine/internal_medicine/nephrology/BrennerRector12e_Ch*.md` | per-chapter |
+| Dialysis | Daugirdas, Handbook of Dialysis | 6e | 2026 | (figures present; raw inbound) | `_sidecar/Handbook of Dialysis 6th ed_Daugirdas2026_Ch*` |
+| Dialysis (alt) | Dialysis Therapy | 6e | 2023 | inbound | `_sidecar/2023_DialysisTherapy_6e` |
+| Dialysis (intro) | Core Concepts in Dialysis | 2021 | 2021 | inbound | `_sidecar/2021_CoreConceptsDialysis` |
+| Pediatric nephrology | Pediatric Nephrology | 6e | recent | `raw/clinical_medicine/internal_medicine/nephrology/pediatric/` + `raw/clinical_medicine/pediatrics/nephrology(pediatric)/` | per-chapter |
+| ENT | Scott-Brown's Otorhinolaryngology, Head and Neck Surgery | 8e | recent | `raw/clinical_medicine/ENT/ScottBrown8e_*.md` (V1/V2/V3) | per-chapter |
+| Biochemistry | Harper's Illustrated Biochemistry | **34e (latest); 33e archived 2026-04-24** | 2026 | inbound (Harper 33e archived under `raw/basic_medicine/biochemistry/_archive/`) | inbound |
+| Biochemistry (alt) | Lehninger Principles of Biochemistry | 8e | recent | `raw/basic_medicine/biochemistry/Lehninger8e_*.md` | per-chapter |
+| Physiology | Ganong's Review of Medical Physiology | 26e | 2019 | inbound | `_sidecar/2019_Ganong_26e` |
+| Biology (preclinical) | Campbell Biology | 13e | 2026 | inbound | `_sidecar/2026_Campbell_13e` |
+| Causal inference / epidemiology | Hernán & Robins, Causal Inference: What If | latest open-edition | open-access | `raw/_archive/_textbooks-pre-wikify-2026-04-26/Hernan_WhatIf/` (+ checklist in `note/Hernan_WhatIf/`) | (checklist + raw) |
+| EBM / critical appraisal | Guyatt Users' Guides to the Medical Literature | latest in vault | recent | `raw/_archive/_textbooks-pre-wikify-2026-04-26/Guyatt_Users_Guides/` | per-chapter |
+| Health research methods | Health Research Methods | 3e | 2021 | inbound | `_sidecar/2021_HealthResMethods_3e` |
+| Renal guideline | KDIGO 2024 CKD | 2024 | 2024 | distributed (`note/guidelines/kdigo/KDIGO2026Anemia.md`, `wiki/.../nephrology/ckd/kdigo_2026_anemia_ckd.md`) | `_sidecar/2024_KDIGO_CKD` |
+
+### How to pick the right book
+
+- **Hematology / oncology / general internal medicine claim** → Harrison 22e first (definitive, 2025).
+- **Nephrology mechanism / disease** → Brenner & Rector 12e (definitive). For HD/PD operations → Daugirdas Handbook of Dialysis 6e.
+- **Pediatric nephrology** → Pediatric Nephrology 6e (definitive).
+- **ENT** → Scott-Brown 8e (V1 = general / head-neck surgery basics, V2 = otology / paediatric ENT, V3 = rhinology / laryngology / facial plastics).
+- **Biochemistry mechanism** → Lehninger 8e or Harper 34e (incoming). Harper 33e archived; do not cite older edition (HR-3 latest-edition-only).
+- **Physiology** → Ganong 26e.
+- **Causal inference / observational study critique** → Hernán *What If* (free open-access; canonical for target-trial framing, DAG, time-zero).
+- **EBM / critical appraisal of trials** → Guyatt Users' Guides.
+- **Renal guideline alignment** → KDIGO 2024 CKD (current); cite recommendation grade.
+- **Quick clinical reference at point-of-care** → Washington Manual 38e or Pocket Medicine 9e.
+
+If the picked book lacks the specific topic, fall back order: (1) primary literature already in vault `raw/articles/...` or topic folder, (2) recent NEJM / Lancet / JAMA / specialty-flagship review located via vault `raw/`, (3) report citation gap and let Copper run mini LLM council (no self-initiated WebSearch per the No-Self-Initiated-Web-Search rule above).
+
 ## Supersedes
 
-This skill replaces `/pdf2md`, `/med-read`, `/appraise`, `/condense` (all absorbed 2026-04-12). Old triggers route here.
+This skill replaces `/pdf2md`, `/med-read`, `/appraise`, `/condense` (all absorbed 2026-04-12). Old triggers route here. `/wikify` = formal alias for Mode A-Manual; both `/wiki` and `/wikify` invoke the same SKILL.
 
 Input: $ARGUMENTS
