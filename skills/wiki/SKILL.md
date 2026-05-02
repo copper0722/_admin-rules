@@ -227,7 +227,14 @@ Steps:
    - Has DOI → citationKey → `raw/articles/{citationKey}/raw.md`
    - No DOI, has project → `proj/{project}/data/{name}/raw.md`
    - No DOI, no project → `kb/{topic}/raw.md`
-7. Move PDF to sidecar as `source.pdf`
+7. **Move (NOT copy) PDF to sidecar — HR-7 invariant** (see Hard Rules below):
+   ```bash
+   mv "$INBOX_PDF" "$SIDECAR_ROOT/{citationKey}/source.pdf"
+   # Per-file cleanup verification — must run before step 8:
+   ls "$INBOX" 2>/dev/null | grep -F "$(basename "$INBOX_PDF")" \
+       && echo CLEANUP_FAIL || echo cleanup_ok
+   ```
+   Use `mv`, **never** `cp`. A `cp` leaves a stale duplicate that pollutes the inbox: Copper cannot tell processed-stale apart from unprocessed-new, and the next agent (cron / interactive) cannot either. If the verify step prints `CLEANUP_FAIL`, fix it immediately (re-run `mv`) before moving to step 8 — never proceed with stale inbox state.
 8. **Simultaneous wiki evaluation** (not a separate step; Opus-only):
    - Claude Opus reads the cleaned raw.md
    - Scans existing `wiki/` for related topic
@@ -429,8 +436,21 @@ Canonical inbox path is declared by the project-local private card.
    - `.docx` / `.html` → convert to .md first, then route as text source
    - Other binary → investigate or move to `proj/{p}/data/` with metadata
 3. Process queue sequentially with the configured runtime.
-4. Mandatory cleanup: after each file's sidecar+raw.md+note land successfully, move the original into the sidecar source path or equivalent archive. Confirm the inbox copy is gone with a bounded check.
-5. Report: N files wikified by type, destinations, cleanup_ok count.
+4. **HR-7 mandatory cleanup — `mv`, not `cp`** (see Hard Rules below). After **each** file's sidecar + raw.md + (optional) note land successfully:
+   ```bash
+   mv "$INBOX_FILE" "$SIDECAR_ROOT/{citationKey}/source.{pdf,mp3,m4a,wav,...}"
+   ls "$INBOX" 2>/dev/null | grep -F "$(basename "$INBOX_FILE")" \
+       && echo CLEANUP_FAIL || echo cleanup_ok
+   ```
+   Per-file: must print `cleanup_ok` before moving to the next file in the queue. Per-failed-file: even when MinerU/whisper fails, **still** `mv` the binary to `_sidecar/{citationKey}/source.{ext}` and write a `raw.md` stub with `status: mineru_failed` (or equivalent). Inbox **never** retains the failed binary either — failure path is sidecar-with-stub, not "leave it for next time".
+5. **HR-7 final batch invariant** — before reporting completion, verify the inbox is clean of all source binaries the batch was responsible for:
+   ```bash
+   find "$INBOX" -maxdepth 1 -type f \
+       \( -iname '*.pdf' -o -iname '*.mp3' -o -iname '*.m4a' -o -iname '*.wav' \
+          -o -iname '*.docx' -o -iname '*.epub' \) | wc -l
+   ```
+   Must be 0 (or equal to the count of files the batch explicitly skipped — those must be enumerated in the report). Anything > 0 is a recurrent-bug regression; do not declare batch complete; loop back and `mv` the residuals.
+6. Report: N files wikified by type, per-file cleanup_ok log line, batch final inbox-residual count, any explicitly-skipped files (with reason).
 
 ### Mode C: Batch (`/wiki batch /path/to/folder/`)
 
@@ -446,6 +466,15 @@ Canonical inbox path is declared by the project-local private card.
 **HR-4 PROCESSING ORDER = YEAR DESC.** Newest content first. Textbooks: 2026 before 2024. Articles: 2026 before 2021. Newer supersedes older.
 
 **HR-6 UID CHAIN.** Every PDF → raw.md (uid in frontmatter) → Zotero entry (same uid). UID types: `doi:` (CrossRef→Zotero), `isbn:` (Google Books API), `pmid:` (PubMed), `gov:{文號}` (公文 header). Script: `raw-uid-zotero-sync.py` (weekly cron). Orphan = PDF without raw.md or raw.md without UID.
+
+**HR-7 INBOX STATE INVARIANT — `mv`, never `cp`** (Copper 2026-04-24, re-flagged 2026-05-02 as **recurrent malignant bug**). After every successfully-processed source binary (PDF / audio / image), the inbox copy MUST be `mv`'d into its sidecar (`_sidecar/{citationKey}/source.{ext}`), never `cp`'d. Reasoning: Copper inspects the inbox to know what is unprocessed; a stale duplicate makes processed-vs-unprocessed indistinguishable, and the next agent — interactive or cron — inherits the same ambiguity. Failure mode is "next session re-processes / mis-skips, inbox accumulates stale binaries, a real new arrival is eventually missed in the noise".
+
+- **Per-file post-condition** (run after every individual `mv`): `ls "$INBOX" | grep -F "$(basename "$file")"` returns nothing.
+- **Per-batch post-condition** (run before declaring batch complete): `find "$INBOX" -maxdepth 1 -type f \( -iname '*.pdf' -o -iname '*.mp3' -o -iname '*.m4a' -o -iname '*.wav' -o -iname '*.docx' -o -iname '*.epub' \) | wc -l` = 0 (or equal to the count of explicitly-skipped files enumerated in the report).
+- **Failed-MinerU / failed-whisper path**: the binary is still `mv`'d to its sidecar (`_sidecar/{citationKey}/source.{ext}`); the failure is recorded as a `raw.md` stub with `status: mineru_failed` / `status: whisper_failed`. The inbox NEVER retains a failed binary "for retry" — retry happens against the sidecar, not the inbox.
+- **`dropbox-inbox-audit.sh` is a safety-net, not a substitute** (q1h cron, archives `cp`-duplicates by sha256 match against sidecar — does not catch agents that skipped the move entirely). Agent self-enforcement is the primary control.
+
+Applies to all Modes (A-PDF, A-Audio, A-Manual when sidecar binary kept, B inbox triage, C batch). Re-flagged as a Hard Rule rather than a Mode B sub-step so the invariant survives Mode boundary.
 
 ## Rules
 
