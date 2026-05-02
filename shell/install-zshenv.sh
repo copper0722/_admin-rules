@@ -26,10 +26,20 @@ mkdir -p "$(dirname "$target")"
 touch "$target"
 
 tmp="$(mktemp)"
+# Two-pass strip:
+#   1. drop the prior marker-bracketed block entirely (idempotent re-run)
+#   2. drop stray `export DEVICE=` and `source .*tx-aliases.sh` lines
+#      that may live outside the marker block (legacy ~/.zshenv versions
+#      that pre-date this deploy tool and declared the export+source
+#      directly). After this pass, the marker block is the single
+#      source of truth.
 awk -v b="$begin" -v e="$end" '
   $0 == b { skip = 1; next }
   $0 == e { skip = 0; next }
-  !skip { print }
+  skip { next }
+  /^export DEVICE=/ { next }
+  /^source .*tx-aliases\.sh"?$/ { next }
+  { print }
 ' "$target" > "$tmp"
 
 {
