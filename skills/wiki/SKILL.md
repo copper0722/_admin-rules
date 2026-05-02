@@ -334,25 +334,38 @@ summary: "..."
 
 **Why a separate mode**: Mode A-PDF and Mode A-Audio assume a binary source artefact and a transcription tool (MinerU / whisper-cpp). Manual social-media input has no binary worth keeping by default — the screenshot is a vehicle for text, not a primary source. The fidelity contract therefore shifts: **embedded image content must be OCR / multimodal-extracted into raw.md verbatim text**, not stored as a sidecar binary, unless Copper explicitly asks to keep the original screenshot. (Copper directive 2026-05-02: "影像直接文字化進 raw".)
 
-**Steps:**
+**Step 0 — Triage input shape (Copper directive 2026-05-02: "wikify 不一定包含 raw")**
 
-1. **Verbatim capture**. Preserve the source text exactly: zh-TW characters, emoji, hashtags, line breaks, ASCII-art, the author's spacing. Do **not** rewrite, condense, or "clean up" — the raw layer's job is to be a faithful mirror. If the platform conventions are part of the message (e.g. FB-style short-line layout), preserve them inside a fenced block.
+`/wikify` 的核心工作是**查證 + 整理 wiki**。raw 鏡像是 conditional — 只有當 input 含「外部第三方來源文本」時才需要 verbatim 鏡像；如果 input 是 Copper 自己的問題或案例查證請求，就不寫 raw，直接跑 cross-reference + wiki synthesis。
 
-2. **Inline image text-extraction**. For each screenshot or pasted image:
+| input shape | example | raw.md? | run which steps |
+|---|---|---|---|
+| **Source-shaped** | 外部第三方來源（FB/Line/IG/Threads 貼文、他人 screenshot、引述他人 quote、廣告稿、公告片段、新聞剪貼） | yes | run steps 1–8 in order |
+| **Question-shaped** | Copper 自己丟一個問題、案例、查證請求（"X 是真的嗎"、"幫我整理 Y"、"我的患者 Z 怎麼處理"、"來源就是一個問題"） | **no** | skip steps 1–4. Run step 5 (textbook cross-ref) → step 7 (wiki synth, citing Copper's question as `manual:copper:{topic_slug}` in `## Provenance`) → step 8 (report). The question itself is the prompt; truth-grounding comes from textbook + vault literature. |
+| **Hybrid** | Copper 貼一段來源並附自己的問題或評論（最常見："這篇 FB 對嗎？"、"這份報告怎麼解讀？"） | yes (source portion only) | run steps 1–4 on the source portion only; Copper's framing/question goes into wiki synthesis as the angle, not into raw |
+
+The principle: raw layer is a mirror of *external* source text. Copper's own questions, comments, and case prompts are not external sources — they are framing for the wiki query, and should not be mirrored into raw. Real work shared across all shapes = step 5 (textbook cross-reference) + step 7 (wiki synthesis); raw mirroring (steps 1–4) is conditional on shape.
+
+**Steps:** (run conditionally per Step 0 above)
+
+1. **Verbatim capture** (Source-shaped + Hybrid only). Preserve the source text exactly: zh-TW characters, emoji, hashtags, line breaks, ASCII-art, the author's spacing. Do **not** rewrite, condense, or "clean up" — the raw layer's job is to be a faithful mirror. If the platform conventions are part of the message (e.g. FB-style short-line layout), preserve them inside a fenced block.
+
+2. **Inline image text-extraction** (Source-shaped + Hybrid only). For each screenshot or pasted image:
    - Read the image with the multimodal Read tool.
    - Transcribe every legible token into a section of raw.md, structured by what the image is (e.g. `## Screenshot N — patient FB private message`, `## Screenshot N — lab report block`).
    - Tabular data (lab reports, prescription tables) → reproduce as markdown table. Preserve H/L flags, units, reference ranges when visible.
    - Note explicitly which fields are illegible / partly redacted; do not guess values.
    - Do **not** create a sidecar binary by default. If Copper asks to keep the original ("收 sidecar"), copy to `_sidecar/{citationKey}/source.{png,jpg}` with sha256 in the filename and add `sidecar: {citationKey}` to frontmatter.
 
-3. **Source identity (uid scheme)**. Manual sources do not have DOI / ISBN / PMID. Use platform-prefixed uids:
+3. **Source identity (uid scheme)** (Source-shaped + Hybrid only; Question-shaped uses `manual:copper:{topic_slug}` directly in wiki ## Provenance, no raw frontmatter required). Manual sources do not have DOI / ISBN / PMID. Use platform-prefixed uids:
    - `fb:{author_handle}:{topic_slug}` — Facebook post (e.g. `fb:SuYining2026:thalassemia_carrier`)
    - `line:{thread_id_or_author}:{topic_slug}` — Line message
    - `ig:{author_handle}:{topic_slug}` — Instagram
    - `threads:{author_handle}:{topic_slug}` — Threads / X
-   - `manual:{topic_slug}` — Copper's own free-form text with no platform anchor
+   - `manual:copper:{topic_slug}` — Copper's own question / case prompt (Question-shaped); cited in wiki only, no raw mirror
+   - `manual:{topic_slug}` — generic free-form text with no platform anchor
 
-4. **Frontmatter scheme** (Pattern C — manual / social-media):
+4. **Frontmatter scheme** (Pattern C — manual / social-media; Source-shaped + Hybrid only):
    ```yaml
    ---
    type: raw
@@ -383,19 +396,22 @@ summary: "..."
    ---
    ```
 
-5. **MANDATORY textbook cross-reference**. Manual social-media sources frequently make clinical claims (e.g. "X is a textbook-level fact"). Before wikifying, the agent picks the most relevant vault-resident textbook chapter from the Vault Textbook Reference Index (below), reads it, and either confirms or contradicts the claim with a citable line range. The cross-reference goes into a `## Cross-reference — {Book} {Edition} Ch{NN}` section of raw.md with quoted lines. If no vault textbook covers the topic, fall back to vault-resident review articles or report a citation gap.
+5. **MANDATORY textbook cross-reference** (all input shapes — this is the core work of `/wikify`). The agent picks the most relevant vault-resident textbook chapter from the Vault Textbook Reference Index (below), reads it, and either confirms or contradicts the clinical claim or answers the question with a citable line range. The cross-reference goes into a `## Cross-reference — {Book} {Edition} Ch{NN}` section of raw.md (Source-shaped / Hybrid) or directly into the wiki body (Question-shaped) with quoted lines. If no vault textbook covers the topic, fall back to vault-resident review articles, then report a citation gap (no self-initiated WebSearch).
 
 6. **Topic placement** per medwiki §10.9 (raw/wiki/note share `{topic_path}` skeleton):
    - Folder = topic collection (a disease, organ system, methodology), not article shape.
    - For social-media expert opinions about a clinical topic, place under the same topic folder as the corresponding textbook chapter, e.g. a thalassemia-screening FB post goes to `raw/clinical_medicine/internal_medicine/hematology/anemia(hematology)/{citationKey}.md` next to `Harrison22e_Ch103.md`.
    - When the topic is genuinely cross-cutting (policy, reimbursement, screening program), use the cross-cutting top-level peer per `protocol/wiki_classification_sop.md`.
 
-7. **Wiki synthesis**. Per medwiki/CLAUDE.md "Wikify Content Boundary":
+7. **Wiki synthesis** (all input shapes). Per medwiki/CLAUDE.md "Wikify Content Boundary":
    - Default = source-faithful synthesis. Do **not** auto-add EBM A1-A11 / PICO / GRADE / Hernán-causal-check sections just because the source is clinical.
-   - If multiple sources on the same topic exist (textbook chapter + this manual source + cited papers), produce one consolidated wiki .md combining them. Cite the manual source in `## Sources` as `fb:{handle}:{topic_slug} — {author} {date} — {one-line of what it added}`.
+   - If multiple sources on the same topic exist (textbook chapter + manual source + cited papers), produce one consolidated wiki .md combining them.
+   - Cite the manual source in `## Sources`:
+     - Source-shaped / Hybrid → `fb:{handle}:{topic_slug} — {author} {date} — {one-line of what it added}`
+     - Question-shaped → in `## Provenance` (not `## Sources`): `manual:copper:{topic_slug} — Copper question {YYYY-MM-DD} — {one-line of the question}`. The wiki body's authority comes from the textbook + literature citations, not the question.
    - The wiki entry must surface the textbook cross-reference inline; do not bury it.
 
-8. **Report**. Print: raw.md path, wiki.md path (if created or updated), the textbook chapter consulted for cross-reference, any citation gap (PMIDs to fill later), and any binary kept on Copper's request.
+8. **Report**. Print: input shape decided (Source-shaped / Question-shaped / Hybrid), raw.md path (if written), wiki.md path (if created or updated), the textbook chapter consulted for cross-reference, any citation gap (PMIDs to fill later), and any binary kept on Copper's request.
 
 ### Mode A-URL → Mode A-Text shim
 
