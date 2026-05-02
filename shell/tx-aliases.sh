@@ -52,6 +52,13 @@ _tx() {
   fi
 }
 
+# Drop any pre-existing cc/cx/hm alias before declaring the functions.
+# Reason: zsh expands aliases at line-read time and they win over functions
+# of the same name; previous .zshenv versions on some devices declared
+# `alias cc='claude --effort max'` which shadowed this function and broke
+# `cc <device>` dispatch. Idempotent: silently noop when no alias exists.
+unalias cc cx hm 2>/dev/null || true
+
 cc() { _tx claude "$@"; }
 cx() { _tx codex "$@"; }
 hm() { _tx hermes "$@"; }
