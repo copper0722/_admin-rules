@@ -40,6 +40,42 @@ small updates; do not gate on completeness.
 - "Skip wiki synthesis, will do later" is a process bug — by the time later
   comes, the source content is no longer fresh in context
 
+## Synthesis-not-transcription rule (Copper directive 2026-05-03)
+
+**Wiki = paraphrase synthesis, not verbatim quote stack.** The reason wiki
+synthesis is Opus-only is precisely that synthesis requires judgment — if the
+output is just `> "verbatim from textbook"` blocks, the work could have been
+done by `grep`. That defeats the model-tier choice and exposes the vault to
+unnecessary copyright risk.
+
+**Hard rules for source-quote density inside `wiki/*.md`:**
+
+1. **Commercial textbooks** (Williams, Harrison, Harper, Lehninger, Brenner,
+   Daugirdas, Nissenson, Scott-Brown, etc.) — **paraphrase + cite**. Use
+   verbatim quote only when the *wording itself* is the point being made
+   (e.g., a guideline's recommendation level statement, a paradigm-shift
+   sentence whose hedging matters). Even then: ≤30 words, ≤2 such quotes per
+   entry. Default mode = synthesis sentence + `(Williams 15e Ch33,
+   §Hyperinsulinemia and IR)` citation.
+2. **Open-access guidelines** (ADA SoC, KDIGO, Taiwan medical association
+   guidelines, AHA/ACC, NIH, etc.) — verbatim quotes acceptable in moderation
+   (≤150 words per quote, no aggregation cap). These are intended for
+   citation; quoting recommendations verbatim is the conventional and legal
+   norm.
+3. **Open-access journal articles** — abstract-level paraphrase preferred;
+   verbatim only for distinctive sentences (a specific HR + CI report,
+   an authors' explicit conclusion line). ≤150 words per quote.
+4. **Raw layer is the verbatim mirror.** If you find yourself wanting to
+   quote a long textbook passage, that passage already lives in
+   `medwiki/raw/{book}_Ch{NN}.md`. Cite the path; do not duplicate verbatim
+   into wiki.
+5. **Note layer is also synthesis** (Copper-readable zh-TW digest), not raw
+   echo; same rule applies, see `medwiki/note/CLAUDE.md`.
+
+The line between fair-use synthesis and copyright-exposure transcription is
+not always sharp; when in doubt, paraphrase. The Opus model tier was chosen
+precisely so this judgment happens at write-time.
+
 ## Wiki Article Standard Format
 
 Every `wiki/wiki_*.md` file MUST follow this structure:
