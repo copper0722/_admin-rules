@@ -25,6 +25,25 @@ raw.md, update manifests/indexes, and perform mechanical link/path repairs.
 They must leave `pending_opus_wiki` state instead of writing source-derived
 wiki text.
 
+## Textbook note dual-output pipeline (Copper directive 2026-05-03)
+
+When `/note-writer` (or any agent) produces a textbook chapter note, **emit both versions in one pass**, never one + manual derivation:
+
+- **Public version** → `personal-website/src/content/notes/public/textbook-summary/{book}/{slug}.md`
+  - Slide-style KEY TAKEAWAYS (5–10 bullets)
+  - No verbatim quotes from copyrighted textbook (paraphrase only)
+  - Last page: clickable link to private full version (build pipeline gates via CF Access)
+  - Frontmatter: `note_type: "textbook-summary"`, `visibility: "public"`
+- **Private version** → `personal-website/src/content/notes/private/textbook-study/{book}/{slug}.md`
+  - Full chapter digest, zh-TW, Copper-readable
+  - May include short verbatim quotes from textbook (within fair-use bounds; ≤2 quotes ≤30 words from commercial textbook per `synthesis-not-transcription rule` above)
+  - Detailed mechanism, clinical implications, Taiwan-specific layer (NHI / TFDA / 健保給付規定)
+  - Frontmatter: `note_type: "textbook-study"`, `visibility: "private"`
+
+Both are publish-ready (per Copper directive: "讓 note 輸出即可在網站上分享"). Build pipeline does not need extra step — output of /note-writer is final-ready.
+
+The two variants share the same `{slug}`; cross-link via frontmatter `related: [<other-slug>]`.
+
 ## Wiki primary home (Copper directive 2026-05-03)
 
 **Wiki and NOTE primary home is `personal-website/` since 2026-05-03**, not `medwiki/`.
