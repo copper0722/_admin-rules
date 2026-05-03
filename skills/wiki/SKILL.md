@@ -25,6 +25,16 @@ raw.md, update manifests/indexes, and perform mechanical link/path repairs.
 They must leave `pending_opus_wiki` state instead of writing source-derived
 wiki text.
 
+## Wiki primary home (Copper directive 2026-05-03)
+
+**Wiki and NOTE primary home is `personal-website/` since 2026-05-03**, not `medwiki/`.
+
+- New wiki entries → `personal-website/src/content/wiki/{slug}.md` (flat slug, hyphenated, lower-case). Astro collection schema lives at `personal-website/src/content/config.ts` `wikiCollection`. Web URL: `/wiki/{slug}/`.
+- New NOTE entries → `personal-website/src/content/notes/{visibility}/{type}/{slug}/index.md` (Astro collection schema `notesCollection`). Web URL: `/notes/{visibility}/{type}/{slug}/`.
+- `medwiki/` retains **raw mirror** + sidecar references only. medwiki/wiki and medwiki/note are deprecated as primary writing locations; legacy entries may remain for backward search but new content goes to personal-website.
+- Wiki entry titles must NOT contain textbook names (Copper directive: 「標題移除教科書名」). Body must be paraphrase synthesis, never transcription. Citations live in `## Sources` section.
+- Cross-reference between wiki entries via `[[slug]]` wikilinks; build pipeline (remark plugin, see Astro integration TODO) resolves to `<a href="/wiki/{slug}/">` on web. Cross-references from wiki body to raw mirror (e.g. `[[Williams2024_Endocrinology_15e_Ch33]]`) resolve to plaintext citations on web (raw stays private in medwiki).
+
 ## Mindset (Copper directive 2026-05-03): wiki = "順便兼做"
 
 Wiki synthesis is **incremental side-effect of reading the source**, not a
