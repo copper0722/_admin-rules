@@ -242,15 +242,73 @@ Contam-cleanup action: forbidden inline → strip OR fold into bucket-L callout 
 
 Note quality = faithful rendering of source PLUS optional collapsed-callout supplements (C/L/T). Anchor rule (caveat/quantitative/decision-hinge) draws ONLY from textbook's own data, not external grading.
 
-### Output path (Copper 2026-04-20 layer split)
+### Output path (Copper directive 2026-05-03 — NOTE primary home moved to personal-website)
 
 | input source | output note path |
 |---|---|
-| `raw/articles/{key}/raw.md` (journal article) | `proj/note/articles/{key}.md` |
-| `raw/.../_textbooks/{Book}/{Ch}/raw.md` (textbook chapter) | `proj/note/textbooks/{Book}/{Ch}.md` |
-| Other (interactive «寫筆記» on PDF/wiki/report) | `proj/note/{semantically-appropriate-subfolder}/{name}.md` |
+| `medwiki/raw/articles/{key}.md` (journal article) | `personal-website/src/content/notes/private/journal-summary/{key}.md` |
+| `medwiki/raw/.../{BookCh}.md` (textbook chapter) — **dual output** | private: `personal-website/src/content/notes/private/textbook-study/{book-slug}/{ch-slug}.md` <br> public: `personal-website/src/content/notes/public/textbook-summary/{book-slug}/{ch-slug}-summary.md` |
+| `medwiki/raw/.../{guideline}.md` (OA guideline) — **dual output** | private: `personal-website/src/content/notes/private/textbook-study/{org}/{section}.md` <br> public: `personal-website/src/content/notes/public/textbook-summary/{org}/{section}-summary.md` |
+| Copper-authored article (debunk, fb-archive, lifestyle, clinical-pearl, nephrology-public) | `personal-website/src/content/notes/public/{note_type}/{slug}/index.md` (per-article folder if has `_sources/` companion) or `{slug}.md` |
+| Exam solutions (CME/board prep) | `personal-website/src/content/notes/public/exam-solution/{specialty}/{slug}.md` |
 
-**Never write notes to `raw/`**. raw/ holds raw.md + source.pdf + sidecars only (machine source layer). Copper-readable note belongs in proj/note/ where Spotlight discovery works.
+**Never write notes to** `medwiki/note/` or `medwiki/wiki/` — these are deprecated since Copper directive 2026-05-03; they have been archived to prevent agent miswrites. The canonical NOTE/wiki home is `personal-website/src/content/{notes,wiki}/`.
+
+**raw mirror layer remains in medwiki/raw/** for source-faithful PDF/audio/URL transcription via MinerU/whisper-cpp/WebFetch. Notes derive from raw, not vice-versa.
+
+### Dual-output rule (textbook + OA guideline + journal notes) — split-content convention (Copper directive 2026-05-04)
+
+For source types that justify both deep study and shareable summary, **content is split, not duplicated**:
+
+- **Public short note (`visibility: public`)** carries:
+  - frontmatter (incl. `ai_assist` banner field)
+  - `## KEY TAKEAWAYS` (3–8 bullets, zh-TW)
+  - `## TEACHING SLIDES` (Marp-compatible slides)
+  - **a small inline link near the top** pointing to the private full note (e.g., `> 完整全文（私人區，Cloudflare Access 認證）：[XXX](/notes/private/.../)`)
+  - **No body content sections.**
+
+- **Private full note (`visibility: private`)** carries:
+  - frontmatter (incl. `ai_assist` banner field)
+  - **No `## KEY TAKEAWAYS` and no `## TEACHING SLIDES`** — those live only in the public short note
+  - body sections (mirror source heading hierarchy with bilingual `中文｜English` headings)
+  - figures embedded inline via `![](/_sidecar/{bundle}/images/{sha}.jpg)` for raw-mirrored sources
+
+Rationale: prior dual-output had ~60% content overlap (KEY TAKEAWAYS + slides duplicated in both public extract and private full). Split-content convention removes the duplication: each fact lives in exactly one of the two files. Reader-flow:
+- public short note: 5-min skim, walk away with takeaways + slides
+- click small "完整全文" link → private full note: deep body for Copper / authenticated readers
+
+Per `note_type` mapping:
+
+| source | private | public |
+|---|---|---|
+| Textbook chapter | `textbook-study` (body) | `textbook-summary` (KEY TAKEAWAYS + slides + link) |
+| OA guideline section | `textbook-study` (body) | `textbook-summary` (KEY TAKEAWAYS + slides + link) |
+| Journal article | `journal-summary` (body) | `journal-summary` (KEY TAKEAWAYS + slides + link)* |
+
+(*Note: `journal-summary` `note_type` is shared across both private full and public short for journal articles; `visibility` differentiates. For textbooks, the type names differ — `textbook-study` for private body, `textbook-summary` for public short.)
+
+This keeps fair-use compliance for paywall textbooks while exposing pedagogical value (the slides + takeaways = original synthesis, not verbatim transcription) and avoids storage/sync duplication.
+
+**Migration**: existing dual-output notes (Williams Ch33/Ch34, Harrison Ch415/Ch420, Harper Ch42, ADA 2026 §2, TWDKD 2024, DAROC 2022 Part 1, etc.) currently follow the old "extract" convention (KEY TAKEAWAYS + slides duplicated in both files). They will be migrated incrementally. New notes from 2026-05-04 forward must use the split-content convention.
+
+### Image embed mode (Copper directive 2026-05-03)
+
+For **private** notes (only Copper reads), figures may be embedded directly via `![](/_sidecar/{bundle}/images/{sha}.jpg)` paths from the raw mirror, **without `[!tip]-` analysis callouts**. Rationale: Copper sees the figures directly; agent-written figure descriptions are redundant.
+
+For **public** notes (textbook-summary + others), figures from raw should NOT be embedded (paywall content). KEY TAKEAWAYS + slides convey the pedagogical content; reader follows link to private full note (or original source) for figures.
+
+### AI authorship disclosure (Copper directive 2026-05-03)
+
+Frontmatter `ai_assist` field mandatory for all notes. Two policy classes:
+
+- **AI-generated note types** (must show visible "AI 製作" banner on web layout):
+  - `textbook-study`, `textbook-summary`, `journal-summary`, `cme-summary`, `review`, `exam-solution`
+  - `ai_assist` field describes generation (e.g., `"Opus 摘要 + paraphrase synthesis；圖片直接內嵌"`)
+- **Copper-authored note types** (no AI banner, only standard fact-check disclosure):
+  - `debunk`, `fb-archive`, `lifestyle`, `nephrology-public`, `clinical-pearl`, `announcement`
+  - `ai_assist: "fact-check + copyedit only"` is the literal default
+
+The Astro layout `src/pages/notes/[...slug].astro` reads `note_type` and renders the AI banner conditionally per this rule.
 
 **Required frontmatter field `parent:`** points back to the source raw.md so reverse lookup works: `parent: /raw/articles/{key}/raw.md` (vault-root absolute).
 

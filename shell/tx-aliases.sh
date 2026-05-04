@@ -14,6 +14,28 @@
 
 TX_DEVICES=(hm4 hmj cm1 mbp mba boa)
 
+_tx_attach_or_create_local() {
+  local session=$1 legacy_session=$2 cmd=$3
+  local s
+  for s in "$session" "$legacy_session"; do
+    if tmux has-session -t "$s" 2>/dev/null; then
+      if [ -n "$TMUX" ]; then
+        tmux switch-client -t "$s"
+      else
+        tmux attach-session -t "$s"
+      fi
+      return
+    fi
+  done
+
+  if [ -n "$TMUX" ]; then
+    tmux new-session -d -s "$session" -c "$HOME/repos" "$cmd"
+    tmux switch-client -t "$session"
+  else
+    tmux new-session -s "$session" -c "$HOME/repos" "$cmd"
+  fi
+}
+
 _tx() {
   local app=$1; shift
   local target=""
@@ -43,16 +65,12 @@ _tx() {
       ;;
   esac
   local session="${prefix}_${target}"
+  local legacy_session="${app}_${target}"
 
   if [ "$target" = "$DEVICE" ]; then
-    if [ -n "$TMUX" ]; then
-      tmux new-session -d -As "$session" -c "$HOME/repos" "$cmd" 2>/dev/null
-      tmux switch-client -t "$session"
-    else
-      tmux new-session -As "$session" -c "$HOME/repos" "$cmd"
-    fi
+    _tx_attach_or_create_local "$session" "$legacy_session" "$cmd"
   else
-    ssh -t "$target" "tmux new-session -As '$session' -c \$HOME/repos \"$cmd\""
+    ssh -t "$target" "if tmux has-session -t '$session' 2>/dev/null; then exec tmux attach-session -t '$session'; fi; if tmux has-session -t '$legacy_session' 2>/dev/null; then exec tmux attach-session -t '$legacy_session'; fi; exec tmux new-session -s '$session' -c \$HOME/repos \"$cmd\""
   fi
 }
 
