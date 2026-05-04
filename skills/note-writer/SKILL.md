@@ -174,7 +174,7 @@ Slides: ""
 
 ### Layer scope (Copper 2026-04-20, hardened 2026-04-20 PM)
 
-**Textbook chapter notes ≠ synthesis layer**. A textbook note (`proj/note/textbooks/{Book}/Ch*.md` — see Output Path below) is a **faithful zh-TW rendering** of the source chapter — translate, structure, preserve clinical content. Do NOT inject independent EBM commentary, Hernán-style causal critique, or "modern evidence update" sections. If the textbook says X, write X (the textbook is the authority for the chapter; if X is contested, that's a separate wiki page's job).
+**Textbook chapter notes ≠ synthesis layer**. A textbook note (output paths in §Output path table below — `personal-website/src/content/notes/private/textbook-study/{book}/{slug}.md` for the full digest, `public/textbook-summary/{book}/{slug}.md` for the slide-style summary) is a **faithful zh-TW rendering** of the source chapter — translate, structure, preserve clinical content. Do NOT inject independent EBM commentary, Hernán-style causal critique, or "modern evidence update" sections. If the textbook says X, write X (the textbook is the authority for the chapter; if X is contested, that's a separate wiki page's job).
 
 EBM + Causal audit applies to `wiki/` ONLY — wiki is the synthesis layer. Vault-steward Phase 4 (Opus max, daily 04:00) handles wiki EBM/Causal. Note-writer's job for textbook = high-fidelity reproduction with KEY TAKEAWAYS that highlight what the textbook itself emphasises.
 
@@ -242,19 +242,39 @@ Contam-cleanup action: forbidden inline → strip OR fold into bucket-L callout 
 
 Note quality = faithful rendering of source PLUS optional collapsed-callout supplements (C/L/T). Anchor rule (caveat/quantitative/decision-hinge) draws ONLY from textbook's own data, not external grading.
 
-### Output path (Copper directive 2026-05-03 — NOTE primary home moved to personal-website)
+### Output path (Copper directive 2026-05-03 — NOTE primary home pivoted to personal-website)
 
-| input source | output note path |
-|---|---|
-| `medwiki/raw/articles/{key}.md` (journal article) | `personal-website/src/content/notes/private/journal-summary/{key}.md` |
-| `medwiki/raw/.../{BookCh}.md` (textbook chapter) — **dual output** | private: `personal-website/src/content/notes/private/textbook-study/{book-slug}/{ch-slug}.md` <br> public: `personal-website/src/content/notes/public/textbook-summary/{book-slug}/{ch-slug}-summary.md` |
-| `medwiki/raw/.../{guideline}.md` (OA guideline) — **dual output** | private: `personal-website/src/content/notes/private/textbook-study/{org}/{section}.md` <br> public: `personal-website/src/content/notes/public/textbook-summary/{org}/{section}-summary.md` |
-| Copper-authored article (debunk, fb-archive, lifestyle, clinical-pearl, nephrology-public) | `personal-website/src/content/notes/public/{note_type}/{slug}/index.md` (per-article folder if has `_sources/` companion) or `{slug}.md` |
-| Exam solutions (CME/board prep) | `personal-website/src/content/notes/public/exam-solution/{specialty}/{slug}.md` |
+NOTE primary home moved from `medwiki/note/` (and the older `~/repos/note/` shell) to `personal-website/src/content/notes/{public,private}/{type}/{slug}.md`. New notes are written there. Existing `medwiki/note/*.md` remain for cross-search and migrate per `personal-website/docs/strategy/migration-inventory.md` (Phase 1 showcase / Phase 2 bulk / Phase 3 deferred).
 
-**Never write notes to** `medwiki/note/` or `medwiki/wiki/` — these are deprecated since Copper directive 2026-05-03; they have been archived to prevent agent miswrites. The canonical NOTE/wiki home is `personal-website/src/content/{notes,wiki}/`.
+Output path matrix (Astro content collection `notesCollection`, schema in `personal-website/src/content/config.ts`):
 
-**raw mirror layer remains in medwiki/raw/** for source-faithful PDF/audio/URL transcription via MinerU/whisper-cpp/WebFetch. Notes derive from raw, not vice-versa.
+| input source | note_type | visibility | output path |
+|---|---|---|---|
+| `raw/articles/{key}/raw.md` (journal article — public-shareable summary) | `journal-summary` | `public` | `personal-website/src/content/notes/public/journal-summary/{slug}.md` |
+| `raw/articles/{key}/raw.md` (journal article — paywalled / detailed) | `journal-summary` | `private` | `personal-website/src/content/notes/private/journal-summary/{slug}.md` |
+| `raw/.../_textbooks/{Book}/{Ch}/raw.md` (textbook chapter, public KEY-TAKEAWAYS only) | `textbook-summary` | `public` | `personal-website/src/content/notes/public/textbook-summary/{book}/{slug}.md` |
+| `raw/.../_textbooks/{Book}/{Ch}/raw.md` (textbook chapter, full Copper-readable digest) | `textbook-study` | `private` | `personal-website/src/content/notes/private/textbook-study/{book}/{slug}.md` |
+| TSN exam recall / 腎專考題解析 | `exam-solution` | `public` | `personal-website/src/content/notes/public/exam-solution/{slug}.md` |
+| FB post archive (Copper-authored, no AI banner) | `fb-archive` | `public` | `personal-website/src/content/notes/public/fb-archive/{slug}.md` |
+| Other (interactive «寫筆記» on PDF/report not fitting above) | `review` / `clinical-pearl` | per content | `personal-website/src/content/notes/{visibility}/{type}/{slug}.md` |
+
+**Textbook dual-output rule** (per `wiki/SKILL.md` 2026-05-03 directive): textbook chapter notes emit BOTH `public/textbook-summary/{book}/{slug}.md` (slide-style KEY TAKEAWAYS, paraphrase only, ≤2 verbatim quotes ≤30 words each) AND `private/textbook-study/{book}/{slug}.md` (full Copper-readable digest, may include short fair-use verbatim quotes) in one pass. Both share the same `{slug}`; cross-link via frontmatter `related: [<other-slug>]`. Build pipeline gates private/ via Cloudflare Access (Google SSO + email allowlist).
+
+**Never write notes to `raw/`**. raw/ holds raw.md + source.pdf + sidecars only (machine source layer). Copper-readable note belongs in `personal-website/src/content/notes/...` where the Astro build serves the canonical web URL `/notes/{visibility}/{type}/{slug}/`.
+
+**Legacy fallback**: if the active environment has no `personal-website/` checkout (e.g., transient subagent without that repo), agent may write to `medwiki/note/{topic_path}/{key}.md` and tag the frontmatter `migration_pending: true` so the next session moves it to personal-website.
+
+**Required frontmatter field `parent:`** points back to the source raw.md so reverse lookup works: `parent: /medwiki/raw/articles/{key}/raw.md` (vault-root absolute, raw mirror remains in medwiki).
+
+* `note_version`: Always use the version string shown above. When this skill is updated, the version string here will change — all new notes will carry the new version, making it easy to identify notes that need rewriting.
+* `generated`: The date the note was generated (not the same as a user-managed `created` date).
+* Omit inapplicable fields entirely (don't leave empty lines).
+* `Book` uses vault-root absolute path to the book's MOC file.
+* `PDF` **REQUIRED** for both textbook and journal articles. Use vault-relative path (e.g. `raw/articles/NEJM_NEJMcps2510060/source.pdf`). Cross-device compatible via Dropbox sync. If PDF not yet in vault, write `pending` as placeholder.
+* Tags: **flat names only** (no `_s/` or `_t/` prefix). Hierarchy managed in tags.db, not tag strings.
+
+If the document doesn't provide full citation details, fill in what's available and leave the rest blank rather than guessing.
+
 
 ### Dual-output rule (textbook + OA guideline + journal notes) — split-content convention (Copper directive 2026-05-04)
 
@@ -309,17 +329,6 @@ Frontmatter `ai_assist` field mandatory for all notes. Two policy classes:
   - `ai_assist: "fact-check + copyedit only"` is the literal default
 
 The Astro layout `src/pages/notes/[...slug].astro` reads `note_type` and renders the AI banner conditionally per this rule.
-
-**Required frontmatter field `parent:`** points back to the source raw.md so reverse lookup works: `parent: /raw/articles/{key}/raw.md` (vault-root absolute).
-
-* `note_version`: Always use the version string shown above. When this skill is updated, the version string here will change — all new notes will carry the new version, making it easy to identify notes that need rewriting.
-* `generated`: The date the note was generated (not the same as a user-managed `created` date).
-* Omit inapplicable fields entirely (don't leave empty lines).
-* `Book` uses vault-root absolute path to the book's MOC file.
-* `PDF` **REQUIRED** for both textbook and journal articles. Use vault-relative path (e.g. `raw/articles/NEJM_NEJMcps2510060/source.pdf`). Cross-device compatible via Dropbox sync. If PDF not yet in vault, write `pending` as placeholder.
-* Tags: **flat names only** (no `_s/` or `_t/` prefix). Hierarchy managed in tags.db, not tag strings.
-
-If the document doesn't provide full citation details, fill in what's available and leave the rest blank rather than guessing.
 
 ---
 
@@ -495,20 +504,20 @@ cp "{pdf_path}" "$SIDECAR/source.pdf" 2>/dev/null
 mv raw/images/{citationKey}/* "$SIDECAR/" 2>/dev/null
 ```
 
-After assembly, the sidecar should contain:
-- `raw.md` — MinerU transcript (moved from raw/ staging)
+After assembly, the sidecar (`~/VaultBinary/_sidecar/{citationKey}/`) should contain:
+- `raw.md` — MinerU transcript (mirrored at `medwiki/raw/articles/{citationKey}/raw.md`)
 - `source.pdf` — original PDF (if available)
-- `*.png` / `*.jpg` — extracted figures
+- `images/{sha}.png` — extracted figures, content-addressed by sha
 
-The note at `raw/articles/{citationKey}.md` can reference sidecar files via standard links:
-- `![Fig 1](/proj/note/articles/{citationKey}/fig1.png)` — embed figure
-- `[Raw transcript](/proj/note/articles/{citationKey}/raw.md)` — link to raw transcript
-- `[PDF](/proj/note/articles/{citationKey}/source.pdf)` — link to PDF
+The note in `personal-website/src/content/notes/{visibility}/{type}/{slug}.md` references sidecar files via the build-time bridge `personal-website/scripts/copy-sidecar-images.py`, which scans built HTML for `/_sidecar/{bundle}/images/{sha}.{ext}` patterns and copies referenced binaries from `~/VaultBinary/_sidecar/` into `dist/_sidecar/`:
+- `![Fig 1](/_sidecar/{citationKey}/images/{sha}.png)` — embed figure
+- `[Raw transcript](/medwiki/raw/articles/{citationKey}/raw.md)` — link to raw mirror (cross-repo, dev-only)
+- `[PDF](/_sidecar/{citationKey}/source.pdf)` — link to PDF (only if Copper opted to publish; commercial textbook PDFs MUST NOT be linked)
 
 ### Mutual linkage update
 
 After sidecar assembly, update Zotero `url` field to include the correct vault-relative path:
-`/raw/articles/{citationKey}` (vault-root path)
+`/medwiki/raw/articles/{citationKey}` (vault-root path; raw mirror remains in medwiki)
 
 ---
 
@@ -556,8 +565,8 @@ Each subagent prompt **must** include all four paths below. If any is missing, t
 
 ## 圖片處理
 1. 比對 pdfimages -list 的頁碼與文中 Figure 編號
-2. 將對應圖片複製到 attachments/ 並重新命名
-3. 在筆記中使用 `![Figure N](/proj/note/articles/{citationKey}/{basename}-{流水號}.png)` 嵌入
+2. 將對應圖片以 sha-named 形式複製到 `~/VaultBinary/_sidecar/{citationKey}/images/{sha}.{ext}`
+3. 在筆記中使用 `![Figure N](/_sidecar/{citationKey}/images/{sha}.png)` 嵌入（personal-website build 時透過 `scripts/copy-sidecar-images.py` 自 `~/VaultBinary/_sidecar/` bridge 進 `dist/_sidecar/`）
 4. 無法對應的圖片（如 logo、裝飾圖）略過
 
 請遵循 medical-note-writer skill 的完整規則。
@@ -573,6 +582,7 @@ The image extraction step in Section 3 ("Figure & Table Analysis") requires acce
 
 | Version | Date | Changes |
 |---|---|---|
+| v2.8 | 2026-05-03 | NOTE primary home pivot: output paths redirect to `personal-website/src/content/notes/{public,private}/{type}/{slug}.md` (Astro `notesCollection`). Sidecar bridge updated to `/_sidecar/{bundle}/images/{sha}.{ext}` pattern via `personal-website/scripts/copy-sidecar-images.py`. Textbook dual-output (`textbook-summary` public + `textbook-study` private) per Copper directive. Legacy `proj/note/...` and `~/repos/note/` shells deprecated; medwiki/note/ retained for backward search and migration-pending fallback. |
 | v2.7 | 2026-04-17 | 圖片直接內嵌，移除 `<div class="no-publish">` 包裝（v2.3 引入，今作廢）。Rationale: 公開分享只走 GitHub repos 的 KEY TAKEAWAYS / TEACHING SLIDES 切片，整篇 note publish 非現行路徑，no-publish guard 已無需要。 |
 | v2.6 | 2026-04-09 | `## KEY TAKEAWAYS` moved to FIRST section (replaces Take Home Message AND old end-of-note KEY TAKEAWAYS — appears once, at top). Removed duplicate. `## TEACHING SLIDES` remains at end (Marp-compatible, script-extractable). |
 | v2.5 | 2026-04-09 | +`## Take Home Message` as mandatory first section (superseded same day by v2.6). |
