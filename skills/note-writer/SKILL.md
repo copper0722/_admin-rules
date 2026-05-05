@@ -264,7 +264,7 @@ Output path matrix (Astro content collection `notesCollection`, schema in `perso
 
 **Legacy fallback**: if the active environment has no `personal-website/` checkout (e.g., transient subagent without that repo), agent may write to `medwiki/note/{topic_path}/{key}.md` and tag the frontmatter `migration_pending: true` so the next session moves it to personal-website.
 
-**Required frontmatter field `parent:`** points back to the source raw.md so reverse lookup works: `parent: /medwiki/raw/articles/{key}/raw.md` (vault-root absolute, raw mirror remains in medwiki).
+**Required frontmatter field `parent:`** points back to the source raw.md so reverse lookup works: `parent: /wiki_raw/raw/articles/{key}/raw.md` (vault-root absolute, raw mirror remains in medwiki).
 
 * `note_version`: Always use the version string shown above. When this skill is updated, the version string here will change — all new notes will carry the new version, making it easy to identify notes that need rewriting.
 * `generated`: The date the note was generated (not the same as a user-managed `created` date).
@@ -505,19 +505,19 @@ mv raw/images/{citationKey}/* "$SIDECAR/" 2>/dev/null
 ```
 
 After assembly, the sidecar (`~/VaultBinary/_sidecar/{citationKey}/`) should contain:
-- `raw.md` — MinerU transcript (mirrored at `medwiki/raw/articles/{citationKey}/raw.md`)
+- `raw.md` — MinerU transcript (mirrored at `wiki_raw/raw/articles/{citationKey}/raw.md`)
 - `source.pdf` — original PDF (if available)
 - `images/{sha}.png` — extracted figures, content-addressed by sha
 
 The note in `personal-website/src/content/notes/{visibility}/{type}/{slug}.md` references sidecar files via the build-time bridge `personal-website/scripts/copy-sidecar-images.py`, which scans built HTML for `/_sidecar/{bundle}/images/{sha}.{ext}` patterns and copies referenced binaries from `~/VaultBinary/_sidecar/` into `dist/_sidecar/`:
 - `![Fig 1](/_sidecar/{citationKey}/images/{sha}.png)` — embed figure
-- `[Raw transcript](/medwiki/raw/articles/{citationKey}/raw.md)` — link to raw mirror (cross-repo, dev-only)
+- `[Raw transcript](/wiki_raw/raw/articles/{citationKey}/raw.md)` — link to raw mirror (cross-repo, dev-only)
 - `[PDF](/_sidecar/{citationKey}/source.pdf)` — link to PDF (only if Copper opted to publish; commercial textbook PDFs MUST NOT be linked)
 
 ### Mutual linkage update
 
 After sidecar assembly, update Zotero `url` field to include the correct vault-relative path:
-`/medwiki/raw/articles/{citationKey}` (vault-root path; raw mirror remains in medwiki)
+`/wiki_raw/raw/articles/{citationKey}` (vault-root path; raw mirror remains in medwiki)
 
 ---
 

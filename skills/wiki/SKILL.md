@@ -96,7 +96,7 @@ unnecessary copyright risk.
    an authors' explicit conclusion line). ≤150 words per quote.
 4. **Raw layer is the verbatim mirror.** If you find yourself wanting to
    quote a long textbook passage, that passage already lives in
-   `medwiki/raw/{book}_Ch{NN}.md`. Cite the path; do not duplicate verbatim
+   `wiki_raw/raw/{book}_Ch{NN}.md`. Cite the path; do not duplicate verbatim
    into wiki.
 5. **Note layer is also synthesis** (Copper-readable zh-TW digest), not raw
    echo; same rule applies, see `medwiki/note/CLAUDE.md`.
@@ -494,7 +494,7 @@ The principle: raw layer is a mirror of *external* source text. Copper's own que
    - For social-media expert opinions about a clinical topic, place under the same topic folder as the corresponding textbook chapter, e.g. a thalassemia-screening FB post goes to `raw/clinical_medicine/internal_medicine/hematology/anemia(hematology)/{citationKey}.md` next to `Harrison22e_Ch103.md`.
    - When the topic is genuinely cross-cutting (policy, reimbursement, screening program), use the cross-cutting top-level peer per `protocol/wiki_classification_sop.md`.
 
-7. **Wiki synthesis** (all input shapes). Per medwiki/CLAUDE.md "Wikify Content Boundary":
+7. **Wiki synthesis** (all input shapes). Per wiki_raw/CLAUDE.md "Wikify Content Boundary":
    - Default = source-faithful synthesis. Do **not** auto-add EBM A1-A11 / PICO / GRADE / Hernán-causal-check sections just because the source is clinical.
    - If multiple sources on the same topic exist (textbook chapter + manual source + cited papers), produce one consolidated wiki .md combining them.
    - Cite the manual source in `## Sources`:
