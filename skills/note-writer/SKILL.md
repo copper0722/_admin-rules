@@ -77,10 +77,10 @@ Figures and tables often contain information **not stated in the text**. Give th
 *Cowork mode (file system available):*
 
 Attempt to extract embedded images from the PDF programmatically:
-- **Success** → save to sidecar folder, then embed directly using **relative path** (from note to sidecar):
+- **Success** → save to the OWC payload `images/` folder, then embed only through the website private asset bridge when the note is private:
 
 ````markdown
-![Figure 15-1](D2026_Ch015/15-1.png)
+![Figure 15-1](/private-assets/{citationKey}/images/{sha}.png)
 
 > [!tip]- Figure X.X 解析｜Original Figure Title
 > * Analysis bullet 1…
@@ -152,9 +152,9 @@ publish: false              # boolean opt-in gate. NEVER true unless Copper sets
 # publish_to: nephro-cme    # enum: textbook-notes | nephro-cme. ONLY set when publish: true.
 
 # ── 教科書專用 ──
-Book: "/raw/{topic_path}/_textbooks/{BookTitle}/MOC_{BookTitle}.md"
+Book: "/Users/copper/VaultBinary/{topic_path}/{BookTitle}/MOC_{BookTitle}.md"
 Chapter: "15"
-PDF: "raw/{topic_path}/_textbooks/{BookTitle}/{Ch}/source.pdf"
+PDF: "/Users/copper/VaultBinary/{topic_path}/{BookTitle}_Ch{NN}/source.pdf"
 
 # ── 文獻 / 指引 / 報告專用 ──
 citationKey: "Author2026Word"
@@ -162,7 +162,7 @@ journal: "Journal Name"
 year: 2026
 DOI: "10.xxxx/xxxxx"
 PMID: "12345678"
-PDF: "raw/articles/{citationKey}/source.pdf"
+PDF: "/Users/copper/VaultBinary/{topic_path}/{citationKey}/source.pdf"
 
 # ── 選填 ──
 FB社團: ""
@@ -196,7 +196,7 @@ If a chapter's KEY TAKEAWAYS or body contains any of the above patterns INLINE (
 
 #### Permitted callout exception (Copper 2026-04-20 PM, hardened 2026-05-01)
 
-Non-source content MAY be added IF AND ONLY IF it lives in an Obsidian callout block that meets the three-bucket convention defined in `medwiki/note/AGENTS.md` "Layer scope (hard line — note ≠ wiki)" §. Card is the authority; this section reproduces the canonical form for Taiwan addenda only:
+Non-source content MAY be added IF AND ONLY IF it lives in an Obsidian callout block that meets the three-bucket convention defined in `personal-website/AGENTS.md` and repo Law "Layer scope (hard line — note ≠ wiki)" rules. Card is the authority; this section reproduces the canonical form for Taiwan addenda only:
 
 ```markdown
 > [!note]- 台灣實務補遺<!>｜Taiwan-specific Practice Notes
@@ -244,33 +244,33 @@ Note quality = faithful rendering of source PLUS optional collapsed-callout supp
 
 ### Output path (Copper directive 2026-05-03 — NOTE primary home pivoted to personal-website)
 
-NOTE primary home moved from `medwiki/note/` (and the older `~/repos/note/` shell) to `personal-website/src/content/notes/{public,private}/{type}/{slug}.md`. New notes are written there. Existing `medwiki/note/*.md` remain for cross-search and migrate per `personal-website/docs/strategy/migration-inventory.md` (Phase 1 showcase / Phase 2 bulk / Phase 3 deferred).
+NOTE primary home moved from `medwiki/note/` (and the older `~/repos/note/` shell) to `personal-website/src/content/notes/{public,private}/{type}/{slug}.md`. New notes are written there. Existing `medwiki/note/*.md` are deprecated historical references only and migrate per `personal-website/docs/strategy/migration-inventory.md` (Phase 1 showcase / Phase 2 bulk / Phase 3 deferred).
 
 Output path matrix (Astro content collection `notesCollection`, schema in `personal-website/src/content/config.ts`):
 
 | input source | note_type | visibility | output path |
 |---|---|---|---|
-| `raw/articles/{key}/raw.md` (journal article — public-shareable summary) | `journal-summary` | `public` | `personal-website/src/content/notes/public/journal-summary/{slug}.md` |
-| `raw/articles/{key}/raw.md` (journal article — paywalled / detailed) | `journal-summary` | `private` | `personal-website/src/content/notes/private/journal-summary/{slug}.md` |
-| `raw/.../_textbooks/{Book}/{Ch}/raw.md` (textbook chapter, public KEY-TAKEAWAYS only) | `textbook-summary` | `public` | `personal-website/src/content/notes/public/textbook-summary/{book}/{slug}.md` |
-| `raw/.../_textbooks/{Book}/{Ch}/raw.md` (textbook chapter, full Copper-readable digest) | `textbook-study` | `private` | `personal-website/src/content/notes/private/textbook-study/{book}/{slug}.md` |
+| `~/VaultBinary/{topic_path}/{key}/raw.md` (journal article — public-shareable summary) | `journal-summary` | `public` | `personal-website/src/content/notes/public/journal-summary/{slug}.md` |
+| `~/VaultBinary/{topic_path}/{key}/raw.md` (journal article — paywalled / detailed) | `journal-summary` | `private` | `personal-website/src/content/notes/private/journal-summary/{slug}.md` |
+| `~/VaultBinary/{topic_path}/{Book}/{Ch}/raw.md` (textbook chapter, public KEY-TAKEAWAYS only) | `textbook-summary` | `public` | `personal-website/src/content/notes/public/textbook-summary/{book}/{slug}.md` |
+| `~/VaultBinary/{topic_path}/{Book}/{Ch}/raw.md` (textbook chapter, full Copper-readable digest) | `textbook-study` | `private` | `personal-website/src/content/notes/private/textbook-study/{book}/{slug}.md` |
 | TSN exam recall / 腎專考題解析 | `exam-solution` | `public` | `personal-website/src/content/notes/public/exam-solution/{slug}.md` |
 | FB post archive (Copper-authored, no AI banner) | `fb-archive` | `public` | `personal-website/src/content/notes/public/fb-archive/{slug}.md` |
 | Other (interactive «寫筆記» on PDF/report not fitting above) | `review` / `clinical-pearl` | per content | `personal-website/src/content/notes/{visibility}/{type}/{slug}.md` |
 
 **Textbook dual-output rule** (per `wiki/SKILL.md` 2026-05-03 directive): textbook chapter notes emit BOTH `public/textbook-summary/{book}/{slug}.md` (slide-style KEY TAKEAWAYS, paraphrase only, ≤2 verbatim quotes ≤30 words each) AND `private/textbook-study/{book}/{slug}.md` (full Copper-readable digest, may include short fair-use verbatim quotes) in one pass. Both share the same `{slug}`; cross-link via frontmatter `related: [<other-slug>]`. Build pipeline gates private/ via Cloudflare Access (Google SSO + email allowlist).
 
-**Never write notes to `raw/`**. raw/ holds raw.md + source.pdf + sidecars only (machine source layer). Copper-readable note belongs in `personal-website/src/content/notes/...` where the Astro build serves the canonical web URL `/notes/{visibility}/{type}/{slug}/`.
+**Never write notes to `raw/` or `~/VaultBinary`**. `~/VaultBinary` holds raw.md + source.pdf + images/ + manifest.json only (machine source layer). Copper-readable note belongs in `personal-website/src/content/notes/...` where the Astro build serves the canonical web URL `/notes/{visibility}/{type}/{slug}/`.
 
-**Legacy fallback**: if the active environment has no `personal-website/` checkout (e.g., transient subagent without that repo), agent may write to `medwiki/note/{topic_path}/{key}.md` and tag the frontmatter `migration_pending: true` so the next session moves it to personal-website.
+**No legacy fallback writes**: if the active environment has no `personal-website/` checkout, stop and create a handover/audit finding. Do not write new notes into `medwiki/note/` or `~/repos/note/`.
 
-**Required frontmatter field `parent:`** points back to the source raw.md so reverse lookup works: `parent: /wiki_raw/raw/articles/{key}/raw.md` (vault-root absolute, raw mirror remains in medwiki).
+**Required frontmatter field `parent:`** points back to the source raw.md so reverse lookup works: `parent: /Users/copper/VaultBinary/{topic_path}/{citationKey}/raw.md` (or equivalent `~/VaultBinary/...` path). PG mirror: `wiki_raw.raw_index`.
 
 * `note_version`: Always use the version string shown above. When this skill is updated, the version string here will change — all new notes will carry the new version, making it easy to identify notes that need rewriting.
 * `generated`: The date the note was generated (not the same as a user-managed `created` date).
 * Omit inapplicable fields entirely (don't leave empty lines).
 * `Book` uses vault-root absolute path to the book's MOC file.
-* `PDF` **REQUIRED** for both textbook and journal articles. Use vault-relative path (e.g. `raw/articles/NEJM_NEJMcps2510060/source.pdf`). Cross-device compatible via Dropbox sync. If PDF not yet in vault, write `pending` as placeholder.
+* `PDF` **REQUIRED** for both textbook and journal articles. Use the OWC payload path (e.g. `/Users/copper/VaultBinary/{topic_path}/{citationKey}/source.pdf`). If PDF not yet in vault, write `pending` as placeholder.
 * Tags: **flat names only** (no `_s/` or `_t/` prefix). Hierarchy managed in tags.db, not tag strings.
 
 If the document doesn't provide full citation details, fill in what's available and leave the rest blank rather than guessing.
@@ -291,7 +291,7 @@ For source types that justify both deep study and shareable summary, **content i
   - frontmatter (incl. `ai_assist` banner field)
   - **No `## KEY TAKEAWAYS` and no `## TEACHING SLIDES`** — those live only in the public short note
   - body sections (mirror source heading hierarchy with bilingual `中文｜English` headings)
-  - figures embedded inline via `![](/_sidecar/{bundle}/images/{sha}.jpg)` for raw-mirrored sources
+  - figures embedded inline only through the website private asset bridge for explicitly selected payload assets
 
 Rationale: prior dual-output had ~60% content overlap (KEY TAKEAWAYS + slides duplicated in both public extract and private full). Split-content convention removes the duplication: each fact lives in exactly one of the two files. Reader-flow:
 - public short note: 5-min skim, walk away with takeaways + slides
@@ -313,7 +313,7 @@ This keeps fair-use compliance for paywall textbooks while exposing pedagogical 
 
 ### Image embed mode (Copper directive 2026-05-03)
 
-For **private** notes (only Copper reads), figures may be embedded directly via `![](/_sidecar/{bundle}/images/{sha}.jpg)` paths from the raw mirror, **without `[!tip]-` analysis callouts**. Rationale: Copper sees the figures directly; agent-written figure descriptions are redundant.
+For **private** notes (only Copper reads), figures may be embedded through the website private asset bridge for explicitly selected `~/VaultBinary` payload images, **without `[!tip]-` analysis callouts**. Rationale: Copper sees the figures directly; agent-written figure descriptions are redundant.
 
 For **public** notes (textbook-summary + others), figures from raw should NOT be embedded (paywall content). KEY TAKEAWAYS + slides convey the pedagogical content; reader follows link to private full note (or original source) for figures.
 
@@ -481,43 +481,45 @@ Write tags into:
 
 `summary:` in frontmatter is **no longer required**. `## Take Home Message` as the first section fulfills the same function (§9.1 exemption). Agent reads Take Home Message to assess relevance without reading the full note.
 
-### Sidecar Assembly (MANDATORY)
+### Payload Assembly (MANDATORY)
 
-After writing the note, assemble the sidecar folder. All related files for this article go into one folder.
+After writing the note, assemble the OWC payload folder. All related source files for this article go into one folder.
 
 ```bash
 # Determine corpus path
-# Articles: raw/articles/{citationKey}/
-# Textbook chapters: raw/books/{BookTitle}/{citationKey}/
+# Articles/textbook chapters: ~/VaultBinary/{topic_path}/{citationKey}/
 
-SIDECAR="raw/articles/{citationKey}"
-mkdir -p "$SIDECAR"
+PAYLOAD="$HOME/VaultBinary/{topic_path}/{citationKey}"
+mkdir -p "$PAYLOAD"
 
 # Move raw transcript from staging
-mv raw/{citationKey}.md "$SIDECAR/raw.md" 2>/dev/null
+mv raw/{citationKey}.md "$PAYLOAD/raw.md" 2>/dev/null
 
 # Copy source PDF (if accessible)
 # PDF may be in ~/Downloads/, Zotero storage, or already in vault
-cp "{pdf_path}" "$SIDECAR/source.pdf" 2>/dev/null
+cp "{pdf_path}" "$PAYLOAD/source.pdf" 2>/dev/null
 
 # Move extracted figures (if any)
-mv raw/images/{citationKey}/* "$SIDECAR/" 2>/dev/null
+mkdir -p "$PAYLOAD/images"
+mv raw/images/{citationKey}/* "$PAYLOAD/images/" 2>/dev/null
 ```
 
-After assembly, the sidecar (`~/VaultBinary/_sidecar/{citationKey}/`) should contain:
-- `raw.md` — MinerU transcript (mirrored at `wiki_raw/raw/articles/{citationKey}/raw.md`)
+After assembly, the payload (`~/VaultBinary/{topic_path}/{citationKey}/`) should contain:
+- `raw.md` — MinerU transcript (indexed by PG `wiki_raw.raw_index`)
 - `source.pdf` — original PDF (if available)
 - `images/{sha}.png` — extracted figures, content-addressed by sha
 
-The note in `personal-website/src/content/notes/{visibility}/{type}/{slug}.md` references sidecar files via the build-time bridge `personal-website/scripts/copy-sidecar-images.py`, which scans built HTML for `/_sidecar/{bundle}/images/{sha}.{ext}` patterns and copies referenced binaries from `~/VaultBinary/_sidecar/` into `dist/_sidecar/`:
-- `![Fig 1](/_sidecar/{citationKey}/images/{sha}.png)` — embed figure
-- `[Raw transcript](/wiki_raw/raw/articles/{citationKey}/raw.md)` — link to raw mirror (cross-repo, dev-only)
-- `[PDF](/_sidecar/{citationKey}/source.pdf)` — link to PDF (only if Copper opted to publish; commercial textbook PDFs MUST NOT be linked)
+Private website notes may reference only explicitly selected assets through a
+website bridge. Legacy `/_sidecar/...` embeds remain supported for old notes;
+new notes should not publish a whole source payload by default.
+- `![Fig 1](/_sidecar/{citationKey}/images/{sha}.png)` — legacy/compat embed only
+- `[Raw transcript](/Users/copper/VaultBinary/{topic_path}/{citationKey}/raw.md)` — dev-only parent pointer
+- `[PDF](...)` — only if Copper opted to publish; commercial textbook PDFs MUST NOT be linked
 
 ### Mutual linkage update
 
-After sidecar assembly, update Zotero `url` field to include the correct vault-relative path:
-`/wiki_raw/raw/articles/{citationKey}` (vault-root path; raw mirror remains in medwiki)
+After payload assembly, update Zotero `url` field to include the correct vault-relative path:
+`/Users/copper/VaultBinary/{topic_path}/{citationKey}/raw.md` or a stable PG-backed resolver URL when implemented.
 
 ---
 
@@ -565,8 +567,8 @@ Each subagent prompt **must** include all four paths below. If any is missing, t
 
 ## 圖片處理
 1. 比對 pdfimages -list 的頁碼與文中 Figure 編號
-2. 將對應圖片以 sha-named 形式複製到 `~/VaultBinary/_sidecar/{citationKey}/images/{sha}.{ext}`
-3. 在筆記中使用 `![Figure N](/_sidecar/{citationKey}/images/{sha}.png)` 嵌入（personal-website build 時透過 `scripts/copy-sidecar-images.py` 自 `~/VaultBinary/_sidecar/` bridge 進 `dist/_sidecar/`）
+2. 將對應圖片以 sha-named 形式複製到 `~/VaultBinary/{topic_path}/{citationKey}/images/{sha}.{ext}`
+3. 私人筆記若必須顯示圖片，使用 website 私人 asset bridge 指向單一圖檔；不要公開整包 source payload。Legacy `/_sidecar/...` 只用於舊筆記相容。
 4. 無法對應的圖片（如 logo、裝飾圖）略過
 
 請遵循 medical-note-writer skill 的完整規則。
@@ -583,6 +585,7 @@ The image extraction step in Section 3 ("Figure & Table Analysis") requires acce
 | Version | Date | Changes |
 |---|---|---|
 | v2.8 | 2026-05-03 | NOTE primary home pivot: output paths redirect to `personal-website/src/content/notes/{public,private}/{type}/{slug}.md` (Astro `notesCollection`). Sidecar bridge updated to `/_sidecar/{bundle}/images/{sha}.{ext}` pattern via `personal-website/scripts/copy-sidecar-images.py`. Textbook dual-output (`textbook-summary` public + `textbook-study` private) per Copper directive. Legacy `proj/note/...` and `~/repos/note/` shells deprecated; medwiki/note/ retained for backward search and migration-pending fallback. |
+| v2.9 | 2026-05-05 | Raw+binary merge: source payloads now live at `~/VaultBinary/{topic_path}/{citationKey}/{raw.md, source.pdf, images/, manifest.json}` and are indexed by PG `wiki_raw.raw_index`; new note writes must not fall back to deprecated `medwiki/note/`. |
 | v2.7 | 2026-04-17 | 圖片直接內嵌，移除 `<div class="no-publish">` 包裝（v2.3 引入，今作廢）。Rationale: 公開分享只走 GitHub repos 的 KEY TAKEAWAYS / TEACHING SLIDES 切片，整篇 note publish 非現行路徑，no-publish guard 已無需要。 |
 | v2.6 | 2026-04-09 | `## KEY TAKEAWAYS` moved to FIRST section (replaces Take Home Message AND old end-of-note KEY TAKEAWAYS — appears once, at top). Removed duplicate. `## TEACHING SLIDES` remains at end (Marp-compatible, script-extractable). |
 | v2.5 | 2026-04-09 | +`## Take Home Message` as mandatory first section (superseded same day by v2.6). |

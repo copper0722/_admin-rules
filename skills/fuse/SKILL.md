@@ -10,11 +10,11 @@ Fuse N independent LLM reports (Deep Research outputs) on the same question into
 
 **Council vs Fuse**: Council = adversarial debate → judge picks winner. Fuse = collaborative synthesis → merge best of all into one with provenance preserved. `/fuse` ≠ `/council`.
 
-**Scope change (v4, 2026-05-03 — Copper directive)**: **Canonical fuse session path = `medwiki/note/fuse/{topic}_{YYYYMMDD}/`** (NOT `~/repos/note/fuse/...` per old v3; the standalone `~/repos/note/` shell was removed when NOTE primary home pivoted to `personal-website/src/content/notes/`). Fuse session is WIP audit-trail material, not Copper-readable polished output, so it stays in medwiki — the polished consensus document still goes to a canonical wiki entry but the wiki entry now lives at `personal-website/src/content/wiki/{slug}.md`. Consumer scopes (e.g., `secretary/tsn/.../{topic}/`) get **symlinks** pointing back to canonical, never copies — to prevent drift between consumer-side workspace and master.
+**Scope change (v5, 2026-05-05 — raw+binary merge cleanup)**: **Canonical fuse session path = `~/repos/_admin-private/workflow/fuse/{topic}_{YYYYMMDD}/`**. Fuse session material is M2M audit trail, not Copper-readable NOTE and not raw source payload, so it belongs in `_admin-private`; the polished consensus document still goes to `personal-website/src/content/wiki/{slug}.md`. Consumer scopes (e.g., `secretary/tsn/.../{topic}/`) get **symlinks** pointing back to the admin session folder, never copies — to prevent drift between consumer-side workspace and master.
 
-**Symlink convention**: `{consumer_scope}/_fuse_session_{YYYYMMDD}` → `~/repos/medwiki/note/fuse/{topic}_{YYYYMMDD}/`. Use absolute symlink path so it survives consumer-scope rename.
+**Symlink convention**: `{consumer_scope}/_fuse_session_{YYYYMMDD}` → `~/repos/_admin-private/workflow/fuse/{topic}_{YYYYMMDD}/`. Use absolute symlink path so it survives consumer-scope rename.
 
-(Earlier v3 path `~/repos/note/fuse/...` retired with `~/repos/note/` shell removal 2026-05-03; v2 path `proj/wiki/fuse/...` retired with proj/ wrapper retire 2026-04-25; v1 root `_fuse/` retired 2026-04-20.)
+(Earlier v4 path `medwiki/note/fuse/...` retired with the 2026-05-05 `wiki_raw`/`~/VaultBinary` split; v3 path `~/repos/note/fuse/...` retired with `~/repos/note/` shell removal 2026-05-03; v2 path `proj/wiki/fuse/...` retired with proj/ wrapper retire 2026-04-25; v1 root `_fuse/` retired 2026-04-20.)
 
 ## Standard Workflow (5 steps)
 
@@ -22,18 +22,18 @@ Fuse N independent LLM reports (Deep Research outputs) on the same question into
 
 Copper asks a question that warrants multi-LLM DR. Before dispatching, CC:
 
-1. **Vault gap scan** — Explore agent scans both `~/repos/personal-website/src/content/{wiki,notes}/` (current canonical homes) AND `~/repos/medwiki/{wiki,raw,note}/` (legacy + raw mirror) — exclude `_archive/`, `.git/`, `node_modules/`, build outputs (`dist/`, `.astro/`) — for existing coverage. Output → `medwiki/note/fuse/{topic}_{YYYYMMDD}/gap_analysis.md`:
+1. **Vault gap scan** — Explore agent scans `~/repos/personal-website/src/content/{wiki,notes}/` (current canonical homes), `~/repos/wiki_raw/` legacy/config surfaces, and bounded `~/VaultBinary/{topic_path}/` payloads when source provenance is needed. Exclude `_archive/`, `.git/`, `node_modules/`, build outputs (`dist/`, `.astro/`). Output → `~/repos/_admin-private/workflow/fuse/{topic}_{YYYYMMDD}/gap_analysis.md`:
    - Tier-1 (direct topic hits), Tier-2 (adjacent), Tier-3 (passing mentions clustered)
-   - FB public-facing audience baseline (what has Copper already communicated to ~100K FB?). FB archive lives at `personal-website/src/content/notes/public/fb-archive/` (canonical) + `medwiki/note/fb/` (legacy mirror).
+   - FB public-facing audience baseline (what has Copper already communicated to ~100K FB?). FB archive lives at `personal-website/src/content/notes/public/fb-archive/`; legacy mirrors are read-only context only.
    - Systematic absences (what the prompt MUST fill)
    - Proposed canonical destination for the fused wiki entry: `personal-website/src/content/wiki/{slug}.md`
-2. **Prompt synthesis** — write the DR prompt to `medwiki/note/fuse/{topic}_{YYYYMMDD}/prompt.md`:
+2. **Prompt synthesis** — write the DR prompt to `~/repos/_admin-private/workflow/fuse/{topic}_{YYYYMMDD}/prompt.md`:
    - **"Known vault coverage" block at top** — name existing wiki/ref files; instruct LLMs to *cite / build-on / challenge*, not restate
    - Research question precisely defined (zh-TW academic terms + English for international LLMs)
    - Output format (PARTs, required tables, minimum row counts, required columns)
    - **Epistemic rules (non-negotiable)** cascading from `_admin-rules/skills/wiki/SKILL.md` Mode D EBM appraisal + Source Verification rules: primary-source-only with DOI/PMID; observed vs derived separation; study-design hierarchy (RCT > cohort > cross-sectional > animal); surrogate flag; Taiwan/Asian applicability; no fabrication
-3. **Session _index.md** — write per schema in `medwiki/note/fuse/AGENTS.md`. Status = `prompt-ready`. Record topic, created-date, sources roster (4 LLM placeholders), wiki_target path (proposed; format: `personal-website/src/content/wiki/{slug}.md`).
-4. **Pasteboard** — `cat medwiki/note/fuse/{topic}_{YYYYMMDD}/prompt.md | pbcopy`. Hand off to Copper.
+3. **Session _index.md** — write per schema in `~/repos/_admin-private/workflow/fuse/AGENTS.md`. Status = `prompt-ready`. Record topic, created-date, sources roster (4 LLM placeholders), wiki_target path (proposed; format: `personal-website/src/content/wiki/{slug}.md`).
+4. **Pasteboard** — `cat ~/repos/_admin-private/workflow/fuse/{topic}_{YYYYMMDD}/prompt.md | pbcopy`. Hand off to Copper.
 
 ### Step 1: Dispatch prompt
 
@@ -46,7 +46,7 @@ On Copper's "all dispatched" confirmation → update `_index.md` status = `dispa
 Copper saves each LLM's output as `.md` and drops into `_inbox/` (or specifies paths). CC moves:
 
 ```bash
-mv _inbox/{file}.md medwiki/note/fuse/{topic}_{YYYYMMDD}/source_{llm}.md
+mv _inbox/{file}.md ~/repos/_admin-private/workflow/fuse/{topic}_{YYYYMMDD}/source_{llm}.md
 ```
 
 Naming: `source_claude.md`, `source_gpt.md`, `source_gemini.md`, `source_grok.md` (or `source_perplexity.md` / `source_kimi.md` per actual roster).
@@ -56,9 +56,9 @@ On first file arrival → `_index.md` status = `received`; update `sources[].rec
 ### Step 3: Generate fused document
 
 Run the 5-phase protocol below → produces:
-- `medwiki/note/fuse/{topic}_{YYYYMMDD}/fused_draft.md` — main consensus document (NOT yet in wiki/)
-- `medwiki/note/fuse/{topic}_{YYYYMMDD}/_inventory.md` — Phase 1 output
-- `medwiki/note/fuse/{topic}_{YYYYMMDD}/_alignment.md` — Phase 2 output
+- `~/repos/_admin-private/workflow/fuse/{topic}_{YYYYMMDD}/fused_draft.md` — main consensus document (NOT yet in wiki/)
+- `~/repos/_admin-private/workflow/fuse/{topic}_{YYYYMMDD}/_inventory.md` — Phase 1 output
+- `~/repos/_admin-private/workflow/fuse/{topic}_{YYYYMMDD}/_alignment.md` — Phase 2 output
 
 Update `_index.md` status = `fused`, `fused_draft` path set.
 
@@ -67,15 +67,15 @@ Update `_index.md` status = `fused`, `fused_draft` path set.
 1. **Resolve canonical wiki slug** — use `wiki_target` from `_index.md` (set in Step 0) OR re-derive from topic keywords per `personal-website/src/content/config.ts` `wikiCollection` schema. Path format: `personal-website/src/content/wiki/{slug}.md` where `{slug}` is flat hyphenated lower-case (e.g., `sglt2-ckd-progression`, `kdigo-2024-anemia-ckd`). Wiki entry titles must NOT contain textbook names (Copper directive 2026-05-03). Cross-reference between wiki entries via `[[slug]]` wikilinks; build pipeline resolves to `<a href="/wiki/{slug}/">`.
 2. **Frontmatter harmonization**:
    - `type: wiki`
-   - `sources:` array referencing `medwiki/note/fuse/{topic}_{YYYYMMDD}/source_*.md`
-   - `parent: /medwiki/note/fuse/{topic}_{YYYYMMDD}/fused_draft.md` (reverse pointer)
+   - `sources:` array referencing `~/repos/_admin-private/workflow/fuse/{topic}_{YYYYMMDD}/source_*.md`
+   - `parent: /_admin-private/workflow/fuse/{topic}_{YYYYMMDD}/fused_draft.md` (reverse pointer)
    - `publish: false` (Copper-only gate for share pipeline; §8.8)
    - `summary:` (required if >500L per §9.1)
 3. **Cross-link sweep** — grep for `(/wiki/{sibling_topic}` patterns; add back-references from sibling wiki entries + MOC / _index.md files. Update `wiki/.../…_index.md` if topic folder has one.
 4. **Provenance tags preserved** — consensus tags `[all]/[C+G]/[split]/[only:X]` stay in-line (they are the methodology's value; don't strip for "cleanliness").
-5. **Commit** — auto-commit cron will sweep; OR explicit `git add {wiki_path} medwiki/note/fuse/{topic}_{YYYYMMDD}/_index.md && git commit -m "wiki-commit: {topic} (/fuse session {YYYYMMDD})"`.
+5. **Commit** — commit the wiki output in `personal-website/` and the session metadata in `_admin-private/` as separate repo commits. Do not try to stage both paths in one repo.
 6. **_index.md update** — status = `wikified`, `wiki_committed_at` = timestamp, `wiki_target` confirmed.
-7. **Archive cue** — after 30d with status=wikified, vault-steward cron zips `medwiki/note/fuse/{topic}_{YYYYMMDD}/` → `_archive/_fuse_{topic}_{YYYYMMDD}.zip` (§1.3). `_index.md` status = `archived` (only the _index.md stays visible as breadcrumb; sources + draft in zip).
+7. **Archive cue** — after 30d with status=wikified, vault-steward cron zips `~/repos/_admin-private/workflow/fuse/{topic}_{YYYYMMDD}/` → `_archive/_fuse_{topic}_{YYYYMMDD}.zip` (§1.3). `_index.md` status = `archived` (only the _index.md stays visible as breadcrumb; sources + draft in zip).
 
 ## Input (Step 0 entry)
 
@@ -88,7 +88,7 @@ Copper provides either:
 
 Copper has DR outputs already in hand (from a previous non-`/fuse` workflow):
 - File paths OR `_inbox/` drop OR pasted content inline
-- CC retroactively creates `medwiki/note/fuse/{topic}_{YYYYMMDD}/` folder, materializes prompt.md (extract from Copper's memory if possible; else flag as "retro-import"), moves source files, proceeds to Step 3
+- CC retroactively creates `~/repos/_admin-private/workflow/fuse/{topic}_{YYYYMMDD}/` folder, materializes prompt.md (extract from Copper's memory if possible; else flag as "retro-import"), moves source files, proceeds to Step 3
 
 ## Protocol (Step 3 5-phase detail)
 
@@ -105,7 +105,7 @@ Read all N reports. For each:
 - **Quality assessment**: {depth, evidence quality, actionability} /10
 ```
 
-Output: `medwiki/note/fuse/{topic}_{YYYYMMDD}/_inventory.md`. Show to Copper before proceeding.
+Output: `~/repos/_admin-private/workflow/fuse/{topic}_{YYYYMMDD}/_inventory.md`. Show to Copper before proceeding.
 
 ### Phase 2: Alignment Matrix
 
@@ -125,11 +125,11 @@ Build alignment table:
 |---|---|---|---|---|---|---|
 | {claim} | {pos} | {pos} | {pos} | {pos} | 一致/相斥/... | {action} |
 
-Output: `medwiki/note/fuse/{topic}_{YYYYMMDD}/_alignment.md`. Show to Copper. Copper may resolve `[split]` items before Phase 3.
+Output: `~/repos/_admin-private/workflow/fuse/{topic}_{YYYYMMDD}/_alignment.md`. Show to Copper. Copper may resolve `[split]` items before Phase 3.
 
 ### Phase 3: Synthesis
 
-Write `medwiki/note/fuse/{topic}_{YYYYMMDD}/fused_draft.md`. Rules:
+Write `~/repos/_admin-private/workflow/fuse/{topic}_{YYYYMMDD}/fused_draft.md`. Rules:
 
 1. **Structure**: rebuild from alignment-matrix topics. Organize by subject matter, NOT any single LLM's structure.
 2. **Content selection**: for each 論點, use the most detailed/accurate version. Never average — pick best, supplement with others.
@@ -157,12 +157,12 @@ Self-audit the fused draft:
 
 ### Phase 5: Session record
 
-Write session metadata to `medwiki/note/fuse/{topic}_{YYYYMMDD}/_index.md` status trail. DO NOT move `fused_draft.md` to wiki yet — Step 4 handles that.
+Write session metadata to `~/repos/_admin-private/workflow/fuse/{topic}_{YYYYMMDD}/_index.md` status trail. DO NOT move `fused_draft.md` to wiki yet — Step 4 handles that.
 
 ## Folder layout (reminder)
 
 ```
-medwiki/note/fuse/
+~/repos/_admin-private/workflow/fuse/
   AGENTS.md                                ← workspace protocol
   {topic}_{YYYYMMDD}/
     _index.md                              ← status + sources roster + wiki_target
@@ -177,7 +177,7 @@ medwiki/note/fuse/
     fused_draft.md                         ← Phase 3 (Step 3 complete)
 ```
 
-Final canonical output → `personal-website/src/content/wiki/{slug}.md` (Step 4 — flat slug per Astro `wikiCollection` schema; web URL `/wiki/{slug}/`). Session folder retained 30d as audit trail → `medwiki/note/fuse/_archive/` zip.
+Final canonical output → `personal-website/src/content/wiki/{slug}.md` (Step 4 — flat slug per Astro `wikiCollection` schema; web URL `/wiki/{slug}/`). Session folder retained 30d as audit trail → `~/repos/_admin-private/workflow/fuse/_archive/` zip.
 
 ## Provenance Tag Reference
 
