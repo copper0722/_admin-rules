@@ -218,17 +218,21 @@ comm -23 /tmp/all_sources.txt /tmp/cited_sources.txt > /tmp/orphan_sources.txt
 
 ## Entity Hierarchy
 
+Post 2026-05-05 raw+binary merge: canonical layout is `~/VaultBinary/{topic}/{citationKey}/{raw.md, source.pdf, ...}` (atomic per-task folder; raw + binary co-located on OWC; never git).
+
 | source | transcription tool | verbatim output | placement |
 |---|---|---|---|
-| PDF (academic, has DOI) | **MinerU on configured runtime** | raw.md + images/ -> note via `/note-writer` | raw/{topic}/{citationKey}/ + `_sidecar/{key}/source.pdf` |
-| PDF (textbook chapter) | **MinerU on configured runtime** | raw.md + images/ | raw/{topic}/{BookEdition}_Ch{NN}/ + `_sidecar/{key}/source.pdf` |
+| PDF (academic, has DOI) | **MinerU on configured runtime** | raw.md + images/ -> note via `/note-writer` | `~/VaultBinary/{topic}/{citationKey}/{raw.md, source.pdf, images/, source/}` |
+| PDF (textbook chapter) | **MinerU on configured runtime** | raw.md + images/ | `~/VaultBinary/{topic}/{BookEdition}_Ch{NN}/{raw.md, source.pdf, images/}` |
 | PDF (project, no DOI) | MinerU | raw.md | `proj/{project}/data/{name}/raw.md` |
-| **mp3 / m4a / wav** (podcast, lecture, meeting) | **whisper-cpp on configured runtime** | raw.md verbatim transcript | raw/{topic}/{citationKey}/ + `_sidecar/{key}/source.mp3` |
-| URL / webpage | WebFetch + DOM clean | .md extract | proj/ or kb/ by topic |
-| Email / text | direct parse | .md capture | proj/ or kb/ by topic |
-| Transcript (existing .txt) | direct ingest | .md structured | proj/ or copper/ |
+| **mp3 / m4a / wav** (podcast, lecture, meeting) | **whisper-cpp on configured runtime** | raw.md verbatim transcript | `~/VaultBinary/{topic}/{citationKey}/{raw.md, source.mp3}` |
+| URL / webpage | WebFetch + DOM clean | .md extract | `~/VaultBinary/{topic}/{slug}/raw.md` (no binary) |
+| Email / text | direct parse | .md capture | `~/VaultBinary/{topic}/{slug}/raw.md` |
+| Transcript (existing .txt) | direct ingest | .md structured | `~/VaultBinary/{topic}/{slug}/raw.md` |
 
-Binary source (PDF/mp3/wav) is NEVER the primary entity. `.md` = first-class citizen. Binary = sidecar attachment under `_sidecar/{key}/`. **Same principle, different tool**: PDF -> MinerU; audio -> whisper-cpp; runtime selection belongs in the private project card. Law §9.3 Principle of Fidelity applies equally - no wiki/note synthesis until verbatim raw.md exists.
+Binary source (PDF/mp3/wav) is NEVER the primary entity. `.md` = first-class citizen. Binary co-locates with raw inside the same task folder. **Same principle, different tool**: PDF -> MinerU; audio -> whisper-cpp; runtime selection belongs in the private project card. Law §9.3 Principle of Fidelity applies equally - no wiki/note synthesis until verbatim raw.md exists.
+
+Ingestion staging: incoming PDFs land at `~/VaultBinary/_inbox/{citationKey}/source.pdf` for MinerU processing, then routed by an explicit topic mapping (see `_admin-private/.script/promote-mineru-output.py`).
 
 ## Workflow
 
