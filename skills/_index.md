@@ -26,5 +26,6 @@ agent skill specifications. Topic folder index per Vault §8.10 — grep-free na
 - [method](/raw/skills/method/) — method reference materials
 - [new-folder](/raw/skills/new-folder/) — new-folder reference materials
 - [note-writer](/raw/skills/note-writer/) — note-writer reference materials
-- [wiki](/raw/skills/wiki/) — wiki reference materials
+- [wiki](/raw/skills/wiki/) — LLM-wiki Q&A skill (retrieval; chat answer, not publish)
+- [wikify](/raw/skills/wikify/) — wikify ingest pipeline (source → raw → wiki); split from /wiki on 2026-05-07
 - [zot](/raw/skills/zot/) — zot reference materials
