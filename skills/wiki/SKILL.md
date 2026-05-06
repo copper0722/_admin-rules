@@ -233,7 +233,7 @@ Post 2026-05-05 raw+binary merge: canonical layout is `~/VaultBinary/{topic}/{ci
 
 Binary source (PDF/mp3/wav) is NEVER the primary entity. `.md` = first-class citizen. Binary co-locates with raw inside the same task folder. **Same principle, different tool**: PDF -> MinerU; audio -> whisper-cpp; runtime selection belongs in the private project card. Law §9.3 Principle of Fidelity applies equally - no wiki/note synthesis until verbatim raw.md exists.
 
-Ingestion staging: incoming PDFs land at `~/VaultBinary/_inbox/{citationKey}/source.pdf` for MinerU processing, then routed by an explicit topic mapping (see `_admin-private/.script/promote-mineru-output.py`).
+Ingestion staging: incoming PDFs land at `~/Dropbox/_Inbox/` (canonical cross-device Dropbox landing zone; macOS resolves to `~/Library/CloudStorage/Dropbox/_Inbox/`). Per-source workdir `~/Dropbox/_Inbox/{citationKey}/source.pdf` is optional. Run MinerU, then promote into `~/repos/wiki_raw/{topic_path}/{topic_note_slug}/` (see `_admin-private/.script/promote-mineru-output.py`). Retired paths: `~/VaultBinary/_inbox/` (VaultBinary retired 2026-05-06) and `~/repos/_inbox/` (non-canonical).
 
 ## Workflow
 
