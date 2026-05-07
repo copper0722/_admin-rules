@@ -69,6 +69,82 @@ small updates; do not gate on completeness.
 - "Skip wiki synthesis, will do later" is a process bug — by the time later
   comes, the source content is no longer fresh in context
 
+## Autonomous Wiki Workflow (Copper directive 2026-05-07)
+
+Wiki layer = **100% autonomous + self-improving + convergent**. The 2026-05-03 "順便兼做" mindset (above) is the *trigger* — when an Opus session touches a source, it updates the wiki. The directives below are the *governance* of that touch — what counts as "well-maintained wiki".
+
+### Authority
+
+- **No Copper review gate**: agent creates / updates / merges / splits / deletes wiki entries without asking. `draft:true` is not a "wait for Copper" signal; it is a stub-marker for genuinely incomplete entries (and even those should publish promptly).
+- **Always-publish**: default `draft: false`. Every entry is live at `/wiki/{slug}/` the moment it is written. Wiki is **not** promoted to homepage (homepage is curated articles + 一般民眾 / 專業人員 split landing; wiki is a library reference layer reached by search, AEO, or `[[slug]]` wikilinks).
+- **Pure LLM-run**: Opus only for source-derived prose. Non-Opus mechanical work (link repair, schema validation, audit-script flagging, manifest sync) OK. No human review gate at any step.
+- **No copper-readable summary**: wiki is M2M; neither Copper nor general humans read it by default. A separate human-readable wiki layer may be added later (Copper directive 2026-05-07: 「未來可能會新增 wiki for human，再說」). Until then, wiki entries omit `## Clinical Bottom Line`, `## Topic Overview` prose intros, `## Why X Cannot Y` rhetorical headers, `## Davenport Proposed Informed-Consent` style narrative scaffolding, and any other section that exists primarily to summarize the entry for a human reader.
+
+### Self-improvement cycle
+
+Triggered every time wiki touches an entry (whether for new source ingest, audit fix, or routine pass):
+
+1. **New source on existing topic** → revise existing entry; do **not** append blindly.
+2. **Reconcile contradictions**: when new source disagrees with existing claim, surface both with citations + judge which is currently best-supported.
+3. **Compress redundancy**: merge duplicate facts, remove stale claims, retire superseded sources.
+4. **Update changelog one line per session**: `- YYYY-MM-DD: integrated PMID:xxx (compressed §A, added §B, split §C → wiki_<sibling-slug>)`.
+5. **Update sources count + paywall_sources / oa_sources / trial_sources / synthesis_lens / contradictions_resolved** to match actual content (not stale frontmatter).
+
+### Convergence over append
+
+Default mode = **revise + tighten**, not append + grow. Each session leaves entry **equal-or-shorter** unless genuinely new ground covered.
+
+- If two facts say the same thing → keep one.
+- If a paragraph can become a 3-row table → make it a table.
+- If a 5-cell table has 4 redundant cells → use a one-line statement with the embedded number.
+- If a section's only content is one fact → fold into adjacent section.
+- If a `## Sources` line is to a paper that no body line references → review whether the citation is still earning its keep; if yes, add a body reference; if no, retire to changelog as `dropped: PMID:xxx (unused)`.
+
+### Length triggers
+
+| line count | action |
+|---|---|
+| <100 | OK |
+| 100-300 | OK; M2M-density spot check |
+| 300-500 | review for compress (likely some redundancy or narrative residue accumulated over multiple passes) |
+| **>500** | **must compress or split** before next session ends — agent does NOT publish entries >500 lines as steady state |
+
+### Split criteria
+
+Split a single entry into multiple when ALL three hold:
+
+1. ≥2 distinct subtopics each have ≥3 distinct facts.
+2. Each subtopic is independently citable (i.e. is itself a concept other entries / external articles would link to via `[[slug]]`).
+3. Resulting children entries are each ≥50 lines after split (otherwise the split was premature; merge back).
+
+Cross-link split entries via frontmatter `related: [<sibling-slug>]` and inline `[[sibling-slug]]` wikilinks. Update changelog of all involved entries with the split decision + sibling slugs.
+
+### Compress criteria (alternative path when length triggers fire but split criteria don't)
+
+1. Convert narrative paragraphs → tables.
+2. Eliminate `## Topic Overview` / `## Clinical Bottom Line` / `## Why X Cannot Y` / `## Davenport Proposed...` style sections (M2M directive 2026-05-07).
+3. Move verbose source quotes → cite source path (raw.md or PMID/DOI); wiki keeps synthesis only.
+4. Drop low-information bridge sentences ("Importantly", "It is worth noting that", "In contrast", etc. when they don't add a fact).
+5. Collapse repeated `(95% CI, …; *p*=…)` formatting into a per-table column once the same statistic family is reported for multiple rows.
+
+### Anti-patterns (audit-script-detectable, must fail audit)
+
+These are mechanically detectable (grep / wc / regex). Per Law §design-principle, encode as audit, not Law prose. PG `quality_audit_tasks` rows:
+
+| task name | detection rule |
+|---|---|
+| `wiki_human_ux_residue` | `^## (Clinical Bottom Line|Topic Overview|Conclusions / Clinical Bottom Line|Why .+ Cannot|Davenport.+Proposed)\b` matched in any `personal-website/src/content/wiki/*.md` |
+| `wiki_oversize` | line count > 500 in any `personal-website/src/content/wiki/*.md` (excluding frontmatter + sources + changelog) |
+| `wiki_draft_legacy` | `^draft: true` in any `personal-website/src/content/wiki/*.md` (legacy from before always-publish directive — should be 0 after 2026-05-07 bulk flip) |
+| `wiki_orphan_source` | `## Sources` entry not referenced anywhere in body |
+| `wiki_stale_count` | frontmatter `sources:` value mismatches actual count of `## Sources` entries |
+
+Findings → `audit_findings`; agent reads + fixes + UPDATE `resolved_at`. Fix is part of the same autonomous loop above; no Copper escalation needed for any of these.
+
+### Relation to "順便兼做" mindset
+
+The 2026-05-03 mindset said "rough but accurate append > deferring". The 2026-05-07 directives sharpen that: rough first pass IS still better than deferring, BUT the next pass MUST tighten and converge — a wiki entry is not done when first written; it is done when each subsequent touch makes it shorter, denser, or more correct. Append-only mode is acceptable only for the literal first pass on a brand-new topic.
+
 ## Synthesis-not-transcription rule (Copper directive 2026-05-03)
 
 **Wiki = paraphrase synthesis, not verbatim quote stack.** The reason wiki
