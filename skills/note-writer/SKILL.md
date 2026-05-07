@@ -392,7 +392,7 @@ This is NOT a different format — it is the same protocol, same frontmatter sch
 
 After all content sections are complete, output `—— 本章結束 ——`, then:
 
-> **Critical**: This section is Marp-compatible. Can be extracted by /slides skill → `marp-cli` → HTML/PDF/PPTX.
+> **Critical**: This section is Marp-compatible AND drives the personal-website SlideDeck carousel (cream notebook + red rings + numbered cyan badges, BoAn-canonical visual). The same source format feeds both consumers — see `consumers` table below. Keep the format strict.
 
 ```markdown
 # （文件中文標題）｜（Original Title）
@@ -417,12 +417,21 @@ After all content sections are complete, output `—— 本章結束 ——`, th
 
 **Content priorities**: Each slide = one teachable concept. Reference key figures/tables with `圖：Figure X.X` or `表：Table X.X`. Cover core arguments, methods, and anything from supplements that changes interpretation.
 
-### Slides Extraction (absorbed from /slides, 2026-04-12)
+### Slide Consumers (2026-05-07: now THREE consumers)
 
-The `## TEACHING SLIDES` section feeds two downstream consumers:
+The `## TEACHING SLIDES` section feeds:
 
-1. **nephro-board-review-sync.py** (cron */10) — auto-extracts via `extract-slides.py` → Marp .md → GitHub Pages
-2. **Manual Marp CLI** (on-demand): `marp {slides.md} -o slides.html` / `--pdf` / `--pptx`
+1. **personal-website SlideDeck** (`personal-website/src/components/notes/SlideDeck.astro`) — auto-mounts on any public note containing the `## TEACHING SLIDES` h2; renders the section as a paginated carousel with the BoAn-canonical visual aesthetic (cream notebook paper + red binder rings + numbered cyan circle badges). Visual reference = `personal-website/handoff/design/wireframes-v1/frame-slide.jsx` (Wireframe 05). Spec home = `personal-website/AGENTS.md` § "Slide rendering". This is the **primary public consumer** going forward.
+2. **nephro-board-review-sync.py** (legacy cron */10, may be retired) — auto-extracts via `extract-slides.py` → Marp .md → GitHub Pages
+3. **Manual Marp CLI** (on-demand): `marp {slides.md} -o slides.html` / `--pdf` / `--pptx`
+
+Because the SlideDeck consumer is the primary public surface, prefer formats that render well there:
+- **Each slide ≤ 5 bullets** (one carousel viewport; more crowds the cream-notebook card)
+- **Each bullet ≤ 1 line of body text** (~30 zh-TW chars or equivalent) — long bullets wrap awkwardly and make the slide visually heavy
+- **Avoid sub-bullets** (`  - …`) when possible; the SlideDeck renders them as a smaller yellow-badge prefix which reads as a deliberate aside, not a casual nest
+- **`**bold**` is now permitted** for the SlideDeck consumer (the cream-notebook design uses deep-teal #116885 strong); however the legacy Marp consumer's `extract-slides.py` strips `**` markers, so use it only for emphasis the slide can lose
+- **Tables** render in the SlideDeck (cyan-tinted header) — keep narrow (≤4 columns) so they don't overflow the cream card
+- Title-only divider slides (`# Title` after the deck-title h1) become cover-style slides in the SlideDeck — use sparingly
 
 Marp frontmatter template for manual extraction (when needed):
 
