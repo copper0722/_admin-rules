@@ -630,7 +630,20 @@ Canonical inbox path is declared by the project-local private card.
 
 **HR-4 PROCESSING ORDER = YEAR DESC.** Newest content first. Textbooks: 2026 before 2024. Articles: 2026 before 2021. Newer supersedes older.
 
-**HR-6 UID CHAIN.** Every PDF → raw.md (uid in frontmatter) → Zotero entry (same uid). UID types: `doi:` (CrossRef→Zotero), `isbn:` (Google Books API), `pmid:` (PubMed), `gov:{文號}` (公文 header). Script: `raw-uid-zotero-sync.py` (weekly cron). Orphan = PDF without raw.md or raw.md without UID.
+**HR-6 UID CHAIN.** Every PDF → raw.md (uid in frontmatter) → Zotero entry (same uid). UID types:
+
+| scheme | when to use | example |
+|---|---|---|
+| `doi:<doi>` | DOI registered (CrossRef → Zotero) | `doi:10.1056/NEJMoa2400000` |
+| `pmid:<pmid>` | PubMed-indexed (no DOI fallback) | `pmid:38123456` |
+| `isbn:<13>` | book with ISBN-13 (Google Books / publisher / WorldCat) | `isbn:9781975160340` |
+| `book:<citation_key>` | **book without ISBN** — society textbook, internal compilation, society guideline bundled as book | `book:TADE_DM_Edu_Core_2026` |
+| `gov:<文號>` | government document (公文 header) | `gov:衛部醫字第...號` |
+| `local:<key>` | vault-internal, pre-publication, unpublished | `local:Copper_DM_Personal_Notes_2026` |
+
+**Books are special** — the canonical source-of-truth table is `wiki_raw.book` (3NF domain table; CHECK constraints encode the UID convention). Do **not** INSERT new `kind='book'` rows in `wiki_raw.source_registry`; new books go to `wiki_raw.book` only. Full convention + migration recipe in `wiki_raw/_config/protocol_book_registry.md`.
+
+Script: `raw-uid-zotero-sync.py` (weekly cron). Orphan = PDF without raw.md or raw.md without UID.
 
 **HR-7 INBOX STATE INVARIANT — `mv`, never `cp`** (Copper 2026-04-24, re-flagged 2026-05-02 as **recurrent malignant bug**). After every successfully-processed source binary (PDF / audio / image), the inbox copy MUST be `mv`'d into its OWC payload folder (`~/VaultBinary/{topic_path}/{citationKey}/source.{ext}`), never `cp`'d. Reasoning: Copper inspects the inbox to know what is unprocessed; a stale duplicate makes processed-vs-unprocessed indistinguishable, and the next agent — interactive or cron — inherits the same ambiguity. Failure mode is "next session re-processes / mis-skips, inbox accumulates stale binaries, a real new arrival is eventually missed in the noise".
 
