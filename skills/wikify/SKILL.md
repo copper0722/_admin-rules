@@ -50,7 +50,8 @@ The two variants share the same `{slug}`; cross-link via frontmatter `related: [
 
 - New wiki entries → `personal-website/src/content/wiki/{slug}.md` (flat slug, hyphenated, lower-case). Astro collection schema lives at `personal-website/src/content/config.ts` `wikiCollection`. Web URL: `/wiki/{slug}/`.
 - New NOTE entries → `personal-website/src/content/notes/{visibility}/{type}/{slug}/index.md` (Astro collection schema `notesCollection`). Web URL: `/notes/{visibility}/{type}/{slug}/`.
-- `wiki_raw/` is now the rules/config control repo only. Raw text + source binaries are co-located on OWC at `~/VaultBinary/{topic_path}/{citationKey}/{raw.md, source.pdf, images/, manifest.json}` and mirrored in PG `wiki_raw.raw_index`. Deprecated `medwiki/wiki`, `medwiki/note`, and `wiki_raw/raw` entries may remain for backward search only.
+- `wiki_raw/` moved under `personal-website/` 2026-05-09. Canonical raw text + source binaries are co-located at `~/repos/personal-website/wiki_raw/{topic_path}/{topic_note_slug}/{raw.md, source.pdf, images/, manifest.json}`; raw `.md` is git-tracked, binary is gitignored. PG mirror: `wiki_raw.raw_index`. Deprecated `medwiki/wiki`, `medwiki/note`, `wiki_raw/raw`, and standalone `~/repos/wiki_raw/...` entries may remain for backward search only.
+- **Whole-book PDF location (Copper directive 2026-05-09)**: when the source binary represents the *entire textbook*, place it at `~/repos/personal-website/wiki_raw/_data/book/{book_citation_key}/{book_citation_key}.pdf` (one folder per book; co-locate per-book metadata + cover image if available). Per-chapter folders under `{topic_path}/{citationKey_Ch{NN}}/source.pdf` may still hold a chapter-only PDF cut, but the authoritative whole-book PDF lives under `_data/book/`. Zotero `book` itemType is the source of truth for which whole-book PDFs must exist (Zotero entry was created only after Copper confirmed the PDF exists).
 - Wiki entry titles must NOT contain textbook names (Copper directive: 「標題移除教科書名」). Body must be paraphrase synthesis, never transcription. Citations live in `## Sources` section.
 - Cross-reference between wiki entries via `[[slug]]` wikilinks; build pipeline (remark plugin, see Astro integration TODO) resolves to `<a href="/wiki/{slug}/">` on web. Cross-references from wiki body to raw payloads resolve to plaintext citations on web; `~/VaultBinary` stays private.
 
@@ -172,7 +173,7 @@ unnecessary copyright risk.
    an authors' explicit conclusion line). ≤150 words per quote.
 4. **Raw layer is the verbatim mirror.** If you find yourself wanting to
    quote a long textbook passage, that passage already lives in
-   `~/VaultBinary/{topic_path}/{citationKey}/raw.md`. Cite the payload path or
+   `~/repos/personal-website/wiki_raw/{topic_path}/{citationKey}/raw.md`. Cite the payload path or
    PG `wiki_raw.raw_index` row; do not duplicate verbatim into wiki.
 5. **Note layer is also synthesis** (Copper-readable zh-TW digest), not raw
    echo; same rule applies, see `personal-website/AGENTS.md` and the
@@ -295,21 +296,21 @@ comm -23 /tmp/all_sources.txt /tmp/cited_sources.txt > /tmp/orphan_sources.txt
 
 ## Entity Hierarchy
 
-Post 2026-05-05 raw+binary merge: canonical layout is `~/VaultBinary/{topic}/{citationKey}/{raw.md, source.pdf, ...}` (atomic per-task folder; raw + binary co-located on OWC; never git).
+Post 2026-05-05 raw+binary merge + 2026-05-09 personal-website pivot: canonical layout is `~/repos/personal-website/wiki_raw/{topic}/{citationKey}/{raw.md, source.pdf, ...}` (atomic per-task folder; raw + binary co-located; raw `.md` git-tracked, binary gitignored). Whole-book PDFs (entire textbook bundle) go to `~/repos/personal-website/wiki_raw/_data/book/{book_citation_key}/{book_citation_key}.pdf` instead of being scattered across chapter folders.
 
 | source | transcription tool | verbatim output | placement |
 |---|---|---|---|
-| PDF (academic, has DOI) | **MinerU on configured runtime** | raw.md + images/ -> note via `/note-writer` | `~/VaultBinary/{topic}/{citationKey}/{raw.md, source.pdf, images/, source/}` |
-| PDF (textbook chapter) | **MinerU on configured runtime** | raw.md + images/ | `~/VaultBinary/{topic}/{BookEdition}_Ch{NN}/{raw.md, source.pdf, images/}` |
+| PDF (academic, has DOI) | **MinerU on configured runtime** | raw.md + images/ -> note via `/note-writer` | `~/repos/personal-website/wiki_raw/{topic}/{citationKey}/{raw.md, source.pdf, images/, source/}` |
+| PDF (textbook chapter) | **MinerU on configured runtime** | raw.md + images/ | `~/repos/personal-website/wiki_raw/{topic}/{BookEdition}_Ch{NN}/{raw.md, source.pdf, images/}` |
 | PDF (project, no DOI) | MinerU | raw.md | `proj/{project}/data/{name}/raw.md` |
-| **mp3 / m4a / wav** (podcast, lecture, meeting) | **whisper-cpp on configured runtime** | raw.md verbatim transcript | `~/VaultBinary/{topic}/{citationKey}/{raw.md, source.mp3}` |
-| URL / webpage | WebFetch + DOM clean | .md extract | `~/VaultBinary/{topic}/{slug}/raw.md` (no binary) |
-| Email / text | direct parse | .md capture | `~/VaultBinary/{topic}/{slug}/raw.md` |
-| Transcript (existing .txt) | direct ingest | .md structured | `~/VaultBinary/{topic}/{slug}/raw.md` |
+| **mp3 / m4a / wav** (podcast, lecture, meeting) | **whisper-cpp on configured runtime** | raw.md verbatim transcript | `~/repos/personal-website/wiki_raw/{topic}/{citationKey}/{raw.md, source.mp3}` |
+| URL / webpage | WebFetch + DOM clean | .md extract | `~/repos/personal-website/wiki_raw/{topic}/{slug}/raw.md` (no binary) |
+| Email / text | direct parse | .md capture | `~/repos/personal-website/wiki_raw/{topic}/{slug}/raw.md` |
+| Transcript (existing .txt) | direct ingest | .md structured | `~/repos/personal-website/wiki_raw/{topic}/{slug}/raw.md` |
 
 Binary source (PDF/mp3/wav) is NEVER the primary entity. `.md` = first-class citizen. Binary co-locates with raw inside the same task folder. **Same principle, different tool**: PDF -> MinerU; audio -> whisper-cpp; runtime selection belongs in the private project card. Law §9.3 Principle of Fidelity applies equally - no wiki/note synthesis until verbatim raw.md exists.
 
-Ingestion staging: incoming PDFs land at `~/Dropbox/_Inbox/` (canonical cross-device Dropbox landing zone; macOS resolves to `~/Library/CloudStorage/Dropbox/_Inbox/`). Per-source workdir `~/Dropbox/_Inbox/{citationKey}/source.pdf` is optional. Run MinerU, then promote into `~/repos/wiki_raw/{topic_path}/{topic_note_slug}/` (see `_admin-private/.script/promote-mineru-output.py`). Retired paths: `~/VaultBinary/_inbox/` (VaultBinary retired 2026-05-06) and `~/repos/_inbox/` (non-canonical).
+Ingestion staging: incoming PDFs land at `~/Library/Mobile Documents/com~apple~CloudDocs/Downloads/` (canonical iCloud-Downloads inbox since 2026-05-06 afternoon; system Downloads `~/Downloads` periodically `mv`'d here by `com.copper.downloads-to-icloud` LaunchAgent). Per-source workdir `<inbox>/{citationKey}/source.pdf` is optional. Run MinerU, then promote into `~/repos/personal-website/wiki_raw/{topic_path}/{topic_note_slug}/` for chapter-level payloads, or `~/repos/personal-website/wiki_raw/_data/book/{book_citation_key}/` for whole-book PDFs (see `_admin-private/.script/promote-mineru-output.py`). Retired inbox paths: `~/Dropbox/_Inbox/` (deprecated 2026-05-06 afternoon, archive remains for forensic trail), `~/repos/_inbox/` (non-canonical).
 
 ## Workflow
 
@@ -321,14 +322,14 @@ Ingestion staging: incoming PDFs land at `~/Dropbox/_Inbox/` (canonical cross-de
    - `.mp3` / `.m4a` / `.wav` / `.ogg` / `.flac` -> **Mode A-Audio (whisper-cpp on configured runtime)**
    - URL → Mode A-URL
    - Text block → Mode A-Text
-3. Determine destination: has DOI? → `~/VaultBinary/{topic_path}/{citationKey}/`. Has project-only scope? → project-local data path declared by that repo card. Else → ask for routing or create a pending audit card.
+3. Determine destination: has DOI? → `~/repos/personal-website/wiki_raw/{topic_path}/{citationKey}/`. Has project-only scope? → project-local data path declared by that repo card. Else → ask for routing or create a pending audit card.
 
 ### Mode A-PDF — MANDATORY PIPELINE: PDF → raw.md → note/wiki
 
 **Never skip raw.md.** Every PDF must go through MinerU first. No direct PDF→note.
 
 ```
-PDF → DEDUP CHECK → MinerU → raw.md (OWC payload, type: raw)
+PDF → DEDUP CHECK → MinerU → raw.md (payload, type: raw)
                                 ↓
                          CC cleanup (簡→繁, LaTeX, tables)
                                 ↓
@@ -342,7 +343,7 @@ PDF → DEDUP CHECK → MinerU → raw.md (OWC payload, type: raw)
 2. Query canonical PostgreSQL first (stop at first match):
    - `wiki_raw.raw_index` by DOI / citationKey / payload path
    - domain textbook / article tables in `vault_main` when available
-   - bounded filesystem check under `~/VaultBinary/{topic_path}/` only when PG has no row
+   - bounded filesystem check under `~/repos/personal-website/wiki_raw/{topic_path}/` only when PG has no row
 3. DOI/uid already exists → **SKIP entirely** (don't re-MinerU, don't re-wikify)
 4. No DOI (gov docs, textbook chapters) → check title similarity in existing wiki .md
 5. **After processing**: update PG `wiki_raw.raw_index` (and domain tables when available) with `raw_path`, `source_path`, status, and wiki/note links.
@@ -356,11 +357,11 @@ PDF → DEDUP CHECK → MinerU → raw.md (OWC payload, type: raw)
 Steps:
 1. Copy to /tmp/ if on virtual FS (GDrive, iCloud)
 2. **Run MinerU**: `mineru -p {pdf} -o /tmp/mineru_out/ -m auto -b pipeline`
-3. **Promote ALL output to the OWC payload folder** (raw.md + images/):
+3. **Promote ALL output to the payload folder** (raw.md + images/):
    ```bash
    # MinerU outputs to /tmp/mineru_out/{filename}/auto/
    MINERU_OUT="/tmp/mineru_out/{filename}/auto"
-   PAYLOAD="$HOME/VaultBinary/{topic_path}/{citationKey}"
+   PAYLOAD="$HOME/repos/personal-website/wiki_raw/{topic_path}/{citationKey}"
    mkdir -p "$PAYLOAD"
    mv "$MINERU_OUT"/*.md "$PAYLOAD/raw.md"
    # CRITICAL: also copy images folder — without this, image refs in raw.md break
@@ -385,9 +386,9 @@ Steps:
    - **Remove references/bibliography** section at end of chapter (numbered reference list `[1]`, `[2]`... or `References` heading). These are not useful in raw.md — the source PDF has them if needed. raw.md = content only.
    - **Truncate at next chapter heading** if boundary page included: if raw.md has two chapter-level headings (`# 35 ...` followed by `# 36 ...`), delete everything from second heading onwards.
 6. Determine identity:
-   - Has DOI → citationKey → `~/VaultBinary/{topic_path}/{citationKey}/raw.md`
+   - Has DOI → citationKey → `~/repos/personal-website/wiki_raw/{topic_path}/{citationKey}/raw.md`
    - No DOI, has project → project-local data path declared by that repo card
-   - No DOI, no project → `~/VaultBinary/{topic_path}/{slug}/raw.md` after explicit topic routing
+   - No DOI, no project → `~/repos/personal-website/wiki_raw/{topic_path}/{slug}/raw.md` after explicit topic routing
 7. **Move (NOT copy) PDF to payload folder — HR-7 invariant** (see Hard Rules below):
    ```bash
    mv "$INBOX_PDF" "$PAYLOAD/source.pdf"
@@ -415,7 +416,7 @@ Steps:
 **Never skip raw.md.** Every audio file must go through the configured transcription runtime first. No direct audio->note. Same Principle of Fidelity as PDF (Law §9.3).
 
 ```
-mp3/wav -> DEDUP CHECK -> stage in OWC payload `{topic_path}/{key}/source.mp3`
+mp3/wav -> DEDUP CHECK -> stage in payload `{topic_path}/{key}/source.mp3`
                               ↓
                       ffmpeg -ar 16000 -ac 1 -c:a pcm_s16le → source.wav
                               ↓
@@ -441,7 +442,7 @@ audio-to-raw \
 **STEP 0 — DEDUP CHECK** (before transcribing):
 1. Compute sha256 of source.mp3 -> check PG `wiki_raw.raw_index` / configured source registry for an existing payload folder
 2. If DOI known (e.g., Annals On Call podcast has DOI 10.7326/ANNALS-*) → same dedup as Mode A-PDF
-3. If same `citationKey` already has `~/VaultBinary/.../{citationKey}/raw.md` → SKIP (don't re-transcribe)
+3. If same `citationKey` already has `~/repos/personal-website/wiki_raw/.../{citationKey}/raw.md` → SKIP (don't re-transcribe)
 
 **STEP 1 — Stage source audio**: place the file in the payload path declared by the active private repo card. Public rules must not hardcode private hostnames, mounts, or transport workarounds.
 
@@ -458,7 +459,7 @@ audio-to-raw \
 ---
 citationKey: {key}
 uid: "doi:{DOI if available}"
-payload: "~/VaultBinary/{topic_path}/{key}"
+payload: "~/repos/personal-website/wiki_raw/{topic_path}/{key}"
 type: raw
 title: "..."
 source_type: podcast            # or: lecture / meeting / interview / conference_talk
@@ -473,7 +474,7 @@ summary: "..."
 
 # {Title}
 
-**Source**: `~/VaultBinary/{topic_path}/{key}/source.mp3`
+**Source**: `~/repos/personal-website/wiki_raw/{topic_path}/{key}/source.mp3`
 **Transcript**: whisper-cpp + {model}.
 
 ---
@@ -527,7 +528,7 @@ The principle: raw layer is a mirror of *external* source text. Copper's own que
    - Transcribe every legible token into a section of raw.md, structured by what the image is (e.g. `## Screenshot N — patient FB private message`, `## Screenshot N — lab report block`).
    - Tabular data (lab reports, prescription tables) → reproduce as markdown table. Preserve H/L flags, units, reference ranges when visible.
    - Note explicitly which fields are illegible / partly redacted; do not guess values.
-   - Do **not** create a binary payload by default. If Copper asks to keep the original, move it to `~/VaultBinary/{topic_path}/{citationKey}/source.{png,jpg}` with sha256 in the filename and add `payload: ~/VaultBinary/{topic_path}/{citationKey}` to frontmatter.
+   - Do **not** create a binary payload by default. If Copper asks to keep the original, move it to `~/repos/personal-website/wiki_raw/{topic_path}/{citationKey}/source.{png,jpg}` with sha256 in the filename and add `payload: ~/repos/personal-website/wiki_raw/{topic_path}/{citationKey}` to frontmatter.
 
 3. **Source identity (uid scheme)** (Source-shaped + Hybrid only; Question-shaped uses `manual:copper:{topic_slug}` directly in wiki ## Provenance, no raw frontmatter required). Manual sources do not have DOI / ISBN / PMID. Use platform-prefixed uids:
    - `fb:{author_handle}:{topic_slug}` — Facebook post (e.g. `fb:SuYining2026:thalassemia_carrier`)
@@ -572,7 +573,7 @@ The principle: raw layer is a mirror of *external* source text. Copper's own que
 
 6. **Topic placement** per repo Law routing fallback (raw/wiki/note share a `{topic_path}` skeleton where practical):
    - Folder = topic collection (a disease, organ system, methodology), not article shape.
-   - For social-media expert opinions about a clinical topic, place under the same topic folder as the corresponding textbook chapter, e.g. a thalassemia-screening FB post goes to `~/VaultBinary/clinical_medicine/internal_medicine/hematology/anemia(hematology)/{citationKey}/raw.md` next to `Harrison22e_Ch103/raw.md`.
+   - For social-media expert opinions about a clinical topic, place under the same topic folder as the corresponding textbook chapter, e.g. a thalassemia-screening FB post goes to `~/repos/personal-website/wiki_raw/clinical_medicine/internal_medicine/hematology/anemia(hematology)/{citationKey}/raw.md` next to `Harrison22e_Ch103/raw.md`.
    - When the topic is genuinely cross-cutting (policy, reimbursement, screening program), use the cross-cutting top-level peer per `protocol/wiki_classification_sop.md`.
 
 7. **Wiki synthesis** (all input shapes). Per `wiki_raw/AGENTS.md` "Wikify Content Boundary":
@@ -607,7 +608,7 @@ Canonical inbox path is declared by the project-local private card.
    ls "$INBOX" 2>/dev/null | grep -F "$(basename "$INBOX_FILE")" \
        && echo CLEANUP_FAIL || echo cleanup_ok
    ```
-   Per-file: must print `cleanup_ok` before moving to the next file in the queue. Per-failed-file: even when MinerU/whisper fails, **still** `mv` the binary to `~/VaultBinary/{topic_path}/{citationKey}/source.{ext}` and write a `raw.md` stub with `status: mineru_failed` (or equivalent). Inbox **never** retains the failed binary either — failure path is payload-with-stub, not "leave it for next time".
+   Per-file: must print `cleanup_ok` before moving to the next file in the queue. Per-failed-file: even when MinerU/whisper fails, **still** `mv` the binary to `~/repos/personal-website/wiki_raw/{topic_path}/{citationKey}/source.{ext}` and write a `raw.md` stub with `status: mineru_failed` (or equivalent). Inbox **never** retains the failed binary either — failure path is payload-with-stub, not "leave it for next time".
 5. **HR-7 final batch invariant** — before reporting completion, verify the inbox is clean of all source binaries the batch was responsible for:
    ```bash
    find "$INBOX" -maxdepth 1 -type f \
@@ -641,15 +642,15 @@ Canonical inbox path is declared by the project-local private card.
 | `gov:<文號>` | government document (公文 header) | `gov:衛部醫字第...號` |
 | `local:<key>` | vault-internal, pre-publication, unpublished | `local:Copper_DM_Personal_Notes_2026` |
 
-**Books are special** — the canonical source-of-truth table is `wiki_raw.book` (3NF domain table; CHECK constraints encode the UID convention). Do **not** INSERT new `kind='book'` rows in `wiki_raw.source_registry`; new books go to `wiki_raw.book` only. Full convention + migration recipe in `wiki_raw/_config/protocol_book_registry.md`.
+**Books are special** — the canonical source-of-truth table is `personal_website.book` (3NF domain table; CHECK constraints encode the UID convention). Do **not** INSERT new `kind='book'` rows in `personal_website.source_registry`; new books go to `personal_website.book` only. The whole-book PDF goes under `~/repos/personal-website/wiki_raw/_data/book/{book_citation_key}/` (Copper directive 2026-05-09). Full convention + migration recipe in `personal-website/wiki_raw/_config/protocol_book_registry.md`.
 
 Script: `raw-uid-zotero-sync.py` (weekly cron). Orphan = PDF without raw.md or raw.md without UID.
 
-**HR-7 INBOX STATE INVARIANT — `mv`, never `cp`** (Copper 2026-04-24, re-flagged 2026-05-02 as **recurrent malignant bug**). After every successfully-processed source binary (PDF / audio / image), the inbox copy MUST be `mv`'d into its OWC payload folder (`~/VaultBinary/{topic_path}/{citationKey}/source.{ext}`), never `cp`'d. Reasoning: Copper inspects the inbox to know what is unprocessed; a stale duplicate makes processed-vs-unprocessed indistinguishable, and the next agent — interactive or cron — inherits the same ambiguity. Failure mode is "next session re-processes / mis-skips, inbox accumulates stale binaries, a real new arrival is eventually missed in the noise".
+**HR-7 INBOX STATE INVARIANT — `mv`, never `cp`** (Copper 2026-04-24, re-flagged 2026-05-02 as **recurrent malignant bug**). After every successfully-processed source binary (PDF / audio / image), the inbox copy MUST be `mv`'d into its payload folder (`~/repos/personal-website/wiki_raw/{topic_path}/{citationKey}/source.{ext}` for chapters/articles, `~/repos/personal-website/wiki_raw/_data/book/{book_citation_key}/{book_citation_key}.pdf` for whole books), never `cp`'d. Reasoning: Copper inspects the inbox to know what is unprocessed; a stale duplicate makes processed-vs-unprocessed indistinguishable, and the next agent — interactive or cron — inherits the same ambiguity. Failure mode is "next session re-processes / mis-skips, inbox accumulates stale binaries, a real new arrival is eventually missed in the noise".
 
 - **Per-file post-condition** (run after every individual `mv`): `ls "$INBOX" | grep -F "$(basename "$file")"` returns nothing.
 - **Per-batch post-condition** (run before declaring batch complete): `find "$INBOX" -maxdepth 1 -type f \( -iname '*.pdf' -o -iname '*.mp3' -o -iname '*.m4a' -o -iname '*.wav' -o -iname '*.docx' -o -iname '*.epub' \) | wc -l` = 0 (or equal to the count of explicitly-skipped files enumerated in the report).
-- **Failed-MinerU / failed-whisper path**: the binary is still `mv`'d to the payload folder (`~/VaultBinary/{topic_path}/{citationKey}/source.{ext}`); the failure is recorded as a `raw.md` stub with `status: mineru_failed` / `status: whisper_failed`. The inbox NEVER retains a failed binary "for retry" — retry happens against the payload folder, not the inbox.
+- **Failed-MinerU / failed-whisper path**: the binary is still `mv`'d to the payload folder (`~/repos/personal-website/wiki_raw/{topic_path}/{citationKey}/source.{ext}`); the failure is recorded as a `raw.md` stub with `status: mineru_failed` / `status: whisper_failed`. The inbox NEVER retains a failed binary "for retry" — retry happens against the payload folder, not the inbox.
 - **`dropbox-inbox-audit.sh` is a safety-net, not a substitute** (q1h cron, archives `cp`-duplicates by sha256 match against payload folders — does not catch agents that skipped the move entirely). Agent self-enforcement is the primary control.
 
 Applies to all Modes (A-PDF, A-Audio, A-Manual when binary payload kept, B inbox triage, C batch). Re-flagged as a Hard Rule rather than a Mode B sub-step so the invariant survives Mode boundary.
@@ -659,7 +660,7 @@ Applies to all Modes (A-PDF, A-Audio, A-Manual when binary payload kept, B inbox
 - MinerU output is NEVER final — always Claude cleanup
 - Known MinerU issues: 簡→繁, LaTeX artifacts, name errors, table misalignment
 - If MinerU fails → try pdfminer fallback → if both fail → report, don't retry
-- Raw first (§1.8): save MinerU output as raw.md in the OWC payload folder, then clean
+- Raw first (§1.8): save MinerU output as raw.md in the payload folder, then clean
 - Every PDF without payload `raw.md` = not wikified = invisible to system
 - /note-writer handles academic PDF→teaching note (higher quality, more token). /wiki handles bulk conversion.
 
@@ -674,7 +675,7 @@ For journal articles + guidelines, wiki evaluation includes full EBM + causal in
 **Deep methodology reference (when appraising complex studies):**
 - `wiki/methodology/wiki_causal_inference.md` — full Hernán digest
 - `wiki/methodology/wiki_research_methods_ebm.md` — full Guyatt digest
-- `~/VaultBinary/research_method/causal_inference/Hernan_WhatIf/causal_inference_critical_appraisal_checklists.md` — 70+ checklist items, if present
+- `~/repos/personal-website/wiki_raw/research_method/causal_inference/Hernan_WhatIf/causal_inference_critical_appraisal_checklists.md` — 70+ checklist items, if present
 
 ### Source Type Detection (auto)
 
@@ -776,7 +777,7 @@ When user pastes content + says "丟進去/整理/file this/歸檔":
 
 ## Mode G: Specialty Clinical Medicine LLM-wiki Bootstrapping
 
-**Trigger:** The user asks to build a high-quality specialty CME/LLM-wiki for an external team, to ingest a textbook corpus as OWC payload, or to open a new `clinical_medicine/{specialty}` folder (e.g. ENT, cardiology, endocrinology).
+**Trigger:** The user asks to build a high-quality specialty CME/LLM-wiki for an external team, to ingest a textbook corpus as payload, or to open a new `clinical_medicine/{specialty}` folder (e.g. ENT, cardiology, endocrinology).
 
 ### Taxonomy routing for cross-cutting clinical concepts
 
@@ -795,7 +796,7 @@ This is a corpus/bootstrap workflow, not a single-PDF `/note-writer` task.
    - Search both repos for the target specialty before creating folders.
    - If the task originates from an invitation/project, record strategic purpose in the owning private project note.
 2. **Sidecar corpus ingest**:
-   - Put large source PDFs under the active OWC payload path declared by the project card. Legacy `_sidecar/` paths are compatibility only and should be git-ignored.
+   - Put large source PDFs under the active payload path declared by the project card. Legacy `_sidecar/` paths are compatibility only and should be git-ignored.
    - Before downloading, resolve and record the real binary target using the project resolver. Do not assume the displayed repo path is local disk.
    - For Google Drive folders, install/use `gdown` when appropriate: `python3 -m pip install --user gdown`; then `python3 -m gdown --folder '{url}' -O {payload_dir} --remaining-ok`.
    - Verify downloaded files with `ls -lh`, page counts, SHA256, and `stat` mtimes before proceeding. For multi-device payload folders, verify both the declared path and the resolved binary path when reachable.
@@ -838,20 +839,20 @@ before citing a specific chapter.
 
 | Specialty / scope | Textbook | Latest edition in vault | Year | Payload locator | Legacy note |
 |---|---|---|---|---|---|
-| Internal medicine (definitive) | Harrison's Principles of Internal Medicine | 22e | 2025 | `~/VaultBinary/clinical_medicine/internal_medicine/**/Harrison22e_Ch*/raw.md` | topic-distributed |
+| Internal medicine (definitive) | Harrison's Principles of Internal Medicine | 22e | 2025 | `~/repos/personal-website/wiki_raw/clinical_medicine/internal_medicine/**/Harrison22e_Ch*/raw.md` | topic-distributed |
 | Internal medicine (pocket) | Pocket Medicine | 9e | 2026 | search PG / `~/VaultBinary` for `PocketMedicine9e` | inbound |
 | Therapeutics quick-ref | Washington Manual of Medical Therapeutics | 38e | recent | search PG / `~/VaultBinary` for `WashingtonManual38e` | per-chapter |
-| Nephrology (definitive) | Brenner & Rector's The Kidney | 12e | recent | `~/VaultBinary/clinical_medicine/internal_medicine/nephrology/**/BrennerRector12e_Ch*/raw.md` | per-chapter |
+| Nephrology (definitive) | Brenner & Rector's The Kidney | 12e | recent | `~/repos/personal-website/wiki_raw/clinical_medicine/internal_medicine/nephrology/**/BrennerRector12e_Ch*/raw.md` | per-chapter |
 | Dialysis | Daugirdas, Handbook of Dialysis | 6e | 2026 | search PG / `~/VaultBinary` for `Daugirdas2026` | figures may exist |
 | Dialysis (alt) | Dialysis Therapy | 6e | 2023 | search PG / `~/VaultBinary` for `DialysisTherapy_6e` | inbound |
 | Dialysis (intro) | Core Concepts in Dialysis | 2021 | 2021 | search PG / `~/VaultBinary` for `CoreConceptsDialysis` | inbound |
-| Pediatric nephrology | Pediatric Nephrology | 6e | recent | `~/VaultBinary/clinical_medicine/**/nephrology*/*Pediatric*/raw.md` | per-chapter |
-| ENT | Scott-Brown's Otorhinolaryngology, Head and Neck Surgery | 8e | recent | `~/VaultBinary/clinical_medicine/ENT/**/ScottBrown8e*/raw.md` | V1/V2/V3 |
+| Pediatric nephrology | Pediatric Nephrology | 6e | recent | `~/repos/personal-website/wiki_raw/clinical_medicine/**/nephrology*/*Pediatric*/raw.md` | per-chapter |
+| ENT | Scott-Brown's Otorhinolaryngology, Head and Neck Surgery | 8e | recent | `~/repos/personal-website/wiki_raw/clinical_medicine/ENT/**/ScottBrown8e*/raw.md` | V1/V2/V3 |
 | Biochemistry | Harper's Illustrated Biochemistry | **34e (latest); 33e archived 2026-04-24** | 2026 | search PG / `~/VaultBinary` for `Harper34e` | 33e archived |
 | Biochemistry (alt) | Lehninger Principles of Biochemistry | 8e | recent | search PG / `~/VaultBinary` for `Lehninger8e` | per-chapter |
 | Physiology | Ganong's Review of Medical Physiology | 26e | 2019 | search PG / `~/VaultBinary` for `Ganong_26e` | inbound |
 | Biology (preclinical) | Campbell Biology | 13e | 2026 | search PG / `~/VaultBinary` for `Campbell_13e` | inbound |
-| Causal inference / epidemiology | Hernán & Robins, Causal Inference: What If | latest open-edition | open-access | `~/VaultBinary/research_method/causal_inference/**/Hernan_WhatIf*/raw.md` | checklist may be note-linked |
+| Causal inference / epidemiology | Hernán & Robins, Causal Inference: What If | latest open-edition | open-access | `~/repos/personal-website/wiki_raw/research_method/causal_inference/**/Hernan_WhatIf*/raw.md` | checklist may be note-linked |
 | EBM / critical appraisal | Guyatt Users' Guides to the Medical Literature | latest in vault | recent | search PG / `~/VaultBinary` for `Guyatt_Users_Guides` | per-chapter |
 | Health research methods | Health Research Methods | 3e | 2021 | search PG / `~/VaultBinary` for `HealthResMethods_3e` | inbound |
 | Renal guideline | KDIGO 2024 CKD | 2024 | 2024 | search PG / `~/VaultBinary` for `KDIGO_CKD` | wiki/note distributed |
@@ -869,7 +870,7 @@ before citing a specific chapter.
 - **Renal guideline alignment** → KDIGO 2024 CKD (current); cite recommendation grade.
 - **Quick clinical reference at point-of-care** → Washington Manual 38e or Pocket Medicine 9e.
 
-If the picked book lacks the specific topic, fall back order: (1) primary literature already indexed by PG `wiki_raw.raw_index` or present under `~/VaultBinary/{topic_path}/`, (2) recent NEJM / Lancet / JAMA / specialty-flagship review located via PG / bounded `~/VaultBinary` search, (3) report citation gap and let Copper run mini LLM council (no self-initiated WebSearch per the No-Self-Initiated-Web-Search rule above).
+If the picked book lacks the specific topic, fall back order: (1) primary literature already indexed by PG `wiki_raw.raw_index` or present under `~/repos/personal-website/wiki_raw/{topic_path}/`, (2) recent NEJM / Lancet / JAMA / specialty-flagship review located via PG / bounded `~/VaultBinary` search, (3) report citation gap and let Copper run mini LLM council (no self-initiated WebSearch per the No-Self-Initiated-Web-Search rule above).
 
 ## Supersedes
 

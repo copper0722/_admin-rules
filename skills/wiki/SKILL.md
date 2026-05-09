@@ -13,7 +13,7 @@ This is the **retrieval direction** counterpart to `/wikify` (ingest direction).
 
 ## Principle
 
-- LLM-wiki retrieval reads **raw md (git-tracked) and wiki/notes synthesis only**. NEVER load binary (PDF / images / tables / source media) into context for retrieval — binary is OWC-only audit asset, retrieval-irrelevant. Memory rule: `feedback_llm_wiki_retrieval_no_binary.md`.
+- LLM-wiki retrieval reads **raw md (git-tracked) and wiki/notes synthesis only**. NEVER load binary (PDF / images / tables / source media) into context for retrieval — binary is local-only audit asset (gitignored under `personal-website/wiki_raw/`), retrieval-irrelevant. Memory rule: `feedback_llm_wiki_retrieval_no_binary.md`.
 - Output = chat answer to Copper, NOT a published artifact. Reader-only zone rules (no internal infrastructure, device names, AGENTS.md citations, AI process disclosures) do not apply because chat ≠ publish; but if Copper later says "this is for FB / publish", switch to Copper-authored note format with reference tier and inline `[N]` numbered citations (memory: `feedback_reference_tier_copper_authored_notes.md`, `feedback_inline_citation_numbered.md`).
 - Voice: zh-TW Taiwan medical terminology, calm academic tone, no debunk drama, inline English for technical tokens (paths, drug INN, classifier names, gene symbols).
 - Ad-hoc retrieval, **single round-trip**: do not invoke task tracking, do not write memory unless the question itself asks for it.
@@ -33,7 +33,7 @@ This is the **retrieval direction** counterpart to `/wikify` (ingest direction).
         OR '<kw_lower>' = ANY(tags)
      ORDER BY citation_key LIMIT 50;
      ```
-   - **wiki_raw raw md layer** — `rg -l --type md -i '<kw_en>|<kw_zh>' ~/repos/wiki_raw/`. On hmj this requires Claude binary to have macOS Files-and-Folders / Full-Disk-Access consent for the OWC volume (the working tree is symlinked into OWC). On hm4 / cm1 / mbp / mba it's a normal SSD git clone — works directly.
+   - **wiki_raw raw md layer** — `rg -l --type md -i '<kw_en>|<kw_zh>' ~/repos/personal-website/wiki_raw/`. wiki_raw moved under `personal-website/` 2026-05-09; no separate consent required — same git tree as personal-website on every device.
    - **personal-website layer** — `rg -l --type md -i '<kw>' ~/repos/personal-website/src/content/{wiki,notes}/`. Wiki entries are M2M synthesis with `tags` + `slug`; notes are Copper-authored zh-TW digests + AI-authored textbook-summary / journal-summary etc.
    - Run all three in **one batched message of parallel Bash calls** — no sequential.
 
@@ -105,10 +105,10 @@ rg -l --type md -i 'KW_en|KW_zh' \
    ~/repos/personal-website/src/content/notes/
 ```
 
-### wiki_raw raw md (post-OWC-consent on hmj; works on other Macs without consent)
+### wiki_raw raw md (lives under personal-website since 2026-05-09)
 
 ```bash
-rg -l --type md -i 'KW' ~/repos/wiki_raw/
+rg -l --type md -i 'KW' ~/repos/personal-website/wiki_raw/
 ```
 
 ### Reading specific hit paragraph
