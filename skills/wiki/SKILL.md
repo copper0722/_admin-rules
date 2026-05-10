@@ -22,7 +22,7 @@ This is the **retrieval direction** counterpart to `/wikify` (ingest direction).
 
 1. **Restate** Copper's question in precise zh-TW domain terms (one line). This both clarifies the scope and gives Copper a chance to redirect before retrieval cost is paid.
 
-2. **Parallel retrieval** across three layers:
+2. **Parallel retrieval** across four layers:
    - **PG metadata layer** — `psql -h hmj -U copper -d vault_main` against `wiki_raw.raw_index`; multi-column `ILIKE` over `file_path` / `title` / `citation_key` plus `'<lower_kw>' = ANY(tags)`. Use lowercase tag form. Sample query:
      ```sql
      SELECT DISTINCT citation_key, file_path, title, line_count
@@ -35,7 +35,12 @@ This is the **retrieval direction** counterpart to `/wikify` (ingest direction).
      ```
    - **wiki_raw raw md layer** — `rg -l --type md -i '<kw_en>|<kw_zh>' ~/repos/personal-website/wiki_raw/`. wiki_raw moved under `personal-website/` 2026-05-09; no separate consent required — same git tree as personal-website on every device.
    - **personal-website layer** — `rg -l --type md -i '<kw>' ~/repos/personal-website/src/content/{wiki,notes}/`. Wiki entries are M2M synthesis with `tags` + `slug`; notes are Copper-authored zh-TW digests + AI-authored textbook-summary / journal-summary etc.
-   - Run all three in **one batched message of parallel Bash calls** — no sequential.
+   - **External synthesis layer (Copper directive 2026-05-10)** — fire two WebFetch calls in the same parallel batch:
+     - **UpToDate** via CMU proxy (Copper logged-in UpToDate Anywhere session): `https://www-uptodate-com.autorpa.cmu.edu.tw:8443/contents/search?search=<kw_en_url_encoded>`
+     - **DynaMed**: `https://www.dynamed.com/search?q=<kw_en_url_encoded>`
+     - On WebFetch returning logged-out splash / no useful content → fall back to `chrome-devtools` MCP driving the live Chrome session (where the institutional cookies live).
+     - Coverage rationale: UpToDate + DynaMed are independently-curated synthesis with active-update guarantees; they catch evolving recommendations that 1-2 year old textbook chapters may have already superseded. Memory: `feedback_wiki_search_tri_source.md`.
+   - Run all four in **one batched message of parallel Bash + WebFetch calls** — no sequential.
 
 3. **Read** the relevant hits' specific paragraphs (chapter + line range). Do not load whole files unless small. Prefer `Read` with offset+limit over full read.
 
@@ -50,12 +55,20 @@ This is the **retrieval direction** counterpart to `/wikify` (ingest direction).
    | Harrison 22e Ch{NN} (L{n}) | "..." |
    | Washington Manual 38e Ch{NN} §{name} (L{n}) | "..." |
 
+   ### 外部 synthesis 對照（DynaMed / UpToDate）
+   | 來源 (topic title, last updated) | 重點 |
+   |---|---|
+   | UpToDate "..." (updated YYYY-MM) | "..." (≤2 短句) |
+   | DynaMed "..." (updated YYYY-MM)  | "..." |
+   *（quote ≤2 short snippets per source; copyright + paywall — never paste large blocks）*
+
    ### 機轉 / 補充
    - bullet, with inline (chapter+line) citation when claim is non-trivial
 
    ### 本機覆蓋盤點 (≤3 條)
    - ✅ 已有: ...
    - ❌ 缺: ... → 建議 fetch (citation_key + DOI/PMID + topic_path)
+   - ⚠️ 不一致: 若 UpToDate / DynaMed 與本機 synthesis 牴觸 → 註明並建議 update local wiki
    ```
 
 5. **Boundaries**:
