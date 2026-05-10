@@ -35,12 +35,13 @@ This is the **retrieval direction** counterpart to `/wikify` (ingest direction).
      ```
    - **wiki_raw raw md layer** — `rg -l --type md -i '<kw_en>|<kw_zh>' ~/repos/personal-website/wiki_raw/`. wiki_raw moved under `personal-website/` 2026-05-09; no separate consent required — same git tree as personal-website on every device.
    - **personal-website layer** — `rg -l --type md -i '<kw>' ~/repos/personal-website/src/content/{wiki,notes}/`. Wiki entries are M2M synthesis with `tags` + `slug`; notes are Copper-authored zh-TW digests + AI-authored textbook-summary / journal-summary etc.
-   - **External synthesis layer (Copper directive 2026-05-10)** — fire two WebFetch calls in the same parallel batch:
-     - **UpToDate** via CMU proxy (Copper logged-in UpToDate Anywhere session): `https://www-uptodate-com.autorpa.cmu.edu.tw:8443/contents/search?search=<kw_en_url_encoded>`
-     - **DynaMed**: `https://www.dynamed.com/search?q=<kw_en_url_encoded>`
-     - On WebFetch returning logged-out splash / no useful content → fall back to `chrome-devtools` MCP driving the live Chrome session (where the institutional cookies live).
-     - Coverage rationale: UpToDate + DynaMed are independently-curated synthesis with active-update guarantees; they catch evolving recommendations that 1-2 year old textbook chapters may have already superseded. Memory: `feedback_wiki_search_tri_source.md`.
-   - Run all four in **one batched message of parallel Bash + WebFetch calls** — no sequential.
+   - **External synthesis NAVIGATOR layer (Copper directive 2026-05-10)** — UpToDate + DynaMed are tertiary synthesis used to **discover primary references**, NEVER cited directly in the answer (commercial source + unstable versioning + academic primary-cite standard). Auth cookies for both live ONLY in **hm4 Chrome Beta** (same place as journal-toc bundler subscriber sessions); WebFetch from any host cannot reuse those cookies → must drive via `chrome-devtools` MCP:
+     - **UpToDate** (CMU proxy, logged-in UpToDate Anywhere): navigate to `https://www-uptodate-com.autorpa.cmu.edu.tw:8443/contents/search?search=<kw_en>`, take snapshot of hits, click top relevant topic, take snapshot to extract its references list.
+     - **DynaMed**: same pattern via `https://www.dynamed.com/search?q=<kw_en>` (or `www-dynamed-com.autorpa.cmu.edu.tw` proxy variant).
+     - Workflow: read the topic's bibliography → identify which primary refs (RCT / guideline / meta-analysis / textbook chapter) ground each clinical recommendation → pull those primary refs from local wiki_raw / PG; if missing, log them as fetch candidates (PMID / DOI + topic_path).
+     - Fallback: if `chrome-devtools` MCP not available this session, try WebFetch as best-effort (will likely return logged-out splash) and report the gap honestly.
+     - Coverage rationale: UpToDate + DynaMed catch evolving recommendations that 1-2 year old textbook chapters may have superseded; their reference lists are the actionable artifact. Memory: `feedback_wiki_search_tri_source.md`.
+   - Run all four in **one batched message of parallel Bash + chrome-devtools MCP calls** — no sequential.
 
 3. **Read** the relevant hits' specific paragraphs (chapter + line range). Do not load whole files unless small. Prefer `Read` with offset+limit over full read.
 
@@ -55,12 +56,10 @@ This is the **retrieval direction** counterpart to `/wikify` (ingest direction).
    | Harrison 22e Ch{NN} (L{n}) | "..." |
    | Washington Manual 38e Ch{NN} §{name} (L{n}) | "..." |
 
-   ### 外部 synthesis 對照（DynaMed / UpToDate）
-   | 來源 (topic title, last updated) | 重點 |
-   |---|---|
-   | UpToDate "..." (updated YYYY-MM) | "..." (≤2 短句) |
-   | DynaMed "..." (updated YYYY-MM)  | "..." |
-   *（quote ≤2 short snippets per source; copyright + paywall — never paste large blocks）*
+   ### 外部 synthesis 對照（UpToDate / DynaMed → 其引用之原始文獻）
+   - UpToDate "Topic title" → 引用 [PMID/DOI A, B, C] → 本機已有 [A, C] / 缺 [B → 建議 fetch]
+   - DynaMed "Topic title" → 引用 [PMID/DOI D, E] → 全部本機已有 ✓
+   *（NEVER cite UpToDate / DynaMed itself — they are navigators to primary refs only）*
 
    ### 機轉 / 補充
    - bullet, with inline (chapter+line) citation when claim is non-trivial
@@ -68,7 +67,7 @@ This is the **retrieval direction** counterpart to `/wikify` (ingest direction).
    ### 本機覆蓋盤點 (≤3 條)
    - ✅ 已有: ...
    - ❌ 缺: ... → 建議 fetch (citation_key + DOI/PMID + topic_path)
-   - ⚠️ 不一致: 若 UpToDate / DynaMed 與本機 synthesis 牴觸 → 註明並建議 update local wiki
+   - ⚠️ 不一致: 若 UpToDate / DynaMed 引用之最新 primary ref 與本機 synthesis 牴觸 → 註明並建議 fetch + update local wiki
    ```
 
 5. **Boundaries**:
