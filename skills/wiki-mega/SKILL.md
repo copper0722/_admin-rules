@@ -22,8 +22,27 @@ description: |
 
 Copper directive 2026-05-11: extension of `/wiki` to 5-source fan-out + Opus
 synthesis. Per workspace memory `feedback_wiki_search_tri_source.md`:
-UpToDate and DynaMed are **navigators only**, never cited directly; their
-output value is the list of primary literature they point to.
+UpToDate and DynaMed are **peer-reviewed L5 systems**, allowed as navigator
+references in tier-honest citation tables but always carrying L5 label.
+
+**OpenEvidence is fundamentally different (Copper directive 2026-05-12).**
+OE is a **pure LLM literature aggregator** — no peer review, no editorial
+board, no structured editorial pipeline. In the EBM-CC 6S Haynes pyramid OE
+is a **blank cell**, not L5. OE in this pipeline serves only as a
+**search-side navigator** to discover what primary literature exists; OE's
+own summary text is never citable. The honest path when OE returns primary
+references the article needs to claim from: **the main Opus does an ad-hoc
+WebFetch of the OA full text, reads it, and cites L1 directly with DOI.**
+OE-summary numerics are not propagated into article bodies.
+
+**Ad-hoc OA primary fetch rule (Copper directive 2026-05-12).** OA primaries
+that support a single specific claim in a single wiki-human article must be
+fetched + read + cited L1 in-session. **They are not written into wiki_raw.**
+wiki_raw is reserved for cross-article reusable sources (textbook chapters,
+guidelines, journal series TOC, regulatory documents). If a primary later
+turns out to serve multiple articles, that's when it earns wiki_raw
+promotion — parallel to the just-in-time typed-table promote rule in
+`tw_health_open.md` runbook.
 
 ## Pipeline
 
@@ -83,6 +102,17 @@ question. Wait for the OE answer.
 Return: (1) OE bottom-line in 2-3 sentences (translate to zh-TW), (2)
 full citation list with DOI/PMID + first-author + year + journal. Do
 NOT add commentary; report exactly what OE said.
+
+**Disclaim openly in your output**: "OE is a pure LLM aggregator (no
+peer review, 6S blank); the citations below are search-navigator hits.
+The main Opus must ad-hoc fetch + read OA primary full text before
+citing any of these as L1 in article body."
+
+**Watch for conflation in the OE summary text**: OE may incorrectly
+attribute findings across primary papers (e.g., conflating two
+related studies under one sentence). Do not assert specifics from OE
+narrative as if verified primary content — surface them as
+"OE-claims-this, needs primary verification."
 
 Under 500 words.
 ```
@@ -210,15 +240,37 @@ After all 5 sub-agents return, the main Opus does:
    citation: which sub-agents cited it.
 2. **Dedupe by DOI/PMID/guideline-uid**. Aliases (DOI variants, PubMed
    citation strings) collapse.
-3. **Map navigator → primary**: UTD and DynaMed entries become navigator
-   labels on a primary-ref row, never standalone rows. If UTD/DynaMed
-   give a claim but no primary cite, mark `[no primary ref found]` and
-   downgrade to a parenthetical secondary note in the answer.
-4. **Local coverage gap check**: for each unique primary DOI/PMID,
+3. **Map navigator → primary**: UTD, DynaMed, and OE entries all become
+   navigator labels on a primary-ref row, never standalone rows.
+   - UTD / DynaMed = peer-reviewed L5 systems (may also stand as L5 cite
+     in the wiki-human refs table)
+   - OE = LLM aggregator (6S blank); strictly navigator only — never appears
+     as a citation row, only in the `Surfaced by` column as a discovery hint
+   - If a navigator claim has no primary cite, mark `[no primary ref found]`
+     and downgrade to a parenthetical secondary note in the answer.
+
+4. **Ad-hoc OA primary fetch (mandatory before article-body claims)**:
+   For each primary DOI/PMID from sub-oe / sub-gemini / UTD or DynaMed
+   reference panel that the answer will rely on for numerical or
+   trial-specific claims, the main Opus must:
+   - WebFetch the DOI URL (follow redirects)
+   - Read the OA full text; if paywalled, mark 🟡 and either skip the
+     specific numeric or label the claim "via L5 navigator" without
+     numerics
+   - Cite L1 directly with verified DOI; do not save the fetched paper
+     into wiki_raw (ad-hoc rule)
+   - Cross-check OE / UTD / DynaMed summary against primary — flag any
+     conflation discovered (the canonical example: OE-summary said
+     "zebrafish 39% prevalence" but the underlying primary paper
+     studied a marine goby, not zebrafish — see CMNV case 2026-05-12).
+5. **Local coverage gap check**: for each unique primary DOI/PMID,
    query PG `wiki_raw.raw_index` + `wiki_raw.raw_source_metadata` for
    `doi=` or `citation_key like`. Mark each row ✓ if local raw exists, ✗
-   if not.
-5. **Compose final answer** in zh-TW (apply fb-pipeline language style:
+   if not. **Note**: ✗ is fine for wiki-human ad-hoc fetch (just means
+   the agent read it in-session). The ✗ → wiki_raw migration only
+   happens when the same primary serves multiple articles.
+
+6. **Compose final answer** in zh-TW (apply fb-pipeline language style:
    no em-dash sentence-joiners, restrained inline English):
 
 ```
@@ -252,7 +304,7 @@ After all 5 sub-agents return, the main Opus does:
 - 若 0 缺口：寫「本地覆蓋完整」
 ```
 
-6. **Optional save → `wiki-human` article (Copper directive 2026-05-11)**:
+7. **Optional save → `wiki-human` article (Copper directive 2026-05-11)**:
    if invocation included `--save`, write the composed answer as a new
    `note_type: wiki-human` public article at
    `~/repos/personal-website/src/content/notes/public/wiki-human/{slug}/index.md`.
@@ -287,22 +339,32 @@ After all 5 sub-agents return, the main Opus does:
    | L2 Syntheses | Systematic reviews / meta-analyses | Cochrane review, journal-curated SR/MA |
    | L3 Synopses of syntheses | Pre-appraised summaries of SR/MA | ACP Journal Club, DARE summaries |
    | L4 Summaries | Practice guidelines + textbook chapters | KDIGO / ADA / ESH / AHA guideline, Harrison's / Brenner & Rector's chapter |
-   | L5 Systems | Point-of-care integrated CDSS | UpToDate topic, DynaMed topic, BMJ Best Practice topic |
+   | L5 Systems | **Peer-reviewed** point-of-care integrated CDSS | UpToDate topic, DynaMed topic, BMJ Best Practice topic |
+   | (no tier) | LLM aggregator, no peer review | OpenEvidence — never appears in citation rows |
 
    Notes:
    - L4 + L5 distinction: 6S puts guideline and textbook at L4
      (Summaries) and UTD/DynaMed/BMJ-BP at L5 (Systems), because
      L5 integrates more downstream layers and supports point-of-care
-     use.
+     use. L5 requires peer-reviewed editorial process.
+   - **OpenEvidence is NOT L5** (Copper directive 2026-05-12). OE has
+     no peer review, no editorial board, no structured editorial
+     pipeline; it is a pure LLM literature aggregator. In the 6S
+     pyramid OE is a blank cell. Label OE in reference notes as
+     `[LLM aggregator — 無 peer review、6S 空白]` only when retaining
+     audit-trail; never appear in the main citation list with L? tag.
    - Guideline is NOT pure-tertiary: it has GRADE-style commissioned
      systematic review (L2) under the hood + expert-panel
      evidence-to-recommendation pipeline. The 6S "Summary" label
      captures this hybrid honestly.
    - For wiki-human articles, citation hygiene Law still applies: each
-     ref must be one the agent actually read in the local corpus
-     (e.g., textbook chapter raw.md, UTD/DynaMed snapshot raw.md,
-     guideline full-text in wiki_raw). Tier labels are honest; no
-     name-dropping primary RCTs the agent did not read.
+     ref must be one the agent actually read (in-session WebFetch is
+     OK; cross-article persistence not required). Tier labels are
+     honest; no name-dropping primary RCTs the agent did not read.
+   - **Ad-hoc OA primary fetch path**: when OE / UTD / DynaMed
+     surfaces a primary DOI that the article needs, the main Opus
+     WebFetches the OA full text in-session, reads, cites L1
+     directly. Do not persist the paper to wiki_raw (one-off rule).
 
    wiki-human article shape:
    ```yaml
@@ -365,18 +427,33 @@ After all 5 sub-agents return, the main Opus does:
 
 ## Citation hygiene reminders
 
-- UpToDate / DynaMed: NEVER cite directly. They are navigator tools to
-  find primary literature. Output table's "Primary ref" column must list
-  RCT / meta-analysis / textbook chapter / guideline / position
-  statement only.
-- OpenEvidence: cite the primary references it surfaces, not OE itself.
-  OE is allowed in `Surfaced by` column.
-- Gemini grounded answer: prefer the underlying source it pulls (e.g.,
-  if Gemini cites a NEJM article, the row's primary ref is the NEJM
-  DOI). Gemini text alone is not citable.
-- Local wiki_raw raw .md: directly citable (citation_key + path).
-- Local synthesized wiki entry: linkable, but the original primary
-  source that wiki entry rests on is the citable atom.
+- **UpToDate / DynaMed**: peer-reviewed L5 systems. May appear as L5
+  citation rows in wiki-human refs table, but only after the agent
+  saved the snapshot raw and read it. The article's specific
+  numerical / trial-name claims should still trace to L1 primary via
+  ad-hoc fetch; UTD/DynaMed prose alone supports only qualitative
+  positions.
+- **OpenEvidence**: 6S blank — LLM aggregator with no peer review.
+  Never appears as a citation row in the article. OE may only appear
+  in: (a) the `Surfaced by` column of the synthesizer's primary-cite
+  table, (b) optional audit-trail block in the article's 「文獻層級
+  說明」 noting how primary refs were discovered. Cite primaries
+  directly after ad-hoc OA fetch.
+- **Conflation watch**: OE summary text may incorrectly attribute
+  findings across multiple primary papers. Always cross-check the
+  fetched primary's actual subject/species/methods vs OE's claim. The
+  CMNV case (2026-05-12): OE said "zebrafish 39% prevalence" but
+  Zhang QL 2018 *Front Microbiol* actually studied marine goby
+  *Mugilogobius abei*, not zebrafish; the zebrafish data is in a
+  different (paywalled) paper. Such conflation is a recurring risk
+  with LLM-aggregator surfaces.
+- **Gemini grounded answer**: prefer the underlying source it pulls.
+  Gemini text alone is not citable.
+- **Local wiki_raw raw .md**: directly citable (citation_key + path).
+- **Local synthesized wiki entry**: linkable, but the original
+  primary source that wiki entry rests on is the citable atom.
+- **Ad-hoc OA primary fetched in-session**: directly citable with
+  DOI; no requirement to persist to wiki_raw (one-off rule).
 
 ## Cross-refs
 
