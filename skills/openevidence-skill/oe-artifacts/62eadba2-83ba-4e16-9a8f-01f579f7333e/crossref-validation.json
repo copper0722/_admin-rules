@@ -1,0 +1,4711 @@
+[
+  {
+    "key": "RogersTS2023Dizziness",
+    "title": "Dizziness: Evaluation and Management",
+    "doi": null,
+    "href": "https://www.aafp.org/link_out?pmid=37192077",
+    "crossref": {
+      "status": "not_found",
+      "method": "bibliographic",
+      "doi": "10.1542/9781610021258-part03-ch27",
+      "title": "Dizziness and Vertigo",
+      "score": 21.606686,
+      "similarity": 0.5,
+      "work": {
+        "indexed": {
+          "date-parts": [
+            [
+              2025,
+              5,
+              8
+            ]
+          ],
+          "date-time": "2025-05-08T13:59:21Z",
+          "timestamp": 1746712761355,
+          "version": "3.40.5"
+        },
+        "reference-count": 0,
+        "publisher": "American Academy of Pediatrics",
+        "isbn-type": [
+          {
+            "type": "electronic",
+            "value": "9781610021258"
+          },
+          {
+            "type": "print",
+            "value": "9781610021241"
+          }
+        ],
+        "content-domain": {
+          "domain": [],
+          "crossmark-restriction": false
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2017,
+              9,
+              17
+            ]
+          ]
+        },
+        "DOI": "10.1542/9781610021258-part03-ch27",
+        "type": "book-chapter",
+        "created": {
+          "date-parts": [
+            [
+              2021,
+              11,
+              8
+            ]
+          ],
+          "date-time": "2021-11-08T20:43:49Z",
+          "timestamp": 1636404229000
+        },
+        "page": "285-295",
+        "source": "Crossref",
+        "is-referenced-by-count": 0,
+        "title": [
+          "Dizziness and Vertigo"
+        ],
+        "prefix": "10.1542",
+        "author": [
+          {
+            "given": "Klaus",
+            "family": "Jahn",
+            "sequence": "first",
+            "affiliation": []
+          }
+        ],
+        "member": "417",
+        "container-title": [
+          "Succinct Pediatrics: Evaluation and Management for Newborn, Genetic, Neurologic, and Developmental-Behavioral Disorders"
+        ],
+        "language": "en",
+        "link": [
+          {
+            "URL": "https://publications.aap.org/aapbooks/book/chapter-pdf/781323/aap_9781610021258-part03-ch27.pdf",
+            "content-type": "unspecified",
+            "content-version": "vor",
+            "intended-application": "similarity-checking"
+          }
+        ],
+        "deposited": {
+          "date-parts": [
+            [
+              2021,
+              11,
+              10
+            ]
+          ],
+          "date-time": "2021-11-10T21:33:14Z",
+          "timestamp": 1636579994000
+        },
+        "score": 21.606686,
+        "resource": {
+          "primary": {
+            "URL": "https://publications.aap.org/aapbooks/book/518/chapter/5807485/Dizziness-and-Vertigo"
+          }
+        },
+        "issued": {
+          "date-parts": [
+            [
+              2017,
+              9,
+              17
+            ]
+          ]
+        },
+        "ISBN": [
+          "9781610021258",
+          "9781610021241"
+        ],
+        "references-count": 0,
+        "URL": "https://doi.org/10.1542/9781610021258-part03-ch27",
+        "published": {
+          "date-parts": [
+            [
+              2017,
+              9,
+              17
+            ]
+          ]
+        }
+      }
+    }
+  },
+  {
+    "key": "Newman-TokerDE2015TiTrATE",
+    "title": "TiTrATE: A Novel, Evidence-Based Approach to Diagnosing Acute Dizziness and Vertigo",
+    "doi": "10.1016/j.ncl.2015.04.011",
+    "href": "https://pubmed.ncbi.nlm.nih.gov/26231273",
+    "crossref": {
+      "status": "validated",
+      "method": "doi",
+      "doi": "10.1016/j.ncl.2015.04.011",
+      "title": "TiTrATE",
+      "similarity": 0.08333333333333333,
+      "work": {
+        "indexed": {
+          "date-parts": [
+            [
+              2026,
+              5,
+              1
+            ]
+          ],
+          "date-time": "2026-05-01T11:50:41Z",
+          "timestamp": 1777636241338,
+          "version": "3.51.4"
+        },
+        "reference-count": 135,
+        "publisher": "Elsevier BV",
+        "issue": "3",
+        "license": [
+          {
+            "start": {
+              "date-parts": [
+                [
+                  2015,
+                  8,
+                  1
+                ]
+              ],
+              "date-time": "2015-08-01T00:00:00Z",
+              "timestamp": 1438387200000
+            },
+            "content-version": "tdm",
+            "delay-in-days": 0,
+            "URL": "https://www.elsevier.com/tdm/userlicense/1.0/"
+          }
+        ],
+        "funder": [
+          {
+            "DOI": "10.13039/100000055",
+            "name": "National Institute on Deafness and Other Communication Disorders",
+            "doi-asserted-by": "publisher",
+            "award": [
+              "1U01DC013778-01A1"
+            ],
+            "award-info": [
+              {
+                "award-number": [
+                  "1U01DC013778-01A1"
+                ]
+              }
+            ],
+            "id": [
+              {
+                "id": "10.13039/100000055",
+                "id-type": "DOI",
+                "asserted-by": "publisher"
+              }
+            ]
+          },
+          {
+            "DOI": "10.13039/100000002",
+            "name": "National Institutes of Health",
+            "doi-asserted-by": "publisher",
+            "id": [
+              {
+                "id": "10.13039/100000002",
+                "id-type": "DOI",
+                "asserted-by": "publisher"
+              }
+            ]
+          }
+        ],
+        "content-domain": {
+          "domain": [
+            "clinicalkey.jp",
+            "clinicalkey.com",
+            "clinicalkey.es",
+            "theclinics.com",
+            "clinicalkey.com.au",
+            "clinicalkey.fr",
+            "elsevier.com",
+            "sciencedirect.com"
+          ],
+          "crossmark-restriction": true
+        },
+        "short-container-title": [
+          "Neurologic Clinics"
+        ],
+        "published-print": {
+          "date-parts": [
+            [
+              2015,
+              8
+            ]
+          ]
+        },
+        "DOI": "10.1016/j.ncl.2015.04.011",
+        "type": "journal-article",
+        "created": {
+          "date-parts": [
+            [
+              2015,
+              7,
+              29
+            ]
+          ],
+          "date-time": "2015-07-29T10:01:26Z",
+          "timestamp": 1438164086000
+        },
+        "page": "577-599",
+        "update-policy": "https://doi.org/10.1016/elsevier_cm_policy",
+        "source": "Crossref",
+        "is-referenced-by-count": 248,
+        "title": [
+          "TiTrATE"
+        ],
+        "prefix": "10.1016",
+        "volume": "33",
+        "author": [
+          {
+            "given": "David E.",
+            "family": "Newman-Toker",
+            "sequence": "first",
+            "affiliation": []
+          },
+          {
+            "given": "Jonathan A.",
+            "family": "Edlow",
+            "sequence": "additional",
+            "affiliation": []
+          }
+        ],
+        "member": "78",
+        "reference": [
+          {
+            "issue": "7",
+            "key": "10.1016/j.ncl.2015.04.011_bib1",
+            "doi-asserted-by": "crossref",
+            "first-page": "765",
+            "DOI": "10.4065/83.7.765",
+            "article-title": "Spectrum of dizziness visits to US emergency departments: cross-sectional analysis from a nationally representative sample",
+            "volume": "83",
+            "author": "Newman-Toker",
+            "year": "2008",
+            "journal-title": "Mayo Clin Proc"
+          },
+          {
+            "issue": "7",
+            "key": "10.1016/j.ncl.2015.04.011_bib2",
+            "doi-asserted-by": "crossref",
+            "first-page": "517",
+            "DOI": "10.1136/emj.2009.078014",
+            "article-title": "Predictors of important neurological causes of dizziness among patients presenting to the emergency department",
+            "volume": "27",
+            "author": "Cheung",
+            "year": "2010",
+            "journal-title": "Emerg Med J"
+          },
+          {
+            "issue": "11",
+            "key": "10.1016/j.ncl.2015.04.011_bib3",
+            "doi-asserted-by": "crossref",
+            "first-page": "1329",
+            "DOI": "10.4065/82.11.1329",
+            "article-title": "Imprecision in patient reports of dizziness symptom quality: a cross-sectional study conducted in an acute care setting",
+            "volume": "82",
+            "author": "Newman-Toker",
+            "year": "2007",
+            "journal-title": "Mayo Clin Proc"
+          },
+          {
+            "issue": "7",
+            "key": "10.1016/j.ncl.2015.04.011_bib4",
+            "doi-asserted-by": "crossref",
+            "first-page": "689",
+            "DOI": "10.1111/acem.12168",
+            "article-title": "Rising annual costs of dizziness presentations to u.s. Emergency departments",
+            "volume": "20",
+            "author": "Saber Tehrani",
+            "year": "2013",
+            "journal-title": "Acad Emerg Med"
+          },
+          {
+            "issue": "1–2",
+            "key": "10.1016/j.ncl.2015.04.011_bib5",
+            "first-page": "1",
+            "article-title": "Classification of vestibular symptoms: towards an international classification of vestibular disorders",
+            "volume": "19",
+            "author": "Bisdorff",
+            "year": "2009",
+            "journal-title": "J Vestib Res"
+          },
+          {
+            "issue": "21",
+            "key": "10.1016/j.ncl.2015.04.011_bib6",
+            "doi-asserted-by": "crossref",
+            "first-page": "2631",
+            "DOI": "10.1093/eurheartj/ehp298",
+            "article-title": "Guidelines for the diagnosis and management of syncope (version 2009)",
+            "volume": "30",
+            "author": "Moya",
+            "year": "2009",
+            "journal-title": "Eur Heart J"
+          },
+          {
+            "issue": "5",
+            "key": "10.1016/j.ncl.2015.04.011_bib7",
+            "doi-asserted-by": "crossref",
+            "first-page": "421",
+            "DOI": "10.1002/ana.410170502",
+            "article-title": "Hypoglycemia: causes, neurological manifestations, and outcome",
+            "volume": "17",
+            "author": "Malouf",
+            "year": "1985",
+            "journal-title": "Ann Neurol"
+          },
+          {
+            "issue": "7",
+            "key": "10.1016/j.ncl.2015.04.011_bib8",
+            "doi-asserted-by": "crossref",
+            "first-page": "1178",
+            "DOI": "10.1212/01.wnl.0000238500.02302.b4",
+            "article-title": "Cerebellar infarction presenting isolated vertigo: frequency and vascular topographical patterns",
+            "volume": "67",
+            "author": "Lee",
+            "year": "2006",
+            "journal-title": "Neurology"
+          },
+          {
+            "issue": "2",
+            "key": "10.1016/j.ncl.2015.04.011_bib9",
+            "doi-asserted-by": "crossref",
+            "first-page": "e15",
+            "DOI": "10.1136/emj.2005.027862",
+            "article-title": "Painless aortic dissection with bilateral carotid involvement presenting with vertigo as the chief complaint",
+            "volume": "23",
+            "author": "Demiryoguran",
+            "year": "2006",
+            "journal-title": "Emerg Med J"
+          },
+          {
+            "issue": "3",
+            "key": "10.1016/j.ncl.2015.04.011_bib10",
+            "doi-asserted-by": "crossref",
+            "first-page": "167",
+            "DOI": "10.1038/ncpneuro0125",
+            "article-title": "‘Cardiogenic vertigo’–true vertigo as the presenting manifestation of primary cardiac disease",
+            "volume": "2",
+            "author": "Newman-Toker",
+            "year": "2006",
+            "journal-title": "Nat Clin Pract Neurol"
+          },
+          {
+            "key": "10.1016/j.ncl.2015.04.011_bib11",
+            "doi-asserted-by": "crossref",
+            "first-page": "460",
+            "DOI": "10.1212/01.CPJ.0000435749.32868.91",
+            "article-title": "Vestibular signs of thiamine deficiency during the early phase of suspected Wernicke’s encephalopathy",
+            "volume": "3",
+            "author": "Kattah",
+            "year": "2013",
+            "journal-title": "Neurol Clin Pract"
+          },
+          {
+            "issue": "10",
+            "key": "10.1016/j.ncl.2015.04.011_bib12",
+            "doi-asserted-by": "crossref",
+            "first-page": "2484",
+            "DOI": "10.1161/01.STR.0000240329.48263.0d",
+            "article-title": "Stroke among patients with dizziness, vertigo, and imbalance in the emergency department: a population-based study",
+            "volume": "37",
+            "author": "Kerber",
+            "year": "2006",
+            "journal-title": "Stroke"
+          },
+          {
+            "issue": "1",
+            "key": "10.1016/j.ncl.2015.04.011_bib13",
+            "doi-asserted-by": "crossref",
+            "first-page": "63",
+            "DOI": "10.1197/j.aem.2006.06.060",
+            "article-title": "Pitfalls in the diagnosis of cerebellar infarction",
+            "volume": "14",
+            "author": "Savitz",
+            "year": "2007",
+            "journal-title": "Acad Emerg Med"
+          },
+          {
+            "issue": "1",
+            "key": "10.1016/j.ncl.2015.04.011_bib14",
+            "doi-asserted-by": "crossref",
+            "first-page": "34",
+            "DOI": "10.1016/j.annemergmed.2010.06.559",
+            "article-title": "Risk of vascular events in emergency department patients discharged home with diagnosis of dizziness or vertigo",
+            "volume": "57",
+            "author": "Kim",
+            "year": "2011",
+            "journal-title": "Ann Emerg Med"
+          },
+          {
+            "issue": "9",
+            "key": "10.1016/j.ncl.2015.04.011_bib15",
+            "doi-asserted-by": "crossref",
+            "first-page": "1518",
+            "DOI": "10.1097/MAO.0b013e318238ff9a",
+            "article-title": "Misdiagnosis of acute peripheral vestibulopathy in central nervous ischemic infarction",
+            "volume": "32",
+            "author": "Braun",
+            "year": "2011",
+            "journal-title": "Otol Neurotol"
+          },
+          {
+            "issue": "5",
+            "key": "10.1016/j.ncl.2015.04.011_bib16",
+            "doi-asserted-by": "crossref",
+            "first-page": "256",
+            "DOI": "10.1159/000331046",
+            "article-title": "Dizziness in the emergency room: diagnoses and misdiagnoses",
+            "volume": "66",
+            "author": "Royl",
+            "year": "2011",
+            "journal-title": "Eur Neurol"
+          },
+          {
+            "issue": "4",
+            "key": "10.1016/j.ncl.2015.04.011_bib17",
+            "doi-asserted-by": "crossref",
+            "first-page": "312",
+            "DOI": "10.1136/emj.2003.012765",
+            "article-title": "Dizziness and yield of emergency head CT scan: is it cost effective?",
+            "volume": "22",
+            "author": "Wasay",
+            "year": "2005",
+            "journal-title": "Emerg Med J"
+          },
+          {
+            "issue": "9",
+            "key": "10.1016/j.ncl.2015.04.011_bib18",
+            "doi-asserted-by": "crossref",
+            "first-page": "1030",
+            "DOI": "10.1016/j.ajem.2009.06.007",
+            "article-title": "Value of computed tomography scans in ED dizziness visits: analysis from a nationally representative sample",
+            "volume": "28",
+            "author": "Kerber",
+            "year": "2010",
+            "journal-title": "Am J Emerg Med"
+          },
+          {
+            "issue": "1",
+            "key": "10.1016/j.ncl.2015.04.011_bib19",
+            "doi-asserted-by": "crossref",
+            "first-page": "45",
+            "DOI": "10.1007/s10140-012-1071-y",
+            "article-title": "Utility of head CT in the evaluation of vertigo/dizziness in the emergency department",
+            "volume": "20",
+            "author": "Lawhn-Heath",
+            "year": "2013",
+            "journal-title": "Emerg Radiol"
+          },
+          {
+            "issue": "5",
+            "key": "10.1016/j.ncl.2015.04.011_bib20",
+            "doi-asserted-by": "crossref",
+            "first-page": "1077",
+            "DOI": "10.3174/ajnr.A3325",
+            "article-title": "Yield of CT angiography and contrast-enhanced MR imaging in patients with dizziness",
+            "volume": "34",
+            "author": "Fakhran",
+            "year": "2013",
+            "journal-title": "AJNR Am J Neuroradiol"
+          },
+          {
+            "issue": "9",
+            "key": "10.1016/j.ncl.2015.04.011_bib21",
+            "doi-asserted-by": "crossref",
+            "first-page": "2250",
+            "DOI": "10.1002/lary.23798",
+            "article-title": "The costs and utility of imaging in evaluating dizzy patients in the emergency room",
+            "volume": "123",
+            "author": "Ahsan",
+            "year": "2013",
+            "journal-title": "Laryngoscope"
+          },
+          {
+            "issue": "5",
+            "key": "10.1016/j.ncl.2015.04.011_bib22",
+            "doi-asserted-by": "crossref",
+            "first-page": "665",
+            "DOI": "10.1016/j.ajem.2011.02.038",
+            "article-title": "Practice variation in neuroimaging to evaluate dizziness in the ED",
+            "volume": "30",
+            "author": "Kim",
+            "year": "2012",
+            "journal-title": "Am J Emerg Med"
+          },
+          {
+            "issue": "Suppl 2",
+            "key": "10.1016/j.ncl.2015.04.011_bib23",
+            "doi-asserted-by": "crossref",
+            "first-page": "ii11",
+            "DOI": "10.1136/bmjqs-2012-001616",
+            "article-title": "How much diagnostic safety can we afford, and how should we decide? A health economics perspective",
+            "volume": "22",
+            "author": "Newman-Toker",
+            "year": "2013",
+            "journal-title": "BMJ Qual Saf"
+          },
+          {
+            "issue": "1",
+            "key": "10.1016/j.ncl.2015.04.011_bib24",
+            "doi-asserted-by": "crossref",
+            "first-page": "186",
+            "DOI": "10.1111/j.1365-2753.2009.01133.x",
+            "article-title": "The evidence base for the evaluation and management of dizziness",
+            "volume": "16",
+            "author": "Kerber",
+            "year": "2010",
+            "journal-title": "J Eval Clin Pract"
+          },
+          {
+            "key": "10.1016/j.ncl.2015.04.011_bib25",
+            "series-title": "Diagnosing dizziness in the emergency department-why “what do you mean by ‘dizzy’?” Should not be the first question you ask",
+            "author": "Newman-Toker",
+            "year": "2007"
+          },
+          {
+            "issue": "10",
+            "key": "10.1016/j.ncl.2015.04.011_bib26",
+            "doi-asserted-by": "crossref",
+            "first-page": "1064",
+            "DOI": "10.1111/acem.12234",
+            "article-title": "Diagnosing dizziness: we are teaching the wrong paradigm!",
+            "volume": "20",
+            "author": "Edlow",
+            "year": "2013",
+            "journal-title": "Acad Emerg Med"
+          },
+          {
+            "key": "10.1016/j.ncl.2015.04.011_bib27",
+            "unstructured": "Newman-Toker DE, Staab JP, Bronstein A, et al. Proposed multi-layer structure for the international classification of vestibular disorders [abstract]. Bárány Society XXVI International Congress. Reykjavik, Iceland, August 18–21, 2010."
+          },
+          {
+            "issue": "11",
+            "key": "10.1016/j.ncl.2015.04.011_bib28",
+            "doi-asserted-by": "crossref",
+            "first-page": "1319",
+            "DOI": "10.4065/82.11.1319",
+            "article-title": "Overreliance on symptom quality in diagnosing dizziness: results of a multicenter survey of emergency physicians",
+            "volume": "82",
+            "author": "Stanton",
+            "year": "2007",
+            "journal-title": "Mayo Clin Proc"
+          },
+          {
+            "issue": "3",
+            "key": "10.1016/j.ncl.2015.04.011_bib29",
+            "doi-asserted-by": "crossref",
+            "first-page": "161",
+            "DOI": "10.1007/s10286-010-0114-2",
+            "article-title": "Prevalence and complications of orthostatic dizziness in the general population",
+            "volume": "21",
+            "author": "Radtke",
+            "year": "2011",
+            "journal-title": "Clin Auton Res"
+          },
+          {
+            "issue": "5",
+            "key": "10.1016/j.ncl.2015.04.011_bib30",
+            "doi-asserted-by": "crossref",
+            "first-page": "897",
+            "DOI": "10.1291/hypres.31.897",
+            "article-title": "Population-based study on the prevalence and correlates of orthostatic hypotension/hypertension and orthostatic dizziness",
+            "volume": "31",
+            "author": "Wu",
+            "year": "2008",
+            "journal-title": "Hypertens Res"
+          },
+          {
+            "issue": "2",
+            "key": "10.1016/j.ncl.2015.04.011_bib31",
+            "doi-asserted-by": "crossref",
+            "first-page": "173",
+            "DOI": "10.1111/j.1365-2710.2005.00629.x",
+            "article-title": "High prevalence of orthostatic hypotension and its correlation with potentially causative medications among elderly veterans",
+            "volume": "30",
+            "author": "Poon",
+            "year": "2005",
+            "journal-title": "J Clin Pharm Ther"
+          },
+          {
+            "issue": "10",
+            "key": "10.1016/j.ncl.2015.04.011_bib32",
+            "doi-asserted-by": "crossref",
+            "first-page": "883",
+            "DOI": "10.1136/jnnp.46.10.883",
+            "article-title": "Primary orthostatic cerebral ischaemia",
+            "volume": "46",
+            "author": "Stark",
+            "year": "1983",
+            "journal-title": "J Neurol Neurosurg Psychiatry"
+          },
+          {
+            "issue": "3",
+            "key": "10.1016/j.ncl.2015.04.011_bib33",
+            "doi-asserted-by": "crossref",
+            "first-page": "199",
+            "DOI": "10.1016/S0303-8467(97)00015-2",
+            "article-title": "Spontaneous intracranial hypotension: clinical and magnetic resonance imaging characteristics",
+            "volume": "99",
+            "author": "Blank",
+            "year": "1997",
+            "journal-title": "Clin Neurol Neurosurg"
+          },
+          {
+            "issue": "1",
+            "key": "10.1016/j.ncl.2015.04.011_bib34",
+            "doi-asserted-by": "crossref",
+            "first-page": "1",
+            "DOI": "10.1080/00016489950181855",
+            "article-title": "Diagnostic criteria for central versus peripheral positioning nystagmus and vertigo: a review",
+            "volume": "119",
+            "author": "Buttner",
+            "year": "1999",
+            "journal-title": "Acta Otolaryngol"
+          },
+          {
+            "issue": "9",
+            "key": "10.1016/j.ncl.2015.04.011_bib35",
+            "doi-asserted-by": "crossref",
+            "first-page": "1028",
+            "DOI": "10.1097/00007611-199309000-00011",
+            "article-title": "Immediate orthostatic hypotension: diagnostic value in acutely ill patients",
+            "volume": "86",
+            "author": "Gilbert",
+            "year": "1993",
+            "journal-title": "South Med J"
+          },
+          {
+            "issue": "7",
+            "key": "10.1016/j.ncl.2015.04.011_bib36",
+            "doi-asserted-by": "crossref",
+            "first-page": "710",
+            "DOI": "10.1136/jnnp.2006.100420",
+            "article-title": "Epidemiology of benign paroxysmal positional vertigo: a population based study",
+            "volume": "78",
+            "author": "von Brevern",
+            "year": "2007",
+            "journal-title": "J Neurol Neurosurg Psychiatry"
+          },
+          {
+            "issue": "5 Suppl 4",
+            "key": "10.1016/j.ncl.2015.04.011_bib37",
+            "doi-asserted-by": "crossref",
+            "first-page": "S47",
+            "DOI": "10.1016/j.otohns.2008.08.022",
+            "article-title": "Clinical practice guideline: benign paroxysmal positional vertigo",
+            "volume": "139",
+            "author": "Bhattacharyya",
+            "year": "2008",
+            "journal-title": "Otolaryngol Head Neck Surg"
+          },
+          {
+            "key": "10.1016/j.ncl.2015.04.011_bib38",
+            "unstructured": "von Brevern M, Bertholon P, Brandt T, et al. Benign paroxysmal positional vertigo: diagnostic criteria. J Vestib Res, in press."
+          },
+          {
+            "issue": "5",
+            "key": "10.1016/j.ncl.2015.04.011_bib39",
+            "doi-asserted-by": "crossref",
+            "first-page": "357",
+            "DOI": "10.1093/qjmed/hci057",
+            "article-title": "Benign paroxysmal positional vertigo: clinical characteristics of dizzy patients referred to a Falls and Syncope Unit",
+            "volume": "98",
+            "author": "Lawson",
+            "year": "2005",
+            "journal-title": "QJM"
+          },
+          {
+            "issue": "22",
+            "key": "10.1016/j.ncl.2015.04.011_bib40",
+            "doi-asserted-by": "crossref",
+            "first-page": "2067",
+            "DOI": "10.1212/01.wnl.0000313378.77444.ac",
+            "article-title": "Practice parameter: therapies for benign paroxysmal positional vertigo (an evidence-based review): report of the Quality Standards Subcommittee of the American Academy of Neurology",
+            "volume": "70",
+            "author": "Fife",
+            "year": "2008",
+            "journal-title": "Neurology"
+          },
+          {
+            "issue": "6",
+            "key": "10.1016/j.ncl.2015.04.011_bib41",
+            "doi-asserted-by": "crossref",
+            "first-page": "497",
+            "DOI": "10.1053/ajem.2002.34964",
+            "article-title": "Prevalence of orthostatic hypotension among patients presenting with syncope in the ED",
+            "volume": "20",
+            "author": "Sarasin",
+            "year": "2002",
+            "journal-title": "Am J Emerg Med"
+          },
+          {
+            "issue": "12",
+            "key": "10.1016/j.ncl.2015.04.011_bib42",
+            "doi-asserted-by": "crossref",
+            "first-page": "2087",
+            "DOI": "10.1007/s11606-008-0801-z",
+            "article-title": "How often is dizziness from primary cardiovascular disease true vertigo? A systematic review",
+            "volume": "23",
+            "author": "Newman-Toker",
+            "year": "2008",
+            "journal-title": "J Gen Intern Med"
+          },
+          {
+            "issue": "11",
+            "key": "10.1016/j.ncl.2015.04.011_bib43",
+            "doi-asserted-by": "crossref",
+            "first-page": "1022",
+            "DOI": "10.1001/jama.281.11.1022",
+            "article-title": "The rational clinical examination. Is this patient hypovolemic?",
+            "volume": "281",
+            "author": "McGee",
+            "year": "1999",
+            "journal-title": "JAMA"
+          },
+          {
+            "issue": "5 Neuro-otology",
+            "key": "10.1016/j.ncl.2015.04.011_bib44",
+            "first-page": "1086",
+            "article-title": "Recurrent spontaneous attacks of dizziness",
+            "volume": "18",
+            "author": "Lempert",
+            "year": "2012",
+            "journal-title": "Continuum"
+          },
+          {
+            "issue": "9253",
+            "key": "10.1016/j.ncl.2015.04.011_bib45",
+            "doi-asserted-by": "crossref",
+            "first-page": "348",
+            "DOI": "10.1016/S0140-6736(00)03642-4",
+            "article-title": "Observations on recurrent syncope and presyncope in 641 patients",
+            "volume": "357",
+            "author": "Mathias",
+            "year": "2001",
+            "journal-title": "Lancet"
+          },
+          {
+            "issue": "10",
+            "key": "10.1016/j.ncl.2015.04.011_bib46",
+            "first-page": "883",
+            "article-title": "Episodic vertigo related to migraine (90 cases): vestibular migraine?",
+            "volume": "246",
+            "author": "Dieterich",
+            "year": "1999",
+            "journal-title": "J Neurol"
+          },
+          {
+            "issue": "1–3",
+            "key": "10.1016/j.ncl.2015.04.011_bib47",
+            "doi-asserted-by": "crossref",
+            "first-page": "273",
+            "DOI": "10.1016/j.jad.2008.04.014",
+            "article-title": "Non-fearful vs. fearful panic attacks: a general population study from the National Comorbidity Survey",
+            "volume": "112",
+            "author": "Chen",
+            "year": "2009",
+            "journal-title": "J Affect Disord"
+          },
+          {
+            "key": "10.1016/j.ncl.2015.04.011_bib48",
+            "doi-asserted-by": "crossref",
+            "first-page": "644",
+            "DOI": "10.1111/j.1468-1331.2010.03241.x",
+            "article-title": "Diagnostic difficulties in the classification of transient neurological attacks",
+            "volume": "18",
+            "author": "Fonseca",
+            "year": "2011",
+            "journal-title": "Eur J Neurol"
+          },
+          {
+            "issue": "3",
+            "key": "10.1016/j.ncl.2015.04.011_bib49",
+            "doi-asserted-by": "crossref",
+            "first-page": "272",
+            "DOI": "10.1080/00016480701509933",
+            "article-title": "Screening for Meniere's disease in the general population - the needle in the haystack",
+            "volume": "128",
+            "author": "Radtke",
+            "year": "2008",
+            "journal-title": "Acta Otolaryngol"
+          },
+          {
+            "issue": "3",
+            "key": "10.1016/j.ncl.2015.04.011_bib50",
+            "doi-asserted-by": "crossref",
+            "first-page": "154",
+            "DOI": "10.1097/MEJ.0b013e3282efd519",
+            "article-title": "Carbon monoxide poisoning: how many patients do we miss?",
+            "volume": "15",
+            "author": "Keles",
+            "year": "2008",
+            "journal-title": "Eur J Emerg Med"
+          },
+          {
+            "issue": "9636",
+            "key": "10.1016/j.ncl.2015.04.011_bib51",
+            "doi-asserted-by": "crossref",
+            "first-page": "406",
+            "DOI": "10.1016/S0140-6736(08)61161-7",
+            "article-title": "Meniere's disease",
+            "volume": "372",
+            "author": "Sajjadi",
+            "year": "2008",
+            "journal-title": "Lancet"
+          },
+          {
+            "issue": "3",
+            "key": "10.1016/j.ncl.2015.04.011_bib52",
+            "doi-asserted-by": "crossref",
+            "first-page": "565",
+            "DOI": "10.1016/S0030-6665(02)00017-8",
+            "article-title": "History of Meniere's disease and its clinical presentation",
+            "volume": "35",
+            "author": "Mancini",
+            "year": "2002",
+            "journal-title": "Otolaryngol Clin North Am"
+          },
+          {
+            "issue": "6",
+            "key": "10.1016/j.ncl.2015.04.011_bib53",
+            "doi-asserted-by": "crossref",
+            "first-page": "440",
+            "DOI": "10.1111/j.1749-4486.2007.01552.x",
+            "article-title": "Symptoms experienced by patients with peripheral vestibular disorders: evaluation of the Vertigo Symptom Scale for clinical application",
+            "volume": "32",
+            "author": "Faag",
+            "year": "2007",
+            "journal-title": "Clin Otolaryngol"
+          },
+          {
+            "issue": "1–2",
+            "key": "10.1016/j.ncl.2015.04.011_bib54",
+            "doi-asserted-by": "crossref",
+            "first-page": "153",
+            "DOI": "10.1016/j.jns.2011.08.039",
+            "article-title": "Audiovestibular loss in anterior inferior cerebellar artery territory infarction: a window to early detection?",
+            "volume": "313",
+            "author": "Lee",
+            "year": "2012",
+            "journal-title": "J Neurol Sci"
+          },
+          {
+            "issue": "6",
+            "key": "10.1016/j.ncl.2015.04.011_bib55",
+            "doi-asserted-by": "crossref",
+            "first-page": "880",
+            "DOI": "10.1212/01.wnl.0000203647.48422.dd",
+            "article-title": "Basilar-type migraine: clinical, epidemiologic, and genetic features",
+            "volume": "66",
+            "author": "Kirchmann",
+            "year": "2006",
+            "journal-title": "Neurology"
+          },
+          {
+            "key": "10.1016/j.ncl.2015.04.011_bib56",
+            "doi-asserted-by": "crossref",
+            "first-page": "242",
+            "DOI": "10.1111/j.1749-6632.2009.03852.x",
+            "article-title": "Vertigo as a symptom of migraine",
+            "volume": "1164",
+            "author": "Lempert",
+            "year": "2009",
+            "journal-title": "Ann N Y Acad Sci"
+          },
+          {
+            "issue": "3",
+            "key": "10.1016/j.ncl.2015.04.011_bib57",
+            "doi-asserted-by": "crossref",
+            "first-page": "426",
+            "DOI": "10.1111/j.1526-4610.2008.01283.x",
+            "article-title": "Relationship between basilar-type migraine and migrainous vertigo",
+            "volume": "49",
+            "author": "Wang",
+            "year": "2009",
+            "journal-title": "Headache"
+          },
+          {
+            "issue": "6",
+            "key": "10.1016/j.ncl.2015.04.011_bib58",
+            "doi-asserted-by": "crossref",
+            "first-page": "1028",
+            "DOI": "10.1212/01.wnl.0000237539.09942.06",
+            "article-title": "Migrainous vertigo: prevalence and impact on quality of life",
+            "volume": "67",
+            "author": "Neuhauser",
+            "year": "2006",
+            "journal-title": "Neurology"
+          },
+          {
+            "issue": "4",
+            "key": "10.1016/j.ncl.2015.04.011_bib59",
+            "doi-asserted-by": "crossref",
+            "first-page": "167",
+            "DOI": "10.3233/VES-2012-0453",
+            "article-title": "Vestibular migraine: diagnostic criteria",
+            "volume": "22",
+            "author": "Lempert",
+            "year": "2012",
+            "journal-title": "J Vestib Res"
+          },
+          {
+            "issue": "8",
+            "key": "10.1016/j.ncl.2015.04.011_bib60",
+            "doi-asserted-by": "crossref",
+            "first-page": "888",
+            "DOI": "10.1111/j.1540-8167.2009.01466.x",
+            "article-title": "Design and use of a quantitative scale for measuring presyncope",
+            "volume": "20",
+            "author": "Sheldon",
+            "year": "2009",
+            "journal-title": "J Cardiovasc Electrophysiol"
+          },
+          {
+            "issue": "8",
+            "key": "10.1016/j.ncl.2015.04.011_bib61",
+            "doi-asserted-by": "crossref",
+            "first-page": "1625",
+            "DOI": "10.1001/archinte.1991.00400080109021",
+            "article-title": "Clinical significance of a dizziness history in medical patients with syncope",
+            "volume": "151",
+            "author": "Sloane",
+            "year": "1991",
+            "journal-title": "Arch Intern Med"
+          },
+          {
+            "issue": "4",
+            "key": "10.1016/j.ncl.2015.04.011_bib62",
+            "doi-asserted-by": "crossref",
+            "first-page": "365",
+            "DOI": "10.1016/S0002-9343(99)80315-5",
+            "article-title": "The value of the clinical history in the differentiation of syncope due to ventricular tachycardia, atrioventricular block, and neurocardiogenic syncope",
+            "volume": "98",
+            "author": "Calkins",
+            "year": "1995",
+            "journal-title": "Am J Med"
+          },
+          {
+            "issue": "3",
+            "key": "10.1016/j.ncl.2015.04.011_bib63",
+            "doi-asserted-by": "crossref",
+            "first-page": "127",
+            "DOI": "10.1007/s10286-008-0465-0",
+            "article-title": "Influence of age and gender on the occurrence and presentation of reflex syncope",
+            "volume": "18",
+            "author": "Romme",
+            "year": "2008",
+            "journal-title": "Clin Auton Res"
+          },
+          {
+            "issue": "4",
+            "key": "10.1016/j.ncl.2015.04.011_bib64",
+            "doi-asserted-by": "crossref",
+            "first-page": "648",
+            "DOI": "10.1111/ene.12622",
+            "article-title": "Vertigo and nystagmus in orthostatic hypotension",
+            "volume": "22",
+            "author": "Choi",
+            "year": "2015",
+            "journal-title": "Eur J Neurol"
+          },
+          {
+            "issue": "8",
+            "key": "10.1016/j.ncl.2015.04.011_bib65",
+            "doi-asserted-by": "crossref",
+            "first-page": "438",
+            "DOI": "10.1038/nrneurol.2009.99",
+            "article-title": "A guide to disorders causing transient loss of consciousness: focus on syncope",
+            "volume": "5",
+            "author": "van Dijk",
+            "year": "2009",
+            "journal-title": "Nat Rev Neurol"
+          },
+          {
+            "issue": "22",
+            "key": "10.1016/j.ncl.2015.04.011_bib66",
+            "doi-asserted-by": "crossref",
+            "first-page": "2360",
+            "DOI": "10.1056/NEJMcp052466",
+            "article-title": "Clinical practice. Panic disorder",
+            "volume": "354",
+            "author": "Katon",
+            "year": "2006",
+            "journal-title": "N Engl J Med"
+          },
+          {
+            "issue": "1",
+            "key": "10.1016/j.ncl.2015.04.011_bib67",
+            "doi-asserted-by": "crossref",
+            "first-page": "163",
+            "DOI": "10.1016/j.ncl.2010.11.002",
+            "article-title": "Ictal panic and interictal panic attacks: diagnostic and therapeutic principles",
+            "volume": "29",
+            "author": "Kanner",
+            "year": "2011",
+            "journal-title": "Neurol Clin"
+          },
+          {
+            "issue": "5",
+            "key": "10.1016/j.ncl.2015.04.011_bib68",
+            "doi-asserted-by": "crossref",
+            "first-page": "564",
+            "DOI": "10.1161/01.STR.6.5.564",
+            "article-title": "A classification and outline of cerebrovascular diseases. II",
+            "volume": "6",
+            "year": "1975",
+            "journal-title": "Stroke"
+          },
+          {
+            "issue": "4",
+            "key": "10.1016/j.ncl.2015.04.011_bib69",
+            "doi-asserted-by": "crossref",
+            "first-page": "378",
+            "DOI": "10.1159/000348849",
+            "article-title": "Nonfocal symptoms are more frequent in patients with vertebral artery than carotid artery stenosis",
+            "volume": "35",
+            "author": "Compter",
+            "year": "2013",
+            "journal-title": "Cerebrovasc Dis"
+          },
+          {
+            "issue": "1–2",
+            "key": "10.1016/j.ncl.2015.04.011_bib70",
+            "doi-asserted-by": "crossref",
+            "first-page": "39",
+            "DOI": "10.1016/j.jns.2012.11.012",
+            "article-title": "Transient neurological attack before vertebrobasilar stroke",
+            "volume": "325",
+            "author": "Hoshino",
+            "year": "2013",
+            "journal-title": "J Neurol Sci"
+          },
+          {
+            "issue": "1",
+            "key": "10.1016/j.ncl.2015.04.011_bib71",
+            "doi-asserted-by": "crossref",
+            "first-page": "65",
+            "DOI": "10.1016/S1474-4422(12)70299-5",
+            "article-title": "Transient isolated brainstem symptoms preceding posterior circulation stroke: a population-based study",
+            "volume": "12",
+            "author": "Paul",
+            "year": "2013",
+            "journal-title": "Lancet Neurol"
+          },
+          {
+            "issue": "3",
+            "key": "10.1016/j.ncl.2015.04.011_bib72",
+            "doi-asserted-by": "crossref",
+            "first-page": "281",
+            "DOI": "10.1001/archneur.1989.00520390047014",
+            "article-title": "Vertigo of vascular origin. Clinical and electronystagmographic features in 84 cases",
+            "volume": "46",
+            "author": "Grad",
+            "year": "1989",
+            "journal-title": "Arch Neurol"
+          },
+          {
+            "issue": "1",
+            "key": "10.1016/j.ncl.2015.04.011_bib73",
+            "doi-asserted-by": "crossref",
+            "first-page": "94",
+            "DOI": "10.1212/WNL.47.1.94",
+            "article-title": "Isolated vertigo as a manifestation of vertebrobasilar ischemia",
+            "volume": "47",
+            "author": "Gomez",
+            "year": "1996",
+            "journal-title": "Neurology"
+          },
+          {
+            "issue": "5",
+            "key": "10.1016/j.ncl.2015.04.011_bib74",
+            "doi-asserted-by": "crossref",
+            "first-page": "245",
+            "DOI": "10.1097/NRL.0b013e31826754e1",
+            "article-title": "Clinical characteristics of symptomatic vertebral artery dissection: a systematic review",
+            "volume": "18",
+            "author": "Gottesman",
+            "year": "2012",
+            "journal-title": "Neurologist"
+          },
+          {
+            "issue": "5",
+            "key": "10.1016/j.ncl.2015.04.011_bib75",
+            "doi-asserted-by": "crossref",
+            "first-page": "529",
+            "DOI": "10.1001/archotol.1967.00760040531010",
+            "article-title": "Vertigo in cerebrovascular disease",
+            "volume": "85",
+            "author": "Fisher",
+            "year": "1967",
+            "journal-title": "Arch Otolaryngol"
+          },
+          {
+            "issue": "12",
+            "key": "10.1016/j.ncl.2015.04.011_bib76",
+            "doi-asserted-by": "crossref",
+            "first-page": "1621",
+            "DOI": "10.1136/jnnp.74.12.1621",
+            "article-title": "Heralding manifestations of basilar artery occlusion with lethal or severe stroke",
+            "volume": "74",
+            "author": "von Campe",
+            "year": "2003",
+            "journal-title": "J Neurol Neurosurg Psychiatry"
+          },
+          {
+            "issue": "3",
+            "key": "10.1016/j.ncl.2015.04.011_bib77",
+            "doi-asserted-by": "crossref",
+            "first-page": "316",
+            "DOI": "10.1016/j.annemergmed.2007.08.016",
+            "article-title": "Short-term prognosis of stroke among patients diagnosed in the emergency department with a transient ischemic attack",
+            "volume": "51",
+            "author": "Shah",
+            "year": "2008",
+            "journal-title": "Ann Emerg Med"
+          },
+          {
+            "issue": "11",
+            "key": "10.1016/j.ncl.2015.04.011_bib78",
+            "doi-asserted-by": "crossref",
+            "first-page": "953",
+            "DOI": "10.1016/S1474-4422(07)70248-X",
+            "article-title": "A transient ischaemic attack clinic with round-the-clock access (SOS-TIA): feasibility and effects",
+            "volume": "6",
+            "author": "Lavallee",
+            "year": "2007",
+            "journal-title": "Lancet Neurol"
+          },
+          {
+            "issue": "9596",
+            "key": "10.1016/j.ncl.2015.04.011_bib79",
+            "doi-asserted-by": "crossref",
+            "first-page": "1432",
+            "DOI": "10.1016/S0140-6736(07)61448-2",
+            "article-title": "Effect of urgent treatment of transient ischaemic attack and minor stroke on early recurrent stroke (EXPRESS study): a prospective population-based sequential comparison",
+            "volume": "370",
+            "author": "Rothwell",
+            "year": "2007",
+            "journal-title": "Lancet"
+          },
+          {
+            "issue": "Pt 9",
+            "key": "10.1016/j.ncl.2015.04.011_bib80",
+            "doi-asserted-by": "crossref",
+            "first-page": "1940",
+            "DOI": "10.1093/brain/awg197",
+            "article-title": "Prognosis of vertebrobasilar transient ischaemic attack and minor stroke",
+            "volume": "126",
+            "author": "Flossmann",
+            "year": "2003",
+            "journal-title": "Brain"
+          },
+          {
+            "issue": "8",
+            "key": "10.1016/j.ncl.2015.04.011_bib81",
+            "doi-asserted-by": "crossref",
+            "first-page": "2732",
+            "DOI": "10.1161/STROKEAHA.109.553859",
+            "article-title": "Vertebrobasilar stenosis predicts high early recurrent stroke risk in posterior circulation stroke and TIA",
+            "volume": "40",
+            "author": "Gulli",
+            "year": "2009",
+            "journal-title": "Stroke"
+          },
+          {
+            "issue": "10",
+            "key": "10.1016/j.ncl.2015.04.011_bib82",
+            "doi-asserted-by": "crossref",
+            "first-page": "2071",
+            "DOI": "10.1002/lary.20597",
+            "article-title": "Vertebrobasilar insufficiency presenting as isolated positional vertigo or dizziness: a double-blind retrospective cohort study",
+            "volume": "119",
+            "author": "Moubayed",
+            "year": "2009",
+            "journal-title": "Laryngoscope"
+          },
+          {
+            "issue": "6",
+            "key": "10.1016/j.ncl.2015.04.011_bib83",
+            "doi-asserted-by": "crossref",
+            "first-page": "1484",
+            "DOI": "10.1161/STROKEAHA.111.646414",
+            "article-title": "Application of the ABCD2 score to identify cerebrovascular causes of dizziness in the emergency department",
+            "volume": "43",
+            "author": "Navi",
+            "year": "2012",
+            "journal-title": "Stroke"
+          },
+          {
+            "issue": "3",
+            "key": "10.1016/j.ncl.2015.04.011_bib84",
+            "doi-asserted-by": "crossref",
+            "first-page": "863",
+            "DOI": "10.1161/STROKEAHA.111.636506",
+            "article-title": "Patients with transient ischemic attack with ABCD2 <4 can have similar 90-day stroke risk as patients with transient ischemic attack with ABCD2 ≥4",
+            "volume": "43",
+            "author": "Amarenco",
+            "year": "2012",
+            "journal-title": "Stroke"
+          },
+          {
+            "issue": "4",
+            "key": "10.1016/j.ncl.2015.04.011_bib85",
+            "first-page": "222",
+            "article-title": "Dizziness following head injury: a neuro-otological study",
+            "volume": "242",
+            "author": "Davies",
+            "year": "1995",
+            "journal-title": "J Neurol"
+          },
+          {
+            "issue": "2",
+            "key": "10.1016/j.ncl.2015.04.011_bib86",
+            "doi-asserted-by": "crossref",
+            "first-page": "232",
+            "DOI": "10.1097/MAO.0b013e3181c993c3",
+            "article-title": "Blast exposure: vestibular consequences and associated characteristics",
+            "volume": "31",
+            "author": "Hoffer",
+            "year": "2010",
+            "journal-title": "Otol Neurotol"
+          },
+          {
+            "issue": "3",
+            "key": "10.1016/j.ncl.2015.04.011_bib87",
+            "doi-asserted-by": "crossref",
+            "first-page": "246",
+            "DOI": "10.1177/000348940311200310",
+            "article-title": "Acute peripheral vestibular deficits after whiplash injuries",
+            "volume": "112",
+            "author": "Vibert",
+            "year": "2003",
+            "journal-title": "Ann Otol Rhinol Laryngol"
+          },
+          {
+            "issue": "4",
+            "key": "10.1016/j.ncl.2015.04.011_bib88",
+            "doi-asserted-by": "crossref",
+            "first-page": "447",
+            "DOI": "10.1097/MAO.0b013e318030d356",
+            "article-title": "Barotrauma and decompression illness of the inner ear: 46 cases during treatment and follow-up",
+            "volume": "28",
+            "author": "Klingmann",
+            "year": "2007",
+            "journal-title": "Otol Neurotol"
+          },
+          {
+            "issue": "3",
+            "key": "10.1016/j.ncl.2015.04.011_bib89",
+            "first-page": "657",
+            "article-title": "The association between the postconcussion symptoms and clinical outcomes for patients with mild traumatic brain injury",
+            "volume": "62",
+            "author": "Yang",
+            "year": "2007",
+            "journal-title": "J Trauma"
+          },
+          {
+            "issue": "11",
+            "key": "10.1016/j.ncl.2015.04.011_bib90",
+            "doi-asserted-by": "crossref",
+            "first-page": "3504",
+            "DOI": "10.1161/STROKEAHA.109.551234",
+            "article-title": "HINTS to diagnose stroke in the acute vestibular syndrome: three-step bedside oculomotor examination more sensitive than early MRI diffusion-weighted imaging",
+            "volume": "40",
+            "author": "Kattah",
+            "year": "2009",
+            "journal-title": "Stroke"
+          },
+          {
+            "issue": "5",
+            "key": "10.1016/j.ncl.2015.04.011_bib91",
+            "first-page": "499",
+            "article-title": "A 19-year-old woman with unexplained weakness and dizziness",
+            "volume": "23",
+            "author": "Trevino",
+            "year": "1997",
+            "journal-title": "J Emerg Nurs"
+          },
+          {
+            "issue": "9",
+            "key": "10.1016/j.ncl.2015.04.011_bib92",
+            "doi-asserted-by": "crossref",
+            "first-page": "1282",
+            "DOI": "10.1345/aph.1L001",
+            "article-title": "Aminoglycoside-induced vestibular injury: maintaining a sense of balance",
+            "volume": "42",
+            "author": "Ariano",
+            "year": "2008",
+            "journal-title": "Ann Pharmacother"
+          },
+          {
+            "issue": "11",
+            "key": "10.1016/j.ncl.2015.04.011_bib93",
+            "doi-asserted-by": "crossref",
+            "first-page": "701",
+            "DOI": "10.5694/mja11.10850",
+            "article-title": "Gentamicin ototoxicity: a 23-year selected case series of 103 patients",
+            "volume": "196",
+            "author": "Ahmed",
+            "year": "2012",
+            "journal-title": "Med J Aust"
+          },
+          {
+            "issue": "12",
+            "key": "10.1016/j.ncl.2015.04.011_bib94",
+            "doi-asserted-by": "crossref",
+            "first-page": "458",
+            "DOI": "10.1056/NEJM195203202461207",
+            "article-title": "Living without a balancing mechanism",
+            "volume": "246",
+            "author": "Crawford",
+            "year": "1952",
+            "journal-title": "N Engl J Med"
+          },
+          {
+            "issue": "9",
+            "key": "10.1016/j.ncl.2015.04.011_bib95",
+            "doi-asserted-by": "crossref",
+            "first-page": "E571",
+            "DOI": "10.1503/cmaj.100174",
+            "article-title": "Does my dizzy patient have a stroke? A systematic review of bedside diagnosis in acute vestibular syndrome",
+            "volume": "183",
+            "author": "Tarnutzer",
+            "year": "2011",
+            "journal-title": "CMAJ"
+          },
+          {
+            "issue": "5 Neuro-otology",
+            "key": "10.1016/j.ncl.2015.04.011_bib96",
+            "first-page": "1016",
+            "article-title": "Symptoms and signs of neuro-otologic disorders",
+            "volume": "18",
+            "author": "Newman-Toker",
+            "year": "2012",
+            "journal-title": "Continuum (Minneap Minn)"
+          },
+          {
+            "issue": "5",
+            "key": "10.1016/j.ncl.2015.04.011_bib97",
+            "doi-asserted-by": "crossref",
+            "first-page": "601",
+            "DOI": "10.1080/00016480701596096",
+            "article-title": "Frontline providers harbor misconceptions about the bedside evaluation of dizzy patients",
+            "volume": "128",
+            "author": "Newman-Toker",
+            "year": "2008",
+            "journal-title": "Acta Otolaryngol"
+          },
+          {
+            "issue": "1",
+            "key": "10.1016/j.ncl.2015.04.011_bib98",
+            "doi-asserted-by": "crossref",
+            "first-page": "43",
+            "DOI": "10.1136/emj.2010.104844",
+            "article-title": "Does intracerebral haemorrhage mimic benign dizziness presentations? A population based study",
+            "volume": "29",
+            "author": "Kerber",
+            "year": "2012",
+            "journal-title": "Emerg Med J"
+          },
+          {
+            "issue": "6",
+            "key": "10.1016/j.ncl.2015.04.011_bib99",
+            "first-page": "e165",
+            "article-title": "Prolonged dysphagia due to Listeria-rhombencephalitis with brainstem abscess and acute polyradiculoneuritis",
+            "volume": "52",
+            "author": "Smiatacz",
+            "year": "2006",
+            "journal-title": "J Infect"
+          },
+          {
+            "issue": "24 Pt 2",
+            "key": "10.1016/j.ncl.2015.04.011_bib100",
+            "doi-asserted-by": "crossref",
+            "first-page": "2378",
+            "DOI": "10.1212/01.wnl.0000314685.01433.0d",
+            "article-title": "Normal head impulse test differentiates acute cerebellar strokes from vestibular neuritis",
+            "volume": "70",
+            "author": "Newman-Toker",
+            "year": "2008",
+            "journal-title": "Neurology"
+          },
+          {
+            "issue": "10",
+            "key": "10.1016/j.ncl.2015.04.011_bib101",
+            "doi-asserted-by": "crossref",
+            "first-page": "986",
+            "DOI": "10.1111/acem.12223",
+            "article-title": "HINTS Outperforms ABCD2 to screen for stroke in acute continuous vertigo and dizziness",
+            "volume": "20",
+            "author": "Newman-Toker",
+            "year": "2013",
+            "journal-title": "Acad Emerg Med"
+          },
+          {
+            "issue": "4",
+            "key": "10.1016/j.ncl.2015.04.011_bib102",
+            "doi-asserted-by": "crossref",
+            "first-page": "458",
+            "DOI": "10.1136/jnnp.2007.123596",
+            "article-title": "Bedside differentiation of vestibular neuritis from central “vestibular pseudoneuritis”",
+            "volume": "79",
+            "author": "Cnyrim",
+            "year": "2008",
+            "journal-title": "J Neurol Neurosurg Psychiatry"
+          },
+          {
+            "issue": "5",
+            "key": "10.1016/j.ncl.2015.04.011_bib103",
+            "first-page": "855",
+            "article-title": "Diagnostic accuracy of acute vestibular syndrome at the bedside in a stroke unit",
+            "volume": "258",
+            "author": "Chen",
+            "year": "2011",
+            "journal-title": "J Neurol"
+          },
+          {
+            "issue": "3",
+            "key": "10.1016/j.ncl.2015.04.011_bib104",
+            "doi-asserted-by": "crossref",
+            "first-page": "475",
+            "DOI": "10.1177/0194599812472614",
+            "article-title": "Cerebellar infarctions mimicking acute peripheral vertigo: how to avoid misdiagnosis?",
+            "volume": "148",
+            "author": "Casani",
+            "year": "2013",
+            "journal-title": "Otolaryngol Head Neck Surg"
+          },
+          {
+            "issue": "5–6",
+            "key": "10.1016/j.ncl.2015.04.011_bib105",
+            "doi-asserted-by": "crossref",
+            "first-page": "322",
+            "DOI": "10.1159/000353285",
+            "article-title": "Nystagmus-based approach to vertebrobasilar stroke presenting as vertigo without initial neurologic signs",
+            "volume": "70",
+            "author": "Kim",
+            "year": "2013",
+            "journal-title": "Eur Neurol"
+          },
+          {
+            "issue": "2",
+            "key": "10.1016/j.ncl.2015.04.011_bib106",
+            "doi-asserted-by": "crossref",
+            "first-page": "114",
+            "DOI": "10.1159/000345643",
+            "article-title": "Head-Shaking aids in the diagnosis of acute audiovestibular loss due to anterior inferior cerebellar artery infarction",
+            "volume": "18",
+            "author": "Huh",
+            "year": "2013",
+            "journal-title": "Audiol Neurootol"
+          },
+          {
+            "issue": "2",
+            "key": "10.1016/j.ncl.2015.04.011_bib107",
+            "doi-asserted-by": "crossref",
+            "first-page": "140",
+            "DOI": "10.3109/00016489.2013.832377",
+            "article-title": "Differential diagnosis of vertigo and dizziness in the emergency department",
+            "volume": "134",
+            "author": "Ozono",
+            "year": "2014",
+            "journal-title": "Acta Otolaryngol"
+          },
+          {
+            "issue": "10",
+            "key": "10.1016/j.ncl.2015.04.011_bib108",
+            "doi-asserted-by": "crossref",
+            "first-page": "1113",
+            "DOI": "10.1136/jnnp.2006.109512",
+            "article-title": "Accuracy of the bedside head impulse test in detecting vestibular hypofunction",
+            "volume": "78",
+            "author": "Jorns-Haderli",
+            "year": "2007",
+            "journal-title": "J Neurol Neurosurg Psychiatry"
+          },
+          {
+            "issue": "2",
+            "key": "10.1016/j.ncl.2015.04.011_bib109",
+            "doi-asserted-by": "crossref",
+            "first-page": "126",
+            "DOI": "10.1111/1742-6723.12372",
+            "article-title": "Can emergency physicians accurately and reliably assess acute vertigo in the emergency department?",
+            "volume": "27",
+            "author": "Vanni",
+            "year": "2015",
+            "journal-title": "Emerg Med Australas"
+          },
+          {
+            "issue": "4",
+            "key": "10.1016/j.ncl.2015.04.011_bib110",
+            "doi-asserted-by": "crossref",
+            "first-page": "1158",
+            "DOI": "10.1161/STROKEAHA.111.000033",
+            "article-title": "Quantitative video-oculography to help diagnose stroke in acute vertigo and dizziness: toward an ECG for the eyes",
+            "volume": "44",
+            "author": "Newman-Toker",
+            "year": "2013",
+            "journal-title": "Stroke"
+          },
+          {
+            "issue": "3",
+            "key": "10.1016/j.ncl.2015.04.011_bib111",
+            "doi-asserted-by": "crossref",
+            "first-page": "457",
+            "DOI": "10.1097/MAO.0000000000000638",
+            "article-title": "VOR gain by head impulse video-oculography differentiates acute vestibular neuritis from stroke",
+            "volume": "36",
+            "author": "Mantokoudis",
+            "year": "2015",
+            "journal-title": "Otol Neurotol"
+          },
+          {
+            "issue": "1",
+            "key": "10.1016/j.ncl.2015.04.011_bib112",
+            "doi-asserted-by": "crossref",
+            "first-page": "39",
+            "DOI": "10.1159/000362780",
+            "article-title": "Quantifying the vestibulo-ocular reflex with video-oculography: nature and frequency of artifacts",
+            "volume": "20",
+            "author": "Mantokoudis",
+            "year": "2015",
+            "journal-title": "Audiol Neurootol"
+          },
+          {
+            "issue": "5",
+            "key": "10.1016/j.ncl.2015.04.011_bib113",
+            "doi-asserted-by": "crossref",
+            "first-page": "559",
+            "DOI": "10.1016/j.jemermed.2011.05.101",
+            "article-title": "Comparative sensitivity of computed tomography vs. magnetic resonance imaging for detecting acute posterior fossa infarct",
+            "volume": "42",
+            "author": "Hwang",
+            "year": "2012",
+            "journal-title": "J Emerg Med"
+          },
+          {
+            "issue": "9558",
+            "key": "10.1016/j.ncl.2015.04.011_bib114",
+            "doi-asserted-by": "crossref",
+            "first-page": "293",
+            "DOI": "10.1016/S0140-6736(07)60151-2",
+            "article-title": "Magnetic resonance imaging and computed tomography in emergency assessment of patients with suspected acute stroke: a prospective comparison",
+            "volume": "369",
+            "author": "Chalela",
+            "year": "2007",
+            "journal-title": "Lancet"
+          },
+          {
+            "issue": "10",
+            "key": "10.1016/j.ncl.2015.04.011_bib115",
+            "doi-asserted-by": "crossref",
+            "first-page": "951",
+            "DOI": "10.1016/S1474-4422(08)70216-3",
+            "article-title": "Diagnosis and initial management of cerebellar infarction",
+            "volume": "7",
+            "author": "Edlow",
+            "year": "2008",
+            "journal-title": "Lancet Neurol"
+          },
+          {
+            "issue": "2",
+            "key": "10.1016/j.ncl.2015.04.011_bib116",
+            "doi-asserted-by": "crossref",
+            "first-page": "169",
+            "DOI": "10.1212/WNL.0000000000000573",
+            "article-title": "Small strokes causing severe vertigo: frequency of false-negative MRIs and nonlacunar mechanisms",
+            "volume": "83",
+            "author": "Saber Tehrani",
+            "year": "2014",
+            "journal-title": "Neurology"
+          },
+          {
+            "issue": "5",
+            "key": "10.1016/j.ncl.2015.04.011_bib117",
+            "doi-asserted-by": "crossref",
+            "first-page": "577",
+            "DOI": "10.1016/j.anl.2011.01.017",
+            "article-title": "False-negative diffusion-weighted MRI in acute cerebellar stroke",
+            "volume": "38",
+            "author": "Morita",
+            "year": "2011",
+            "journal-title": "Auris Nasus Larynx"
+          },
+          {
+            "issue": "1–2",
+            "key": "10.1016/j.ncl.2015.04.011_bib118",
+            "doi-asserted-by": "crossref",
+            "first-page": "62",
+            "DOI": "10.1016/j.jns.2012.10.002",
+            "article-title": "Early use of MRI improves diagnostic accuracy in young adults with stroke",
+            "volume": "324",
+            "author": "Bhattacharya",
+            "year": "2013",
+            "journal-title": "J Neurol Sci"
+          },
+          {
+            "issue": "2",
+            "key": "10.1016/j.ncl.2015.04.011_bib119",
+            "doi-asserted-by": "crossref",
+            "first-page": "155",
+            "DOI": "10.1515/dx-2013-0038",
+            "article-title": "Missed diagnosis of stroke in the emergency department: a cross-sectional analysis of a large population-based sample",
+            "volume": "1",
+            "author": "Newman-Toker",
+            "year": "2014",
+            "journal-title": "Diagnosis"
+          },
+          {
+            "issue": "4",
+            "key": "10.1016/j.ncl.2015.04.011_bib120",
+            "doi-asserted-by": "crossref",
+            "first-page": "e35923",
+            "DOI": "10.1371/journal.pone.0035923",
+            "article-title": "Increased risk of vascular events in emergency room patients discharged home with diagnosis of dizziness or vertigo: a 3-year follow-up study",
+            "volume": "7",
+            "author": "Lee",
+            "year": "2012",
+            "journal-title": "PLoS One"
+          },
+          {
+            "issue": "6",
+            "key": "10.1016/j.ncl.2015.04.011_bib121",
+            "first-page": "1649",
+            "article-title": "Multiple sclerosis as a cause of the acute vestibular syndrome",
+            "volume": "260",
+            "author": "Pula",
+            "year": "2013",
+            "journal-title": "J Neurol"
+          },
+          {
+            "issue": "5",
+            "key": "10.1016/j.ncl.2015.04.011_bib122",
+            "doi-asserted-by": "crossref",
+            "first-page": "259",
+            "DOI": "10.1159/000046131",
+            "article-title": "HSV-1 not only in human vestibular ganglia but also in the vestibular labyrinth",
+            "volume": "6",
+            "author": "Arbusow",
+            "year": "2001",
+            "journal-title": "Audiol Neurootol"
+          },
+          {
+            "issue": "3",
+            "key": "10.1016/j.ncl.2015.04.011_bib123",
+            "doi-asserted-by": "crossref",
+            "first-page": "355",
+            "DOI": "10.1136/jnnp.2008.155978",
+            "article-title": "Prodromal dizziness in vestibular neuritis: frequency and clinical implication",
+            "volume": "80",
+            "author": "Lee",
+            "year": "2009",
+            "journal-title": "J Neurol Neurosurg Psychiatry"
+          },
+          {
+            "issue": "8",
+            "key": "10.1016/j.ncl.2015.04.011_bib124",
+            "doi-asserted-by": "crossref",
+            "first-page": "895",
+            "DOI": "10.1080/00016489950180243",
+            "article-title": "Vestibular neuritis: a follow-up study",
+            "volume": "119",
+            "author": "Bergenius",
+            "year": "1999",
+            "journal-title": "Acta Otolaryngol"
+          },
+          {
+            "issue": "6",
+            "key": "10.1016/j.ncl.2015.04.011_bib125",
+            "doi-asserted-by": "crossref",
+            "first-page": "427",
+            "DOI": "10.3233/VES-1998-8603",
+            "article-title": "High resolution Gd-DTPA MR imaging of the inner ear in 60 patients with idiopathic vestibular neuritis: no evidence for contrast enhancement of the labyrinth or vestibular nerve",
+            "volume": "8",
+            "author": "Strupp",
+            "year": "1998",
+            "journal-title": "J Vestib Res"
+          },
+          {
+            "issue": "8",
+            "key": "10.1016/j.ncl.2015.04.011_bib126",
+            "first-page": "1553",
+            "article-title": "Inferior vestibular neuritis",
+            "volume": "259",
+            "author": "Kim",
+            "year": "2012",
+            "journal-title": "J Neurol"
+          },
+          {
+            "issue": "5",
+            "key": "10.1016/j.ncl.2015.04.011_bib127",
+            "doi-asserted-by": "crossref",
+            "first-page": "826",
+            "DOI": "10.1177/0194599812457557",
+            "article-title": "Insufficient evidence for the effect of corticosteroid treatment on recovery of vestibular neuritis",
+            "volume": "147",
+            "author": "Wegner",
+            "year": "2012",
+            "journal-title": "Otolaryngol Head Neck Surg"
+          },
+          {
+            "issue": "8",
+            "key": "10.1016/j.ncl.2015.04.011_bib128",
+            "first-page": "478",
+            "article-title": "Fatal complications of otitis 60 years ago",
+            "volume": "43",
+            "author": "Bergmann",
+            "year": "1995",
+            "journal-title": "HNO"
+          },
+          {
+            "issue": "1–2",
+            "key": "10.1016/j.ncl.2015.04.011_bib129",
+            "doi-asserted-by": "crossref",
+            "first-page": "82",
+            "DOI": "10.1016/j.jns.2008.12.002",
+            "article-title": "Isolated labyrinthine infarction as a harbinger of anterior inferior cerebellar artery territory infarction with normal diffusion-weighted brain MRI",
+            "volume": "278",
+            "author": "Kim",
+            "year": "2009",
+            "journal-title": "J Neurol Sci"
+          },
+          {
+            "issue": "11",
+            "key": "10.1016/j.ncl.2015.04.011_bib130",
+            "doi-asserted-by": "crossref",
+            "first-page": "1080",
+            "DOI": "10.1016/j.mayocp.2012.05.023",
+            "article-title": "Rate and predictors of serious neurologic causes of dizziness in the emergency department",
+            "volume": "87",
+            "author": "Navi",
+            "year": "2012",
+            "journal-title": "Mayo Clin Proc"
+          },
+          {
+            "issue": "8",
+            "key": "10.1016/j.ncl.2015.04.011_bib131",
+            "doi-asserted-by": "crossref",
+            "first-page": "641",
+            "DOI": "10.1136/emermed-2013-202674",
+            "article-title": "Characteristics of central lesions in patients with dizziness determined by diffusion MRI in the emergency department",
+            "volume": "31",
+            "author": "Lee",
+            "year": "2014",
+            "journal-title": "Emerg Med J"
+          },
+          {
+            "key": "10.1016/j.ncl.2015.04.011_bib132",
+            "series-title": "Harwood-nuss' clinical practice of emergency medicine",
+            "article-title": "Vertigo",
+            "author": "Raynor",
+            "year": "2010"
+          },
+          {
+            "key": "10.1016/j.ncl.2015.04.011_bib133",
+            "series-title": "Emergency medicine: a comprehensive study guide",
+            "article-title": "Vertigo and dizziness",
+            "author": "Goldman",
+            "year": "2011"
+          },
+          {
+            "key": "10.1016/j.ncl.2015.04.011_bib134",
+            "series-title": "Rosen's emergency medicine concepts and clinical practice",
+            "article-title": "Dizziness and Vertigo",
+            "author": "Chang",
+            "year": "2014"
+          },
+          {
+            "issue": "18",
+            "key": "10.1016/j.ncl.2015.04.011_bib135",
+            "doi-asserted-by": "crossref",
+            "first-page": "1736",
+            "DOI": "10.1056/NEJMcpc1302431",
+            "article-title": "Case records of the Massachusetts General Hospital. Case 34-2013. A 69-year-old man with dizziness and vomiting",
+            "volume": "369",
+            "author": "Ning",
+            "year": "2013",
+            "journal-title": "N Engl J Med"
+          }
+        ],
+        "container-title": [
+          "Neurologic Clinics"
+        ],
+        "original-title": [],
+        "language": "en",
+        "link": [
+          {
+            "URL": "https://api.elsevier.com/content/article/PII:S0733861915000353?httpAccept=text/xml",
+            "content-type": "text/xml",
+            "content-version": "vor",
+            "intended-application": "text-mining"
+          },
+          {
+            "URL": "https://api.elsevier.com/content/article/PII:S0733861915000353?httpAccept=text/plain",
+            "content-type": "text/plain",
+            "content-version": "vor",
+            "intended-application": "text-mining"
+          }
+        ],
+        "deposited": {
+          "date-parts": [
+            [
+              2021,
+              12,
+              4
+            ]
+          ],
+          "date-time": "2021-12-04T15:29:55Z",
+          "timestamp": 1638631795000
+        },
+        "score": 1,
+        "resource": {
+          "primary": {
+            "URL": "https://linkinghub.elsevier.com/retrieve/pii/S0733861915000353"
+          }
+        },
+        "subtitle": [],
+        "short-title": [],
+        "issued": {
+          "date-parts": [
+            [
+              2015,
+              8
+            ]
+          ]
+        },
+        "references-count": 135,
+        "journal-issue": {
+          "issue": "3",
+          "published-print": {
+            "date-parts": [
+              [
+                2015,
+                8
+              ]
+            ]
+          }
+        },
+        "alternative-id": [
+          "S0733861915000353"
+        ],
+        "URL": "https://doi.org/10.1016/j.ncl.2015.04.011",
+        "relation": {},
+        "ISSN": [
+          "0733-8619"
+        ],
+        "issn-type": [
+          {
+            "value": "0733-8619",
+            "type": "print"
+          }
+        ],
+        "subject": [],
+        "published": {
+          "date-parts": [
+            [
+              2015,
+              8
+            ]
+          ]
+        },
+        "assertion": [
+          {
+            "value": "Elsevier",
+            "name": "publisher",
+            "label": "This article is maintained by"
+          },
+          {
+            "value": "TiTrATE",
+            "name": "articletitle",
+            "label": "Article Title"
+          },
+          {
+            "value": "Neurologic Clinics",
+            "name": "journaltitle",
+            "label": "Journal Title"
+          },
+          {
+            "value": "https://doi.org/10.1016/j.ncl.2015.04.011",
+            "name": "articlelink",
+            "label": "CrossRef DOI link to publisher maintained version"
+          },
+          {
+            "value": "article",
+            "name": "content_type",
+            "label": "Content Type"
+          },
+          {
+            "value": "Copyright © 2015 Elsevier Inc. All rights reserved.",
+            "name": "copyright",
+            "label": "Copyright"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "key": "MuncieHL2017Dizziness",
+    "title": "Dizziness: Approach to Evaluation and Management",
+    "doi": null,
+    "href": "https://pubmed.ncbi.nlm.nih.gov/28145669",
+    "crossref": {
+      "status": "candidate",
+      "method": "bibliographic",
+      "doi": "10.36347/sasjm.2022.v08i02.007",
+      "title": "Dizziness: Approach to Evaluation, Assessment and Management",
+      "score": 23.938334,
+      "similarity": 0.8571428571428571,
+      "work": {
+        "indexed": {
+          "date-parts": [
+            [
+              2024,
+              5,
+              1
+            ]
+          ],
+          "date-time": "2024-05-01T11:21:21Z",
+          "timestamp": 1714562481258
+        },
+        "reference-count": 0,
+        "publisher": "SASPR Edu International Pvt. Ltd",
+        "issue": "2",
+        "content-domain": {
+          "domain": [],
+          "crossmark-restriction": false
+        },
+        "short-container-title": [
+          "SAS J Med"
+        ],
+        "published-print": {
+          "date-parts": [
+            [
+              2022,
+              2,
+              16
+            ]
+          ]
+        },
+        "abstract": "<jats:p>Dizziness is a common symptom. It was traditionally divided into four categories based on the patient’s history: vertigo, presyncope, disequilibrium, and light-headedness. However, the distinction between these symptoms is of limited clinical usefulness. Patients have difficulty describing the quality of their symptoms but can more consistently identify the timing and triggers. Episodic vertigo triggered by head motion may be due to benign paroxysmal positional vertigo. Vertigo with unilateral hearing loss +/- tinnitus suggests Meniere disease. Episodic vertigo not associated with any trigger may be a symptom of vestibular neuritis. Evaluation focuses on determining whether the etiology is peripheral or central. Peripheral etiologies are usually benign. Central etiologies often require urgent treatment. The HINTS (head-impulse, nystagmus, test of skew) examination can help distinguish peripheral from central etiologies. The physical examination includes orthostatic blood pressure measurement, a full cardiac and neurologic examination, assessment for nystagmus, and the Dix-Hallpike maneuver. Laboratory testing and imaging are not required and are usually not helpful. Benign paroxysmal positional vertigo can be treated with a canalith repositioning procedure (Epley maneuver). Treatment of Meniere disease includes salt restriction and diuretics. Symptoms of vestibular neuritis are relieved with vestibular suppressant medications and vestibular rehabilitation.</jats:p>",
+        "DOI": "10.36347/sasjm.2022.v08i02.007",
+        "type": "journal-article",
+        "created": {
+          "date-parts": [
+            [
+              2022,
+              3,
+              16
+            ]
+          ],
+          "date-time": "2022-03-16T13:01:55Z",
+          "timestamp": 1647435715000
+        },
+        "page": "90-99",
+        "source": "Crossref",
+        "is-referenced-by-count": 3,
+        "title": [
+          "Dizziness: Approach to Evaluation, Assessment and Management"
+        ],
+        "prefix": "10.36347",
+        "volume": "8",
+        "author": [
+          {
+            "given": "Ehab M",
+            "family": "Mobarek",
+            "sequence": "first",
+            "affiliation": []
+          },
+          {
+            "given": "Mohammad B",
+            "family": "Okdeh",
+            "sequence": "additional",
+            "affiliation": []
+          },
+          {
+            "given": "Yasmeen S",
+            "family": "Jamalelden",
+            "sequence": "additional",
+            "affiliation": []
+          }
+        ],
+        "member": "22072",
+        "published-online": {
+          "date-parts": [
+            [
+              2022,
+              2,
+              16
+            ]
+          ]
+        },
+        "container-title": [
+          "SAS Journal of Medicine"
+        ],
+        "deposited": {
+          "date-parts": [
+            [
+              2022,
+              3,
+              16
+            ]
+          ],
+          "date-time": "2022-03-16T13:01:55Z",
+          "timestamp": 1647435715000
+        },
+        "score": 23.938334,
+        "resource": {
+          "primary": {
+            "URL": "https://saspublishers.com/media/articles/SASJM_82_90-99.pdf"
+          }
+        },
+        "issued": {
+          "date-parts": [
+            [
+              2022,
+              2,
+              16
+            ]
+          ]
+        },
+        "references-count": 0,
+        "journal-issue": {
+          "issue": "2",
+          "published-online": {
+            "date-parts": [
+              [
+                2022,
+                2,
+                16
+              ]
+            ]
+          },
+          "published-print": {
+            "date-parts": [
+              [
+                2022,
+                2,
+                16
+              ]
+            ]
+          }
+        },
+        "URL": "https://doi.org/10.36347/sasjm.2022.v08i02.007",
+        "ISSN": [
+          "2454-5112"
+        ],
+        "issn-type": [
+          {
+            "value": "2454-5112",
+            "type": "electronic"
+          }
+        ],
+        "published": {
+          "date-parts": [
+            [
+              2022,
+              2,
+              16
+            ]
+          ]
+        }
+      }
+    }
+  },
+  {
+    "key": "GurleyKL2019Acute",
+    "title": "Acute Dizziness",
+    "doi": "10.1055/s-0038-1676857",
+    "href": "https://pubmed.ncbi.nlm.nih.gov/30743290",
+    "crossref": {
+      "status": "validated",
+      "method": "doi",
+      "doi": "10.1055/s-0038-1676857",
+      "title": "Acute Dizziness",
+      "similarity": 1.0,
+      "work": {
+        "indexed": {
+          "date-parts": [
+            [
+              2025,
+              12,
+              12
+            ]
+          ],
+          "date-time": "2025-12-12T13:33:45Z",
+          "timestamp": 1765546425973
+        },
+        "reference-count": 0,
+        "publisher": "Georg Thieme Verlag KG",
+        "issue": "01",
+        "content-domain": {
+          "domain": [],
+          "crossmark-restriction": false
+        },
+        "short-container-title": [
+          "Semin Neurol"
+        ],
+        "published-print": {
+          "date-parts": [
+            [
+              2019,
+              2
+            ]
+          ]
+        },
+        "abstract": "<jats:title>Abstract</jats:title><jats:p>Dizziness is a common chief complaint with an extensive differential diagnosis that includes both benign and serious conditions. Physicians must distinguish the majority of patients who suffer from self-limiting conditions from those with serious illnesses that require acute treatment. The preferred approach to the diagnosis of an acutely dizzy patient emphasizes different aspects of the history to guide a focused physical examination, with the goal of differentiating benign peripheral vestibular conditions from dangerous posterior circulation strokes. Currently, misdiagnoses are frequent and diagnostic testing costs are high. This partly relates to use of an outdated diagnostic paradigm. This commonly used traditional approach relies on dizziness “symptom quality” or “type” (vertigo, presyncope, disequilibrium) to guide inquiry. It does not distinguish benign from dangerous causes and is inconsistent with current best evidence. A better approach categorizes patients into three groups based on timing and triggers. Each category has its own differential diagnosis and targeted bedside approach: (1) acute vestibular syndrome, where bedside physical examination differentiates vestibular neuritis from stroke; (2) spontaneous episodic vestibular syndrome, where associated symptoms help differentiate vestibular migraine from transient ischemic attack; and (3) triggered episodic vestibular syndrome, where the Dix-Hallpike and supine roll test help differentiate benign paroxysmal positional vertigo from posterior fossa structural lesions. The “timing and triggers” diagnostic approach for the acutely dizzy derives from current best evidence and offers the potential to reduce misdiagnosis while simultaneously decreasing diagnostic test overuse, unnecessary hospitalization, and incorrect treatments.</jats:p>",
+        "DOI": "10.1055/s-0038-1676857",
+        "type": "journal-article",
+        "created": {
+          "date-parts": [
+            [
+              2019,
+              2,
+              11
+            ]
+          ],
+          "date-time": "2019-02-11T18:40:06Z",
+          "timestamp": 1549910406000
+        },
+        "page": "027-040",
+        "source": "Crossref",
+        "is-referenced-by-count": 19,
+        "title": [
+          "Acute Dizziness"
+        ],
+        "prefix": "10.1055",
+        "volume": "39",
+        "author": [
+          {
+            "given": "Jonathan",
+            "family": "Edlow",
+            "sequence": "first",
+            "affiliation": [
+              {
+                "name": "Deparment of Emergency Medicine, Harvard Medical School, Boston, Massachusetts"
+              },
+              {
+                "name": "Department of Emergency Medicine, Beth Israel Deaconess Medical Center, Boston, Massachusetts"
+              }
+            ]
+          },
+          {
+            "given": "Kiersten",
+            "family": "Gurley",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Deparment of Emergency Medicine, Harvard Medical School, Boston, Massachusetts"
+              },
+              {
+                "name": "Department of Emergency Medicine, Beth Israel Deaconess Medical Center, Boston, Massachusetts"
+              },
+              {
+                "name": "Department of Emergency Medicine, Mount Auburn Hospital, Cambridge, Massachusetts"
+              }
+            ]
+          }
+        ],
+        "member": "194",
+        "published-online": {
+          "date-parts": [
+            [
+              2019,
+              2,
+              11
+            ]
+          ]
+        },
+        "container-title": [
+          "Seminars in Neurology"
+        ],
+        "original-title": [],
+        "language": "en",
+        "link": [
+          {
+            "URL": "http://www.thieme-connect.de/products/ejournals/pdf/10.1055/s-0038-1676857.pdf",
+            "content-type": "unspecified",
+            "content-version": "vor",
+            "intended-application": "similarity-checking"
+          }
+        ],
+        "deposited": {
+          "date-parts": [
+            [
+              2019,
+              2,
+              11
+            ]
+          ],
+          "date-time": "2019-02-11T18:40:08Z",
+          "timestamp": 1549910408000
+        },
+        "score": 1,
+        "resource": {
+          "primary": {
+            "URL": "http://www.thieme-connect.de/DOI/DOI?10.1055/s-0038-1676857"
+          }
+        },
+        "subtitle": [],
+        "short-title": [],
+        "issued": {
+          "date-parts": [
+            [
+              2019,
+              2
+            ]
+          ]
+        },
+        "references-count": 0,
+        "journal-issue": {
+          "issue": "01",
+          "published-online": {
+            "date-parts": [
+              [
+                2019,
+                2,
+                11
+              ]
+            ]
+          },
+          "published-print": {
+            "date-parts": [
+              [
+                2019,
+                2
+              ]
+            ]
+          }
+        },
+        "URL": "https://doi.org/10.1055/s-0038-1676857",
+        "relation": {},
+        "ISSN": [
+          "0271-8235",
+          "1098-9021"
+        ],
+        "issn-type": [
+          {
+            "value": "0271-8235",
+            "type": "print"
+          },
+          {
+            "value": "1098-9021",
+            "type": "electronic"
+          }
+        ],
+        "subject": [],
+        "published": {
+          "date-parts": [
+            [
+              2019,
+              2
+            ]
+          ]
+        }
+      }
+    }
+  },
+  {
+    "key": "EdlowJA2023Guidelines",
+    "title": "Guidelines for Reasonable and Appropriate Care in the Emergency Department 3 (GRACE-3): Acute Dizziness and Vertigo in the Emergency Department",
+    "doi": "10.1111/acem.14728",
+    "href": "https://onlinelibrary.wiley.com/doi/10.1111/acem.14728",
+    "crossref": {
+      "status": "validated",
+      "method": "doi",
+      "doi": "10.1111/acem.14728",
+      "title": "Guidelines for reasonable and appropriate care in the emergency department 3 (<scp>GRACE</scp>‐3): Acute dizziness and vertigo in the emergency department",
+      "similarity": 0.9375,
+      "work": {
+        "indexed": {
+          "date-parts": [
+            [
+              2026,
+              5,
+              1
+            ]
+          ],
+          "date-time": "2026-05-01T11:51:03Z",
+          "timestamp": 1777636263375,
+          "version": "3.51.4"
+        },
+        "reference-count": 266,
+        "publisher": "Wiley",
+        "issue": "5",
+        "license": [
+          {
+            "start": {
+              "date-parts": [
+                [
+                  2023,
+                  5,
+                  11
+                ]
+              ],
+              "date-time": "2023-05-11T00:00:00Z",
+              "timestamp": 1683763200000
+            },
+            "content-version": "vor",
+            "delay-in-days": 10,
+            "URL": "http://onlinelibrary.wiley.com/termsAndConditions#vor"
+          }
+        ],
+        "funder": [
+          {
+            "DOI": "10.13039/100007619",
+            "name": "Society for Academic Emergency Medicine",
+            "doi-asserted-by": "publisher",
+            "id": [
+              {
+                "id": "10.13039/100007619",
+                "id-type": "DOI",
+                "asserted-by": "publisher"
+              }
+            ]
+          }
+        ],
+        "content-domain": {
+          "domain": [
+            "onlinelibrary.wiley.com"
+          ],
+          "crossmark-restriction": true
+        },
+        "short-container-title": [
+          "Academic Emergency Medicine"
+        ],
+        "published-print": {
+          "date-parts": [
+            [
+              2023,
+              5
+            ]
+          ]
+        },
+        "abstract": "<jats:title>Abstract</jats:title><jats:p>This third Guideline for Reasonable and Appropriate Care in the Emergency Department (GRACE‐3) from the Society for Academic Emergency Medicine is on the topic adult patients with acute dizziness and vertigo in the emergency department (ED). A multidisciplinary guideline panel applied the Grading of Recommendations Assessment, Development, and Evaluation (GRADE) approach to assess the certainty of evidence and strength of recommendations regarding five questions for adult ED patients with acute dizziness of less than 2 weeks' duration. The intended population is adults presenting to the ED with acute dizziness or vertigo. The panel derived 15 evidence‐based recommendations based on the timing and triggers of the dizziness but recognizes that alternative diagnostic approaches exist, such as the STANDING protocol and nystagmus examination in combination with gait unsteadiness or the presence of vascular risk factors. As an overarching recommendation, (1) emergency clinicians should receive training in bedside physical examination techniques for patients with the acute vestibular syndrome (AVS; HINTS) and the diagnostic and therapeutic maneuvers for benign paroxysmal positional vertigo (BPPV; Dix–Hallpike test and Epley maneuver). To help distinguish central from peripheral causes in patients with the AVS, we recommend: (2) use HINTS (for clinicians trained in its use) in patients with nystagmus, (3) use finger rub to further aid in excluding stroke in patients with nystagmus, (4) use severity of gait unsteadiness in patients without nystagmus, (5) do<jats:italic>not</jats:italic>use brain computed tomography (CT), (6) do<jats:italic>not</jats:italic>use routine magnetic resonance imaging (MRI) as a first‐line test if a clinician trained in HINTS is available, and (7) use MRI as a confirmatory test in patients with central or equivocal HINTS examinations. In patients with the spontaneous episodic vestibular syndrome: (8) search for symptoms or signs of cerebral ischemia, (9) do<jats:italic>not</jats:italic>use CT, and (10) use CT angiography or MRI angiography if there is concern for transient ischemic attack. In patients with the triggered (positional) episodic vestibular syndrome, (11) use the Dix–Hallpike test to diagnose posterior canal BPPV (pc‐BPPV), (12) do<jats:italic>not</jats:italic>use CT, and (13) do<jats:italic>not</jats:italic>use MRI routinely, unless atypical clinical features are present. In patients diagnosed with vestibular neuritis, (14) consider short‐term steroids as a treatment option. In patients diagnosed with pc‐BPPV, (15) treat with the Epley maneuver. It is clear that as of 2023, when applied in routine practice by emergency clinicians without special training, HINTS testing is inaccurate, partly due to use in the wrong patients and partly due to issues with its interpretation. Most emergency physicians have not received training in use of HINTS. As such, it is not standard of care, either in the legal sense of that term (“what the average physician would do in similar circumstances”) or in the common parlance sense (“the standard action typically used by physicians in routine practice”).</jats:p>",
+        "DOI": "10.1111/acem.14728",
+        "type": "journal-article",
+        "created": {
+          "date-parts": [
+            [
+              2023,
+              5,
+              11
+            ]
+          ],
+          "date-time": "2023-05-11T10:59:41Z",
+          "timestamp": 1683802781000
+        },
+        "page": "442-486",
+        "update-policy": "https://doi.org/10.1002/crossmark_policy",
+        "source": "Crossref",
+        "is-referenced-by-count": 134,
+        "title": [
+          "Guidelines for reasonable and appropriate care in the emergency department 3 (<scp>GRACE</scp>‐3): Acute dizziness and vertigo in the emergency department"
+        ],
+        "prefix": "10.1111",
+        "volume": "30",
+        "author": [
+          {
+            "ORCID": "https://orcid.org/0000-0001-6855-0912",
+            "authenticated-orcid": false,
+            "given": "Jonathan A.",
+            "family": "Edlow",
+            "sequence": "first",
+            "affiliation": [
+              {
+                "name": "Department of Emergency Medicine Harvard Medical School Boston Massachusetts USA"
+              },
+              {
+                "name": "Department of Emergency Medicine Beth Israel Deaconess Medical Center Boston Massachusetts USA"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0002-2603-7157",
+            "authenticated-orcid": false,
+            "given": "Christopher",
+            "family": "Carpenter",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Department of Emergency Medicine Washington University School of Medicine St. Louis Missouri USA"
+              },
+              {
+                "name": "Department of Emergency Medicine Washington University St. Louis Missouri USA"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0001-9693-6871",
+            "authenticated-orcid": false,
+            "given": "Murtaza",
+            "family": "Akhter",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Department of Emergency Medicine Penn State School of Medicine State College Pennsylvania USA"
+              },
+              {
+                "name": "Hershey Medical Center State College Pennsylvania USA"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0002-0373-606X",
+            "authenticated-orcid": false,
+            "given": "Danya",
+            "family": "Khoujah",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Department of Emergency Medicine University of Maryland School of Medicine Baltimore Maryland USA"
+              },
+              {
+                "name": "Department of Emergency Medicine Adventhealth Tampa Tampa Florida USA"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0002-1166-1045",
+            "authenticated-orcid": false,
+            "given": "Evie",
+            "family": "Marcolini",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Department of Emergency Medicine Geisel School of Medicine, Dartmouth Hanover New Hampshire USA"
+              },
+              {
+                "name": "Department of Emergency Medicine Dartmouth‐Hitchcock Medical Center Lebanon New Hampshire USA"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0002-1158-5302",
+            "authenticated-orcid": false,
+            "given": "William J.",
+            "family": "Meurer",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Department of Emergency Medicine University of Michigan Medical School Ann Arbor Michigan USA"
+              }
+            ]
+          },
+          {
+            "given": "David",
+            "family": "Morrill",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Patient Representative Lakeland Florida USA"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0002-6676-6418",
+            "authenticated-orcid": false,
+            "given": "James G.",
+            "family": "Naples",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Department of Emergency Medicine Harvard Medical School Boston Massachusetts USA"
+              },
+              {
+                "name": "Division of Otolaryngology‐Head &amp; Neck Surgery Beth Israel Deaconess Medical Center Boston Massachusetts USA"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0001-8263-0556",
+            "authenticated-orcid": false,
+            "given": "Robert",
+            "family": "Ohle",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Department of Emergency Medicine Northern Ontario School of Medicine Sudbury Ontario Canada"
+              },
+              {
+                "name": "Health Science North Research Institute Sudbury Ontario Canada"
+              },
+              {
+                "name": "Department of Emergency Medicine Health Sciences North Sudbury Ontario Canada"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0002-6981-2846",
+            "authenticated-orcid": false,
+            "given": "Rodney",
+            "family": "Omron",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Department of Emergency Medicine Johns Hopkins University School of Medicine Baltimore Maryland USA"
+              },
+              {
+                "name": "Department of Emergency Medicine Johns Hopkins Hospital Baltimore Maryland USA"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0002-3346-0308",
+            "authenticated-orcid": false,
+            "given": "Sameer",
+            "family": "Sharif",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Division of Critical Care and Emergency Medicine, Department of Medicine McMaster University Hamilton Ontario Canada"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0003-0018-1019",
+            "authenticated-orcid": false,
+            "given": "Matt",
+            "family": "Siket",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Department of Emergency Medicine Robert Larner College of Medicine at the University of Vermont Burlington Vermont USA"
+              },
+              {
+                "name": "Department of Emergency Medicine, Larner College of Medicine University of Vermont Burlington Vermont USA"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0002-6380-161X",
+            "authenticated-orcid": false,
+            "given": "Suneel",
+            "family": "Upadhye",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Emergency Medicine, Evidence and Impact (HEI) McMaster University Burlington Ontario Canada"
+              },
+              {
+                "name": "Health Research Methods, Evidence and Impact (HEI) McMaster University Burlington Ontario Canada"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0001-5388-9163",
+            "authenticated-orcid": false,
+            "given": "Lucas Oliveira J.",
+            "family": "e Silva",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Mayo Clinic Rochester Minnesota USA"
+              },
+              {
+                "name": "Department of Emergency Medicine Hospital de Clinicas de Porto Alegre Porto Alegre Rio Grande do Sul Brazil"
+              }
+            ]
+          },
+          {
+            "given": "Etta",
+            "family": "Sundberg",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "COO Royal Oasis Pool and Spas Las Vegas Nevada USA"
+              }
+            ]
+          },
+          {
+            "given": "Karen",
+            "family": "Tartt",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Absinthe Brasserie &amp; Bar San Francisco California USA"
+              },
+              {
+                "name": "St. George Spirits San Francisco California USA"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0002-1201-5715",
+            "authenticated-orcid": false,
+            "given": "Simone",
+            "family": "Vanni",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Department of Emergency Medicine University of Florence Firenze Italy"
+              },
+              {
+                "name": "Department of Emergency Medicine University Hospital Careggi Firenze Italy"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0003-2789-4115",
+            "authenticated-orcid": false,
+            "given": "David E.",
+            "family": "Newman‐Toker",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Department of Neurology Johns Hopkins University School of Medicine Baltimore Maryland USA"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0002-1632-4750",
+            "authenticated-orcid": false,
+            "given": "Fernanda",
+            "family": "Bellolio",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Mayo Clinic College of Medicine Rochester Minnesota USA"
+              },
+              {
+                "name": "Department of Emergency Medicine Mayo Clinic Rochester Minnesota USA"
+              }
+            ]
+          }
+        ],
+        "member": "311",
+        "published-online": {
+          "date-parts": [
+            [
+              2023,
+              5,
+              11
+            ]
+          ]
+        },
+        "reference": [
+          {
+            "key": "e_1_2_8_2_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1197/j.aem.2004.06.001"
+          },
+          {
+            "key": "e_1_2_8_3_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/acem.14337"
+          },
+          {
+            "key": "e_1_2_8_4_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.3389/fneur.2017.00590"
+          },
+          {
+            "key": "e_1_2_8_5_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1177/019459989210700310"
+          },
+          {
+            "key": "e_1_2_8_6_1",
+            "article-title": "Modifications of the Epley (canalith repositioning) manoeuvre for posterior canal benign paroxysmal positional vertigo (BPPV)",
+            "author": "Hunt WT",
+            "year": "2012",
+            "journal-title": "Cochrane Database Syst Rev"
+          },
+          {
+            "key": "e_1_2_8_7_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.4065/83.7.765"
+          },
+          {
+            "key": "e_1_2_8_8_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1136/emj.2009.078014"
+          },
+          {
+            "key": "e_1_2_8_9_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1097/NRL.0000000000000282"
+          },
+          {
+            "key": "e_1_2_8_10_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/j.1553-2712.2008.00189.x"
+          },
+          {
+            "key": "e_1_2_8_11_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1159/000481982"
+          },
+          {
+            "key": "e_1_2_8_12_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1002/ana.24532"
+          },
+          {
+            "key": "e_1_2_8_13_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/acem.12168"
+          },
+          {
+            "key": "e_1_2_8_14_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.ajem.2009.06.007"
+          },
+          {
+            "key": "e_1_2_8_15_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1212/WNL.22.4.323"
+          },
+          {
+            "key": "e_1_2_8_16_1",
+            "first-page": "1",
+            "article-title": "The timing‐and‐triggers approach to the patient with acute dizziness",
+            "volume": "21",
+            "author": "Edlow JA",
+            "year": "2019",
+            "journal-title": "Emerg Med Pract"
+          },
+          {
+            "key": "e_1_2_8_17_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.ncl.2015.04.009"
+          },
+          {
+            "key": "e_1_2_8_18_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.ncl.2015.04.010"
+          },
+          {
+            "key": "e_1_2_8_19_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.amjmed.2017.05.048"
+          },
+          {
+            "key": "e_1_2_8_20_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.4065/82.11.1329"
+          },
+          {
+            "key": "e_1_2_8_21_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/acem.12234"
+          },
+          {
+            "key": "e_1_2_8_22_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.jemermed.2017.12.024"
+          },
+          {
+            "key": "e_1_2_8_23_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.jemermed.2015.10.040"
+          },
+          {
+            "key": "e_1_2_8_24_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.annemergmed.2007.03.037"
+          },
+          {
+            "key": "e_1_2_8_25_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/j.1553-2712.2009.00523.x"
+          },
+          {
+            "key": "e_1_2_8_26_1",
+            "first-page": "195",
+            "volume-title": "Washington University Manual of Patient Safety and Quality",
+            "author": "Kane B",
+            "year": "2016"
+          },
+          {
+            "key": "e_1_2_8_27_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1161/01.STR.0000240329.48263.0d"
+          },
+          {
+            "key": "e_1_2_8_28_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.mayocp.2012.05.023"
+          },
+          {
+            "key": "e_1_2_8_29_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1002/ana.24521"
+          },
+          {
+            "key": "e_1_2_8_30_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1002/ana.24172"
+          },
+          {
+            "key": "e_1_2_8_31_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.annemergmed.2010.06.559"
+          },
+          {
+            "key": "e_1_2_8_32_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1371/journal.pone.0035923"
+          },
+          {
+            "key": "e_1_2_8_33_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/acem.14627"
+          },
+          {
+            "key": "e_1_2_8_34_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1136/jnnp.2007.123596"
+          },
+          {
+            "key": "e_1_2_8_35_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.annemergmed.2017.10.012"
+          },
+          {
+            "key": "e_1_2_8_36_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.ncl.2015.04.002"
+          },
+          {
+            "key": "e_1_2_8_37_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1161/STROKEAHA.109.551234"
+          },
+          {
+            "key": "e_1_2_8_38_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1055/s-0039-3402739"
+          },
+          {
+            "key": "e_1_2_8_39_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1212/01.wnl.0000314685.01433.0d"
+          },
+          {
+            "key": "e_1_2_8_40_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1503/cmaj.100174"
+          },
+          {
+            "key": "e_1_2_8_41_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.3233/VES-220201"
+          },
+          {
+            "key": "e_1_2_8_42_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.ajem.2011.02.038"
+          },
+          {
+            "key": "e_1_2_8_43_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/S0140-6736(07)60151-2"
+          },
+          {
+            "key": "e_1_2_8_44_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1002/lary.23798"
+          },
+          {
+            "key": "e_1_2_8_45_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1177/1971400920988665"
+          },
+          {
+            "key": "e_1_2_8_46_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.jemermed.2011.05.101"
+          },
+          {
+            "key": "e_1_2_8_47_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.crad.2015.01.016"
+          },
+          {
+            "key": "e_1_2_8_48_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1007/s10140-012-1071-y"
+          },
+          {
+            "key": "e_1_2_8_49_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.3889/oamjms.2018.340"
+          },
+          {
+            "key": "e_1_2_8_50_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1136/emj.2003.012765"
+          },
+          {
+            "key": "e_1_2_8_51_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1136/emj.2010.104844"
+          },
+          {
+            "key": "e_1_2_8_52_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.4065/82.11.1319"
+          },
+          {
+            "key": "e_1_2_8_53_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1161/STROKEAHA.114.007087"
+          },
+          {
+            "key": "e_1_2_8_54_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1197/j.aem.2006.06.060"
+          },
+          {
+            "key": "e_1_2_8_55_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.15441/ceem.17.233"
+          },
+          {
+            "key": "e_1_2_8_56_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/1742-6723.12588"
+          },
+          {
+            "key": "e_1_2_8_57_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1136/bmj.g5702"
+          },
+          {
+            "key": "e_1_2_8_58_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.annemergmed.2006.06.035"
+          },
+          {
+            "key": "e_1_2_8_59_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.4103/0974-2700.82199"
+          },
+          {
+            "key": "e_1_2_8_60_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1212/WNL.0000000000004120"
+          },
+          {
+            "key": "e_1_2_8_61_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1212/CPJ.0000000000000028"
+          },
+          {
+            "key": "e_1_2_8_62_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1007/s00415-021-10627-1"
+          },
+          {
+            "key": "e_1_2_8_63_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1212/WNL.0000000000000573"
+          },
+          {
+            "key": "e_1_2_8_64_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/acem.14171"
+          },
+          {
+            "key": "e_1_2_8_65_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1017/cjn.2015.330"
+          },
+          {
+            "key": "e_1_2_8_66_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/acem.13960"
+          },
+          {
+            "key": "e_1_2_8_67_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/1742-6723.12372"
+          },
+          {
+            "key": "e_1_2_8_68_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1177/0194599816689667"
+          },
+          {
+            "key": "e_1_2_8_69_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1212/01.wnl.0000313378.77444.ac"
+          },
+          {
+            "key": "e_1_2_8_70_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.7861/clinmedicine.16-4-335"
+          },
+          {
+            "key": "e_1_2_8_71_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/1742-6723.12418"
+          },
+          {
+            "key": "e_1_2_8_72_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.annemergmed.2019.09.017"
+          },
+          {
+            "key": "e_1_2_8_73_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1212/WNL.0b013e318241f2a2"
+          },
+          {
+            "key": "e_1_2_8_74_1",
+            "first-page": "MT89",
+            "article-title": "Unnecessary diagnostic tests often obtained for benign paroxysmal positional vertigo",
+            "volume": "15",
+            "author": "Polensek SH",
+            "year": "2009",
+            "journal-title": "Med Sci Monit"
+          },
+          {
+            "key": "e_1_2_8_75_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.3342/ceo.2011.4.3.113"
+          },
+          {
+            "key": "e_1_2_8_76_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/1742-6723.13810"
+          },
+          {
+            "key": "e_1_2_8_77_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1097/MAO.0000000000003464"
+          },
+          {
+            "key": "e_1_2_8_78_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/j.1553-2712.2008.00035.x"
+          },
+          {
+            "key": "e_1_2_8_79_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/acem.12828"
+          },
+          {
+            "key": "e_1_2_8_80_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/acem.14623"
+          },
+          {
+            "key": "e_1_2_8_81_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1136/bmj.i2089"
+          },
+          {
+            "key": "e_1_2_8_82_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1136/bmj.i2016"
+          },
+          {
+            "key": "e_1_2_8_83_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.jclinepi.2012.03.013"
+          },
+          {
+            "key": "e_1_2_8_84_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.jclinepi.2013.02.003"
+          },
+          {
+            "key": "e_1_2_8_85_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/acem.14297"
+          },
+          {
+            "key": "e_1_2_8_86_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.7326/ACPJC-1995-123-3-A12"
+          },
+          {
+            "key": "e_1_2_8_87_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/acem.14296"
+          },
+          {
+            "key": "e_1_2_8_88_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/acem.14495"
+          },
+          {
+            "key": "e_1_2_8_89_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/acem.14630"
+          },
+          {
+            "key": "e_1_2_8_90_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/acem.14561"
+          },
+          {
+            "key": "e_1_2_8_91_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/acem.14583"
+          },
+          {
+            "key": "e_1_2_8_92_1",
+            "article-title": "Corticosteroids for the treatment of idiopathic acute vestibular dysfunction (vestibular neuritis)",
+            "author": "Fishman JM",
+            "year": "2011",
+            "journal-title": "Cochrane Database Syst Rev"
+          },
+          {
+            "key": "e_1_2_8_93_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1177/0194599820982910"
+          },
+          {
+            "key": "e_1_2_8_94_1",
+            "article-title": "The Epley (canalith repositioning) manoeuvre for benign paroxysmal positional vertigo",
+            "author": "Hilton MP",
+            "year": "2014",
+            "journal-title": "Cochrane Database Syst Rev"
+          },
+          {
+            "key": "e_1_2_8_95_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.jclinepi.2010.07.015"
+          },
+          {
+            "key": "e_1_2_8_96_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.jclinepi.2010.04.026"
+          },
+          {
+            "key": "e_1_2_8_97_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.jclinepi.2010.07.017"
+          },
+          {
+            "key": "e_1_2_8_98_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.jclinepi.2019.12.020"
+          },
+          {
+            "key": "e_1_2_8_99_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.jclinepi.2011.03.017"
+          },
+          {
+            "key": "e_1_2_8_100_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.jclinepi.2019.12.021"
+          },
+          {
+            "key": "e_1_2_8_101_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.jclinepi.2011.04.014"
+          },
+          {
+            "key": "e_1_2_8_102_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.jclinepi.2011.06.004"
+          },
+          {
+            "key": "e_1_2_8_103_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.jclinepi.2016.01.032"
+          },
+          {
+            "key": "e_1_2_8_104_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.jclinepi.2016.07.006"
+          },
+          {
+            "key": "e_1_2_8_105_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.jclinepi.2014.12.011"
+          },
+          {
+            "key": "e_1_2_8_106_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/acem.14494"
+          },
+          {
+            "key": "e_1_2_8_107_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1007/s43678-021-00110-1"
+          },
+          {
+            "key": "e_1_2_8_108_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1212/01.CON.0000421618.33654.8a"
+          },
+          {
+            "key": "e_1_2_8_109_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.3389/fneur.2022.839042"
+          },
+          {
+            "key": "e_1_2_8_110_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1186/s12873-016-0101-6"
+          },
+          {
+            "key": "e_1_2_8_111_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1161/STROKEAHA.111.646414"
+          },
+          {
+            "key": "e_1_2_8_112_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/acem.14295"
+          },
+          {
+            "key": "e_1_2_8_113_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1212/WNL.0000000000002141"
+          },
+          {
+            "key": "e_1_2_8_114_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1161/STROKEAHA.113.001057"
+          },
+          {
+            "key": "e_1_2_8_115_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1161/STROKEAHA.108.529883"
+          },
+          {
+            "key": "e_1_2_8_116_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1080/20009666.2017.1332317"
+          },
+          {
+            "key": "e_1_2_8_117_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1161/STROKEAHA.116.015507"
+          },
+          {
+            "key": "e_1_2_8_118_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1177/102490790601300302"
+          },
+          {
+            "key": "e_1_2_8_119_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1007/s00415-020-09909-x"
+          },
+          {
+            "key": "e_1_2_8_120_1",
+            "first-page": "1",
+            "article-title": "Value of magnetic resonance imaging and audiology in the emergency department differential diagnosis of peripheral and central vertigo",
+            "volume": "32",
+            "author": "Ozakin E",
+            "year": "2012",
+            "journal-title": "Turk Klin J Med Sci"
+          },
+          {
+            "key": "e_1_2_8_121_1",
+            "first-page": "371",
+            "article-title": "Incidence and predicting factors of cerebellar stroke in paitnets with acute vestibular syndrome in Songklanagarind emergency department: a preliminary study",
+            "volume": "101",
+            "author": "Limapichart T",
+            "year": "2018",
+            "journal-title": "J Med Assoc Thailand"
+          },
+          {
+            "key": "e_1_2_8_122_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.jstrokecerebrovasdis.2020.105043"
+          },
+          {
+            "key": "e_1_2_8_123_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1007/s00405-007-0433-7"
+          },
+          {
+            "key": "e_1_2_8_124_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1080/00016489.2018.1552367"
+          },
+          {
+            "key": "e_1_2_8_125_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.3109/00016489.2013.832377"
+          },
+          {
+            "key": "e_1_2_8_126_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.jocn.2014.09.011"
+          },
+          {
+            "key": "e_1_2_8_127_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1371/journal.pone.0214661"
+          },
+          {
+            "key": "e_1_2_8_128_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.3389/fneur.2021.605040"
+          },
+          {
+            "key": "e_1_2_8_129_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.ajem.2017.06.034"
+          },
+          {
+            "key": "e_1_2_8_130_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.annemergmed.2010.06.564"
+          },
+          {
+            "key": "e_1_2_8_131_1",
+            "volume-title": "Ataxia Is more Sensitive for Stroke than ABCD2 Vasular Risk or NIH Stroke Scale in Acute Vertigo",
+            "author": "Badihian S",
+            "year": "2022"
+          },
+          {
+            "key": "e_1_2_8_132_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.clinph.2020.04.173"
+          },
+          {
+            "key": "e_1_2_8_133_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.3389/fneur.2016.00125"
+          },
+          {
+            "key": "e_1_2_8_134_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1007/s00415-010-5853-4"
+          },
+          {
+            "key": "e_1_2_8_135_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1097/MAO.0000000000002067"
+          },
+          {
+            "key": "e_1_2_8_136_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/ene.14997"
+          },
+          {
+            "key": "e_1_2_8_137_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/acem.12223"
+          },
+          {
+            "key": "e_1_2_8_138_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.4103/0028-3886.310089"
+          },
+          {
+            "key": "e_1_2_8_139_1",
+            "first-page": "71",
+            "article-title": "Out‐of‐hospital scaling to recognize central vertigo",
+            "volume": "37",
+            "author": "Okada M",
+            "year": "2012",
+            "journal-title": "Tokai J Exp Clin Med"
+          },
+          {
+            "key": "e_1_2_8_140_1",
+            "first-page": "349",
+            "article-title": "Peripheral vertigo versus central vertigo. Application of the HINTS protocol",
+            "volume": "59",
+            "author": "Batuecas‐Caletrio A",
+            "year": "2014",
+            "journal-title": "Rev Neurol"
+          },
+          {
+            "key": "e_1_2_8_141_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1007/s00415-021-10692-6"
+          },
+          {
+            "key": "e_1_2_8_142_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1161/STROKEAHA.111.000033"
+          },
+          {
+            "key": "e_1_2_8_143_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.jns.2010.10.005"
+          },
+          {
+            "key": "e_1_2_8_144_1",
+            "first-page": "621",
+            "article-title": "Finger‐to‐nose test improved diagnosis of cerebrovascular events in patients presenting with isolated dizziness in the emergency department",
+            "volume": "84",
+            "author": "Nishida K",
+            "year": "2022",
+            "journal-title": "Nagoya J Med Sci"
+          },
+          {
+            "key": "e_1_2_8_145_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/ene.14707"
+          },
+          {
+            "key": "e_1_2_8_146_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.ultrasmedbio.2017.11.002"
+          },
+          {
+            "key": "e_1_2_8_147_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1186/s40463-018-0305-8"
+          },
+          {
+            "key": "e_1_2_8_148_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/acem.14659"
+          },
+          {
+            "key": "e_1_2_8_149_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/acem.14558"
+          },
+          {
+            "key": "e_1_2_8_150_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/acem.14635"
+          },
+          {
+            "key": "e_1_2_8_151_1",
+            "article-title": "Timing for nystagmus evaluation by STANDING or HINTS in patients with vertigo/dizziness in the emergency department",
+            "author": "Vanni S",
+            "year": "2022",
+            "journal-title": "Acad Emerg Med"
+          },
+          {
+            "key": "e_1_2_8_152_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.neurad.2016.04.001"
+          },
+          {
+            "key": "e_1_2_8_153_1",
+            "first-page": "1509",
+            "article-title": "Evaluation of the CCT and MRI results of patients hospitalized after applying to the emergency department with vertigo complaints",
+            "volume": "28",
+            "author": "Karakaya Z",
+            "year": "2017",
+            "journal-title": "Biomed Res (India)"
+          },
+          {
+            "key": "e_1_2_8_154_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.5811/westjem.2015.7.26158"
+          },
+          {
+            "key": "e_1_2_8_155_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/acem.12255"
+          },
+          {
+            "key": "e_1_2_8_156_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.3174/ajnr.A3325"
+          },
+          {
+            "key": "e_1_2_8_157_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.5152/iao.2014.209"
+          },
+          {
+            "key": "e_1_2_8_158_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1002/jmri.21088"
+          },
+          {
+            "key": "e_1_2_8_159_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1093/brain/awg197"
+          },
+          {
+            "key": "e_1_2_8_160_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1161/STROKEAHA.109.553859"
+          },
+          {
+            "key": "e_1_2_8_161_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1093/brain/awp026"
+          },
+          {
+            "key": "e_1_2_8_162_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/S0140-6736(12)60768-5"
+          },
+          {
+            "key": "e_1_2_8_163_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1161/STROKEAHA.110.607614"
+          },
+          {
+            "key": "e_1_2_8_164_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.jstrokecerebrovasdis.2019.104537"
+          },
+          {
+            "key": "e_1_2_8_165_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1161/STROKEAHA.119.027071"
+          },
+          {
+            "key": "e_1_2_8_166_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1001/jamaneurol.2019.2531"
+          },
+          {
+            "key": "e_1_2_8_167_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/S1474-4422(12)70299-5"
+          },
+          {
+            "key": "e_1_2_8_168_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1161/STROKEAHA.120.032488"
+          },
+          {
+            "key": "e_1_2_8_169_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1177/23969873211000877"
+          },
+          {
+            "key": "e_1_2_8_170_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1161/STR.0000000000000375"
+          },
+          {
+            "key": "e_1_2_8_171_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/S1474-4422(07)70264-8"
+          },
+          {
+            "key": "e_1_2_8_172_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/S1474-4422(21)00044-2"
+          },
+          {
+            "key": "e_1_2_8_173_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1001/jamaneurol.2019.0072"
+          },
+          {
+            "key": "e_1_2_8_174_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/S1474-4422(08)70216-3"
+          },
+          {
+            "key": "e_1_2_8_175_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1161/01.str.0000441965.15164.d6"
+          },
+          {
+            "key": "e_1_2_8_176_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1056/NEJMra072149"
+          },
+          {
+            "key": "e_1_2_8_177_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1001/archinternmed.2009.427"
+          },
+          {
+            "issue": "1",
+            "key": "e_1_2_8_178_1",
+            "article-title": "Comparing magnetic resonance imaging and computed tomography machine accessibility among urban and rural county hospitals",
+            "volume": "11",
+            "author": "Burdorf BT",
+            "year": "2021",
+            "journal-title": "J Public Health Res"
+          },
+          {
+            "key": "e_1_2_8_179_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1001/jamaoto.2022.0330"
+          },
+          {
+            "key": "e_1_2_8_180_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.3389/fneur.2022.766685"
+          },
+          {
+            "key": "e_1_2_8_181_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.3389/fneur.2021.768460"
+          },
+          {
+            "key": "e_1_2_8_182_1",
+            "volume-title": "Remote Expert Diagnosis by Video‐Oculography Is more Accurate than In‐Person ED Diagnosis in Acute Vertigo and Dizziness—Preliminary Results of the AVERT Trial",
+            "author": "Badihian S",
+            "year": "2022"
+          },
+          {
+            "key": "e_1_2_8_183_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.3389/fneur.2022.920357"
+          },
+          {
+            "key": "e_1_2_8_184_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1161/STROKEAHA.108.192218"
+          },
+          {
+            "key": "e_1_2_8_185_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/head.13240"
+          },
+          {
+            "key": "e_1_2_8_186_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.3233/VES-201644"
+          },
+          {
+            "key": "e_1_2_8_187_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.3233/VES-150549"
+          },
+          {
+            "key": "e_1_2_8_188_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1136/bmj.n49"
+          },
+          {
+            "key": "e_1_2_8_189_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.ncl.2008.11.004"
+          },
+          {
+            "key": "e_1_2_8_190_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.annemergmed.2017.06.026"
+          },
+          {
+            "key": "e_1_2_8_191_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.annemergmed.2018.06.009"
+          },
+          {
+            "key": "e_1_2_8_192_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.annemergmed.2003.12.025"
+          },
+          {
+            "key": "e_1_2_8_193_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1007/s43678-021-00181-0"
+          },
+          {
+            "key": "e_1_2_8_194_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.annemergmed.2011.03.009"
+          },
+          {
+            "key": "e_1_2_8_195_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1161/STROKEAHA.109.577650"
+          },
+          {
+            "key": "e_1_2_8_196_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/S1474-4422(13)70211-4"
+          },
+          {
+            "key": "e_1_2_8_197_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1001/archneurol.2011.2083"
+          },
+          {
+            "key": "e_1_2_8_198_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1136/jnnp.2010.222091"
+          },
+          {
+            "key": "e_1_2_8_199_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/S0140-6736(20)31961-9"
+          },
+          {
+            "key": "e_1_2_8_200_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.3109/00207454.2014.905777"
+          },
+          {
+            "key": "e_1_2_8_201_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1097/NRL.0b013e31826754e1"
+          },
+          {
+            "key": "e_1_2_8_202_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1001/jama.1977.03270360044017"
+          },
+          {
+            "key": "e_1_2_8_203_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1056/NEJMra041544"
+          },
+          {
+            "key": "e_1_2_8_204_1",
+            "first-page": "1086",
+            "article-title": "Recurrent spontaneous attacks of dizziness",
+            "volume": "18",
+            "author": "Lempert T",
+            "year": "2012",
+            "journal-title": "Continuum (Minneap Minn)"
+          },
+          {
+            "key": "e_1_2_8_205_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1186/s12883-017-0894-2"
+          },
+          {
+            "key": "e_1_2_8_206_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1161/STROKEAHA.111.636506"
+          },
+          {
+            "key": "e_1_2_8_207_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1161/STROKEAHA.109.560045"
+          },
+          {
+            "key": "e_1_2_8_208_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1161/01.STR.0000102900.74360.D9"
+          },
+          {
+            "key": "e_1_2_8_209_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1002/jum.14301"
+          },
+          {
+            "key": "e_1_2_8_210_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1161/STROKEAHA.109.556035"
+          },
+          {
+            "key": "e_1_2_8_211_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1161/STROKEAHA.112.669929"
+          },
+          {
+            "key": "e_1_2_8_212_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/S1474-4422(07)70248-X"
+          },
+          {
+            "key": "e_1_2_8_213_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/S0140-6736(07)61448-2"
+          },
+          {
+            "key": "e_1_2_8_214_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1161/STROKEAHA.121.034279"
+          },
+          {
+            "key": "e_1_2_8_215_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1056/NEJMcp1908837"
+          },
+          {
+            "key": "e_1_2_8_216_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/S1474-4422(07)70274-0"
+          },
+          {
+            "key": "e_1_2_8_217_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1001/archinternmed.2009.66"
+          },
+          {
+            "key": "e_1_2_8_218_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1044/2021_AJA-21-00086"
+          },
+          {
+            "key": "e_1_2_8_219_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1136/bmj.j4218"
+          },
+          {
+            "key": "e_1_2_8_220_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1093/qjmed/hci057"
+          },
+          {
+            "key": "e_1_2_8_221_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.3233/VES-180637"
+          },
+          {
+            "key": "e_1_2_8_222_1",
+            "doi-asserted-by": "crossref",
+            "DOI": "10.3389/fneur.2020.625776",
+            "article-title": "Two symptoms strongly suggest benign paroxysmal positional vertigo in a dizzy patient",
+            "volume": "11",
+            "author": "Dam VS",
+            "year": "2020",
+            "journal-title": "Front Neurol"
+          },
+          {
+            "key": "e_1_2_8_223_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/ene.12622"
+          },
+          {
+            "key": "e_1_2_8_224_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.mayocp.2013.10.026"
+          },
+          {
+            "key": "e_1_2_8_225_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.3233/VES-150553"
+          },
+          {
+            "key": "e_1_2_8_226_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/j.1553-2712.2011.01093.x"
+          },
+          {
+            "key": "e_1_2_8_227_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/ene.14909"
+          },
+          {
+            "key": "e_1_2_8_228_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1212/WNL.0000000000000838"
+          },
+          {
+            "key": "e_1_2_8_229_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.2147/AMEP.S309001"
+          },
+          {
+            "key": "e_1_2_8_230_1",
+            "first-page": "e830‐e8",
+            "article-title": "An educational intervention for acute dizziness care: a randomized",
+            "volume": "40",
+            "author": "Meurer WJ",
+            "year": "2019",
+            "journal-title": "Vignette‐Based Study Otol Neurotol"
+          },
+          {
+            "key": "e_1_2_8_231_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1007/s00405-019-05470-0"
+          },
+          {
+            "key": "e_1_2_8_232_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1212/CPJ.0000000000000366"
+          },
+          {
+            "key": "e_1_2_8_233_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1056/NEJMcp1309481"
+          },
+          {
+            "key": "e_1_2_8_234_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1055/s-0038-1670693"
+          },
+          {
+            "key": "e_1_2_8_235_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/bs.pbr.2019.04.022"
+          },
+          {
+            "key": "e_1_2_8_236_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1007/s10072-019-04101-0"
+          },
+          {
+            "key": "e_1_2_8_237_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.anl.2017.05.017"
+          },
+          {
+            "key": "e_1_2_8_238_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1017/S0022215121003923"
+          },
+          {
+            "key": "e_1_2_8_239_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1007/s00405-019-05459-9"
+          },
+          {
+            "key": "e_1_2_8_240_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1177/0194599814525919"
+          },
+          {
+            "key": "e_1_2_8_241_1",
+            "article-title": "Vestibular rehabilitation for unilateral peripheral vestibular dysfunction",
+            "volume": "1",
+            "author": "McDonnell MN",
+            "year": "2015",
+            "journal-title": "Cochrane Database Syst Rev"
+          },
+          {
+            "key": "e_1_2_8_242_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/acem.14583"
+          },
+          {
+            "key": "e_1_2_8_243_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.3389/fneur.2016.00231"
+          },
+          {
+            "key": "e_1_2_8_244_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1007/s11606-012-2077-6"
+          },
+          {
+            "key": "e_1_2_8_245_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.ncl.2015.04.012"
+          },
+          {
+            "key": "e_1_2_8_246_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1007/s00198-018-4564-z"
+          },
+          {
+            "issue": "67",
+            "key": "e_1_2_8_247_1",
+            "doi-asserted-by": "crossref",
+            "first-page": "674",
+            "DOI": "10.1111/jgs.15767",
+            "article-title": "American Geriatrics Society 2018 updated AGS Beers Criteria® for potentially inappropriate medication use in older adults",
+            "volume": "2019",
+            "author": "By the American Geriatrics Society Beers Criteria® Update Expert Panel",
+            "year": "2019",
+            "journal-title": "J Am Geriatr Soc"
+          },
+          {
+            "key": "e_1_2_8_248_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1097/MAO.0000000000002106"
+          },
+          {
+            "key": "e_1_2_8_249_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/S0025-6196(11)64615-6"
+          },
+          {
+            "key": "e_1_2_8_250_1",
+            "first-page": "1049",
+            "article-title": "Canalith repositioning maneuver for benign paroxysmal positional vertigo: randomized controlled trial in family practice",
+            "volume": "53",
+            "author": "Munoz JE",
+            "year": "2007",
+            "journal-title": "Can Fam Physician"
+          },
+          {
+            "key": "e_1_2_8_251_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1136/jnnp.2005.085894"
+          },
+          {
+            "key": "e_1_2_8_252_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1097/00005537-200305000-00011"
+          },
+          {
+            "key": "e_1_2_8_253_1",
+            "article-title": "The efficacy of Epley procedure for treatment of benign paroxysmal positional vertigo of the posterior semicircular canal",
+            "volume": "2",
+            "author": "Liang SB",
+            "year": "2010",
+            "journal-title": "J Youjiang Medical Univ Nationalities"
+          },
+          {
+            "key": "e_1_2_8_254_1",
+            "article-title": "Clinical efficacy of Epley procedure for treatment of benign paroxysmal positional vertigo of posterior semicircular canal",
+            "author": "Xie K",
+            "year": "2012",
+            "journal-title": "Chinese J Gen Pract"
+          },
+          {
+            "key": "e_1_2_8_255_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1136/jnnp.2006.100420"
+          },
+          {
+            "key": "e_1_2_8_256_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1007/s00405-020-06357-1"
+          },
+          {
+            "key": "e_1_2_8_257_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1159/000075558"
+          },
+          {
+            "key": "e_1_2_8_258_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1007/s00405-004-0841-x"
+          },
+          {
+            "key": "e_1_2_8_259_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1097/00129492-200307000-00018"
+          },
+          {
+            "key": "e_1_2_8_260_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1067/mhn.2000.105415"
+          },
+          {
+            "key": "e_1_2_8_261_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.2519/jospt.2015.5707"
+          },
+          {
+            "key": "e_1_2_8_262_1",
+            "first-page": "113",
+            "article-title": "Elderly falls associated with benign paroxysmal positional vertigo",
+            "volume": "76",
+            "author": "Gananca FF",
+            "year": "2010",
+            "journal-title": "Braz J Otorhinolaryngol"
+          },
+          {
+            "key": "e_1_2_8_263_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1177/0003489417718847"
+          },
+          {
+            "key": "e_1_2_8_264_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1177/0194599814536530"
+          },
+          {
+            "key": "e_1_2_8_265_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/acem.14608"
+          },
+          {
+            "key": "e_1_2_8_266_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1001/jamaneurol.2022.1858"
+          },
+          {
+            "key": "e_1_2_8_267_1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/acem.14559"
+          }
+        ],
+        "container-title": [
+          "Academic Emergency Medicine"
+        ],
+        "original-title": [],
+        "language": "en",
+        "link": [
+          {
+            "URL": "https://onlinelibrary.wiley.com/doi/pdf/10.1111/acem.14728",
+            "content-type": "unspecified",
+            "content-version": "vor",
+            "intended-application": "similarity-checking"
+          }
+        ],
+        "deposited": {
+          "date-parts": [
+            [
+              2023,
+              12,
+              12
+            ]
+          ],
+          "date-time": "2023-12-12T18:08:46Z",
+          "timestamp": 1702404526000
+        },
+        "score": 1,
+        "resource": {
+          "primary": {
+            "URL": "https://onlinelibrary.wiley.com/doi/10.1111/acem.14728"
+          }
+        },
+        "subtitle": [],
+        "short-title": [],
+        "issued": {
+          "date-parts": [
+            [
+              2023,
+              5
+            ]
+          ]
+        },
+        "references-count": 266,
+        "journal-issue": {
+          "issue": "5",
+          "published-print": {
+            "date-parts": [
+              [
+                2023,
+                5
+              ]
+            ]
+          }
+        },
+        "alternative-id": [
+          "10.1111/acem.14728"
+        ],
+        "URL": "https://doi.org/10.1111/acem.14728",
+        "archive": [
+          "Portico"
+        ],
+        "relation": {},
+        "ISSN": [
+          "1069-6563",
+          "1553-2712"
+        ],
+        "issn-type": [
+          {
+            "value": "1069-6563",
+            "type": "print"
+          },
+          {
+            "value": "1553-2712",
+            "type": "electronic"
+          }
+        ],
+        "subject": [],
+        "published": {
+          "date-parts": [
+            [
+              2023,
+              5
+            ]
+          ]
+        },
+        "assertion": [
+          {
+            "value": "2023-03-14",
+            "order": 0,
+            "name": "received",
+            "label": "Received",
+            "group": {
+              "name": "publication_history",
+              "label": "Publication History"
+            }
+          },
+          {
+            "value": "2023-03-14",
+            "order": 1,
+            "name": "accepted",
+            "label": "Accepted",
+            "group": {
+              "name": "publication_history",
+              "label": "Publication History"
+            }
+          },
+          {
+            "value": "2023-05-11",
+            "order": 2,
+            "name": "published",
+            "label": "Published",
+            "group": {
+              "name": "publication_history",
+              "label": "Publication History"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "key": "PostRE2010Dizziness",
+    "title": "Dizziness: A Diagnostic Approach",
+    "doi": null,
+    "href": "https://pubmed.ncbi.nlm.nih.gov/20704166",
+    "crossref": {
+      "status": "not_found",
+      "method": "bibliographic",
+      "doi": "10.14253/acn.2020.22.2.75",
+      "title": "Diagnostic approach of orthostatic dizziness/vertigo",
+      "score": 23.22759,
+      "similarity": 0.5,
+      "work": {
+        "indexed": {
+          "date-parts": [
+            [
+              2025,
+              5,
+              13
+            ]
+          ],
+          "date-time": "2025-05-13T02:10:05Z",
+          "timestamp": 1747102205487,
+          "version": "3.40.5"
+        },
+        "reference-count": 48,
+        "publisher": "The Korean Society of Clinical Neurophysiology (KAMJE)",
+        "issue": "2",
+        "license": [
+          {
+            "start": {
+              "date-parts": [
+                [
+                  2020,
+                  10,
+                  28
+                ]
+              ],
+              "date-time": "2020-10-28T00:00:00Z",
+              "timestamp": 1603843200000
+            },
+            "content-version": "tdm",
+            "delay-in-days": 0,
+            "URL": "http://creativecommons.org/licenses/by-nc/4.0/"
+          }
+        ],
+        "content-domain": {
+          "domain": [
+            "e-acn.org"
+          ],
+          "crossmark-restriction": true
+        },
+        "short-container-title": [
+          "ACN"
+        ],
+        "published-print": {
+          "date-parts": [
+            [
+              2020,
+              10,
+              30
+            ]
+          ]
+        },
+        "abstract": "<jats:p>This paper introduces new diagnostic criteria and differential diagnosis of orthostatic dizziness to help clinicians to diagnose hemodynamic orthostatic dizziness. Clinicians need to be able to discriminate hemodynamic orthostatic dizziness from other types of dizziness that are induced or aggravated when standing or walking. Measurements of the orthostatic blood pressure and heart rate are important when screening hemodynamic orthostatic dizziness. Detailed history-taking, a physical examination, and laboratory tests are essential for finding the cause of hemodynamic orthostatic dizziness. The differential diagnosis of hemodynamic orthostatic dizziness is crucial because it can be caused by various autonomic neuropathies.</jats:p>",
+        "DOI": "10.14253/acn.2020.22.2.75",
+        "type": "journal-article",
+        "created": {
+          "date-parts": [
+            [
+              2021,
+              6,
+              16
+            ]
+          ],
+          "date-time": "2021-06-16T06:37:56Z",
+          "timestamp": 1623825476000
+        },
+        "page": "75-81",
+        "update-policy": "https://doi.org/10.14253/crossmark_policy",
+        "source": "Crossref",
+        "is-referenced-by-count": 1,
+        "title": [
+          "Diagnostic approach of orthostatic dizziness/vertigo"
+        ],
+        "prefix": "10.14253",
+        "volume": "22",
+        "author": [
+          {
+            "ORCID": "https://orcid.org/0000-0003-0568-6104",
+            "authenticated-orcid": true,
+            "given": "Hyung",
+            "family": "Lee",
+            "sequence": "first",
+            "affiliation": []
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0002-2140-4763",
+            "authenticated-orcid": true,
+            "given": "Hyun Ah",
+            "family": "Kim",
+            "sequence": "additional",
+            "affiliation": []
+          }
+        ],
+        "member": "5368",
+        "reference": [
+          {
+            "key": "ref1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1001/archinte.152.5.1058"
+          },
+          {
+            "key": "ref2",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1291/hypres.31.897"
+          },
+          {
+            "key": "ref3",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1161/01.HYP.19.6.508"
+          },
+          {
+            "key": "ref4",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1001/jama.1987.03400110093033"
+          },
+          {
+            "key": "ref5",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/j.1532-5415.1996.tb03738.x"
+          },
+          {
+            "key": "ref6",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/S0385-8146(96)00012-0"
+          },
+          {
+            "key": "ref7",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1159/000276809"
+          },
+          {
+            "key": "ref8",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1093/ageing/23.2.117"
+          },
+          {
+            "key": "ref9",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1007/s10286-010-0114-2"
+          },
+          {
+            "key": "ref10",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1007/s10072-015-2363-2"
+          },
+          {
+            "key": "ref11",
+            "first-page": "s248",
+            "volume-title": "Neurogenic orthostatic hypotension: pathophysiology and diagnosis",
+            "author": "Low",
+            "year": "2015"
+          },
+          {
+            "key": "ref12",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1161/01.STR.29.1.104"
+          },
+          {
+            "key": "ref13",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/0165-1838(94)90008-6"
+          },
+          {
+            "key": "ref14",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.3233/VES-2009-0343"
+          },
+          {
+            "key": "ref15",
+            "first-page": "132",
+            "volume-title": "",
+            "author": "Baloh",
+            "year": "2010"
+          },
+          {
+            "key": "ref16",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1007/s004150050479"
+          },
+          {
+            "key": "ref17",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/S0002-9629(15)40480-X"
+          },
+          {
+            "key": "ref18",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1136/pgmj.2007.058198"
+          },
+          {
+            "key": "ref19",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.jns.2012.11.019"
+          },
+          {
+            "key": "ref20",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.3233/VES-190655"
+          },
+          {
+            "key": "ref21",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1111/ene.12622"
+          },
+          {
+            "key": "ref22",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1007/s11606-008-0801-z"
+          },
+          {
+            "key": "ref23",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/S0002-9343(97)89517-4"
+          },
+          {
+            "key": "ref24",
+            "first-page": "8",
+            "volume-title": "",
+            "author": "Low",
+            "year": "2008"
+          },
+          {
+            "key": "ref25",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.amjoto.2013.04.005"
+          },
+          {
+            "key": "ref26",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1097/WCO.0000000000000417"
+          },
+          {
+            "key": "ref27",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.3233/VES-170622"
+          },
+          {
+            "key": "ref28",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1212/WNL.46.6.1515"
+          },
+          {
+            "key": "ref29",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1212/01.CON.0000421622.56525.58"
+          },
+          {
+            "key": "ref30",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1097/MAO.0b013e31805c74a7"
+          },
+          {
+            "volume-title": "",
+            "year": "2013",
+            "author": "Association",
+            "key": "ref31"
+          },
+          {
+            "key": "ref32",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.jad.2005.09.010"
+          },
+          {
+            "key": "ref33",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1097/00005537-200310000-00010"
+          },
+          {
+            "key": "ref34",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1097/00019052-199902000-00002"
+          },
+          {
+            "key": "ref35",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.3233/VES-170619"
+          },
+          {
+            "key": "ref36",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.jns.2015.09.006"
+          },
+          {
+            "key": "ref37",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.rec.2018.09.002"
+          },
+          {
+            "key": "ref38",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1007/s10286-011-0119-5"
+          },
+          {
+            "key": "ref39",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.amjmed.2007.02.023"
+          },
+          {
+            "key": "ref40",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.clinph.2013.10.022"
+          },
+          {
+            "key": "ref41",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1097/MD.0000000000003608"
+          },
+          {
+            "key": "ref42",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1212/01.wnl.0000184504.13173.ef"
+          },
+          {
+            "key": "ref43",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1001/archneur.64.3.381"
+          },
+          {
+            "key": "ref44",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1002/ana.25170"
+          },
+          {
+            "key": "ref45",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1007/s00415-012-6736-7"
+          },
+          {
+            "key": "ref46",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1007/s00415-016-8375-x"
+          },
+          {
+            "key": "ref47",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/j.mayocp.2012.08.013"
+          },
+          {
+            "key": "ref48",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.1016/S0025-6196(11)61027-6"
+          }
+        ],
+        "container-title": [
+          "Annals of Clinical Neurophysiology"
+        ],
+        "language": "en",
+        "link": [
+          {
+            "URL": "http://e-acn.org/upload/pdf/acn-22-2-75.pdf",
+            "content-type": "application/pdf",
+            "content-version": "vor",
+            "intended-application": "text-mining"
+          },
+          {
+            "URL": "http://e-acn.org/journal/view.php?doi=10.14253/acn.2020.22.2.75",
+            "content-type": "unspecified",
+            "content-version": "vor",
+            "intended-application": "text-mining"
+          },
+          {
+            "URL": "http://e-acn.org/upload/pdf/acn-22-2-75.pdf",
+            "content-type": "unspecified",
+            "content-version": "vor",
+            "intended-application": "similarity-checking"
+          }
+        ],
+        "deposited": {
+          "date-parts": [
+            [
+              2025,
+              5,
+              13
+            ]
+          ],
+          "date-time": "2025-05-13T01:49:21Z",
+          "timestamp": 1747100961000
+        },
+        "score": 23.22759,
+        "resource": {
+          "primary": {
+            "URL": "http://e-acn.org/journal/view.php?doi=10.14253/acn.2020.22.2.75"
+          }
+        },
+        "issued": {
+          "date-parts": [
+            [
+              2020,
+              10,
+              30
+            ]
+          ]
+        },
+        "references-count": 48,
+        "journal-issue": {
+          "issue": "2",
+          "published-print": {
+            "date-parts": [
+              [
+                2020,
+                10
+              ]
+            ]
+          }
+        },
+        "URL": "https://doi.org/10.14253/acn.2020.22.2.75",
+        "ISSN": [
+          "2508-691X",
+          "2508-6960"
+        ],
+        "issn-type": [
+          {
+            "type": "print",
+            "value": "2508-691X"
+          },
+          {
+            "type": "electronic",
+            "value": "2508-6960"
+          }
+        ],
+        "published": {
+          "date-parts": [
+            [
+              2020,
+              10,
+              30
+            ]
+          ]
+        },
+        "assertion": [
+          {
+            "value": "2020-08-14",
+            "order": 0,
+            "name": "received",
+            "label": "Received",
+            "group": {
+              "name": "publication_history",
+              "label": "Publication History"
+            }
+          },
+          {
+            "value": "2020-09-09",
+            "order": 1,
+            "name": "accepted",
+            "label": "Accepted",
+            "group": {
+              "name": "publication_history",
+              "label": "Publication History"
+            }
+          },
+          {
+            "value": "2020-10-28",
+            "order": 2,
+            "name": "published",
+            "label": "Published online",
+            "group": {
+              "name": "publication_history",
+              "label": "Publication History"
+            }
+          },
+          {
+            "value": "2020-10-30",
+            "order": 3,
+            "name": "published",
+            "label": "Print publication",
+            "group": {
+              "name": "publication_history",
+              "label": "Publication History"
+            }
+          }
+        ]
+      }
+    }
+  }
+]

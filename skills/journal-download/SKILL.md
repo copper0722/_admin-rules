@@ -31,6 +31,11 @@ When invoked from a private workspace under `~/repos`, the operational implement
 3. If OA PDF URL is confirmed, download with `curl`.
 4. Verify file type and size.
 5. Store only metadata/provenance in public repos unless the PDF license allows redistribution.
+6. For topic-specific download queues, do not treat deterministic download success as topic acceptance. A later LLM gate must read metadata + content and either route to wikify or reverse the topic registration if the article is off-topic.
+
+## Topic-specific recurring crawlers
+
+For recurring PubMed/OA article lanes, use PG state plus a sliding overlap window and stable identifier upserts; do not persist PubMed `retstart`/page number as the durable cursor. Repeated discovery is acceptable; duplicate PG registration or duplicate wikification is not. Keep deterministic download, LLM relevance judgment, and Opus wikify as separate stages. See `references/pubmed-esrd-recurring-lane.md` for the ESRD/HD pattern.
 
 ## Metadata Manifest
 

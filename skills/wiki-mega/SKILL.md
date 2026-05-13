@@ -78,7 +78,7 @@ Find every local hit in:
   1. PG wiki_raw.raw_index — keyword search on title + body_excerpt
      (psql -h hmj -d vault_main; table wiki_raw.raw_index has columns
      citation_key, title, body_excerpt, raw_md_path)
-  2. ripgrep on ~/repos/personal-website/wiki_raw/ (raw .md text)
+  2. ripgrep on ~/repos/vault/ (raw .md text)
   3. ripgrep on ~/repos/personal-website/src/content/wiki/ (existing M2M
      wiki synthesis entries)
 

@@ -1,0 +1,102 @@
+[
+  {
+    "key": "WesselsMR2011Streptococcal",
+    "title": "Streptococcal Pharyngitis",
+    "doi": "10.1056/nejmcp1009126",
+    "href": "https://www.nejm.org/doi/full/10.1056/NEJMcp1009126",
+    "crossref": {
+      "status": "skipped",
+      "method": "none"
+    }
+  },
+  {
+    "key": "HamiltonJL2024Streptococcal",
+    "title": "Streptococcal Pharyngitis: Rapid Evidence Review",
+    "doi": null,
+    "href": "https://www.aafp.org/link_out?pmid=38648833",
+    "crossref": {
+      "status": "skipped",
+      "method": "none"
+    }
+  },
+  {
+    "key": "RandelA2013IDSA",
+    "title": "IDSA Updates Guideline for Managing Group a Streptococcal Pharyngitis",
+    "doi": null,
+    "href": "https://pubmed.ncbi.nlm.nih.gov/24010402",
+    "crossref": {
+      "status": "skipped",
+      "method": "none"
+    }
+  },
+  {
+    "key": "SmithKL2023Tonsillitis",
+    "title": "Tonsillitis and Tonsilloliths: Diagnosis and Management",
+    "doi": null,
+    "href": "https://www.aafp.org/link_out?pmid=36689967",
+    "crossref": {
+      "status": "skipped",
+      "method": "none"
+    }
+  },
+  {
+    "key": "HarristA2016Notes",
+    "title": "Notes From the Field: Group a Streptococcal Pharyngitis Misdiagnoses at a Rural Urgent-Care Clinic--Wyoming, March 2015",
+    "doi": "10.15585/mmwr.mm6450a4",
+    "href": "https://pubmed.ncbi.nlm.nih.gov/26719990",
+    "crossref": {
+      "status": "skipped",
+      "method": "none"
+    }
+  },
+  {
+    "key": "BisnoAL2001Acute",
+    "title": "Acute Pharyngitis",
+    "doi": "10.1056/nejm200101183440308",
+    "href": "https://www.nejm.org/doi/full/10.1056/NEJM200101183440308",
+    "crossref": {
+      "status": "skipped",
+      "method": "none"
+    }
+  },
+  {
+    "key": "HedinK2023Different",
+    "title": "Different Antibiotic Treatments for Group a Streptococcal Pharyngitis",
+    "doi": "10.1002/14651858.cd004406.pub6",
+    "href": "https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD004406.pub6/full",
+    "crossref": {
+      "status": "skipped",
+      "method": "none"
+    }
+  },
+  {
+    "key": "HarrisAM2016Appropriate",
+    "title": "Appropriate Antibiotic Use for Acute Respiratory Tract Infection in Adults: Advice for High-Value Care From the American College of Physicians and the Centers for Disease Control and Prevention",
+    "doi": "10.7326/m15-1840",
+    "href": "https://www.acpjournals.org/doi/abs/10.7326/M15-1840?url_ver=Z39.88-2003&rfr_id=ori:rid:crossref.org&rfr_dat=cr_pub%20%200pubmed",
+    "crossref": {
+      "status": "skipped",
+      "method": "none"
+    }
+  },
+  {
+    "key": "BassJW1986Treatment",
+    "title": "Treatment of Streptococcal Pharyngitis Revisited",
+    "doi": null,
+    "href": "https://pubmed.ncbi.nlm.nih.gov/3522953?utm_source=openevidence&utm_medium=referral",
+    "crossref": {
+      "status": "skipped",
+      "method": "none"
+    }
+  },
+  {
+    "key": "AltamimiS2012Short",
+    "title": "Short-Term Late-Generation Antibiotics Versus Longer Term Penicillin for Acute Streptococcal Pharyngitis in Children",
+    "doi": "10.1002/14651858.cd004872.pub3",
+    "href": "https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD004872.pub3/full",
+    "crossref": {
+      "status": "skipped",
+      "method": "none"
+    }
+  }
+]

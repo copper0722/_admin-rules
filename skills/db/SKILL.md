@@ -36,6 +36,8 @@ This public skill describes database design principles only. Private DSNs, hostn
 - Batch writes inside transactions.
 - Record import source, row count, started/finished time, and error state.
 - Keep canonical writes in one owner path or use explicit lease/conflict policy.
+- When a user says a large dataset is already imported, verify the canonical PG schema/tables first before searching the filesystem for JSONL/Parquet dumps. Count rows, inspect metadata/catalog tables, and compare expected vs ingested counts before claiming a download protocol matches the live corpus. See `references/pg-large-open-data-verification.md`.
+- For Taiwan health open data (`tw_health_open`, NHI IODE, TFDA OpenData), verify completion in PG before packaging or advertising a public repo; use `references/tw-health-open-nhi-tfda.md` for source endpoints, SQL checks, and public-repo packaging gates.
 
 ## Migration Checklist
 
