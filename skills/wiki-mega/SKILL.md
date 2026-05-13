@@ -6,7 +6,10 @@ description: |
   Opus fans out 5 parallel sub-agents (local wiki_raw + OpenEvidence +
   UpToDate + DynaMed + Gemini CLI grounded web search), then synthesizes
   one concise zh-TW answer with primary-citation table and local-coverage
-  gap report.
+  gap report. Every invocation produces a saved wiki-human article at
+  `personal-website/src/content/notes/public/wiki-human/<slug>/index.md`
+  (Copper directive 2026-05-13); chat reply summarises the saved article.
+  No `--save` flag — saving is the skill's primary deliverable, not opt-in.
 
   MANDATORY TRIGGERS: /wiki-mega, /wm, 深查, 大查, mega wiki, /wikimega.
   Trigger requires Q-shape (clinical / medical / EBM question, not source
@@ -61,7 +64,7 @@ Question (zh-TW)
 [Synthesizer: collate, dedupe DOIs, map navigator→primary, gap-check vs
  local wiki_raw, produce concise zh-TW answer]
   ↓
-Chat output (+ optional --save to personal-website/src/content/wiki/<slug>.md)
+Chat output AND mandatory save to personal-website/src/content/notes/public/wiki-human/<slug>/index.md
 ```
 
 ## Sub-agent prompts
@@ -304,10 +307,27 @@ After all 5 sub-agents return, the main Opus does:
 - 若 0 缺口：寫「本地覆蓋完整」
 ```
 
+<<<<<<< Updated upstream
 7. **Optional save → `wiki-human` article (Copper directive 2026-05-11)**:
    if invocation included `--save`, write the composed answer as a new
+=======
+6. **Mandatory wiki-human save (Copper directive 2026-05-13)**: every
+   `/wiki-mega` invocation writes the composed answer as a new
+>>>>>>> Stashed changes
    `note_type: wiki-human` public article at
    `~/repos/personal-website/src/content/notes/public/wiki-human/{slug}/index.md`.
+   This is the skill's primary deliverable; the chat reply is a
+   summary that points at the saved article path. There is no flag
+   and no opt-in — `/wiki-mega` without a saved article is a failed
+   invocation. If the save step is blocked (filesystem error, slug
+   collision, sync-guard refusal), report the blocker explicitly and
+   do not silently degrade to chat-only.
+
+   Slug convention: `<topic-slug>-<YYYY-MM>` (e.g.
+   `dizziness-history-taking-2026-05`), matching the existing
+   `wiki-human/` slug pattern. On collision, append `-v2` / `-v3`
+   incrementally; do not overwrite an existing article unless the
+   user explicitly asks for an update.
 
    `wiki-human` is a **versatile public article type** (`notes`
    collection, `note_type: wiki-human`); `/wiki-mega` is ONE producer
