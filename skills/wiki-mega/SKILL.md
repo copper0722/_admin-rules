@@ -54,8 +54,8 @@ Question (zh-TW)
 5 parallel Agent calls (general-purpose subagent_type, run in single message)
   ├── sub-local      → PG wiki_raw.raw_index + ripgrep wiki_raw + content/wiki
   ├── sub-oe         → scripts/oe.py (OpenEvidence) ← openevidence-skill
-  ├── sub-utd        → chrome-devtools MCP, UpToDate CMU proxy
-  ├── sub-dynamed    → chrome-devtools MCP, DynaMed
+  ├── sub-utd        → uptodate-skill (stdlib utd.py + osascript, hm4/mbp Chrome Beta)
+  ├── sub-dynamed    → dynamed-skill (stdlib dynamed.py + osascript, hm4/mbp Chrome Beta)
   └── sub-gemini     → gemini -p "<refined_q>" (grounded web search)
   ↓
 [Synthesizer: collate, dedupe DOIs, map navigator→primary, gap-check vs
