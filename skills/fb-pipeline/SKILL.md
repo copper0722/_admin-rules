@@ -61,9 +61,18 @@ Drafts may contain:
 
 - Post title or hook.
 - Plain-language explanation.
-- Public source links.
 - AI-authorship disclosure.
 - Suggested image/card concept using original wording.
+- Source citation by name + date (NOT a URL).
 
-Drafts must not contain access tokens, private paths, or unpublished personal records.
+Drafts must not contain:
+
+- `http://` or `https://` URLs in the post body. Universal rule per Copper
+  2026-05-14: Facebook algo systematically penalises posts with external
+  links, organic reach collapses. Applies to 社團 / 粉專 / personal wall
+  alike. To direct readers: cite source by name + date, place URL in the
+  first comment after publishing (comments are not penalised), or point
+  readers to a non-FB platform link tree. The only inline links permitted
+  are FB-internal kinds (tagged users, location check-ins).
+- Access tokens, private paths, unpublished personal records.
 
