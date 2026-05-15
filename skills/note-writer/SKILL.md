@@ -234,6 +234,27 @@ Past agents repeatedly injected wiki-style synthesis into notes despite this rul
 
 If a chapter's KEY TAKEAWAYS or body contains any of the above patterns INLINE (mixed with textbook content), the note is **contaminated** and must be rewritten faithfully from raw.md.
 
+#### CRITICAL — "No synthesis injection" ≠ "skip translation" (Copper directive 2026-05-15)
+
+The 7 forbidden patterns above are about **content additions outside the source** (external literature, GRADE labels, causal critique, policy gloss). They are **NOT** instructions to skip Stage 1 zh-TW translation.
+
+**Stage 1 zh-TW translation IS REQUIRED, NOT optional.**
+
+Pattern of recent sub-agent failure (af92 Fitzpatrick ch001-050, aadc ENT v1-ch001-050):
+- Agent read "no synthesis injection" + "faithful rendering"
+- Concluded: leave English body verbatim, only translate frontmatter + titles
+- Result: `note-private.md` body = raw.md English text with zh-TW frontmatter wrapper = **NOT a textbook-study note**.
+
+**Correct behavior:**
+- Stage 1 (extended thinking): full section-by-section zh-TW translation of source body
+- Stage 2 (output): restructure translated text as hierarchical bullet outline + bilingual headings + KEY TAKEAWAYS + TEACHING SLIDES (public) / full body (private)
+- The OUTPUT body must be in zh-TW (台灣學術術語), NOT English verbatim
+- Verbatim English fair-use quotes ≤30 words each, ≤2 per note (per Layer scope rule for public) are allowed embedded in zh-TW prose, but the surrounding body is zh-TW
+
+**Mechanical extractor scripts** (e.g., grep AT-A-GLANCE blocks + re-emit) bypassing Stage 1 = forbidden. Such scripts produce contaminated notes; rewrite faithfully via the two-stage process.
+
+If you find yourself thinking "I'll just keep the English to be faithful to the source", STOP and re-read Stage 1 above. Faithful = full zh-TW translation; bilingual headings = `中文｜English`; body prose = zh-TW.
+
 #### Permitted callout exception (Copper 2026-04-20 PM, hardened 2026-05-01)
 
 Non-source content MAY be added IF AND ONLY IF it lives in an Obsidian callout block that meets the three-bucket convention defined in `personal-website/AGENTS.md` and repo Law "Layer scope (hard line — note ≠ wiki)" rules. Card is the authority; this section reproduces the canonical form for Taiwan addenda only:
