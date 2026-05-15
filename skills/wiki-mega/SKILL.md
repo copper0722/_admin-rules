@@ -9,11 +9,12 @@ description: |
   gap report. Every invocation produces a saved reader-facing article bundle
   at `vault/{primary_topic_path}/wiki-human-{slug}/{article.md, refs.json, manifest.json}`
   (Copper directives 2026-05-13 / 2026-05-14 vault canonicalization /
-  2026-05-15 publish-flag prebuild sync); chat reply summarises the saved article.
-  Personal-website renderer view materialized via prebuild script
-  `scripts/sync-vault-published-to-content.py` reading frontmatter
-  `publish: true` (a045). No `--save` flag — saving is the skill's primary
-  deliverable, not opt-in.
+  2026-05-15 publish-flag direct-load); chat reply summarises the saved article.
+  Personal-website renderer reads vault directly via Astro 5 globLoader
+  (`base: '..'`, `pattern: 'vault/**/{article,note-public,note-private,index}.md'`);
+  frontmatter `publish: true` gates which vault entries surface on the public
+  site. No prebuild sync script, no symlinks — Astro reads vault canonical
+  per build. No `--save` flag; saving is the skill's primary deliverable.
 
   MANDATORY TRIGGERS: /wiki-mega, /wm, 深查, 大查, mega wiki, /wikimega.
   Trigger requires Q-shape (clinical / medical / EBM question, not source
@@ -337,15 +338,16 @@ After all 5 sub-agents return, the main Opus does:
    - `manifest.json` — bundle manifest with `producer: wiki-mega`,
      `question`, `refined_q`, `sub_agent_results_summary`, `created_at`.
 
-   **Renderer view via prebuild sync** (Copper directive 2026-05-15: vault
-   = single content corpus; personal-website = pure renderer). After writing
-   vault canonical bundle, the prebuild script
-   `personal-website/scripts/sync-vault-published-to-content.py` reads
-   frontmatter `publish: true` + `visibility: public` + `note_type: wiki-human`
-   and materializes the renderer symlink at
-   `personal-website/src/content/notes/public/wiki-human/{slug}/index.md → vault/{primary_topic_path}/wiki-human-{slug}/article.md`.
-   Astro globLoader follows symlinks transparently; URL stays
-   `/notes/public/wiki-human/{slug}/`. No whole-folder symlinks; per-file gate.
+   **Renderer view via direct vault read** (Copper directive 2026-05-15:
+   vault = single content corpus; personal-website = pure renderer). After
+   writing the vault canonical bundle, Astro 5 globLoader on the
+   `notes` collection (`base: '..'`, pattern matches `vault/**/article.md`)
+   picks up the new entry on next build. Frontmatter `publish: true` is the
+   sole gate (`isPublicNoteEntry` filter). URL derives from generateId:
+   `/notes/{visibility}/{note_type}/{slug}/` (effectively
+   `/notes/public/wiki-human/{slug}/` for /wiki-mega output).
+   No symlinks, no prebuild sync script — the prior
+   `scripts/sync-vault-published-to-content.py` was archived 2026-05-15.
 
    Slug convention: `<topic-slug>-<YYYY-MM>` (e.g.
    `dizziness-history-taking-2026-05`). On collision, append `-v2` / `-v3`
@@ -409,7 +411,7 @@ After all 5 sub-agents return, the main Opus does:
      WebFetches the OA full text in-session, reads, cites L1
      directly. Do not persist the paper to wiki_raw (one-off rule).
 
-   vault article shape (Copper directive 2026-05-15 publish-flag prebuild sync):
+   vault article shape (Copper directive 2026-05-15 publish-flag direct-load):
    ```yaml
    ---
    title: {restated question as title}
@@ -418,7 +420,7 @@ After all 5 sub-agents return, the main Opus does:
    artifact_type: article
    note_type: wiki-human
    visibility: public
-   publish: true                   # triggers prebuild renderer-symlink (a045)
+   publish: true                   # gates inclusion in Astro notes collection (direct vault read)
    medical_audience: [Physician]   # or [GeneralPublic] when applicable
    topic: [<list>]
    topic_path: <from sub-utd/sub-dynamed pick or from PG folder_registry>
