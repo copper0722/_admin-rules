@@ -72,22 +72,53 @@ Immediately after frontmatter, before any content sections:
 
 Figures and tables often contain information **not stated in the text**. Give them full treatment.
 
-**Figures** — insert after the relevant paragraph using this exact structure:
+#### Figure embedding is MANDATORY for PDF private notes (Copper directive 2026-05-14)
 
-*Cowork mode (file system available):*
+> Website 含 figure 是既有要求，只是被長期忽略 — 必須寫入 pipeline。
+> Recurring bug: sub-agents repeatedly extract figure captions into `[!tip]-`
+> callouts but skip the binary extraction + image embed step. This makes the
+> private website render text-only and Copper cannot actually read figures.
+> Going forward this is non-negotiable for every PDF source.
 
-Attempt to extract embedded images from the PDF programmatically:
-- **Success** → save to the payload `images/` folder, then embed only through the website private asset bridge when the note is private:
+**Mandatory pipeline (Cowork mode, file system available, source is PDF)**:
+
+1. **Extract**: `pdfimages -png "{source.pdf}" "{bundle}/images/fig"` — drops
+   all embedded images as `fig-NNN.png` into the payload `images/` folder.
+2. **List**: `pdfimages -list "{source.pdf}"` — emits page + dimensions per
+   image so each `fig-NNN.png` can be mapped to the matching `Figure X.X`
+   caption from `raw.md`.
+3. **SHA-rename**: each `fig-NNN.png` is renamed to `{sha12}.png` where
+   `sha12 = sha256(file_bytes)[:12]`. This is required because the
+   personal-website `/_sidecar/...` bridge regex
+   (`personal-website/scripts/copy-sidecar-images.py` PATTERN) matches
+   only hex filenames. Non-hex names (e.g. `fig-000.png`) silently fail
+   the build-time copy and the image 404s on the deployed site.
+4. **Map sha → figure ID** by visual inspection (use the Read tool to view
+   the PNG, cross-reference against `Figure X.X` captions in `raw.md` page
+   order). Record the mapping in `images/_mapping.json` for audit.
+5. **Embed** in `note-private.md` (and only in `note-private.md` — public
+   notes never embed figures from paywalled sources):
 
 ````markdown
-![Figure 15-1](/private-assets/{citationKey}/images/{sha}.png)
+![Figure X.X](/_sidecar/{citation_key}/images/{sha12}.png)
 
 > [!tip]- Figure X.X 解析｜Original Figure Title
 > * Analysis bullet 1…
 > * Analysis bullet 2…
 ````
 
-- **Failure** (scanned page / extraction not possible) → use placeholder:
+The embed path `/_sidecar/{citation_key}/images/{sha12}.png` is resolved at
+build time by `personal-website/scripts/copy-sidecar-images.py` (post-build,
+pre-deploy) which copies the matching PNG out of
+`vault/{topic_path}/{citation_key}/images/` into `dist/_sidecar/...` so the
+deployed Cloudflare-Access-gated route renders the image.
+
+**Failure cases (acceptable placeholders)** — use `(此處插入 Figure X.X 截圖)`
+only when:
+- Source is not a PDF (HTML clip / Web extract). HTML images may not be
+  cleanly extractable; fall back to placeholder + caption analysis only.
+- PDF is a pure scanned page bundle and `pdfimages -list` returns zero
+  images. Record this in `images/_mapping.json` as `pdfimages_zero: true`.
 
 ````markdown
 (此處插入 Figure X.X 截圖)
@@ -97,9 +128,18 @@ Attempt to extract embedded images from the PDF programmatically:
 > * Analysis bullet 2…
 ````
 
+**Post-write check (mandatory)**: after writing `note-private.md` for a PDF
+source, the orchestrating agent MUST verify
+`grep -c '^!\[' note-private.md >= max(1, figures_extracted)` AND that
+every `[!tip]- Figure X.X` callout has a matching `![Figure X.X](/_sidecar/...)`
+embed immediately above it. If the count is 0 while `pdfimages -list`
+returned >=1 image, the note is contaminated by the recurring
+"caption-only" bug and must be patched before reporting completion.
+
 *Regular chat mode (no file system):*
 
-All figures use the placeholder format above.
+All figures use the placeholder format above; sha-rename + bridge embed
+are skipped because there is no payload to write to.
 
 **Structure rules:**
 * Images are embedded **directly**, no wrapper. Rationale (Copper 2026-04-17): public sharing is done via GitHub repos at KEY TAKEAWAYS / TEACHING SLIDES granularity only — whole-note publish is not a current route, so the `<div class="no-publish">` guard (v2.3) is obsolete. Simpler markdown = fewer rendering quirks in Obsidian + downstream tooling.
@@ -256,11 +296,12 @@ Output path matrix (Astro content collection `notesCollection`, schema in `perso
 | `~/repos/vault/{topic_path}/{Book}/{Ch}/raw.md` (textbook chapter, full Copper-readable digest) | `textbook-study` | `private` | `vault/{topic_path}/{citation_key}/note-private.md` |
 | TSN exam recall / 腎專考題解析 | `exam-solution` | `public` | `personal-website/src/content/notes/public/exam-solution/{slug}.md` |
 | FB post archive (Copper-authored, no AI banner) | `fb-archive` | `public` | `personal-website/src/content/notes/public/fb-archive/{slug}.md` |
+| `/wiki-mega` synthesis / mini-review article | `wiki-human` | `public` | `vault/{topic_path}/{slug}/article.md` (canonical) + renderer symlink `personal-website/src/content/notes/public/wiki-human/{slug}/index.md → vault/{topic_path}/{slug}/article.md` |
 | Other (interactive «寫筆記» on PDF/report not fitting above) | `review` / `clinical-pearl` | per content | `personal-website/src/content/notes/{visibility}/{type}/{slug}.md` |
 
 **Textbook dual-output rule** (per `wiki/SKILL.md` 2026-05-03 directive): textbook chapter notes emit BOTH `public/textbook-summary/{book}/{slug}.md` (slide-style KEY TAKEAWAYS, paraphrase only, ≤2 verbatim quotes ≤30 words each) AND `private/textbook-study/{book}/{slug}.md` (full Copper-readable digest, may include short fair-use verbatim quotes) in one pass. Both share the same `{slug}`; cross-link via frontmatter `related: [<other-slug>]`. Build pipeline gates private/ via Cloudflare Access (Google SSO + email allowlist).
 
-**Never write notes to `raw/` or `~/repos/personal-website/wiki_raw`**. The `wiki_raw` tree holds raw.md + source.pdf + images/ + manifest.json only (machine source layer). Copper-readable note belongs in `vault/{topic_path}/{slug}/note-{public,private}.md` (per-source bundle folder) where the Astro build serves the canonical web URL `/notes/{visibility}/{type}/{slug}/`.
+**Never write notes to `raw/` or the `personal-website/wiki_raw` symlink**. The `vault/` tree holds raw.md + source.pdf + images/ + manifest.json plus the bundle-local note/article artifacts. Copper-readable note belongs in `vault/{topic_path}/{slug}/note-{public,private}.md` (per-source bundle folder) where the Astro build serves the canonical web URL `/notes/{visibility}/{type}/{slug}/`.
 
 **No legacy fallback writes**: if the active environment has no `personal-website/` checkout, stop and create a handover/audit finding. Do not write new notes into `medwiki/note/` or `~/repos/note/`.
 
@@ -313,7 +354,7 @@ This keeps fair-use compliance for paywall textbooks while exposing pedagogical 
 
 ### Image embed mode (Copper directive 2026-05-03)
 
-For **private** notes (only Copper reads), figures may be embedded through the website private asset bridge for explicitly selected `~/repos/personal-website/wiki_raw` payload images, **without `[!tip]-` analysis callouts**. Rationale: Copper sees the figures directly; agent-written figure descriptions are redundant.
+For **private** notes (only Copper reads), figures may be embedded through the website private asset bridge for explicitly selected `~/repos/vault` payload images, **without `[!tip]-` analysis callouts**. Rationale: Copper sees the figures directly; agent-written figure descriptions are redundant.
 
 For **public** notes (textbook-summary + others), figures from raw should NOT be embedded (paywall content). KEY TAKEAWAYS + slides convey the pedagogical content; reader follows link to private full note (or original source) for figures.
 
@@ -594,7 +635,7 @@ The image extraction step in Section 3 ("Figure & Table Analysis") requires acce
 | Version | Date | Changes |
 |---|---|---|
 | v2.8 | 2026-05-03 | NOTE primary home pivot: output paths redirect to `personal-website/src/content/notes/{public,private}/{type}/{slug}.md` (Astro `notesCollection`). Sidecar bridge updated to `/_sidecar/{bundle}/images/{sha}.{ext}` pattern via `personal-website/scripts/copy-sidecar-images.py`. Textbook dual-output (`textbook-summary` public + `textbook-study` private) per Copper directive. Legacy `proj/note/...` and `~/repos/note/` shells deprecated; medwiki/note/ retained for backward search and migration-pending fallback. |
-| v2.10 | 2026-05-09 | wiki_raw moved under `personal-website/`. Canonical raw payload path is now `~/repos/vault/{topic_path}/{topic_note_slug}/{raw.md, source.pdf, images/, manifest.json}`. Old `~/VaultBinary/...` and `~/repos/wiki_raw/...` standalone paths are deprecated; agents must rewrite frontmatter `parent:` and reference paths. PG schema names (`wiki_raw.raw_index`, `wiki_raw.source_registry`, `wiki_raw.book`) are unchanged — only filesystem location moved. |
+| v2.10 | 2026-05-09 / 2026-05-13 | wiki_raw moved under `personal-website/`, then merged into `vault/`. Canonical raw payload path is now `~/repos/vault/{topic_path}/{topic_note_slug}/{raw.md, source.pdf, images/, manifest.json}`. Old `~/VaultBinary/...`, `~/repos/wiki_raw/...`, and canonical-use `personal-website/wiki_raw/...` paths are deprecated; agents must rewrite frontmatter `parent:` and reference paths to `vault/`. PG schema names (`wiki_raw.raw_index`, `wiki_raw.source_registry`, `wiki_raw.book`) are unchanged — only filesystem location moved. |
 | v2.9 | 2026-05-05 | Raw+binary merge: source payloads now live at `~/repos/vault/{topic_path}/{citationKey}/{raw.md, source.pdf, images/, manifest.json}` and are indexed by PG `wiki_raw.raw_index`; new note writes must not fall back to deprecated `medwiki/note/`. |
 | v2.7 | 2026-04-17 | 圖片直接內嵌，移除 `<div class="no-publish">` 包裝（v2.3 引入，今作廢）。Rationale: 公開分享只走 GitHub repos 的 KEY TAKEAWAYS / TEACHING SLIDES 切片，整篇 note publish 非現行路徑，no-publish guard 已無需要。 |
 | v2.6 | 2026-04-09 | `## KEY TAKEAWAYS` moved to FIRST section (replaces Take Home Message AND old end-of-note KEY TAKEAWAYS — appears once, at top). Removed duplicate. `## TEACHING SLIDES` remains at end (Marp-compatible, script-extractable). |

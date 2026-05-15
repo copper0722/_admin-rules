@@ -6,9 +6,9 @@ description: |
   Opus fans out 5 parallel sub-agents (local wiki_raw + OpenEvidence +
   UpToDate + DynaMed + Gemini CLI grounded web search), then synthesizes
   one concise zh-TW answer with primary-citation table and local-coverage
-  gap report. Every invocation produces a saved wiki-human article at
-  `personal-website/src/content/notes/public/wiki-human/<slug>/index.md`
-  (Copper directive 2026-05-13); chat reply summarises the saved article.
+  gap report. Every invocation produces a saved reader-facing article at
+  `vault/{topic_path}/{slug}/article.md` (Copper directive 2026-05-13 plus
+  2026-05-14 vault canonicalization); chat reply summarises the saved article.
   No `--save` flag — saving is the skill's primary deliverable, not opt-in.
 
   MANDATORY TRIGGERS: /wiki-mega, /wm, 深查, 大查, mega wiki, /wikimega.
@@ -39,7 +39,7 @@ WebFetch of the OA full text, reads it, and cites L1 directly with DOI.**
 OE-summary numerics are not propagated into article bodies.
 
 **Ad-hoc OA primary fetch rule (Copper directive 2026-05-12).** OA primaries
-that support a single specific claim in a single wiki-human article must be
+that support a single specific claim in a single vault article must be
 fetched + read + cited L1 in-session. **They are not written into wiki_raw.**
 wiki_raw is reserved for cross-article reusable sources (textbook chapters,
 guidelines, journal series TOC, regulatory documents). If a primary later
@@ -55,7 +55,7 @@ Question (zh-TW)
 [Opus restates as precise domain query (refined_q)]
   ↓
 5 parallel Agent calls (general-purpose subagent_type, run in single message)
-  ├── sub-local      → PG wiki_raw.raw_index + ripgrep wiki_raw + content/wiki
+  ├── sub-local      → PG wiki_raw.raw_index + ripgrep vault + legacy content/wiki
   ├── sub-oe         → scripts/oe.py (OpenEvidence) ← openevidence-skill
   ├── sub-utd        → uptodate-skill (stdlib utd.py + osascript, hm4/mbp Chrome Beta)
   ├── sub-dynamed    → dynamed-skill (stdlib dynamed.py + osascript, hm4/mbp Chrome Beta)
@@ -64,7 +64,7 @@ Question (zh-TW)
 [Synthesizer: collate, dedupe DOIs, map navigator→primary, gap-check vs
  local wiki_raw, produce concise zh-TW answer]
   ↓
-Chat output AND mandatory save to personal-website/src/content/notes/public/wiki-human/<slug>/index.md
+Chat output AND mandatory save to vault/{topic_path}/{slug}/article.md
 ```
 
 ## Sub-agent prompts
@@ -82,8 +82,8 @@ Find every local hit in:
      (psql -h hmj -d vault_main; table wiki_raw.raw_index has columns
      citation_key, title, body_excerpt, raw_md_path)
   2. ripgrep on ~/repos/vault/ (raw .md text)
-  3. ripgrep on ~/repos/personal-website/src/content/wiki/ (existing M2M
-     wiki synthesis entries)
+  3. ripgrep on ~/repos/personal-website/src/content/wiki/ (legacy M2M
+     wiki synthesis entries / publisher context)
 
 For each hit return: citation_key | title | path | 1-line relevance to
 {refined_q}. Up to 12 hits, prefer textbook chapter > guideline > journal
@@ -127,8 +127,10 @@ You are sub-utd for /wiki-mega. Query: {refined_q}, host: {host}.
 
 Use uptodate-skill — stdlib Python CLI that drives the logged-in Chrome
 Beta tab via osascript. Each topic snapshot becomes a proper raw entry
-under wiki_raw and registers in PG (source_type=clinical_database,
-cite_directly=false flag preserved on the snapshot).
+under vault and registers in PG (source_type=clinical_database,
+cite_directly=false flag preserved on the snapshot). The legacy CLI flag
+name `--save-to-wiki-raw` is retained for compatibility but must resolve to
+`~/repos/vault/`.
 
 Flow:
   1. auth-status:
@@ -147,7 +149,7 @@ Flow:
      disease but cover a different facet (e.g., pathogenesis when the
      query is about treatment). Report your picks + why.
 
-  4. Decide topic_path under wiki_raw for each pick. Use existing PG
+  4. Decide topic_path under vault for each pick. Use existing PG
      wiki_raw.folder_registry to align with the canonical topic tree:
        psql -h hmj -d vault_main -c \
          "SELECT topic_path FROM wiki_raw.folder_registry \
@@ -161,7 +163,7 @@ Flow:
          --save-to-wiki-raw \
          --target-dir "<topic_path>" \
          --query-origin "{refined_q}"
-     The script writes raw.md to wiki_raw/<topic_path>/UpToDate_<slug>_
+     The script writes raw.md to vault/<topic_path>/UpToDate_<slug>_
      <YYYYMMDD>/raw.md and INSERTs a PG row with the publisher's
      constructed recommended_citation in publisher_metadata.
 
@@ -204,7 +206,7 @@ named-disease topic (e.g., "IgA nephropathy treatment" → "Glomerular
 Disease in Adults - Approach to the Patient"). Pick the topic whose
 overview text most directly addresses the query.
 
-Saved raw.md = wiki_raw/<topic_path>/DynaMed_<slug>_<YYYYMMDD>/raw.md
+Saved raw.md = vault/<topic_path>/DynaMed_<slug>_<YYYYMMDD>/raw.md
 PG row: source_type=clinical_database, journal=DynaMed,
 publisher=EBSCO Information Services, recommended_citation constructed
 from page metadata (title + Updated date + URL + accessed date).
@@ -246,7 +248,7 @@ After all 5 sub-agents return, the main Opus does:
 3. **Map navigator → primary**: UTD, DynaMed, and OE entries all become
    navigator labels on a primary-ref row, never standalone rows.
    - UTD / DynaMed = peer-reviewed L5 systems (may also stand as L5 cite
-     in the wiki-human refs table)
+     in the article refs table)
    - OE = LLM aggregator (6S blank); strictly navigator only — never appears
      as a citation row, only in the `Surfaced by` column as a discovery hint
    - If a navigator claim has no primary cite, mark `[no primary ref found]`
@@ -269,7 +271,7 @@ After all 5 sub-agents return, the main Opus does:
 5. **Local coverage gap check**: for each unique primary DOI/PMID,
    query PG `wiki_raw.raw_index` + `wiki_raw.raw_source_metadata` for
    `doi=` or `citation_key like`. Mark each row ✓ if local raw exists, ✗
-   if not. **Note**: ✗ is fine for wiki-human ad-hoc fetch (just means
+   if not. **Note**: ✗ is fine for article ad-hoc fetch (just means
    the agent read it in-session). The ✗ → wiki_raw migration only
    happens when the same primary serves multiple articles.
 
@@ -307,15 +309,11 @@ After all 5 sub-agents return, the main Opus does:
 - 若 0 缺口：寫「本地覆蓋完整」
 ```
 
-<<<<<<< Updated upstream
-7. **Optional save → `wiki-human` article (Copper directive 2026-05-11)**:
-   if invocation included `--save`, write the composed answer as a new
-=======
-6. **Mandatory wiki-human save (Copper directive 2026-05-13)**: every
-   `/wiki-mega` invocation writes the composed answer as a new
->>>>>>> Stashed changes
-   `note_type: wiki-human` public article at
-   `~/repos/personal-website/src/content/notes/public/wiki-human/{slug}/index.md`.
+7. **Mandatory vault article save (Copper directive 2026-05-13; path updated
+   2026-05-14; renderer symlink view added 2026-05-15)**: every `/wiki-mega`
+   invocation writes the composed answer as a public reader-facing article at
+   `~/repos/vault/{topic_path}/{slug}/article.md` plus sidecar `refs.json` +
+   `manifest.json`.
    This is the skill's primary deliverable; the chat reply is a
    summary that points at the saved article path. There is no flag
    and no opt-in — `/wiki-mega` without a saved article is a failed
@@ -323,27 +321,35 @@ After all 5 sub-agents return, the main Opus does:
    collision, sync-guard refusal), report the blocker explicitly and
    do not silently degrade to chat-only.
 
+   **Renderer view via symlink** (Copper directive 2026-05-15: wiki-human
+   articles must live in vault canonically so they participate in vault search
+   + sidecar refs + PG synthesis_artifact lineage; personal-website carries a
+   symlink view so Astro globLoader continues to serve
+   `/notes/public/wiki-human/{slug}/`). After writing vault canonical, also
+   create a relative symlink:
+   `personal-website/src/content/notes/public/wiki-human/{slug}/index.md → ../../../../../../../vault/{topic_path}/{slug}/article.md`
+   (7 `../` levels to escape personal-website + dive into vault sibling repo).
+   Astro globLoader follows symlinks transparently; URL stays
+   `/notes/public/wiki-human/{slug}/`.
+
    Slug convention: `<topic-slug>-<YYYY-MM>` (e.g.
-   `dizziness-history-taking-2026-05`), matching the existing
-   `wiki-human/` slug pattern. On collision, append `-v2` / `-v3`
+   `dizziness-history-taking-2026-05`). On collision, append `-v2` / `-v3`
    incrementally; do not overwrite an existing article unless the
    user explicitly asks for an update.
 
-   `wiki-human` is a **versatile public article type** (`notes`
-   collection, `note_type: wiki-human`); `/wiki-mega` is ONE producer
-   pipeline among several. Other wiki-human producers, out of scope for
-   this skill: drug-indication articles built from TFDA 藥證 + NHI 給付
-   + 仿單 cross-references; policy explainers built from MOHW 公告; etc.
-   Each producer pipeline uses different source-tier mixes appropriate
-   to its topic.
+   `article.md` is a **versatile public article artifact** inside a vault
+   bundle; `/wiki-mega` is ONE producer pipeline among several. Other
+   producers, out of scope for this skill: drug-indication articles built from
+   TFDA 藥證 + NHI 給付 + 仿單 cross-references; policy explainers built from
+   MOHW 公告; etc. Each producer pipeline uses different source-tier mixes
+   appropriate to its topic.
 
    Contrast with the other synthesis surface this workspace runs:
    - **`wiki-llm`** (canonical `wiki/` collection at
      `src/content/wiki/{slug}.md`) — M2M compressed English, autonomous,
      aimed at agent retrieval + AEO. `/wiki-mega` does NOT write
      wiki-llm entries.
-   - **`wiki-human`** (`notes` collection, `note_type: wiki-human`) —
-     reader-facing public article. Citation policy = **EBM-CC 6S
+   - **vault `article.md`** — reader-facing public article. Citation policy = **EBM-CC 6S
      Haynes pyramid tier-annotated** (Copper directive 2026-05-11).
      Each reference row carries its 6S level; the article freely cites
      synthesis layers (L2–L5) including guidelines and clinical
@@ -351,7 +357,7 @@ After all 5 sub-agents return, the main Opus does:
      see whether the claim rests on a primary trial, a meta-analysis,
      a guideline recommendation, or a clinical-database summary.
 
-   **EBM-CC 6S levels used for wiki-human citation tier labels:**
+   **EBM-CC 6S levels used for article citation tier labels:**
 
    | 6S level | Type | Examples |
    |---|---|---|
@@ -377,7 +383,7 @@ After all 5 sub-agents return, the main Opus does:
      systematic review (L2) under the hood + expert-panel
      evidence-to-recommendation pipeline. The 6S "Summary" label
      captures this hybrid honestly.
-   - For wiki-human articles, citation hygiene Law still applies: each
+   - For vault articles, citation hygiene Law still applies: each
      ref must be one the agent actually read (in-session WebFetch is
      OK; cross-article persistence not required). Tier labels are
      honest; no name-dropping primary RCTs the agent did not read.
@@ -386,13 +392,13 @@ After all 5 sub-agents return, the main Opus does:
      WebFetches the OA full text in-session, reads, cites L1
      directly. Do not persist the paper to wiki_raw (one-off rule).
 
-   wiki-human article shape:
+   vault article shape:
    ```yaml
    ---
    title: {restated question as title}
    published: {today}
    last_reviewed: {today}
-   note_type: wiki-human
+   artifact_type: article
    visibility: public
    medical_audience: [Physician]   # or [GeneralPublic] when applicable
    topic: [<list>]
@@ -422,7 +428,7 @@ After all 5 sub-agents return, the main Opus does:
    | ... | NefIgArd trial: Lafayette RA et al. Lancet 2023. doi:... | L1 Studies (pivotal RCT) |
 
    Each row's 6S level is required; this is the citation-tier
-   transparency wiki-human exists to deliver. Article may cite any
+   transparency the article exists to deliver. Article may cite any
    mix of L1–L5 appropriate to the topic; per citation hygiene Law,
    every ref must be one the agent actually read.
    ```
@@ -440,15 +446,14 @@ After all 5 sub-agents return, the main Opus does:
    WHERE citation_key = '<key>';
    ```
 
-   wiki-human does NOT replace the canonical `wiki/` (wiki-llm). Both
-   live; they serve different audiences. `wiki-llm` for AEO / agent
-   research depth; `wiki-human` for Copper-facing readership at a
-   defined tertiary tier.
+   Vault `article.md` does NOT replace the canonical `wiki/` (wiki-llm). Both
+   live; they serve different audiences. `wiki-llm` for AEO / agent research
+   depth; `article.md` for Copper-facing readership at a defined tertiary tier.
 
 ## Citation hygiene reminders
 
 - **UpToDate / DynaMed**: peer-reviewed L5 systems. May appear as L5
-  citation rows in wiki-human refs table, but only after the agent
+  citation rows in article refs table, but only after the agent
   saved the snapshot raw and read it. The article's specific
   numerical / trial-name claims should still trace to L1 primary via
   ad-hoc fetch; UTD/DynaMed prose alone supports only qualitative
