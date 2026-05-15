@@ -6,10 +6,14 @@ description: |
   Opus fans out 5 parallel sub-agents (local wiki_raw + OpenEvidence +
   UpToDate + DynaMed + Gemini CLI grounded web search), then synthesizes
   one concise zh-TW answer with primary-citation table and local-coverage
-  gap report. Every invocation produces a saved reader-facing article at
-  `vault/{topic_path}/{slug}/article.md` (Copper directive 2026-05-13 plus
-  2026-05-14 vault canonicalization); chat reply summarises the saved article.
-  No `--save` flag — saving is the skill's primary deliverable, not opt-in.
+  gap report. Every invocation produces a saved reader-facing article bundle
+  at `vault/{primary_topic_path}/wiki-human-{slug}/{article.md, refs.json, manifest.json}`
+  (Copper directives 2026-05-13 / 2026-05-14 vault canonicalization /
+  2026-05-15 publish-flag prebuild sync); chat reply summarises the saved article.
+  Personal-website renderer view materialized via prebuild script
+  `scripts/sync-vault-published-to-content.py` reading frontmatter
+  `publish: true` (a045). No `--save` flag — saving is the skill's primary
+  deliverable, not opt-in.
 
   MANDATORY TRIGGERS: /wiki-mega, /wm, 深查, 大查, mega wiki, /wikimega.
   Trigger requires Q-shape (clinical / medical / EBM question, not source
@@ -310,10 +314,10 @@ After all 5 sub-agents return, the main Opus does:
 ```
 
 7. **Mandatory vault article save (Copper directive 2026-05-13; path updated
-   2026-05-14; renderer symlink view added 2026-05-15)**: every `/wiki-mega`
-   invocation writes the composed answer as a public reader-facing article at
-   `~/repos/vault/{topic_path}/{slug}/article.md` plus sidecar `refs.json` +
-   `manifest.json`.
+   2026-05-14; renderer symlink view added 2026-05-15; publish-flag
+   prebuild sync 2026-05-15)**: every `/wiki-mega` invocation writes the
+   composed answer as a public reader-facing article bundle at
+   `~/repos/vault/{primary_topic_path}/wiki-human-{slug}/{article.md, refs.json, manifest.json}`.
    This is the skill's primary deliverable; the chat reply is a
    summary that points at the saved article path. There is no flag
    and no opt-in — `/wiki-mega` without a saved article is a failed
@@ -321,21 +325,34 @@ After all 5 sub-agents return, the main Opus does:
    collision, sync-guard refusal), report the blocker explicitly and
    do not silently degrade to chat-only.
 
-   **Renderer view via symlink** (Copper directive 2026-05-15: wiki-human
-   articles must live in vault canonically so they participate in vault search
-   + sidecar refs + PG synthesis_artifact lineage; personal-website carries a
-   symlink view so Astro globLoader continues to serve
-   `/notes/public/wiki-human/{slug}/`). After writing vault canonical, also
-   create a relative symlink:
-   `personal-website/src/content/notes/public/wiki-human/{slug}/index.md → ../../../../../../../vault/{topic_path}/{slug}/article.md`
-   (7 `../` levels to escape personal-website + dive into vault sibling repo).
+   **Bundle layout**:
+   - `article.md` — reader-facing zh-TW prose body; frontmatter carries
+     `publish: true`, `visibility: public`, `note_type: wiki-human` so
+     prebuild sync materializes the renderer view.
+   - `refs.json` — sidecar centralized references, 6S-tier annotated.
+     JSON schema: `[{claim, ref, tier, doi_or_url, accessed_at, surfaced_by:[...]}, ...]`.
+     Article body cites by ref-id from refs.json; refs.json is the
+     authoritative reference store (article body is free of long
+     reference blocks; renderer ingests refs.json alongside article.md).
+   - `manifest.json` — bundle manifest with `producer: wiki-mega`,
+     `question`, `refined_q`, `sub_agent_results_summary`, `created_at`.
+
+   **Renderer view via prebuild sync** (Copper directive 2026-05-15: vault
+   = single content corpus; personal-website = pure renderer). After writing
+   vault canonical bundle, the prebuild script
+   `personal-website/scripts/sync-vault-published-to-content.py` reads
+   frontmatter `publish: true` + `visibility: public` + `note_type: wiki-human`
+   and materializes the renderer symlink at
+   `personal-website/src/content/notes/public/wiki-human/{slug}/index.md → vault/{primary_topic_path}/wiki-human-{slug}/article.md`.
    Astro globLoader follows symlinks transparently; URL stays
-   `/notes/public/wiki-human/{slug}/`.
+   `/notes/public/wiki-human/{slug}/`. No whole-folder symlinks; per-file gate.
 
    Slug convention: `<topic-slug>-<YYYY-MM>` (e.g.
    `dizziness-history-taking-2026-05`). On collision, append `-v2` / `-v3`
    incrementally; do not overwrite an existing article unless the
-   user explicitly asks for an update.
+   user explicitly asks for an update. Bundle folder prefix
+   `wiki-human-` namespaces against other producer pipelines
+   (drug-indication, policy-explainer) in the same topic folder.
 
    `article.md` is a **versatile public article artifact** inside a vault
    bundle; `/wiki-mega` is ONE producer pipeline among several. Other
@@ -392,18 +409,21 @@ After all 5 sub-agents return, the main Opus does:
      WebFetches the OA full text in-session, reads, cites L1
      directly. Do not persist the paper to wiki_raw (one-off rule).
 
-   vault article shape:
+   vault article shape (Copper directive 2026-05-15 publish-flag prebuild sync):
    ```yaml
    ---
    title: {restated question as title}
    published: {today}
    last_reviewed: {today}
    artifact_type: article
+   note_type: wiki-human
    visibility: public
+   publish: true                   # triggers prebuild renderer-symlink (a045)
    medical_audience: [Physician]   # or [GeneralPublic] when applicable
    topic: [<list>]
    topic_path: <from sub-utd/sub-dynamed pick or from PG folder_registry>
    tags: [<from query domain>]
+   references_sidecar: refs.json   # centralized references in sibling JSON
    references_count: N
    ---
 

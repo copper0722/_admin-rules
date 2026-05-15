@@ -44,16 +44,16 @@ Both are publish-ready (per Copper directive: "讓 note 輸出即可在網站上
 
 The two variants share the same `{slug}`; cross-link via frontmatter `related: [<other-slug>]`.
 
-## Wiki primary home (Copper directive 2026-05-03)
+## Wiki primary home (Copper directive 2026-05-03; vault canonical 2026-05-15)
 
-**Wiki and NOTE primary home is `personal-website/` since 2026-05-03**, not `medwiki/`.
+**Vault = single content corpus; personal-website = pure renderer (Copper directive 2026-05-15).**
 
-- New wiki entries → `personal-website/src/content/wiki/{slug}.md` (flat slug, hyphenated, lower-case). Astro collection schema lives at `personal-website/src/content/config.ts` `wikiCollection`. Web URL: `/wiki/{slug}/`.
-- New NOTE entries → `personal-website/src/content/notes/{visibility}/{type}/{slug}/index.md` (Astro collection schema `notesCollection`). Web URL: `/notes/{visibility}/{type}/{slug}/`.
-- `wiki_raw/` moved under `personal-website/` 2026-05-09. Canonical raw text + source binaries are co-located at `~/repos/vault/{topic_path}/{topic_note_slug}/{raw.md, source.pdf, images/, manifest.json}`; raw `.md` is git-tracked, binary is gitignored. PG mirror: `wiki_raw.raw_index`. Deprecated `medwiki/wiki`, `medwiki/note`, `wiki_raw/raw`, and standalone `~/repos/wiki_raw/...` entries may remain for backward search only.
+- New wiki entries → `personal-website/src/content/wiki/{slug}.md` (flat slug, hyphenated, lower-case; wiki-llm collection stays renderer-side as M2M agent retrieval surface). Astro collection schema lives at `personal-website/src/content/config.ts` `wikiCollection`. Web URL: `/wiki/{slug}/`.
+- New NOTE entries → **vault canonical** `vault/{topic_path}/{citation_key_or_slug}/note-{public,private}.md` (or `article.md` for wiki-human synthesis bundles). Frontmatter `publish: true` + `visibility` + `note_type` triggers prebuild script `personal-website/scripts/sync-vault-published-to-content.py` (a045) to symlink the vault canonical into `personal-website/src/content/notes/{visibility}/{note_type}/{slug}/index.md`. No whole-folder symlinks; per-file gate. Web URL: `/notes/{visibility}/{note_type}/{slug}/`.
+- `wiki_raw/` moved under `personal-website/` 2026-05-09, then was merged into `vault/` 2026-05-13. Canonical raw text + source binaries are co-located at `~/repos/vault/{topic_path}/{topic_note_slug}/{raw.md, source.pdf, images/, manifest.json}`; raw `.md` is git-tracked, binary is gitignored. PG mirror: `wiki_raw.raw_index`. Deprecated `medwiki/wiki`, `medwiki/note`, `wiki_raw/raw`, and standalone `~/repos/wiki_raw/...` entries may remain for backward search only.
 - **Whole-book PDF location (Copper directive 2026-05-09)**: when the source binary represents the *entire textbook*, place it at `~/repos/vault/_data/book/{book_citation_key}/{book_citation_key}.pdf` (one folder per book; co-locate per-book metadata + cover image if available). Per-chapter folders under `{topic_path}/{citationKey_Ch{NN}}/source.pdf` may still hold a chapter-only PDF cut, but the authoritative whole-book PDF lives under `_data/book/`. Zotero `book` itemType is the source of truth for which whole-book PDFs must exist (Zotero entry was created only after Copper confirmed the PDF exists).
 - Wiki entry titles must NOT contain textbook names (Copper directive: 「標題移除教科書名」). Body must be paraphrase synthesis, never transcription. Citations live in `## Sources` section.
-- Cross-reference between wiki entries via `[[slug]]` wikilinks; build pipeline (remark plugin, see Astro integration TODO) resolves to `<a href="/wiki/{slug}/">` on web. Cross-references from wiki body to raw payloads resolve to plaintext citations on web; `~/VaultBinary` stays private.
+- Cross-reference between wiki entries via `[[slug]]` wikilinks; build pipeline (remark plugin, see Astro integration TODO) resolves to `<a href="/wiki/{slug}/">` on web. Cross-references from wiki body to raw payloads resolve to plaintext citations on web; binary/source sidecars stay private.
 
 ## Mindset (Copper directive 2026-05-03): wiki = "順便兼做"
 
@@ -350,7 +350,7 @@ PDF → DEDUP CHECK → MinerU → raw.md (payload, type: raw)
 6. Log every dedup decision
 
 **STEP 0B — EDITION CHECK (textbooks only):**
-1. Check PG textbook inventory or bounded `~/VaultBinary` textbook paths for all editions of same textbook
+1. Check PG textbook inventory or bounded `~/repos/vault` textbook paths for all editions of same textbook
 2. If newer edition exists in vault → do NOT process older edition
 3. Processing order = **year DESC** (newest first, always)
 
@@ -627,7 +627,7 @@ Canonical inbox path is declared by the project-local private card.
 
 ## Hard Rules (card-level, all agents)
 
-**HR-3 TEXTBOOK = LATEST EDITION ONLY.** If newer edition of same textbook exists in `~/VaultBinary` or PG inventory, do NOT wikify older. Archive superseded editions (§1.3).
+**HR-3 TEXTBOOK = LATEST EDITION ONLY.** If newer edition of same textbook exists in `~/repos/vault` or PG inventory, do NOT wikify older. Archive superseded editions (§1.3).
 
 **HR-4 PROCESSING ORDER = YEAR DESC.** Newest content first. Textbooks: 2026 before 2024. Articles: 2026 before 2021. Newer supersedes older.
 
@@ -796,11 +796,11 @@ When user pastes content + says "丟進去/整理/file this/歸檔":
 
 Before creating a disease/specialty-local folder, decide whether the concept is truly owned by that specialty or is a cross-cutting method/policy domain:
 
-- Clinical tools or measurements used beyond one specialty (e.g. body composition monitoring, frailty scales, exercise testing) → prefer `clinical_medicine/assessment_methods/{concept}/` in `~/VaultBinary`, `wiki_raw` indexes, and personal-website wiki paths, then link from specialty pages as needed.
+- Clinical tools or measurements used beyond one specialty (e.g. body composition monitoring, frailty scales, exercise testing) → prefer `clinical_medicine/assessment_methods/{concept}/` in `~/repos/vault`, `wiki_raw` indexes, and personal-website publisher paths, then link from specialty pages as needed.
 - Reimbursement, regulation, health insurance, device payment, national policy, or payer-system topics → prefer a top-level peer domain such as `health_insurance_reimbursement/{topic}/` rather than burying it under `clinical_medicine/`.
 - Disease/specialty paths may contain symlinks or index links back to the canonical cross-cutting folder, e.g. `clinical_medicine/internal_medicine/nephrology/ckd/esrd/dialysis_reimbursement -> ../../../../../health_insurance_reimbursement/dialysis_reimbursement`.
 - If the source material is pending from a human/vendor and facts are incomplete, create a small `_index.md` plus a pending-source page with explicit source gaps; do not invent reimbursement details via unsourced synthesis.
-- Mirror the same routing in `~/VaultBinary` and PG `wiki_raw.raw_index`; verify case-sensitive paths (`ckd` vs `CKD`) before committing path metadata.
+- Mirror the same routing in `~/repos/vault` and PG `wiki_raw.raw_index`; verify case-sensitive paths (`ckd` vs `CKD`) before committing path metadata.
 
 This is a corpus/bootstrap workflow, not a single-PDF `/note-writer` task.
 
@@ -836,7 +836,7 @@ This is a corpus/bootstrap workflow, not a single-PDF `/note-writer` task.
    - Pull/sync to other reachable machines when this is infrastructure for future agents; note unreachable hosts explicitly.
 7. **Report state clearly**:
    - Sidecar path and files downloaded.
-   - Created personal-website wiki path and `~/VaultBinary` payload path.
+   - Created vault article/raw path and PG metadata.
    - Git commits pushed.
    - Background pipeline session id and current state.
    - Any unreachable machine or blocked next step.
@@ -847,28 +847,28 @@ When wikifying any source (especially Mode A-Manual), the agent must pick a
 vault-resident textbook chapter to cross-reference clinical claims. This index
 is the LLM's mental map of "what books are in the vault". It is a snapshot;
 authoritative inventory will live in the textbooks PG table once that lands.
-Verify presence with `find ~/VaultBinary -path '*<Prefix>*' -name raw.md | head`
+Verify presence with `find ~/repos/vault -path '*<Prefix>*' -name raw.md | head`
 before citing a specific chapter.
 
 | Specialty / scope | Textbook | Latest edition in vault | Year | Payload locator | Legacy note |
 |---|---|---|---|---|---|
 | Internal medicine (definitive) | Harrison's Principles of Internal Medicine | 22e | 2025 | `~/repos/vault/clinical_medicine/internal_medicine/**/Harrison22e_Ch*/raw.md` | topic-distributed |
-| Internal medicine (pocket) | Pocket Medicine | 9e | 2026 | search PG / `~/VaultBinary` for `PocketMedicine9e` | inbound |
-| Therapeutics quick-ref | Washington Manual of Medical Therapeutics | 38e | recent | search PG / `~/VaultBinary` for `WashingtonManual38e` | per-chapter |
+| Internal medicine (pocket) | Pocket Medicine | 9e | 2026 | search PG / `~/repos/vault` for `PocketMedicine9e` | inbound |
+| Therapeutics quick-ref | Washington Manual of Medical Therapeutics | 38e | recent | search PG / `~/repos/vault` for `WashingtonManual38e` | per-chapter |
 | Nephrology (definitive) | Brenner & Rector's The Kidney | 12e | recent | `~/repos/vault/clinical_medicine/internal_medicine/nephrology/**/BrennerRector12e_Ch*/raw.md` | per-chapter |
-| Dialysis | Daugirdas, Handbook of Dialysis | 6e | 2026 | search PG / `~/VaultBinary` for `Daugirdas2026` | figures may exist |
-| Dialysis (alt) | Dialysis Therapy | 6e | 2023 | search PG / `~/VaultBinary` for `DialysisTherapy_6e` | inbound |
-| Dialysis (intro) | Core Concepts in Dialysis | 2021 | 2021 | search PG / `~/VaultBinary` for `CoreConceptsDialysis` | inbound |
+| Dialysis | Daugirdas, Handbook of Dialysis | 6e | 2026 | search PG / `~/repos/vault` for `Daugirdas2026` | figures may exist |
+| Dialysis (alt) | Dialysis Therapy | 6e | 2023 | search PG / `~/repos/vault` for `DialysisTherapy_6e` | inbound |
+| Dialysis (intro) | Core Concepts in Dialysis | 2021 | 2021 | search PG / `~/repos/vault` for `CoreConceptsDialysis` | inbound |
 | Pediatric nephrology | Pediatric Nephrology | 6e | recent | `~/repos/vault/clinical_medicine/**/nephrology*/*Pediatric*/raw.md` | per-chapter |
 | ENT | Scott-Brown's Otorhinolaryngology, Head and Neck Surgery | 8e | recent | `~/repos/vault/clinical_medicine/ENT/**/ScottBrown8e*/raw.md` | V1/V2/V3 |
-| Biochemistry | Harper's Illustrated Biochemistry | **34e (latest); 33e archived 2026-04-24** | 2026 | search PG / `~/VaultBinary` for `Harper34e` | 33e archived |
-| Biochemistry (alt) | Lehninger Principles of Biochemistry | 8e | recent | search PG / `~/VaultBinary` for `Lehninger8e` | per-chapter |
-| Physiology | Ganong's Review of Medical Physiology | 26e | 2019 | search PG / `~/VaultBinary` for `Ganong_26e` | inbound |
-| Biology (preclinical) | Campbell Biology | 13e | 2026 | search PG / `~/VaultBinary` for `Campbell_13e` | inbound |
+| Biochemistry | Harper's Illustrated Biochemistry | **34e (latest); 33e archived 2026-04-24** | 2026 | search PG / `~/repos/vault` for `Harper34e` | 33e archived |
+| Biochemistry (alt) | Lehninger Principles of Biochemistry | 8e | recent | search PG / `~/repos/vault` for `Lehninger8e` | per-chapter |
+| Physiology | Ganong's Review of Medical Physiology | 26e | 2019 | search PG / `~/repos/vault` for `Ganong_26e` | inbound |
+| Biology (preclinical) | Campbell Biology | 13e | 2026 | search PG / `~/repos/vault` for `Campbell_13e` | inbound |
 | Causal inference / epidemiology | Hernán & Robins, Causal Inference: What If | latest open-edition | open-access | `~/repos/vault/research_method/causal_inference/**/Hernan_WhatIf*/raw.md` | checklist may be note-linked |
-| EBM / critical appraisal | Guyatt Users' Guides to the Medical Literature | latest in vault | recent | search PG / `~/VaultBinary` for `Guyatt_Users_Guides` | per-chapter |
-| Health research methods | Health Research Methods | 3e | 2021 | search PG / `~/VaultBinary` for `HealthResMethods_3e` | inbound |
-| Renal guideline | KDIGO 2024 CKD | 2024 | 2024 | search PG / `~/VaultBinary` for `KDIGO_CKD` | wiki/note distributed |
+| EBM / critical appraisal | Guyatt Users' Guides to the Medical Literature | latest in vault | recent | search PG / `~/repos/vault` for `Guyatt_Users_Guides` | per-chapter |
+| Health research methods | Health Research Methods | 3e | 2021 | search PG / `~/repos/vault` for `HealthResMethods_3e` | inbound |
+| Renal guideline | KDIGO 2024 CKD | 2024 | 2024 | search PG / `~/repos/vault` for `KDIGO_CKD` | wiki/note distributed |
 
 ### How to pick the right book
 
@@ -883,7 +883,7 @@ before citing a specific chapter.
 - **Renal guideline alignment** → KDIGO 2024 CKD (current); cite recommendation grade.
 - **Quick clinical reference at point-of-care** → Washington Manual 38e or Pocket Medicine 9e.
 
-If the picked book lacks the specific topic, fall back order: (1) primary literature already indexed by PG `wiki_raw.raw_index` or present under `~/repos/vault/{topic_path}/`, (2) recent NEJM / Lancet / JAMA / specialty-flagship review located via PG / bounded `~/VaultBinary` search, (3) report citation gap and let Copper run mini LLM council (no self-initiated WebSearch per the No-Self-Initiated-Web-Search rule above).
+If the picked book lacks the specific topic, fall back order: (1) primary literature already indexed by PG `wiki_raw.raw_index` or present under `~/repos/vault/{topic_path}/`, (2) recent NEJM / Lancet / JAMA / specialty-flagship review located via PG / bounded `~/repos/vault` search, (3) report citation gap and let Copper run mini LLM council (no self-initiated WebSearch per the No-Self-Initiated-Web-Search rule above).
 
 ## Supersedes
 

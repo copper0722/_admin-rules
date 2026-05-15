@@ -282,30 +282,41 @@ Contam-cleanup action: forbidden inline → strip OR fold into bucket-L callout 
 
 Note quality = faithful rendering of source PLUS optional collapsed-callout supplements (C/L/T). Anchor rule (caveat/quantitative/decision-hinge) draws ONLY from textbook's own data, not external grading.
 
-### Output path (Copper directive 2026-05-03 — NOTE primary home pivoted to personal-website)
+### Output path (Copper directive 2026-05-15 — vault canonical + publish-flag prebuild sync)
 
-NOTE primary home moved from `medwiki/note/` (and the older `~/repos/note/` shell) to `personal-website/src/content/notes/{public,private}/{type}/{slug}.md`. New notes are written there. Existing `medwiki/note/*.md` are deprecated historical references only and migrate per `personal-website/docs/strategy/migration-inventory.md` (Phase 1 showcase / Phase 2 bulk / Phase 3 deferred).
+**Vault = single content corpus; personal-website = pure renderer.** All note types target vault `{topic_path}/{citation_key_or_slug}/` bundles. Personal-website never receives direct writes; it ingests vault content via prebuild script `scripts/sync-vault-published-to-content.py` (a045) which symlinks per-file based on frontmatter gates.
 
-Output path matrix (Astro content collection `notesCollection`, schema in `personal-website/src/content/config.ts`):
+**Publish gate**: every note frontmatter MUST carry `publish: true | false` + `visibility: public | private` + `note_type: <enum>`. Prebuild script reads the trio and:
 
-| input source | note_type | visibility | output path |
-|---|---|---|---|
-| `~/repos/vault/{topic_path}/{key}/raw.md` (journal article — public-shareable summary) | `journal-summary` | `public` | `personal-website/src/content/notes/public/journal-summary/{slug}.md` |
-| `~/repos/vault/{topic_path}/{key}/raw.md` (journal article — paywalled / detailed) | `journal-summary` | `private` | `personal-website/src/content/notes/private/journal-summary/{slug}.md` |
-| `~/repos/vault/{topic_path}/{Book}/{Ch}/raw.md` (textbook chapter, public KEY-TAKEAWAYS only) | `textbook-summary` | `public` | `vault/{topic_path}/{citation_key}/note-public.md` |
-| `~/repos/vault/{topic_path}/{Book}/{Ch}/raw.md` (textbook chapter, full Copper-readable digest) | `textbook-study` | `private` | `vault/{topic_path}/{citation_key}/note-private.md` |
-| TSN exam recall / 腎專考題解析 | `exam-solution` | `public` | `personal-website/src/content/notes/public/exam-solution/{slug}.md` |
-| FB post archive (Copper-authored, no AI banner) | `fb-archive` | `public` | `personal-website/src/content/notes/public/fb-archive/{slug}.md` |
-| `/wiki-mega` synthesis / mini-review article | `wiki-human` | `public` | `vault/{topic_path}/{slug}/article.md` (canonical) + renderer symlink `personal-website/src/content/notes/public/wiki-human/{slug}/index.md → vault/{topic_path}/{slug}/article.md` |
-| Other (interactive «寫筆記» on PDF/report not fitting above) | `review` / `clinical-pearl` | per content | `personal-website/src/content/notes/{visibility}/{type}/{slug}.md` |
+- `publish: true` → creates symlink `personal-website/src/content/notes/{visibility}/{note_type}/{slug}/index.md → vault/{topic_path}/{citation_key_or_slug}/{file}.md`
+- `publish: false` → vault canonical only; no renderer view (note still git-tracked, indexed in PG, readable via vault search)
 
-**Textbook dual-output rule** (per `wiki/SKILL.md` 2026-05-03 directive): textbook chapter notes emit BOTH `public/textbook-summary/{book}/{slug}.md` (slide-style KEY TAKEAWAYS, paraphrase only, ≤2 verbatim quotes ≤30 words each) AND `private/textbook-study/{book}/{slug}.md` (full Copper-readable digest, may include short fair-use verbatim quotes) in one pass. Both share the same `{slug}`; cross-link via frontmatter `related: [<other-slug>]`. Build pipeline gates private/ via Cloudflare Access (Google SSO + email allowlist).
+No whole-folder symlinks. Per-file gate. Renderer URL = `/notes/{visibility}/{note_type}/{slug}/` (Astro globLoader follows symlinks transparently).
 
-**Never write notes to `raw/` or the `personal-website/wiki_raw` symlink**. The `vault/` tree holds raw.md + source.pdf + images/ + manifest.json plus the bundle-local note/article artifacts. Copper-readable note belongs in `vault/{topic_path}/{slug}/note-{public,private}.md` (per-source bundle folder) where the Astro build serves the canonical web URL `/notes/{visibility}/{type}/{slug}/`.
+Output path matrix (Astro content collection `notesCollection` schema lives at `personal-website/src/content/config.ts`; vault canonical is the source of truth):
 
-**No legacy fallback writes**: if the active environment has no `personal-website/` checkout, stop and create a handover/audit finding. Do not write new notes into `medwiki/note/` or `~/repos/note/`.
+| input source | note_type | visibility | vault canonical path | renderer view (when `publish: true`) |
+|---|---|---|---|---|
+| `vault/{topic_path}/{key}/raw.md` (journal article — public-shareable summary) | `journal-summary` | `public` | `vault/{topic_path}/{key}/note-public.md` | `personal-website/src/content/notes/public/journal-summary/{slug}/index.md` |
+| `vault/{topic_path}/{key}/raw.md` (journal article — paywalled / detailed) | `journal-summary` | `private` | `vault/{topic_path}/{key}/note-private.md` | `personal-website/src/content/notes/private/journal-summary/{slug}/index.md` |
+| `vault/{topic_path}/{Book}/{Ch}/raw.md` (textbook chapter, public KEY-TAKEAWAYS only) | `textbook-summary` | `public` | `vault/{topic_path}/{citation_key}/note-public.md` | `personal-website/src/content/notes/public/textbook-summary/{slug}/index.md` |
+| `vault/{topic_path}/{Book}/{Ch}/raw.md` (textbook chapter, full Copper-readable digest) | `textbook-study` | `private` | `vault/{topic_path}/{citation_key}/note-private.md` | `personal-website/src/content/notes/private/textbook-study/{slug}/index.md` |
+| TSN exam recall / 腎專考題解析 | `exam-solution` | `public` | `vault/{topic_path}/{slug}/note-public.md` | `personal-website/src/content/notes/public/exam-solution/{slug}/index.md` |
+| FB post archive (Copper-authored, no AI banner) | `fb-archive` | `public` | `vault/{topic_path}/{slug}/note-public.md` | `personal-website/src/content/notes/public/fb-archive/{slug}/index.md` |
+| `/wiki-mega` synthesis / mini-review article | `wiki-human` | `public` | `vault/{primary_topic_path}/wiki-human-{slug}/article.md` + sidecar `refs.json` | `personal-website/src/content/notes/public/wiki-human/{slug}/index.md` |
+| Other (interactive «寫筆記» on PDF/report not fitting above) | `review` / `clinical-pearl` | per content | `vault/{topic_path}/{slug}/note-{public,private}.md` | `personal-website/src/content/notes/{visibility}/{note_type}/{slug}/index.md` |
+
+**Textbook dual-output rule** (per `wikify/SKILL.md` 2026-05-03 directive): textbook chapter notes emit BOTH `note-public.md` (slide-style KEY TAKEAWAYS, paraphrase only, ≤2 verbatim quotes ≤30 words each) AND `note-private.md` (full Copper-readable digest, may include short fair-use verbatim quotes) in one pass within the same `vault/{topic_path}/{citation_key}/` bundle. Both share the same `{slug}`; cross-link via frontmatter `related: [<other-slug>]`. Build pipeline gates private/ via Cloudflare Access (Google SSO + email allowlist).
+
+**Wiki-human bundle layout** (Copper directive 2026-05-15): vault canonical = `vault/{primary_topic_path}/wiki-human-{slug}/{article.md, refs.json, manifest.json}`. Centralized references in sidecar `refs.json` (6S-tier annotated, agent-readable JSON) keeps the article body free of long reference blocks; Astro renderer ingests `refs.json` alongside `article.md` to render the references panel. Slug prefix `wiki-human-` namespaces against other producer pipelines (drug-indication, policy-explainer) in the same topic folder.
+
+**Never write notes directly to `personal-website/src/content/notes/`**. Vault canonical is the only write target; personal-website paths are created and managed by the prebuild script. Manual writes to `src/content/notes/` will be overwritten or flagged on next sync. The `vault/` tree holds raw.md + source.pdf + images/ + manifest.json plus the bundle-local note/article artifacts.
+
+**No legacy fallback writes**: if the active environment has no `personal-website/` checkout, the vault canonical is still authoritative — write to vault, and the renderer view will materialize on the next prebuild on any host with personal-website checked out. Do not write new notes into `medwiki/note/` or `~/repos/note/`.
 
 **Required frontmatter field `parent:`** points back to the source raw.md so reverse lookup works: `parent: /Users/copper/repos/vault/{topic_path}/{citationKey}/raw.md` (or equivalent `~/repos/vault/...` path). PG mirror: `wiki_raw.raw_index`.
+
+**Required frontmatter `publish` field** (Copper directive 2026-05-15): every note must carry `publish: true | false` explicitly. The prebuild script `personal-website/scripts/sync-vault-published-to-content.py` reads this field together with `visibility` and `note_type` to materialize the renderer symlink under `personal-website/src/content/notes/`. Omitting `publish` = sync-skip (treated as `publish: false`). Flipping `publish: false → true` requires no other change; next prebuild creates the symlink. Flipping `publish: true → false` removes the symlink; vault canonical retained.
 
 * `note_version`: Always use the version string shown above. When this skill is updated, the version string here will change — all new notes will carry the new version, making it easy to identify notes that need rewriting.
 * `generated`: The date the note was generated (not the same as a user-managed `created` date).
@@ -634,6 +645,7 @@ The image extraction step in Section 3 ("Figure & Table Analysis") requires acce
 
 | Version | Date | Changes |
 |---|---|---|
+| v2.11 | 2026-05-15 | Vault canonical content model + publish-flag prebuild sync. All note types target `vault/{topic_path}/{citation_key_or_slug}/note-{public,private}.md` (or `article.md` for wiki-human). Frontmatter `publish: true` + `visibility` + `note_type` triggers prebuild script `personal-website/scripts/sync-vault-published-to-content.py` (a045) to symlink the vault canonical into `personal-website/src/content/notes/{visibility}/{note_type}/{slug}/index.md`. No whole-folder symlinks. Per-file gate. Personal-website becomes a pure renderer; vault is the single content corpus. Wiki-human bundle layout = `vault/{primary_topic_path}/wiki-human-{slug}/{article.md, refs.json, manifest.json}` with centralized 6S-tier refs in sidecar. |
 | v2.8 | 2026-05-03 | NOTE primary home pivot: output paths redirect to `personal-website/src/content/notes/{public,private}/{type}/{slug}.md` (Astro `notesCollection`). Sidecar bridge updated to `/_sidecar/{bundle}/images/{sha}.{ext}` pattern via `personal-website/scripts/copy-sidecar-images.py`. Textbook dual-output (`textbook-summary` public + `textbook-study` private) per Copper directive. Legacy `proj/note/...` and `~/repos/note/` shells deprecated; medwiki/note/ retained for backward search and migration-pending fallback. |
 | v2.10 | 2026-05-09 / 2026-05-13 | wiki_raw moved under `personal-website/`, then merged into `vault/`. Canonical raw payload path is now `~/repos/vault/{topic_path}/{topic_note_slug}/{raw.md, source.pdf, images/, manifest.json}`. Old `~/VaultBinary/...`, `~/repos/wiki_raw/...`, and canonical-use `personal-website/wiki_raw/...` paths are deprecated; agents must rewrite frontmatter `parent:` and reference paths to `vault/`. PG schema names (`wiki_raw.raw_index`, `wiki_raw.source_registry`, `wiki_raw.book`) are unchanged — only filesystem location moved. |
 | v2.9 | 2026-05-05 | Raw+binary merge: source payloads now live at `~/repos/vault/{topic_path}/{citationKey}/{raw.md, source.pdf, images/, manifest.json}` and are indexed by PG `wiki_raw.raw_index`; new note writes must not fall back to deprecated `medwiki/note/`. |
