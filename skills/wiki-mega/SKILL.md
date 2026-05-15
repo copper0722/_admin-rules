@@ -472,9 +472,27 @@ After all 5 sub-agents return, the main Opus does:
 
 ## Citation hygiene reminders
 
-- **UpToDate / DynaMed**: peer-reviewed L5 systems. May appear as L5
-  citation rows in article refs table, but only after the agent
-  saved the snapshot raw and read it. The article's specific
+- **Body-prose voice — never lead with "根據 UpToDate ..." or "UpToDate
+  表示 ..." (Copper directive 2026-05-15)**: in wiki-human / vault
+  article body prose, the originating-authority voice must be guideline
+  / consensus level (e.g., "ADA 2024 Hyperglycemic Crises Consensus",
+  "JBDS-IP", "KDIGO 2025", "EASD"). UpToDate / DynaMed may only appear
+  as a *supporting echo* downstream in the same sentence (e.g., "ADA
+  2024 consensus ...; UpToDate Topic 1795 echoes this" or "...UpToDate
+  採更保守的 K⁺ ≥ 3.5 mEq/L 門檻、同此精神"). Direct body-prose
+  citation of a clinical database as the primary authority looks
+  不入流 by academic convention; UTD / DynaMed are tertiary point-of-
+  care summaries, never primary or guideline-grade. They MAY still
+  appear as L5 rows in the article's 文獻參考 list (Haynes 6S tier-
+  honest), but never as the lead-in voice in body text. If body prose
+  has only UTD / DynaMed to cite for a claim, the article should
+  either (a) trace the claim back to the L4 guideline UTD / DynaMed
+  itself cites and lead with that, or (b) phrase the position as
+  "違反專家共識 / 現行 expert consensus..." with UTD / DynaMed as the
+  corroborating L5 reference.
+- **UpToDate / DynaMed (citation-row policy)**: peer-reviewed L5 systems.
+  May appear as L5 citation rows in article refs list, but only after
+  the agent saved the snapshot raw and read it. The article's specific
   numerical / trial-name claims should still trace to L1 primary via
   ad-hoc fetch; UTD/DynaMed prose alone supports only qualitative
   positions.
