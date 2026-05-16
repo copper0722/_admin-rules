@@ -3,6 +3,7 @@ type: data
 name: wiki
 description: "LLM-wiki Q&A skill. Copper asks ad-hoc clinical / medical / policy / literature questions; agent retrieves from local LLM-wiki three layers (PG wiki_raw.raw_index + wiki_raw raw md + personal-website wiki & notes), integrates a chat answer with chapter+line citations, and reports local coverage gaps. MANDATORY TRIGGERS: /wiki, wiki?, 查 wiki, 問 wiki, 查 raw, 查 LLM-wiki, 查 LLM 的 wiki, /q, /ask, /wq. Trigger requires Q-shape (clinical/medical question, not source ingest). Source-ingest input (PDF/audio/URL/scattered manual paste) goes to /wikify."
 argument-hint: "[clinical / medical / policy question]"
+summary: "LLM-wiki Q&A skill: retrieve from three local LLM-wiki layers (PG wiki_raw.raw_index + raw md + personal-website wiki/notes) and answer clinical/medical questions with chapter+line citations; reports local coverage gaps. Q-shape questions only — source ingest routes to /wikify."
 ---
 
 # /wiki — LLM-wiki Q&A Skill
@@ -13,7 +14,7 @@ This is the **retrieval direction** counterpart to `/wikify` (ingest direction).
 
 ## Principle
 
-- LLM-wiki retrieval reads **raw md (git-tracked) and wiki/notes synthesis only**. NEVER load binary (PDF / images / tables / source media) into context for retrieval — binary is local-only audit asset (gitignored under `personal-website/wiki_raw/`), retrieval-irrelevant. Memory rule: `feedback_llm_wiki_retrieval_no_binary.md`.
+- LLM-wiki retrieval reads **raw md (git-tracked) and wiki/notes synthesis only**. NEVER load binary (PDF / images / tables / source media) into context for retrieval — binary is local-only audit asset (gitignored under `vault/`), retrieval-irrelevant. Memory rule: `feedback_llm_wiki_retrieval_no_binary.md`.
 - Output = chat answer to Copper, NOT a published artifact. Reader-only zone rules (no internal infrastructure, device names, AGENTS.md citations, AI process disclosures) do not apply because chat ≠ publish; but if Copper later says "this is for FB / publish", switch to Copper-authored note format with reference tier and inline `[N]` numbered citations (memory: `feedback_reference_tier_copper_authored_notes.md`, `feedback_inline_citation_numbered.md`).
 - Voice: zh-TW Taiwan medical terminology, calm academic tone, no debunk drama, inline English for technical tokens (paths, drug INN, classifier names, gene symbols).
 - Ad-hoc retrieval, **single round-trip**: do not invoke task tracking, do not write memory unless the question itself asks for it.
@@ -33,7 +34,7 @@ This is the **retrieval direction** counterpart to `/wikify` (ingest direction).
         OR '<kw_lower>' = ANY(tags)
      ORDER BY citation_key LIMIT 50;
      ```
-   - **wiki_raw raw md layer** — `rg -l --type md -i '<kw_en>|<kw_zh>' ~/repos/personal-website/wiki_raw/`. wiki_raw moved under `personal-website/` 2026-05-09; no separate consent required — same git tree as personal-website on every device.
+   - **vault raw md layer** — `rg -l --type md -i '<kw_en>|<kw_zh>' ~/repos/vault/`. `personal-website/wiki_raw` is only a symlink/backcompat route; new retrieval docs should name `vault/`.
    - **personal-website layer** — `rg -l --type md -i '<kw>' ~/repos/personal-website/src/content/{wiki,notes}/`. Wiki entries are M2M synthesis with `tags` + `slug`; notes are Copper-authored zh-TW digests + AI-authored textbook-summary / journal-summary etc.
    - **textbook-share sidecar layer (retrieval only, not wikify)** — search completed textbook-share sidecar repos only as a layer-aware fallback. Copper explicitly distinguishes **wiki search** from **wikify**; do not answer a search-efficiency question by describing wiki synthesis. For `~/repos/textbook-share/*/*/chapters/*/`, same-chapter priority is `wiki.md > proofread.md > raw.md`; after 2026-05-13 completed chapters should normally be `proofread.md + raw.md.gz` with no searchable `raw.md`. Generic `rg --type md` should therefore hit `proofread.md`/`wiki.md`, not compressed raw. If multiple layers match one chapter, keep the highest layer and do **not** load `raw.md` and `proofread.md` together unless verifying OCR/proofread quality.
    - **External synthesis NAVIGATOR layer (Copper directive 2026-05-10)** — UpToDate + DynaMed are tertiary synthesis used to **discover primary references**, NEVER cited directly in the answer (commercial source + unstable versioning + academic primary-cite standard). Auth cookies for both live ONLY in **hm4 Chrome Beta** (same place as journal-toc bundler subscriber sessions); WebFetch from any host cannot reuse those cookies → must drive via `chrome-devtools` MCP:
@@ -46,7 +47,12 @@ This is the **retrieval direction** counterpart to `/wikify` (ingest direction).
 
 3. **Read** the relevant hits' specific paragraphs (chapter + line range). Do not load whole files unless small. Prefer `Read` with offset+limit over full read.
 
-4. **Integrate** — fixed answer skeleton:
+4. **Integrate** — source-grounding discipline before writing the answer:
+   - If Copper asks to review,校稿, or draft a reply to someone else's article/email/初稿, read the target draft first and anchor every critique to an actual sentence or phrase in that draft. Do not argue against an implication the draft does not make.
+   - When the draft already states the correct principle, explicitly acknowledge that and frame changes as precision/wording improvements, not as corrections of a strawman. Example pitfall from FMC Kidney Life Plan review: the draft already said居家透析並非適合每一位病人/沒有最好只有最適合; the reply should not say "avoid making readers think home dialysis is always better" as if the author claimed that. Instead: "整體方向正確；建議把 HHD『提升治療效果』改成較精準的排程/頻率/時間描述，並把 PD『清潔』改成無菌操作與感染預防。"
+   - Before finalizing an outbound reply, do a quick traceability check: each requested change should map to (a) a quoted/located source-draft phrase and (b) the retrieved medical/textbook basis.
+
+5. **Integrate** — fixed answer skeleton:
 
    ```
    ## {結論一句話 zh-TW}
@@ -76,6 +82,8 @@ This is the **retrieval direction** counterpart to `/wikify` (ingest direction).
    - Question is "write a note about X" not "tell me about X" → redirect to `/note-writer` (Opus-only teaching note pipeline).
    - Question depends on figure / table / image content → respond "binary not in retrieval contract" + suggest spawning an image-description sub-agent if Copper has the source binary mounted.
    - Question is "for FB / publish / 衛教" → switch output mode: zh-TW publish-ready, calm objective voice (memory: `feedback_debunk_cool_objective_voice.md`), inline `[N]` citations + numbered `## References` list, reference tier = Tier 1 textbook + Tier 2 guideline + Tier 3 top-journal review only (memory: `feedback_reference_tier_copper_authored_notes.md`). NO internal infrastructure leak (memory: `feedback_no_ai_methodology_in_article_body.md`).
+
+- **Textbook-grounded professional review of external drafts** — when Copper forwards an article/interview/patient-education draft and asks to check it against local textbooks (e.g. `去查 Daugirdas textbook modality choice 做專業校稿`), use the editorial calibration pattern in `references/textbook-grounded-professional-review.md`: retrieve precise textbook line ranges, write an internal grounded review, and provide a clean sender-facing reply draft without internal paths.
 
 ## Reference tier ordering (priority)
 
@@ -118,10 +126,10 @@ rg -l --type md -i 'KW_en|KW_zh' \
    ~/repos/personal-website/src/content/notes/
 ```
 
-### wiki_raw raw md (lives under personal-website since 2026-05-09)
+### vault raw md
 
 ```bash
-rg -l --type md -i 'KW' ~/repos/personal-website/wiki_raw/
+rg -l --type md -i 'KW' ~/repos/vault/
 ```
 
 ### Reading specific hit paragraph

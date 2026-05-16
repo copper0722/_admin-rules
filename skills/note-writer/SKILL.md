@@ -2,6 +2,7 @@
 type: note
 name: medical-note-writer
 description: "**Medical Teaching Note Writer**: Generate high-fidelity teaching notes in Traditional Chinese (Taiwan) from medical PDFs (textbook chapters, journal articles, supplements). MANDATORY TRIGGERS: 寫筆記, 生成筆記, 寫教學筆記, 教科書筆記, textbook notes, write notes, generate notes, PDF 筆記, medical notes, 幫我寫筆記, 轉成筆記, 做筆記. Also trigger when user uploads a medical PDF and asks to convert it into notes, or mentions teaching notes, study notes, or vault notes from medical content."
+summary: "Two-stage (translate → restructure) zh-TW medical-teaching-note generator from PDFs/journal articles/textbook chapters. Outputs vault-rooted markdown with frontmatter + callouts; preserves causal logic + table/figure refs. Stage 1 thinking-only translation, Stage 2 hierarchical bullet output."
 ---
 
 # Medical Teaching Note Writer
