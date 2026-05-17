@@ -6,7 +6,7 @@ Use when Copper forwards an external article/interview/patient-education draft a
 
 1. Treat this as retrieval + editorial calibration, not wikify and not a new published wiki article.
 2. Read the external draft already saved under secretary or extract it from attachments if needed.
-3. Search local `~/我的雲端硬碟/library-share/textbook/` (gdrive canonical) / `vault/` for the precise clinical frame. For completed textbook chapters, search `proofread.md` / `article.md`; do not decompress or search `raw.md.gz` unless auditing provenance.
+3. Search local `~/我的雲端硬碟/agent-share/textbook/` (gdrive canonical) / `vault/` for the precise clinical frame. For completed textbook chapters, search `proofread.md` / `article.md`; do not decompress or search `raw.md.gz` unless auditing provenance.
 4. Read specific line ranges from the relevant chapter(s), not whole books.
 5. Produce two artifacts when useful:
    - internal professional review with source/line grounding for Copper

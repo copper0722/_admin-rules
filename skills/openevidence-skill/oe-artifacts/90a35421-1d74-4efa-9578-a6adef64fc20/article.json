@@ -1,0 +1,1309 @@
+{
+  "id": "90a35421-1d74-4efa-9578-a6adef64fc20",
+  "datetime_created": "2026-05-15T11:21:07.943113Z",
+  "article_type": "Ask OpenEvidence Light with citations",
+  "inputs": {
+    "history": [],
+    "question": "Postprandial somnolence mechanisms: evidence evaluation of Wurtman-Fernstrom tryptophan/LNAA hypothesis (insulin → muscle BCAA uptake → brain tryptophan → serotonin/melatonin → drowsiness) versus alternative mechanisms including orexin/hypocretin glucose-sensing, CCK/GLP-1 satiety, vagal afferent activation, splanchnic blood flow, parasympathetic activation, postprandial cytokines (IL-1β IL-6). Focus on preclinical and human controlled studies. Cite primary refs with DOIs.",
+    "attachments": [],
+    "use_gatekeeper": true,
+    "component_config_version": "rc",
+    "variant_configuration_file": "minimal"
+  },
+  "status": "success",
+  "user_error_msg": "",
+  "output": {
+    "id": "701b9429-215e-4926-92bc-ffbc01850519",
+    "text": "The <strong>Wurtman-Fernstrom tryptophan/LNAA hypothesis has limited support in human studies with normal mixed meals</strong>, while <strong>emerging evidence favors alternative mechanisms including vagal afferent activation, glucose-sensing by sleep-promoting neurons, and orexin/hypocretin inhibition</strong> as primary drivers of postprandial somnolence.\n\n<strong>Tryptophan/LNAA Hypothesis: Evidence and Limitations</strong>\n\nThe classical hypothesis proposes that carbohydrate-induced insulin secretion promotes muscle uptake of branched-chain amino acids (BCAAs: leucine, isoleucine, valine), increasing the plasma tryptophan:LNAA ratio and facilitating tryptophan transport across the blood-brain barrier, thereby increasing brain serotonin synthesis.[[[$$$Parker G, Brotchie H. <a target=\"_blank\" href=\"https://onlinelibrary.wiley.com/doi/10.1111/j.1600-0447.2011.01706.x\">Mood Effects of the Amino Acids Tryptophan and Tyrosine: 'Food for Thought' III</a>. Acta Psychiatrica Scandinavica. 2011;124(6):417-26. doi:10.1111/j.1600-0447.2011.01706.x.$$$]!!![$$$Newsholme EA, Blomstrand E. <a target=\"_blank\" href=\"https://pubmed.ncbi.nlm.nih.gov/16365097\">Branched-Chain Amino Acids and Central Fatigue</a>. The Journal of Nutrition. 2006;136(1 Suppl):274S-6S. doi:10.1093/jn/136.1.274S.$$$]]] Wurtman et al. (2003) demonstrated in 9 healthy subjects that carbohydrate-rich breakfasts (69.9g carbohydrate, 5.2g protein) versus protein-rich breakfasts (15.4g carbohydrate, 46.8g protein) produced significantly different plasma tryptophan:LNAA ratios (median difference 54%, range 36-88%, P<0.01), with insulin rising after carbohydrate but not protein meals.[[[$$$Wurtman RJ, Wurtman JJ, Regan MM, et al. <a target=\"_blank\" href=\"https://pubmed.ncbi.nlm.nih.gov/12499331\">Effects of Normal Meals Rich in Carbohydrates or Proteins on Plasma Tryptophan and Tyrosine Ratios</a>. The American Journal of Clinical Nutrition. 2003;77(1):128-32. doi:10.1093/ajcn/77.1.128.$$$]]] The mechanism operates through insulin-mediated selective uptake of LNAAs by muscle, while tryptophan levels remain stable, creating competitive advantage for brain uptake.[[[$$$Parker G, Brotchie H. <a target=\"_blank\" href=\"https://onlinelibrary.wiley.com/doi/10.1111/j.1600-0447.2011.01706.x\">Mood Effects of the Amino Acids Tryptophan and Tyrosine: 'Food for Thought' III</a>. Acta Psychiatrica Scandinavica. 2011;124(6):417-26. doi:10.1111/j.1600-0447.2011.01706.x.$$$]]]\n\nHowever, <strong>critical limitations</strong> undermine this hypothesis for real-world postprandial somnolence. As little as 5% protein content in a meal prevents the increase in tryptophan concentrations, making the mechanism unrealistic for typical mixed meals.[[[$$$Zhao M, Tuo H, Wang S, Zhao L. <a target=\"_blank\" href=\"https://onlinelibrary.wiley.com/doi/10.1155/2020/3142874\">The Effects of Dietary Nutrition on Sleep and Sleep Disorders</a>. Mediators of Inflammation. 2020;2020:3142874. doi:10.1155/2020/3142874.$$$]]] Additionally, increased serotonin does not necessarily translate to melatonin production, which is regulated by darkness rather than meal timing.[[[$$$Zhao M, Tuo H, Wang S, Zhao L. <a target=\"_blank\" href=\"https://onlinelibrary.wiley.com/doi/10.1155/2020/3142874\">The Effects of Dietary Nutrition on Sleep and Sleep Disorders</a>. Mediators of Inflammation. 2020;2020:3142874. doi:10.1155/2020/3142874.$$$]]] Only 2-3% of dietary tryptophan (approximately 0.5g daily in Western diets) is used for central serotonin production.[[[$$$Parker G, Brotchie H. <a target=\"_blank\" href=\"https://onlinelibrary.wiley.com/doi/10.1111/j.1600-0447.2011.01706.x\">Mood Effects of the Amino Acids Tryptophan and Tyrosine: 'Food for Thought' III</a>. Acta Psychiatrica Scandinavica. 2011;124(6):417-26. doi:10.1111/j.1600-0447.2011.01706.x.$$$]]]\n\n<strong>Vagal Afferent Pathway: Recent Mechanistic Evidence</strong>\n\nA 2025 study by Chen et al. provides direct circuit-level evidence for vagal mediation of postprandial sleep. In male mice, activation of stomach/duodenum-innervating vagal sensory neurons reduced wakefulness and increased NREM sleep, while chemogenetic inhibition abolished feeding-induced sleep promotion.[[[$$$Chen K, Xiang G, Hang Z, et al. <a target=\"_blank\" href=\"https://pubmed.ncbi.nlm.nih.gov/41407675\">The Gut Vagal Sensory Pathway Drives Postprandial Sleep via Activation of PVH-projecting GABAergic Neurons in the NTS</a>. Nature Communications. 2025;:10.1038/s41467-025-66112-0. doi:10.1038/s41467-025-66112-0.$$$]]] Using anterograde transsynaptic tracing and single-nucleus RNA sequencing, investigators identified a specific pathway: upper gut vagal afferents → GABAergic neurons in the nucleus of solitary tract (NTS) → paraventricular nucleus of hypothalamus (PVH). Optogenetic activation of NTS GABAergic neurons and their PVH projections suppressed wakefulness and prolonged NREM sleep.[[[$$$Chen K, Xiang G, Hang Z, et al. <a target=\"_blank\" href=\"https://pubmed.ncbi.nlm.nih.gov/41407675\">The Gut Vagal Sensory Pathway Drives Postprandial Sleep via Activation of PVH-projecting GABAergic Neurons in the NTS</a>. Nature Communications. 2025;:10.1038/s41467-025-66112-0. doi:10.1038/s41467-025-66112-0.$$$]]] This represents the first direct demonstration of the neural circuitry driving postprandial sleep.\n\n<strong>Glucose-Sensing Mechanisms</strong>\n\nVarin et al. (2015) demonstrated that glucose directly excites sleep-promoting neurons in the ventrolateral preoptic nucleus (VLPO) of mice. Glucose infusion into the VLPO promoted slow-wave sleep and increased c-Fos expression selectively in VLPO neurons. Patch-clamp recordings showed that VLPO neurons with sleep-promoting properties are selectively excited by glucose within physiological range through glucose catabolism leading to closure of ATP-sensitive potassium (K<em>ATP) channels. This mechanism provides direct metabolic state sensing by sleep centers.</em>[[[$$$Varin C, Rancillac A, Geoffroy H, et al. <a target=\"_blank\" href=\"https://pubmed.ncbi.nlm.nih.gov/26156991\">Glucose Induces Slow-Wave Sleep by Exciting the Sleep-Promoting Neurons in the Ventrolateral Preoptic Nucleus: A New Link Between Sleep and Metabolism</a>. The Journal of Neuroscience : The Official Journal of the Society for Neuroscience. 2015;35(27):9900-11. doi:10.1523/JNEUROSCI.0609-15.2015.$$$]]]\n\n<strong>Orexin/Hypocretin Inhibition</strong>\n\nHypocretin/orexin neurons in the lateral hypothalamus promote wakefulness and arousal, with defects causing narcolepsy.[[[$$$Burdakov D, Alexopoulos H. <a target=\"_blank\" href=\"https://pubmed.ncbi.nlm.nih.gov/16364191\">Metabolic State Signalling Through Central Hypocretin/Orexin Neurons</a>. Journal of Cellular and Molecular Medicine. 2005 Oct-Dec;9(4):795-803. doi:10.1111/j.1582-4934.2005.tb00380.x.$$$]]] These neurons alter their intrinsic electrical activity according to ambient nutrient levels and appetite-regulating hormones, representing strong candidates for neural correlates of postprandial sleepiness.[[[$$$Burdakov D, Alexopoulos H. <a target=\"_blank\" href=\"https://pubmed.ncbi.nlm.nih.gov/16364191\">Metabolic State Signalling Through Central Hypocretin/Orexin Neurons</a>. Journal of Cellular and Molecular Medicine. 2005 Oct-Dec;9(4):795-803. doi:10.1111/j.1582-4934.2005.tb00380.x.$$$]]] The glucose-induced excitation of VLPO sleep-promoting neurons likely works in concert with orexin neuron inhibition during fed states.\n\n<strong>Gut Hormone Mechanisms</strong>\n\nWells et al. (1997) conducted paired studies in 18 healthy volunteers comparing high-fat-low-carbohydrate versus low-fat-high-carbohydrate morning meals. Cholecystokinin (CCK) concentrations were significantly higher after high-fat meals, while insulin was higher after high-carbohydrate meals. Subjects reported greater sleepiness 2-3 hours after high-fat-low-carbohydrate meals, with significantly greater fatigue ratings at 3 hours, consistent with CCK-mediated lassitude.[[[$$$Wells AS, Read NW, Uvnas-Moberg K, Alster P. <a target=\"_blank\" href=\"https://pubmed.ncbi.nlm.nih.gov/9145937\">Influences of Fat and Carbohydrate on Postprandial Sleepiness, Mood, and Hormones</a>. Physiology & Behavior. 1997;61(5):679-86. doi:10.1016/s0031-9384(96)00519-7.$$$]]] This suggests CCK may contribute independently of the tryptophan mechanism.\n\n<strong>Alternative Hypotheses</strong>\n\nBazar et al. (2004) challenged the traditional \"blood redistribution\" myth, noting that cerebral perfusion is preferentially maintained during diverse physiologic states (e.g., exercise) and that no measurable change occurs in common carotid artery blood flow postprandially.[[[$$$Bazar KA, Yun AJ, Lee PY. <a target=\"_blank\" href=\"https://pubmed.ncbi.nlm.nih.gov/15488646\">Debunking a Myth: Neurohormonal and Vagal Modulation of Sleep Centers, Not Redistribution of Blood Flow, May Account for Postprandial Somnolence</a>. Medical Hypotheses. 2004;63(5):778-82. doi:10.1016/j.mehy.2004.04.015.$$$]]] They proposed that postprandial release of gut-brain hormones (melatonin, orexins) and vagal activation modulate hypothalamic sleep centers.[[[$$$Bazar KA, Yun AJ, Lee PY. <a target=\"_blank\" href=\"https://pubmed.ncbi.nlm.nih.gov/15488646\">Debunking a Myth: Neurohormonal and Vagal Modulation of Sleep Centers, Not Redistribution of Blood Flow, May Account for Postprandial Somnolence</a>. Medical Hypotheses. 2004;63(5):778-82. doi:10.1016/j.mehy.2004.04.015.$$$]]]\n\nThe inflammatory hypothesis suggests high-glycemic-index diets stimulate inflammatory immune responses (IL-1β, IL-6) that may affect sleep quality, though direct mechanistic studies linking postprandial cytokines to acute somnolence are lacking in the retrieved literature.[[[$$$Zhao M, Tuo H, Wang S, Zhao L. <a target=\"_blank\" href=\"https://onlinelibrary.wiley.com/doi/10.1155/2020/3142874\">The Effects of Dietary Nutrition on Sleep and Sleep Disorders</a>. Mediators of Inflammation. 2020;2020:3142874. doi:10.1155/2020/3142874.$$$]]]\n\n<strong>Synthesis</strong>\n\nCurrent evidence suggests postprandial somnolence results from <strong>multiple parallel mechanisms</strong> rather than a single pathway. The vagal afferent pathway provides the most direct circuit-level evidence, while glucose sensing by VLPO neurons and orexin inhibition offer complementary metabolic signaling. The tryptophan/LNAA hypothesis, while biochemically sound for pure carbohydrate loads, appears insufficient to explain somnolence after typical mixed meals containing protein. CCK release after fat ingestion represents an additional hormonal mechanism. The relative contribution of each pathway likely varies with meal composition, timing, and individual metabolic state.\n\nWould you like to explore the specific experimental protocols and outcome measures used to assess postprandial somnolence in human controlled trials, including objective measures like polysomnography versus subjective sleepiness scales?",
+    "structured_article": {
+      "title": "",
+      "byline": "",
+      "what_is_this_page_html": "",
+      "lead_image_url": "",
+      "slug": "",
+      "placeholder": false,
+      "follow_up_questions": [
+        "What populations are most susceptible to postprandial somnolence based on controlled studies?",
+        "Are there any medications or dietary supplements that significantly alter postprandial somnolence?",
+        "What are the most common side effects of drugs targeting orexin or glucagon-like peptide-1 pathways?"
+      ],
+      "external_search_results": [],
+      "page_type": "ask_oe_light_with_citations",
+      "ui_flags": null,
+      "metadata": {},
+      "raw_text": "The **Wurtman-Fernstrom tryptophan/LNAA hypothesis has limited support in human studies with normal mixed meals**, while **emerging evidence favors alternative mechanisms including vagal afferent activation, glucose-sensing by sleep-promoting neurons, and orexin/hypocretin inhibition** as primary drivers of postprandial somnolence.\n\n**Tryptophan/LNAA Hypothesis: Evidence and Limitations**\n\nThe classical hypothesis proposes that carbohydrate-induced insulin secretion promotes muscle uptake of branched-chain amino acids (BCAAs: leucine, isoleucine, valine), increasing the plasma tryptophan:LNAA ratio and facilitating tryptophan transport across the blood-brain barrier, thereby increasing brain serotonin synthesis[2][4]. Wurtman et al. (2003) demonstrated in 9 healthy subjects that carbohydrate-rich breakfasts (69.9g carbohydrate, 5.2g protein) versus protein-rich breakfasts (15.4g carbohydrate, 46.8g protein) produced significantly different plasma tryptophan:LNAA ratios (median difference 54%, range 36-88%, P<0.01), with insulin rising after carbohydrate but not protein meals[3]. The mechanism operates through insulin-mediated selective uptake of LNAAs by muscle, while tryptophan levels remain stable, creating competitive advantage for brain uptake[2].\n\nHowever, **critical limitations** undermine this hypothesis for real-world postprandial somnolence. As little as 5% protein content in a meal prevents the increase in tryptophan concentrations, making the mechanism unrealistic for typical mixed meals[1]. Additionally, increased serotonin does not necessarily translate to melatonin production, which is regulated by darkness rather than meal timing[1]. Only 2-3% of dietary tryptophan (approximately 0.5g daily in Western diets) is used for central serotonin production[2].\n\n**Vagal Afferent Pathway: Recent Mechanistic Evidence**\n\nA 2025 study by Chen et al. provides direct circuit-level evidence for vagal mediation of postprandial sleep. In male mice, activation of stomach/duodenum-innervating vagal sensory neurons reduced wakefulness and increased NREM sleep, while chemogenetic inhibition abolished feeding-induced sleep promotion[6]. Using anterograde transsynaptic tracing and single-nucleus RNA sequencing, investigators identified a specific pathway: upper gut vagal afferents → GABAergic neurons in the nucleus of solitary tract (NTS) → paraventricular nucleus of hypothalamus (PVH). Optogenetic activation of NTS GABAergic neurons and their PVH projections suppressed wakefulness and prolonged NREM sleep[6]. This represents the first direct demonstration of the neural circuitry driving postprandial sleep.\n\n**Glucose-Sensing Mechanisms**\n\nVarin et al. (2015) demonstrated that glucose directly excites sleep-promoting neurons in the ventrolateral preoptic nucleus (VLPO) of mice. Glucose infusion into the VLPO promoted slow-wave sleep and increased c-Fos expression selectively in VLPO neurons. Patch-clamp recordings showed that VLPO neurons with sleep-promoting properties are selectively excited by glucose within physiological range through glucose catabolism leading to closure of ATP-sensitive potassium (K_ATP) channels[9]. This mechanism provides direct metabolic state sensing by sleep centers.\n\n**Orexin/Hypocretin Inhibition**\n\nHypocretin/orexin neurons in the lateral hypothalamus promote wakefulness and arousal, with defects causing narcolepsy[10]. These neurons alter their intrinsic electrical activity according to ambient nutrient levels and appetite-regulating hormones, representing strong candidates for neural correlates of postprandial sleepiness[10]. The glucose-induced excitation of VLPO sleep-promoting neurons likely works in concert with orexin neuron inhibition during fed states.\n\n**Gut Hormone Mechanisms**\n\nWells et al. (1997) conducted paired studies in 18 healthy volunteers comparing high-fat-low-carbohydrate versus low-fat-high-carbohydrate morning meals. Cholecystokinin (CCK) concentrations were significantly higher after high-fat meals, while insulin was higher after high-carbohydrate meals. Subjects reported greater sleepiness 2-3 hours after high-fat-low-carbohydrate meals, with significantly greater fatigue ratings at 3 hours, consistent with CCK-mediated lassitude[8]. This suggests CCK may contribute independently of the tryptophan mechanism.\n\n**Alternative Hypotheses**\n\nBazar et al. (2004) challenged the traditional \"blood redistribution\" myth, noting that cerebral perfusion is preferentially maintained during diverse physiologic states (e.g., exercise) and that no measurable change occurs in common carotid artery blood flow postprandially[7]. They proposed that postprandial release of gut-brain hormones (melatonin, orexins) and vagal activation modulate hypothalamic sleep centers[7].\n\nThe inflammatory hypothesis suggests high-glycemic-index diets stimulate inflammatory immune responses (IL-1β, IL-6) that may affect sleep quality[1], though direct mechanistic studies linking postprandial cytokines to acute somnolence are lacking in the retrieved literature.\n\n**Synthesis**\n\nCurrent evidence suggests postprandial somnolence results from **multiple parallel mechanisms** rather than a single pathway. The vagal afferent pathway provides the most direct circuit-level evidence, while glucose sensing by VLPO neurons and orexin inhibition offer complementary metabolic signaling. The tryptophan/LNAA hypothesis, while biochemically sound for pure carbohydrate loads, appears insufficient to explain somnolence after typical mixed meals containing protein. CCK release after fat ingestion represents an additional hormonal mechanism. The relative contribution of each pathway likely varies with meal composition, timing, and individual metabolic state.\n\nWould you like to explore the specific experimental protocols and outcome measures used to assess postprandial somnolence in human controlled trials, including objective measures like polysomnography versus subjective sleepiness scales?",
+      "articlesection_set": [
+        {
+          "section_title": "",
+          "identifier": "",
+          "metadata": {},
+          "placeholder": false,
+          "articleparagraph_set": [],
+          "articlefigureparagraph_set": []
+        },
+        {
+          "section_title": "",
+          "identifier": "",
+          "metadata": {},
+          "placeholder": false,
+          "articleparagraph_set": [
+            {
+              "paragraph_title": "",
+              "link_name": "",
+              "identifier": "",
+              "placeholder": false,
+              "order_in_section": 0,
+              "articlespan_set": [
+                {
+                  "text": "The",
+                  "citations": [],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                },
+                {
+                  "text": " <strong>Wurtman-Fernstrom tryptophan/LNAA hypothesis has limited support in human studies with normal mixed meals</strong>",
+                  "citations": [],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                },
+                {
+                  "text": ", while",
+                  "citations": [],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                },
+                {
+                  "text": " <strong>emerging evidence favors alternative mechanisms including vagal afferent activation, glucose-sensing by sleep-promoting neurons, and orexin/hypocretin inhibition</strong>",
+                  "citations": [],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                },
+                {
+                  "text": " as primary drivers of postprandial somnolence.",
+                  "citations": [],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                }
+              ]
+            },
+            {
+              "paragraph_title": "",
+              "link_name": "",
+              "identifier": "",
+              "placeholder": false,
+              "order_in_section": 1,
+              "articlespan_set": [
+                {
+                  "text": "<strong>Tryptophan/LNAA Hypothesis: Evidence and Limitations</strong>",
+                  "citations": [],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                }
+              ]
+            },
+            {
+              "paragraph_title": "",
+              "link_name": "",
+              "identifier": "",
+              "placeholder": false,
+              "order_in_section": 2,
+              "articlespan_set": [
+                {
+                  "text": "The classical hypothesis proposes that carbohydrate-induced insulin secretion promotes muscle uptake of branched-chain amino acids (BCAAs: leucine, isoleucine, valine), increasing the plasma tryptophan:LNAA ratio and facilitating tryptophan transport across the blood-brain barrier, thereby increasing brain serotonin synthesis.",
+                  "citations": [
+                    {
+                      "metadata": {
+                        "id": 21488845,
+                        "id_type": 1,
+                        "origin": "xjmfz`sftfbsdi`gvmmufyu",
+                        "origin_type": 1,
+                        "content_metadata": {
+                          "section_path": [
+                            "Material and methods",
+                            "Tryptophan – a serotonin precursor"
+                          ],
+                          "is_abstract": false
+                        },
+                        "citation_detail": {
+                          "title": "Mood effects of the amino acids tryptophan and tyrosine",
+                          "authors_string": "Parker G, Brotchie H.",
+                          "dt_published": "2011-12-01T00:00:00+00:00",
+                          "repository": "Wiley",
+                          "journal_owner": "Wiley-Blackwell",
+                          "journal_name": "Acta Psychiatrica Scandinavica",
+                          "journal_short_name": "Acta Psychiatr Scand",
+                          "pmid": 21488845,
+                          "doi": "10.1111/j.1600-0447.2011.01706.x",
+                          "publication_info_string": "Acta Psychiatrica Scandinavica. 2011;124(6):417-26. doi:10.1111/j.1600-0447.2011.01706.x.",
+                          "publication_types": [
+                            "Research Support, Non-U.S. Gov't",
+                            "Review",
+                            "Journal Article"
+                          ],
+                          "resolved_publication_type": "Other_Review",
+                          "href": "https://onlinelibrary.wiley.com/doi/10.1111/j.1600-0447.2011.01706.x"
+                        },
+                        "related_publications": [],
+                        "why_cited": {
+                          "impact_score": 5.83,
+                          "impact_score_type": "official_impact_factor",
+                          "recency_score": 5279,
+                          "recency_score_type": "days_since_published",
+                          "relevance_score": -1000
+                        }
+                      },
+                      "citation": "Parker G, Brotchie H. <a target=\"_blank\" href=\"https://onlinelibrary.wiley.com/doi/10.1111/j.1600-0447.2011.01706.x\">Mood Effects of the Amino Acids Tryptophan and Tyrosine: 'Food for Thought' III</a>. Acta Psychiatrica Scandinavica. 2011;124(6):417-26. doi:10.1111/j.1600-0447.2011.01706.x."
+                    },
+                    {
+                      "metadata": {
+                        "id": 16365097,
+                        "id_type": 1,
+                        "origin": "qvcnfe`bctusbdut`ijoefy`46qdu`beb4tnbmm`w4",
+                        "origin_type": 1,
+                        "citation_detail": {
+                          "title": "Branched-Chain Amino Acids and Central Fatigue",
+                          "authors_string": "Newsholme EA, Blomstrand E.",
+                          "dt_published": "2006-01-01T00:00:00+00:00",
+                          "repository": "PubMed",
+                          "journal_owner": "Elsevier",
+                          "journal_name": "The Journal of Nutrition",
+                          "journal_short_name": "J Nutr",
+                          "pmid": 16365097,
+                          "doi": "10.1093/jn/136.1.274S",
+                          "publication_info_string": "The Journal of Nutrition. 2006;136(1 Suppl):274S-6S. doi:10.1093/jn/136.1.274S.",
+                          "publication_types": [
+                            "Research Support, Non-U.S. Gov't",
+                            "Journal Article"
+                          ],
+                          "resolved_publication_type": "",
+                          "href": "https://pubmed.ncbi.nlm.nih.gov/16365097"
+                        },
+                        "related_publications": [],
+                        "why_cited": {
+                          "impact_score": 3.75,
+                          "impact_score_type": "official_impact_factor",
+                          "recency_score": 7439,
+                          "recency_score_type": "days_since_published",
+                          "relevance_score": -1000
+                        }
+                      },
+                      "citation": "Newsholme EA, Blomstrand E. <a target=\"_blank\" href=\"https://pubmed.ncbi.nlm.nih.gov/16365097\">Branched-Chain Amino Acids and Central Fatigue</a>. The Journal of Nutrition. 2006;136(1 Suppl):274S-6S. doi:10.1093/jn/136.1.274S."
+                    }
+                  ],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                },
+                {
+                  "text": " Wurtman et al. (2003) demonstrated in 9 healthy subjects that carbohydrate-rich breakfasts (69.9g carbohydrate, 5.2g protein) versus protein-rich breakfasts (15.4g carbohydrate, 46.8g protein) produced significantly different plasma tryptophan:LNAA ratios (median difference 54%, range 36-88%, P<0.01), with insulin rising after carbohydrate but not protein meals.",
+                  "citations": [
+                    {
+                      "metadata": {
+                        "id": 12499331,
+                        "id_type": 1,
+                        "origin": "qvcnfe`bctusbdut`ijoefy`46qdu`beb4tnbmm`w4",
+                        "origin_type": 1,
+                        "citation_detail": {
+                          "title": "Effects of Normal Meals Rich in Carbohydrates or Proteins on Plasma Tryptophan and Tyrosine Ratios",
+                          "authors_string": "Wurtman RJ, Wurtman JJ, Regan MM, et al.",
+                          "dt_published": "2003-01-01T00:00:00+00:00",
+                          "repository": "PubMed",
+                          "journal_owner": "Elsevier",
+                          "journal_name": "The American Journal of Clinical Nutrition",
+                          "journal_short_name": "Am J Clin Nutr",
+                          "pmid": 12499331,
+                          "doi": "10.1093/ajcn/77.1.128",
+                          "publication_info_string": "The American Journal of Clinical Nutrition. 2003;77(1):128-32. doi:10.1093/ajcn/77.1.128.",
+                          "publication_types": [
+                            "Research Support, U.S. Gov't, P.H.S.",
+                            "Research Support, Non-U.S. Gov't",
+                            "Clinical Trial",
+                            "Journal Article",
+                            "Randomized Controlled Trial"
+                          ],
+                          "resolved_publication_type": "",
+                          "href": "https://pubmed.ncbi.nlm.nih.gov/12499331"
+                        },
+                        "related_publications": [],
+                        "why_cited": {
+                          "impact_score": 5.68,
+                          "impact_score_type": "official_impact_factor",
+                          "recency_score": 8535,
+                          "recency_score_type": "days_since_published",
+                          "relevance_score": -1000
+                        }
+                      },
+                      "citation": "Wurtman RJ, Wurtman JJ, Regan MM, et al. <a target=\"_blank\" href=\"https://pubmed.ncbi.nlm.nih.gov/12499331\">Effects of Normal Meals Rich in Carbohydrates or Proteins on Plasma Tryptophan and Tyrosine Ratios</a>. The American Journal of Clinical Nutrition. 2003;77(1):128-32. doi:10.1093/ajcn/77.1.128."
+                    }
+                  ],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                },
+                {
+                  "text": " The mechanism operates through insulin-mediated selective uptake of LNAAs by muscle, while tryptophan levels remain stable, creating competitive advantage for brain uptake.",
+                  "citations": [
+                    {
+                      "metadata": {
+                        "id": 21488845,
+                        "id_type": 1,
+                        "origin": "xjmfz`sftfbsdi`gvmmufyu",
+                        "origin_type": 1,
+                        "content_metadata": {
+                          "section_path": [
+                            "Material and methods",
+                            "Tryptophan – a serotonin precursor"
+                          ],
+                          "is_abstract": false
+                        },
+                        "citation_detail": {
+                          "title": "Mood effects of the amino acids tryptophan and tyrosine",
+                          "authors_string": "Parker G, Brotchie H.",
+                          "dt_published": "2011-12-01T00:00:00+00:00",
+                          "repository": "Wiley",
+                          "journal_owner": "Wiley-Blackwell",
+                          "journal_name": "Acta Psychiatrica Scandinavica",
+                          "journal_short_name": "Acta Psychiatr Scand",
+                          "pmid": 21488845,
+                          "doi": "10.1111/j.1600-0447.2011.01706.x",
+                          "publication_info_string": "Acta Psychiatrica Scandinavica. 2011;124(6):417-26. doi:10.1111/j.1600-0447.2011.01706.x.",
+                          "publication_types": [
+                            "Research Support, Non-U.S. Gov't",
+                            "Review",
+                            "Journal Article"
+                          ],
+                          "resolved_publication_type": "Other_Review",
+                          "href": "https://onlinelibrary.wiley.com/doi/10.1111/j.1600-0447.2011.01706.x"
+                        },
+                        "related_publications": [],
+                        "why_cited": {
+                          "impact_score": 5.83,
+                          "impact_score_type": "official_impact_factor",
+                          "recency_score": 5279,
+                          "recency_score_type": "days_since_published",
+                          "relevance_score": -1000
+                        }
+                      },
+                      "citation": "Parker G, Brotchie H. <a target=\"_blank\" href=\"https://onlinelibrary.wiley.com/doi/10.1111/j.1600-0447.2011.01706.x\">Mood Effects of the Amino Acids Tryptophan and Tyrosine: 'Food for Thought' III</a>. Acta Psychiatrica Scandinavica. 2011;124(6):417-26. doi:10.1111/j.1600-0447.2011.01706.x."
+                    }
+                  ],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                }
+              ]
+            },
+            {
+              "paragraph_title": "",
+              "link_name": "",
+              "identifier": "",
+              "placeholder": false,
+              "order_in_section": 3,
+              "articlespan_set": [
+                {
+                  "text": "However,",
+                  "citations": [],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                },
+                {
+                  "text": " <strong>critical limitations</strong>",
+                  "citations": [],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                },
+                {
+                  "text": " undermine this hypothesis for real-world postprandial somnolence.",
+                  "citations": [],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                },
+                {
+                  "text": " As little as 5% protein content in a meal prevents the increase in tryptophan concentrations, making the mechanism unrealistic for typical mixed meals.",
+                  "citations": [
+                    {
+                      "metadata": {
+                        "id": 32684833,
+                        "id_type": 1,
+                        "origin": "xjmfz`sftfbsdi`gvmmufyu",
+                        "origin_type": 1,
+                        "content_metadata": {
+                          "section_path": [
+                            "2. Carbohydrates"
+                          ],
+                          "is_abstract": false
+                        },
+                        "citation_detail": {
+                          "title": "The Effects of Dietary Nutrition on Sleep and Sleep Disorders",
+                          "authors_string": "Zhao M, Tuo H, Wang S, Zhao L.",
+                          "dt_published": "2020-04-08T00:00:00+00:00",
+                          "repository": "Wiley",
+                          "journal_owner": null,
+                          "journal_name": "Mediators of Inflammation",
+                          "journal_short_name": "Mediators Inflamm",
+                          "pmid": 32684833,
+                          "doi": "10.1155/2020/3142874",
+                          "publication_info_string": "Mediators of Inflammation. 2020;2020:3142874. doi:10.1155/2020/3142874.",
+                          "publication_types": [
+                            "Journal Article",
+                            "Review"
+                          ],
+                          "resolved_publication_type": "Other_Review",
+                          "href": "https://onlinelibrary.wiley.com/doi/10.1155/2020/3142874"
+                        },
+                        "related_publications": [],
+                        "why_cited": {
+                          "impact_score": 4.54,
+                          "impact_score_type": "official_impact_factor",
+                          "recency_score": 2228,
+                          "recency_score_type": "days_since_published",
+                          "relevance_score": -1000
+                        }
+                      },
+                      "citation": "Zhao M, Tuo H, Wang S, Zhao L. <a target=\"_blank\" href=\"https://onlinelibrary.wiley.com/doi/10.1155/2020/3142874\">The Effects of Dietary Nutrition on Sleep and Sleep Disorders</a>. Mediators of Inflammation. 2020;2020:3142874. doi:10.1155/2020/3142874."
+                    }
+                  ],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                },
+                {
+                  "text": " Additionally, increased serotonin does not necessarily translate to melatonin production, which is regulated by darkness rather than meal timing.",
+                  "citations": [
+                    {
+                      "metadata": {
+                        "id": 32684833,
+                        "id_type": 1,
+                        "origin": "xjmfz`sftfbsdi`gvmmufyu",
+                        "origin_type": 1,
+                        "content_metadata": {
+                          "section_path": [
+                            "2. Carbohydrates"
+                          ],
+                          "is_abstract": false
+                        },
+                        "citation_detail": {
+                          "title": "The Effects of Dietary Nutrition on Sleep and Sleep Disorders",
+                          "authors_string": "Zhao M, Tuo H, Wang S, Zhao L.",
+                          "dt_published": "2020-04-08T00:00:00+00:00",
+                          "repository": "Wiley",
+                          "journal_owner": null,
+                          "journal_name": "Mediators of Inflammation",
+                          "journal_short_name": "Mediators Inflamm",
+                          "pmid": 32684833,
+                          "doi": "10.1155/2020/3142874",
+                          "publication_info_string": "Mediators of Inflammation. 2020;2020:3142874. doi:10.1155/2020/3142874.",
+                          "publication_types": [
+                            "Journal Article",
+                            "Review"
+                          ],
+                          "resolved_publication_type": "Other_Review",
+                          "href": "https://onlinelibrary.wiley.com/doi/10.1155/2020/3142874"
+                        },
+                        "related_publications": [],
+                        "why_cited": {
+                          "impact_score": 4.54,
+                          "impact_score_type": "official_impact_factor",
+                          "recency_score": 2228,
+                          "recency_score_type": "days_since_published",
+                          "relevance_score": -1000
+                        }
+                      },
+                      "citation": "Zhao M, Tuo H, Wang S, Zhao L. <a target=\"_blank\" href=\"https://onlinelibrary.wiley.com/doi/10.1155/2020/3142874\">The Effects of Dietary Nutrition on Sleep and Sleep Disorders</a>. Mediators of Inflammation. 2020;2020:3142874. doi:10.1155/2020/3142874."
+                    }
+                  ],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                },
+                {
+                  "text": " Only 2-3% of dietary tryptophan (approximately 0.5g daily in Western diets) is used for central serotonin production.",
+                  "citations": [
+                    {
+                      "metadata": {
+                        "id": 21488845,
+                        "id_type": 1,
+                        "origin": "xjmfz`sftfbsdi`gvmmufyu",
+                        "origin_type": 1,
+                        "content_metadata": {
+                          "section_path": [
+                            "Material and methods",
+                            "Tryptophan – a serotonin precursor"
+                          ],
+                          "is_abstract": false
+                        },
+                        "citation_detail": {
+                          "title": "Mood effects of the amino acids tryptophan and tyrosine",
+                          "authors_string": "Parker G, Brotchie H.",
+                          "dt_published": "2011-12-01T00:00:00+00:00",
+                          "repository": "Wiley",
+                          "journal_owner": "Wiley-Blackwell",
+                          "journal_name": "Acta Psychiatrica Scandinavica",
+                          "journal_short_name": "Acta Psychiatr Scand",
+                          "pmid": 21488845,
+                          "doi": "10.1111/j.1600-0447.2011.01706.x",
+                          "publication_info_string": "Acta Psychiatrica Scandinavica. 2011;124(6):417-26. doi:10.1111/j.1600-0447.2011.01706.x.",
+                          "publication_types": [
+                            "Research Support, Non-U.S. Gov't",
+                            "Review",
+                            "Journal Article"
+                          ],
+                          "resolved_publication_type": "Other_Review",
+                          "href": "https://onlinelibrary.wiley.com/doi/10.1111/j.1600-0447.2011.01706.x"
+                        },
+                        "related_publications": [],
+                        "why_cited": {
+                          "impact_score": 5.83,
+                          "impact_score_type": "official_impact_factor",
+                          "recency_score": 5279,
+                          "recency_score_type": "days_since_published",
+                          "relevance_score": -1000
+                        }
+                      },
+                      "citation": "Parker G, Brotchie H. <a target=\"_blank\" href=\"https://onlinelibrary.wiley.com/doi/10.1111/j.1600-0447.2011.01706.x\">Mood Effects of the Amino Acids Tryptophan and Tyrosine: 'Food for Thought' III</a>. Acta Psychiatrica Scandinavica. 2011;124(6):417-26. doi:10.1111/j.1600-0447.2011.01706.x."
+                    }
+                  ],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                }
+              ]
+            },
+            {
+              "paragraph_title": "",
+              "link_name": "",
+              "identifier": "",
+              "placeholder": false,
+              "order_in_section": 4,
+              "articlespan_set": [
+                {
+                  "text": "<strong>Vagal Afferent Pathway: Recent Mechanistic Evidence</strong>",
+                  "citations": [],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                }
+              ]
+            },
+            {
+              "paragraph_title": "",
+              "link_name": "",
+              "identifier": "",
+              "placeholder": false,
+              "order_in_section": 5,
+              "articlespan_set": [
+                {
+                  "text": "A 2025 study by Chen et al. provides direct circuit-level evidence for vagal mediation of postprandial sleep.",
+                  "citations": [],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                },
+                {
+                  "text": " In male mice, activation of stomach/duodenum-innervating vagal sensory neurons reduced wakefulness and increased NREM sleep, while chemogenetic inhibition abolished feeding-induced sleep promotion.",
+                  "citations": [
+                    {
+                      "metadata": {
+                        "id": 41407675,
+                        "id_type": 1,
+                        "origin": "qvcnfe`bctusbdut`ijoefy`46qdu`beb4tnbmm`w4",
+                        "origin_type": 1,
+                        "citation_detail": {
+                          "title": "The Gut Vagal Sensory Pathway Drives Postprandial Sleep via Activation of PVH-projecting GABAergic Neurons in the NTS",
+                          "authors_string": "Chen K, Xiang G, Hang Z, et al.",
+                          "dt_published": "2025-12-17T00:00:00+00:00",
+                          "repository": "PubMed",
+                          "journal_owner": null,
+                          "journal_name": "Nature Communications",
+                          "journal_short_name": "Nat Commun",
+                          "pmid": 41407675,
+                          "doi": "10.1038/s41467-025-66112-0",
+                          "publication_info_string": "Nature Communications. 2025;:10.1038/s41467-025-66112-0. doi:10.1038/s41467-025-66112-0.",
+                          "publication_types": [
+                            "Journal Article"
+                          ],
+                          "resolved_publication_type": "",
+                          "href": "https://pubmed.ncbi.nlm.nih.gov/41407675"
+                        },
+                        "related_publications": [],
+                        "why_cited": {
+                          "impact_score": 15.41,
+                          "impact_score_type": "official_impact_factor",
+                          "recency_score": 149,
+                          "recency_score_type": "days_since_published",
+                          "relevance_score": -1000
+                        }
+                      },
+                      "citation": "Chen K, Xiang G, Hang Z, et al. <a target=\"_blank\" href=\"https://pubmed.ncbi.nlm.nih.gov/41407675\">The Gut Vagal Sensory Pathway Drives Postprandial Sleep via Activation of PVH-projecting GABAergic Neurons in the NTS</a>. Nature Communications. 2025;:10.1038/s41467-025-66112-0. doi:10.1038/s41467-025-66112-0."
+                    }
+                  ],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                },
+                {
+                  "text": " Using anterograde transsynaptic tracing and single-nucleus RNA sequencing, investigators identified a specific pathway: upper gut vagal afferents → GABAergic neurons in the nucleus of solitary tract (NTS) → paraventricular nucleus of hypothalamus (PVH).",
+                  "citations": [],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                },
+                {
+                  "text": " Optogenetic activation of NTS GABAergic neurons and their PVH projections suppressed wakefulness and prolonged NREM sleep.",
+                  "citations": [
+                    {
+                      "metadata": {
+                        "id": 41407675,
+                        "id_type": 1,
+                        "origin": "qvcnfe`bctusbdut`ijoefy`46qdu`beb4tnbmm`w4",
+                        "origin_type": 1,
+                        "citation_detail": {
+                          "title": "The Gut Vagal Sensory Pathway Drives Postprandial Sleep via Activation of PVH-projecting GABAergic Neurons in the NTS",
+                          "authors_string": "Chen K, Xiang G, Hang Z, et al.",
+                          "dt_published": "2025-12-17T00:00:00+00:00",
+                          "repository": "PubMed",
+                          "journal_owner": null,
+                          "journal_name": "Nature Communications",
+                          "journal_short_name": "Nat Commun",
+                          "pmid": 41407675,
+                          "doi": "10.1038/s41467-025-66112-0",
+                          "publication_info_string": "Nature Communications. 2025;:10.1038/s41467-025-66112-0. doi:10.1038/s41467-025-66112-0.",
+                          "publication_types": [
+                            "Journal Article"
+                          ],
+                          "resolved_publication_type": "",
+                          "href": "https://pubmed.ncbi.nlm.nih.gov/41407675"
+                        },
+                        "related_publications": [],
+                        "why_cited": {
+                          "impact_score": 15.41,
+                          "impact_score_type": "official_impact_factor",
+                          "recency_score": 149,
+                          "recency_score_type": "days_since_published",
+                          "relevance_score": -1000
+                        }
+                      },
+                      "citation": "Chen K, Xiang G, Hang Z, et al. <a target=\"_blank\" href=\"https://pubmed.ncbi.nlm.nih.gov/41407675\">The Gut Vagal Sensory Pathway Drives Postprandial Sleep via Activation of PVH-projecting GABAergic Neurons in the NTS</a>. Nature Communications. 2025;:10.1038/s41467-025-66112-0. doi:10.1038/s41467-025-66112-0."
+                    }
+                  ],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                },
+                {
+                  "text": " This represents the first direct demonstration of the neural circuitry driving postprandial sleep.",
+                  "citations": [],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                }
+              ]
+            },
+            {
+              "paragraph_title": "",
+              "link_name": "",
+              "identifier": "",
+              "placeholder": false,
+              "order_in_section": 6,
+              "articlespan_set": [
+                {
+                  "text": "<strong>Glucose-Sensing Mechanisms</strong>",
+                  "citations": [],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                }
+              ]
+            },
+            {
+              "paragraph_title": "",
+              "link_name": "",
+              "identifier": "",
+              "placeholder": false,
+              "order_in_section": 7,
+              "articlespan_set": [
+                {
+                  "text": "Varin et al. (2015) demonstrated that glucose directly excites sleep-promoting neurons in the ventrolateral preoptic nucleus (VLPO) of mice.",
+                  "citations": [],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                },
+                {
+                  "text": " Glucose infusion into the VLPO promoted slow-wave sleep and increased c-Fos expression selectively in VLPO neurons.",
+                  "citations": [],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                },
+                {
+                  "text": " Patch-clamp recordings showed that VLPO neurons with sleep-promoting properties are selectively excited by glucose within physiological range through glucose catabolism leading to closure of ATP-sensitive potassium (K",
+                  "citations": [],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                },
+                {
+                  "text": "<em>ATP) channels. This mechanism provides direct metabolic state sensing by sleep centers.</em>",
+                  "citations": [
+                    {
+                      "metadata": {
+                        "id": 26156991,
+                        "id_type": 1,
+                        "origin": "qvcnfe`bctusbdut`ijoefy`46qdu`beb4tnbmm`w4",
+                        "origin_type": 1,
+                        "citation_detail": {
+                          "title": "Glucose Induces Slow-Wave Sleep by Exciting the Sleep-Promoting Neurons in the Ventrolateral Preoptic Nucleus: A New Link Between Sleep and Metabolism",
+                          "authors_string": "Varin C, Rancillac A, Geoffroy H, et al.",
+                          "dt_published": "2015-07-08T00:00:00+00:00",
+                          "repository": "PubMed",
+                          "journal_owner": null,
+                          "journal_name": "The Journal of Neuroscience : The Official Journal of the Society for Neuroscience",
+                          "journal_short_name": "J Neurosci",
+                          "pmid": 26156991,
+                          "doi": "10.1523/JNEUROSCI.0609-15.2015",
+                          "publication_info_string": "The Journal of Neuroscience : The Official Journal of the Society for Neuroscience. 2015;35(27):9900-11. doi:10.1523/JNEUROSCI.0609-15.2015.",
+                          "publication_types": [
+                            "Journal Article",
+                            "Research Support, Non-U.S. Gov't"
+                          ],
+                          "resolved_publication_type": "",
+                          "href": "https://pubmed.ncbi.nlm.nih.gov/26156991"
+                        },
+                        "related_publications": [],
+                        "why_cited": {
+                          "impact_score": 4.96,
+                          "impact_score_type": "official_impact_factor",
+                          "recency_score": 3964,
+                          "recency_score_type": "days_since_published",
+                          "relevance_score": -1000
+                        }
+                      },
+                      "citation": "Varin C, Rancillac A, Geoffroy H, et al. <a target=\"_blank\" href=\"https://pubmed.ncbi.nlm.nih.gov/26156991\">Glucose Induces Slow-Wave Sleep by Exciting the Sleep-Promoting Neurons in the Ventrolateral Preoptic Nucleus: A New Link Between Sleep and Metabolism</a>. The Journal of Neuroscience : The Official Journal of the Society for Neuroscience. 2015;35(27):9900-11. doi:10.1523/JNEUROSCI.0609-15.2015."
+                    }
+                  ],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                }
+              ]
+            },
+            {
+              "paragraph_title": "",
+              "link_name": "",
+              "identifier": "",
+              "placeholder": false,
+              "order_in_section": 8,
+              "articlespan_set": [
+                {
+                  "text": "<strong>Orexin/Hypocretin Inhibition</strong>",
+                  "citations": [],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                }
+              ]
+            },
+            {
+              "paragraph_title": "",
+              "link_name": "",
+              "identifier": "",
+              "placeholder": false,
+              "order_in_section": 9,
+              "articlespan_set": [
+                {
+                  "text": "Hypocretin/orexin neurons in the lateral hypothalamus promote wakefulness and arousal, with defects causing narcolepsy.",
+                  "citations": [
+                    {
+                      "metadata": {
+                        "id": 16364191,
+                        "id_type": 1,
+                        "origin": "qvcnfe`bctusbdut`ijoefy`46qdu`beb4tnbmm`w4",
+                        "origin_type": 1,
+                        "citation_detail": {
+                          "title": "Metabolic State Signalling Through Central Hypocretin/Orexin Neurons",
+                          "authors_string": "Burdakov D, Alexopoulos H.",
+                          "dt_published": "2005-12-21T00:00:00+00:00",
+                          "repository": "PubMed",
+                          "journal_owner": null,
+                          "journal_name": "Journal of Cellular and Molecular Medicine",
+                          "journal_short_name": "J Cell Mol Med",
+                          "pmid": 16364191,
+                          "doi": "10.1111/j.1582-4934.2005.tb00380.x",
+                          "publication_info_string": "Journal of Cellular and Molecular Medicine. 2005 Oct-Dec;9(4):795-803. doi:10.1111/j.1582-4934.2005.tb00380.x.",
+                          "publication_types": [
+                            "Research Support, Non-U.S. Gov't",
+                            "Review",
+                            "Journal Article"
+                          ],
+                          "resolved_publication_type": "",
+                          "href": "https://pubmed.ncbi.nlm.nih.gov/16364191"
+                        },
+                        "related_publications": [],
+                        "why_cited": {
+                          "impact_score": 5.21,
+                          "impact_score_type": "official_impact_factor",
+                          "recency_score": 7450,
+                          "recency_score_type": "days_since_published",
+                          "relevance_score": -1000
+                        }
+                      },
+                      "citation": "Burdakov D, Alexopoulos H. <a target=\"_blank\" href=\"https://pubmed.ncbi.nlm.nih.gov/16364191\">Metabolic State Signalling Through Central Hypocretin/Orexin Neurons</a>. Journal of Cellular and Molecular Medicine. 2005 Oct-Dec;9(4):795-803. doi:10.1111/j.1582-4934.2005.tb00380.x."
+                    }
+                  ],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                },
+                {
+                  "text": " These neurons alter their intrinsic electrical activity according to ambient nutrient levels and appetite-regulating hormones, representing strong candidates for neural correlates of postprandial sleepiness.",
+                  "citations": [
+                    {
+                      "metadata": {
+                        "id": 16364191,
+                        "id_type": 1,
+                        "origin": "qvcnfe`bctusbdut`ijoefy`46qdu`beb4tnbmm`w4",
+                        "origin_type": 1,
+                        "citation_detail": {
+                          "title": "Metabolic State Signalling Through Central Hypocretin/Orexin Neurons",
+                          "authors_string": "Burdakov D, Alexopoulos H.",
+                          "dt_published": "2005-12-21T00:00:00+00:00",
+                          "repository": "PubMed",
+                          "journal_owner": null,
+                          "journal_name": "Journal of Cellular and Molecular Medicine",
+                          "journal_short_name": "J Cell Mol Med",
+                          "pmid": 16364191,
+                          "doi": "10.1111/j.1582-4934.2005.tb00380.x",
+                          "publication_info_string": "Journal of Cellular and Molecular Medicine. 2005 Oct-Dec;9(4):795-803. doi:10.1111/j.1582-4934.2005.tb00380.x.",
+                          "publication_types": [
+                            "Research Support, Non-U.S. Gov't",
+                            "Review",
+                            "Journal Article"
+                          ],
+                          "resolved_publication_type": "",
+                          "href": "https://pubmed.ncbi.nlm.nih.gov/16364191"
+                        },
+                        "related_publications": [],
+                        "why_cited": {
+                          "impact_score": 5.21,
+                          "impact_score_type": "official_impact_factor",
+                          "recency_score": 7450,
+                          "recency_score_type": "days_since_published",
+                          "relevance_score": -1000
+                        }
+                      },
+                      "citation": "Burdakov D, Alexopoulos H. <a target=\"_blank\" href=\"https://pubmed.ncbi.nlm.nih.gov/16364191\">Metabolic State Signalling Through Central Hypocretin/Orexin Neurons</a>. Journal of Cellular and Molecular Medicine. 2005 Oct-Dec;9(4):795-803. doi:10.1111/j.1582-4934.2005.tb00380.x."
+                    }
+                  ],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                },
+                {
+                  "text": " The glucose-induced excitation of VLPO sleep-promoting neurons likely works in concert with orexin neuron inhibition during fed states.",
+                  "citations": [],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                }
+              ]
+            },
+            {
+              "paragraph_title": "",
+              "link_name": "",
+              "identifier": "",
+              "placeholder": false,
+              "order_in_section": 10,
+              "articlespan_set": [
+                {
+                  "text": "<strong>Gut Hormone Mechanisms</strong>",
+                  "citations": [],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                }
+              ]
+            },
+            {
+              "paragraph_title": "",
+              "link_name": "",
+              "identifier": "",
+              "placeholder": false,
+              "order_in_section": 11,
+              "articlespan_set": [
+                {
+                  "text": "Wells et al. (1997) conducted paired studies in 18 healthy volunteers comparing high-fat-low-carbohydrate versus low-fat-high-carbohydrate morning meals.",
+                  "citations": [],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                },
+                {
+                  "text": " Cholecystokinin (CCK) concentrations were significantly higher after high-fat meals, while insulin was higher after high-carbohydrate meals.",
+                  "citations": [],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                },
+                {
+                  "text": " Subjects reported greater sleepiness 2-3 hours after high-fat-low-carbohydrate meals, with significantly greater fatigue ratings at 3 hours, consistent with CCK-mediated lassitude.",
+                  "citations": [
+                    {
+                      "metadata": {
+                        "id": 9145937,
+                        "id_type": 1,
+                        "origin": "qvcnfe`bctusbdut`ijoefy`46qdu`beb4tnbmm`w4",
+                        "origin_type": 1,
+                        "citation_detail": {
+                          "title": "Influences of Fat and Carbohydrate on Postprandial Sleepiness, Mood, and Hormones",
+                          "authors_string": "Wells AS, Read NW, Uvnas-Moberg K, Alster P.",
+                          "dt_published": "1997-05-01T00:00:00+00:00",
+                          "repository": "PubMed",
+                          "journal_owner": null,
+                          "journal_name": "Physiology & Behavior",
+                          "journal_short_name": "Physiol Behav",
+                          "pmid": 9145937,
+                          "doi": "10.1016/s0031-9384(96)00519-7",
+                          "publication_info_string": "Physiology & Behavior. 1997;61(5):679-86. doi:10.1016/s0031-9384(96)00519-7.",
+                          "publication_types": [
+                            "Journal Article"
+                          ],
+                          "resolved_publication_type": "",
+                          "href": "https://pubmed.ncbi.nlm.nih.gov/9145937"
+                        },
+                        "related_publications": [],
+                        "why_cited": {
+                          "impact_score": 2.98,
+                          "impact_score_type": "official_impact_factor",
+                          "recency_score": 10606,
+                          "recency_score_type": "days_since_published",
+                          "relevance_score": -1000
+                        }
+                      },
+                      "citation": "Wells AS, Read NW, Uvnas-Moberg K, Alster P. <a target=\"_blank\" href=\"https://pubmed.ncbi.nlm.nih.gov/9145937\">Influences of Fat and Carbohydrate on Postprandial Sleepiness, Mood, and Hormones</a>. Physiology & Behavior. 1997;61(5):679-86. doi:10.1016/s0031-9384(96)00519-7."
+                    }
+                  ],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                },
+                {
+                  "text": " This suggests CCK may contribute independently of the tryptophan mechanism.",
+                  "citations": [],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                }
+              ]
+            },
+            {
+              "paragraph_title": "",
+              "link_name": "",
+              "identifier": "",
+              "placeholder": false,
+              "order_in_section": 12,
+              "articlespan_set": [
+                {
+                  "text": "<strong>Alternative Hypotheses</strong>",
+                  "citations": [],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                }
+              ]
+            },
+            {
+              "paragraph_title": "",
+              "link_name": "",
+              "identifier": "",
+              "placeholder": false,
+              "order_in_section": 13,
+              "articlespan_set": [
+                {
+                  "text": "Bazar et al. (2004) challenged the traditional \"blood redistribution\" myth, noting that cerebral perfusion is preferentially maintained during diverse physiologic states (e.g., exercise) and that no measurable change occurs in common carotid artery blood flow postprandially.",
+                  "citations": [
+                    {
+                      "metadata": {
+                        "id": 15488646,
+                        "id_type": 1,
+                        "origin": "qvcnfe`bctusbdut`ijoefy`46qdu`beb4tnbmm`w4",
+                        "origin_type": 1,
+                        "citation_detail": {
+                          "title": "Debunking a Myth: Neurohormonal and Vagal Modulation of Sleep Centers, Not Redistribution of Blood Flow, May Account for Postprandial Somnolence",
+                          "authors_string": "Bazar KA, Yun AJ, Lee PY.",
+                          "dt_published": "2004-10-19T00:00:00+00:00",
+                          "repository": "PubMed",
+                          "journal_owner": "Elsevier",
+                          "journal_name": "Medical Hypotheses",
+                          "journal_short_name": "Med Hypotheses",
+                          "pmid": 15488646,
+                          "doi": "10.1016/j.mehy.2004.04.015",
+                          "publication_info_string": "Medical Hypotheses. 2004;63(5):778-82. doi:10.1016/j.mehy.2004.04.015.",
+                          "publication_types": [
+                            "Journal Article"
+                          ],
+                          "resolved_publication_type": "",
+                          "href": "https://pubmed.ncbi.nlm.nih.gov/15488646"
+                        },
+                        "related_publications": [],
+                        "why_cited": {
+                          "impact_score": 4.1,
+                          "impact_score_type": "official_impact_factor",
+                          "recency_score": 8059,
+                          "recency_score_type": "days_since_published",
+                          "relevance_score": -1000
+                        }
+                      },
+                      "citation": "Bazar KA, Yun AJ, Lee PY. <a target=\"_blank\" href=\"https://pubmed.ncbi.nlm.nih.gov/15488646\">Debunking a Myth: Neurohormonal and Vagal Modulation of Sleep Centers, Not Redistribution of Blood Flow, May Account for Postprandial Somnolence</a>. Medical Hypotheses. 2004;63(5):778-82. doi:10.1016/j.mehy.2004.04.015."
+                    }
+                  ],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                },
+                {
+                  "text": " They proposed that postprandial release of gut-brain hormones (melatonin, orexins) and vagal activation modulate hypothalamic sleep centers.",
+                  "citations": [
+                    {
+                      "metadata": {
+                        "id": 15488646,
+                        "id_type": 1,
+                        "origin": "qvcnfe`bctusbdut`ijoefy`46qdu`beb4tnbmm`w4",
+                        "origin_type": 1,
+                        "citation_detail": {
+                          "title": "Debunking a Myth: Neurohormonal and Vagal Modulation of Sleep Centers, Not Redistribution of Blood Flow, May Account for Postprandial Somnolence",
+                          "authors_string": "Bazar KA, Yun AJ, Lee PY.",
+                          "dt_published": "2004-10-19T00:00:00+00:00",
+                          "repository": "PubMed",
+                          "journal_owner": "Elsevier",
+                          "journal_name": "Medical Hypotheses",
+                          "journal_short_name": "Med Hypotheses",
+                          "pmid": 15488646,
+                          "doi": "10.1016/j.mehy.2004.04.015",
+                          "publication_info_string": "Medical Hypotheses. 2004;63(5):778-82. doi:10.1016/j.mehy.2004.04.015.",
+                          "publication_types": [
+                            "Journal Article"
+                          ],
+                          "resolved_publication_type": "",
+                          "href": "https://pubmed.ncbi.nlm.nih.gov/15488646"
+                        },
+                        "related_publications": [],
+                        "why_cited": {
+                          "impact_score": 4.1,
+                          "impact_score_type": "official_impact_factor",
+                          "recency_score": 8059,
+                          "recency_score_type": "days_since_published",
+                          "relevance_score": -1000
+                        }
+                      },
+                      "citation": "Bazar KA, Yun AJ, Lee PY. <a target=\"_blank\" href=\"https://pubmed.ncbi.nlm.nih.gov/15488646\">Debunking a Myth: Neurohormonal and Vagal Modulation of Sleep Centers, Not Redistribution of Blood Flow, May Account for Postprandial Somnolence</a>. Medical Hypotheses. 2004;63(5):778-82. doi:10.1016/j.mehy.2004.04.015."
+                    }
+                  ],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                }
+              ]
+            },
+            {
+              "paragraph_title": "",
+              "link_name": "",
+              "identifier": "",
+              "placeholder": false,
+              "order_in_section": 14,
+              "articlespan_set": [
+                {
+                  "text": "The inflammatory hypothesis suggests high-glycemic-index diets stimulate inflammatory immune responses (IL-1β, IL-6) that may affect sleep quality, though direct mechanistic studies linking postprandial cytokines to acute somnolence are lacking in the retrieved literature.",
+                  "citations": [
+                    {
+                      "metadata": {
+                        "id": 32684833,
+                        "id_type": 1,
+                        "origin": "xjmfz`sftfbsdi`gvmmufyu",
+                        "origin_type": 1,
+                        "content_metadata": {
+                          "section_path": [
+                            "2. Carbohydrates"
+                          ],
+                          "is_abstract": false
+                        },
+                        "citation_detail": {
+                          "title": "The Effects of Dietary Nutrition on Sleep and Sleep Disorders",
+                          "authors_string": "Zhao M, Tuo H, Wang S, Zhao L.",
+                          "dt_published": "2020-04-08T00:00:00+00:00",
+                          "repository": "Wiley",
+                          "journal_owner": null,
+                          "journal_name": "Mediators of Inflammation",
+                          "journal_short_name": "Mediators Inflamm",
+                          "pmid": 32684833,
+                          "doi": "10.1155/2020/3142874",
+                          "publication_info_string": "Mediators of Inflammation. 2020;2020:3142874. doi:10.1155/2020/3142874.",
+                          "publication_types": [
+                            "Journal Article",
+                            "Review"
+                          ],
+                          "resolved_publication_type": "Other_Review",
+                          "href": "https://onlinelibrary.wiley.com/doi/10.1155/2020/3142874"
+                        },
+                        "related_publications": [],
+                        "why_cited": {
+                          "impact_score": 4.54,
+                          "impact_score_type": "official_impact_factor",
+                          "recency_score": 2228,
+                          "recency_score_type": "days_since_published",
+                          "relevance_score": -1000
+                        }
+                      },
+                      "citation": "Zhao M, Tuo H, Wang S, Zhao L. <a target=\"_blank\" href=\"https://onlinelibrary.wiley.com/doi/10.1155/2020/3142874\">The Effects of Dietary Nutrition on Sleep and Sleep Disorders</a>. Mediators of Inflammation. 2020;2020:3142874. doi:10.1155/2020/3142874."
+                    }
+                  ],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                }
+              ]
+            },
+            {
+              "paragraph_title": "",
+              "link_name": "",
+              "identifier": "",
+              "placeholder": false,
+              "order_in_section": 15,
+              "articlespan_set": [
+                {
+                  "text": "<strong>Synthesis</strong>",
+                  "citations": [],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                }
+              ]
+            },
+            {
+              "paragraph_title": "",
+              "link_name": "",
+              "identifier": "",
+              "placeholder": false,
+              "order_in_section": 16,
+              "articlespan_set": [
+                {
+                  "text": "Current evidence suggests postprandial somnolence results from",
+                  "citations": [],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                },
+                {
+                  "text": " <strong>multiple parallel mechanisms</strong>",
+                  "citations": [],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                },
+                {
+                  "text": " rather than a single pathway.",
+                  "citations": [],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                },
+                {
+                  "text": " The vagal afferent pathway provides the most direct circuit-level evidence, while glucose sensing by VLPO neurons and orexin inhibition offer complementary metabolic signaling.",
+                  "citations": [],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                },
+                {
+                  "text": " The tryptophan/LNAA hypothesis, while biochemically sound for pure carbohydrate loads, appears insufficient to explain somnolence after typical mixed meals containing protein.",
+                  "citations": [],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                },
+                {
+                  "text": " CCK release after fat ingestion represents an additional hormonal mechanism.",
+                  "citations": [],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                },
+                {
+                  "text": " The relative contribution of each pathway likely varies with meal composition, timing, and individual metabolic state.",
+                  "citations": [],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                }
+              ]
+            },
+            {
+              "paragraph_title": "",
+              "link_name": "",
+              "identifier": "",
+              "placeholder": false,
+              "order_in_section": 17,
+              "articlespan_set": [
+                {
+                  "text": "Would you like to explore the specific experimental protocols and outcome measures used to assess postprandial somnolence in human controlled trials, including objective measures like polysomnography versus subjective sleepiness scales?",
+                  "citations": [],
+                  "is_block_quote": false,
+                  "is_highlighted": false,
+                  "placeholder": false,
+                  "hidden": false,
+                  "articlespanentry_set": []
+                }
+              ]
+            }
+          ],
+          "articlefigureparagraph_set": []
+        }
+      ],
+      "medically_reviewed_by": "",
+      "image_url": "",
+      "dt_published": "2026-05-15T11:21:53.109082+00:00",
+      "generation_steps": [
+        {
+          "kind": "reasoning",
+          "label": "Analyzing query",
+          "done": true
+        },
+        {
+          "kind": "search",
+          "label": "Searching published medical literature, guidelines, FDA, CDC, and more",
+          "done": true
+        },
+        {
+          "kind": "synthesizing",
+          "label": "Synthesizing relevant information",
+          "done": true
+        },
+        {
+          "kind": "done",
+          "label": "Done",
+          "done": true
+        }
+      ]
+    },
+    "page_type": "ask_oe_light_with_citations"
+  },
+  "partial_output": null,
+  "original_article": null,
+  "personalization_applied": false,
+  "associated_org": null,
+  "access_level": "CREATOR_ONLY",
+  "shared_with_emails": [],
+  "user_can_change_access_level": true,
+  "resolved_access_level": "CREATOR_ONLY",
+  "collections": [],
+  "can_share_publicly": true,
+  "annotation_task_sets": [],
+  "title": "Postprandial Somnolence Mechanisms",
+  "voice_mode": false,
+  "dotflow_id": null,
+  "dotflow_name": null,
+  "dotflow_quick_description": null
+}

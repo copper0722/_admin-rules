@@ -44,7 +44,7 @@ import time
 import urllib.parse
 from pathlib import Path
 
-WIKI_RAW_ROOT_DEFAULT = Path.home() / "repos" / "personal-website" / "wiki_raw"
+WIKI_RAW_ROOT_DEFAULT = Path.home() / "repos" / "vault"
 WIKI_RAW_ROOT = Path(os.environ.get("WIKI_RAW_ROOT", str(WIKI_RAW_ROOT_DEFAULT)))
 SOURCE_NAME = "uptodate"
 
@@ -286,8 +286,18 @@ def cmd_topic(host: str | None, url: str, save: bool,
     chrome_navigate(url, host=host)
     # UTD topic pages do not use <h1>; wait on body length + topic-id
     # footer marker, which only appears once the topic content is loaded.
+    #
+    # Bug 2026-05-14 (Copper): if the eval'd tab already had ANY UTD topic
+    # loaded (e.g. "Evaluation of the patient with vertigo"), the body
+    # length + Topic-Version regex were already satisfied so the predicate
+    # returned true on stale content and extract_js read the OLD topic.
+    # Fix: tie the wait to `location.href` containing the requested URL's
+    # slug, so we only proceed once Chrome has navigated to the new URL.
+    target_slug = _slug_for_url(url)
+    slug_re = json.dumps(target_slug)  # JS-safe quoting
     ok = wait_for_js(
-        "document.body.innerText.length > 4000 &&"
+        f"location.href.indexOf({slug_re}) !== -1 &&"
+        " document.body.innerText.length > 4000 &&"
         " /Topic\\s+\\d+\\s+Version\\s+[\\d.]+/.test(document.body.innerText)",
         host=host, timeout_s=NAV_WAIT_DEFAULT,
     )
@@ -622,7 +632,7 @@ def main(argv: list[str] | None = None) -> int:
     p_t.add_argument("url")
     p_t.add_argument("--no-save", action="store_true")
     p_t.add_argument("--save-to-wiki-raw", action="store_true",
-                     help="save raw.md into personal-website/wiki_raw/"
+                     help="save raw.md into vault/"
                           "<target-dir>/<url-slug>/raw.md as a reference"
                           " snapshot; flips off the artifact-dir branch")
     p_t.add_argument("--target-dir", default=None,

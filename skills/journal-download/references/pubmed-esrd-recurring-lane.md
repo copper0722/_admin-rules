@@ -54,7 +54,7 @@ Store PMID/PMCID/DOI in `publisher_metadata` or equivalent provenance columns so
 
 ## Raw Markdown writes
 
-- Target canonical raw-KB route from Law/cards, not stale archived paths. For Copper this is hm4 `~/repos/personal-website/wiki_raw/` unless the task is explicitly about legacy staging migration.
+- Target canonical raw-KB route from Law/cards, not stale archived paths. For Copper this is hm4 `~/repos/vault/` unless the task is explicitly about legacy staging migration.
 - Use deterministic paths per article.
 - Write to a temp file and atomic-rename to `raw.md`.
 - If `raw.md` exists:

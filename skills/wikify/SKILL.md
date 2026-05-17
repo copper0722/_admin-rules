@@ -503,6 +503,70 @@ summary: "..."
 
 ### Mode A-Manual — `/wikify` (zero-binary scattered manual input)
 
+> **2026-05-17 amendment — social-media pearl pipeline (Copper directive evening
+> session):**
+>
+> When Copper pastes a **social-media post by a physician / 衛教 KOL**
+> (FB / Threads / IG / X / Line / 醫聯網 / blog), the default action is no
+> longer just "save to vault". The protocol is:
+>
+> 1. **Save pearl bundle** at
+>    `~/我的雲端硬碟/agent-share/pearls/<YYYY>/<YYYY-MM-DD>_<handle>_<phrase>/`
+>    (year bucket, no author subfolder). Bundle layout per
+>    `agent-share/pearls/AGENTS.md` §«Per-pearl bundle layout»:
+>    `raw.md` (frontmatter + verbatim body + optional `## Comments` block) +
+>    `manifest.json` + (if image attached) `images/img_N.{jpg,png}` saved as
+>    **binary** (post 2026-05-17 supersedes the older "OCR-only no binary"
+>    rule for pearls — images are part of the pearl) + (if comments)
+>    `comments.jsonl`. Set
+>    `verification_status: unverified` initially.
+> 2. **Fact-check** the post's substantive clinical claims against
+>    textbook / guideline / primary literature. Default sources, in
+>    priority order:
+>    a. `wiki_raw.raw_index` PG search for the primary citation named in
+>       the post (DOI / PMID / journal+year). If hit, read full text.
+>    b. If primary not local, retrieve via Copper-provided URL (e.g. ACPjournals
+>       full text via logged-in browser), save to
+>       `agent-share/journal/<journal>/<column>/<slug>/raw.md` +
+>       `manifest.json` with extracted key findings.
+>    c. Cross-reference with vault-resident textbook chapter (Harrison /
+>       Mandell / specialty textbook) per the existing Mode A-Manual
+>       step 5.
+>    d. OpenEvidence / UpToDate / DynaMed as L5 navigators (not direct
+>       citation per memory `feedback_wiki_search_tri_source`).
+> 3. **Build claim-by-claim table** in vault topic note: every substantive
+>    claim → corroborated / partial / contradicted vs primary, with the
+>    specific quote / table / value.
+> 4. **Write note + wiki** at
+>    `vault/<topic_path>/<topic_slug>/{note.md, article.md, refs.json}`:
+>    - `note.md` = reader-facing zh-TW (single file, H2 sections incl.
+>      Take home / Slides / Body / Clinical scenarios / References;
+>      `public_sections: [take_home, slides, body]` whitelist).
+>    - `article.md` = M2M compressed English (≤ 200 lines per
+>      `feedback_wiki_human_length_cap`; auto-publish `draft: false`).
+>    - Reference both the pearl bundle path and the primary citation in
+>      `references` and `sources`.
+> 5. **Flip pearl bundle `manifest.verification_status`** from
+>    `unverified` → `corroborated` / `partial` / `refuted` based on
+>    fact-check; add `verification_note` with summary; add
+>    `derivative_note_path` + `derivative_wiki_path` pointing to vault
+>    topic folder.
+> 6. **Append chain-log** at
+>    `agent-share/pearls/_agent-status/_chain-log.tsv` (7 col;
+>    `bundled_manual` status).
+> 7. **Do not** create an author subfolder under `pearls/` for new
+>    sources (Copper directive 2026-05-17:「不設專區」). Only the
+>    grandfathered `mysportscience/` retains a subfolder.
+>
+> If the social-media post is **non-medical / non-professional** (channel
+> announcement, poll teaser, personal life, political / advocacy,
+> off-topic news), reject in chat — do NOT save to pearls/. The agent is
+> the gating layer for noise (`feedback_fb_pearls_cancelled_manual_only`).
+>
+> The original Mode A-Manual workflow below remains the reference for the
+> raw mirror + textbook cross-reference mechanics; the new protocol above
+> wraps it with the pearls/ + fact-check + note + wiki cycle.
+
 **Trigger**: Copper pastes scattered manual input directly into chat — most commonly a social-media post (Facebook / Line / Instagram / Threads / X), a screenshot of a chat / lab report / 公告, a transcribed quote, or a free-form note. There is no PDF, no audio, no URL the agent must fetch — the source text and any embedded image content arrive inline in the conversation. `/wikify` (or bare paste of recognizable scattered manual input) routes here. NOTE 2026-05-07: pre-split alias `/wiki text:...` no longer routes here; `/wiki` is now the LLM-wiki Q&A skill (retrieval direction).
 
 **Why a separate mode**: Mode A-PDF and Mode A-Audio assume a binary source artefact and a transcription tool (MinerU / whisper-cpp). Manual social-media input has no binary worth keeping by default — the screenshot is a vehicle for text, not a primary source. The fidelity contract therefore shifts: **embedded image content must be OCR / multimodal-extracted into raw.md verbatim text**, not stored as a binary payload, unless Copper explicitly asks to keep the original screenshot. (Copper directive 2026-05-02: "影像直接文字化進 raw".)

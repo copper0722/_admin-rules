@@ -10,7 +10,7 @@ Subcommands:
     search <query>             Navigate DynaMed search URL, return top topic links.
     topic <url>                Open topic URL, extract title + overview +
                                cited refs. With --save-to-wiki-raw, write
-                               raw.md into personal-website/wiki_raw/
+                               raw.md into vault/
                                <target-dir>/<citation_key>/raw.md and
                                INSERT a PG row.
 
@@ -36,7 +36,7 @@ URL_MATCH = "dynamed.com"
 SOURCE_NAME = "dynamed"
 TOPIC_PATH_HINTS = ("/approach-to/", "/conditions/", "/management/", "/drugs/")
 ARTIFACT_ROOT = Path(os.environ.get("DYNAMED_ARTIFACT_DIR", "./dynamed-artifacts"))
-WIKI_RAW_ROOT_DEFAULT = Path.home() / "repos" / "personal-website" / "wiki_raw"
+WIKI_RAW_ROOT_DEFAULT = Path.home() / "repos" / "vault"
 WIKI_RAW_ROOT = Path(os.environ.get("WIKI_RAW_ROOT", str(WIKI_RAW_ROOT_DEFAULT)))
 OSA_TIMEOUT = 30
 NAV_WAIT_DEFAULT = 20

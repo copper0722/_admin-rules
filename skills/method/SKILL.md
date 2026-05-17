@@ -15,6 +15,7 @@ Reflect on this conversation for literature/data errors corrected by Copper. Ext
    - Data presentation errors (wrong denominator, stale data, observed vs derived)
    - Cross-country comparison errors (false equivalence, missing structural context)
    - Academic presentation errors (subjective interpretation where objectivity needed)
+   - Draft-review errors: responding to a strawman or inferred claim rather than the actual draft text; failing to anchor feedback in what the counterparty actually wrote
 
 2. **Extract** per error:
    - **Failure mode**: what was wrong (specific example from this session)
@@ -31,6 +32,7 @@ Reflect on this conversation for literature/data errors corrected by Copper. Ext
 ## RULES
 
 - Only extract from ACTUAL corrections in THIS session. Don't invent hypothetical errors.
+- For professional/draft review, first restate what the source draft actually says and identify exact phrases being changed. Do not frame feedback as preventing a claim unless the draft actually makes or strongly implies that claim.
 - Each lesson must have a concrete failure mode from the conversation, not a generic principle.
 - If no corrections happened → report "本次 session 無文獻評讀糾正" and exit.
 - M2M English for wiki files, zh-TW for report to Copper.
