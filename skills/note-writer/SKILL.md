@@ -189,7 +189,9 @@ aliases:
 
 # ── Share-pipeline gate (Vault §8.8 — REQUIRED, never omit) ──
 publish: false              # boolean opt-in gate. NEVER true unless Copper sets it.
-                            # textbook-share-sync.py launchd :15 routes publish:true notes to repo.
+                            # downstream publishing pipeline gates on publish:true; library-share
+                            # canonical (gdrive, hm4/mbp-mounted) replaces the prior textbook-share-sync
+                            # script lane (retired 2026-05-17 with the library-share migration).
 # publish_to: nephro-cme    # enum: textbook-notes | nephro-cme. ONLY set when publish: true.
 
 # ── 教科書專用 ──
