@@ -17,9 +17,36 @@ At session start, read the latest relevant handover from the configured private 
 3. Decisions and rationale.
 4. Completed work summary.
 
-## Write Contract
+## Write Contract — three-part ritual
 
-At session end, write one structured record:
+`/handover write` (also `write` / `end` / `收工` subject) executes **three parts in sequence**. All three must run; skipping any one is a contract violation. The private runtime card declares storage endpoints and script paths; this public card defines only the ritual shape.
+
+### Part 1 — knowledge extraction (`/wiki`)
+
+Scan this session's transcript for:
+
+- New knowledge / fact / method worth adding to the LLM-wiki layer.
+- Corrections or additions to existing wiki entries.
+- Cross-link opportunities between wikis mentioned in the session.
+
+For each candidate, locate the relevant wiki entry and update (or create a stub if the topic is new). Register newly created entries in the wiki index. If nothing wiki-worthy surfaced this session, skip silently — no empty stubs.
+
+### Part 2 — methodology reflection (`/method`)
+
+Scan the session for operator corrections / guidance about:
+
+- Wiki methodology, EBM appraisal, causal-inference framing.
+- Source verification (OCR fidelity, primary-vs-secondary, citation hygiene, anti-fabrication).
+- Data accuracy (precision, derived vs confirmed, fabrication risks).
+- Note format, language register, audience routing.
+- Routine-vs-gap filtering, scope / priority calls.
+- Any methodological principle the operator pushed back on this session.
+
+For each correction, append a dated bullet to the closest existing memory feedback entry, or create a new feedback memory if no match exists. Register new memories in the memory index (one-line hook). If no methodology correction landed this session, skip silently.
+
+### Part 3 — handover record (durable, structured)
+
+Write one structured record to the configured private handover backend (offline fallback when the backend is unreachable). The record shape:
 
 ```json
 {
@@ -35,6 +62,8 @@ At session end, write one structured record:
   "next_priorities": "actionable next steps"
 }
 ```
+
+`role` segments the feed so each session type reads only its own handovers; the derivation rule from session-name prefix is declared by the private runtime card. Fields that map to a richer review pattern (`to_do`, `bug`, `done`, `comment`) live in the private schema and are out of scope for this public contract.
 
 ## Rules
 
