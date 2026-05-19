@@ -1,10 +1,31 @@
 ---
 type: data
 name: method
-description: "Reflect on methodology corrections in this session — extract lessons from Copper's guidance on literature appraisal, data citation, source verification. Update wiki methodology. MANDATORY TRIGGERS: /method, 反省文獻, method reflect, 方法論反省."
+description: "EBM methodology reference + reflection skill. Reference doc = `methodology.md` (EBM appraisal framework from Straus 6e + Guyatt Users' Guides + Hernán Causal Inference: What If). MANDATORY TRIGGERS: /method, 反省文獻, method reflect, 方法論反省, EBM appraisal, debunk methodology."
 ---
 
-# /method — Methodology Reflection
+# /method — Methodology Reference + Reflection
+
+This skill has two modes:
+
+## Mode A — Methodology reference (use when writing debunk articles, wiki critiques, evidence grading)
+
+**Read [`methodology.md`](./methodology.md)** for the full EBM appraisal framework. Apply uniformly:
+
+- Two questions: Is it valid? Is it important?
+- Glasziou race analogy (fair start / race / finish)
+- PICO format
+- Therapy validity (Straus 6e Ch4 Table 4.1, 7 RCT questions)
+- Harm validity (Straus 6e Ch7 Table 7.1, 4 questions + Hill criteria)
+- Evidence hierarchy (1a SR-of-RCT → 5 expert opinion; n=1 self-experiment below 5)
+- Three independent streams (epi + Mendelian randomization + RCT)
+- Hernán causal hygiene (counterfactual, confounding, selection, measurement, time-zero, collider, competing risks)
+- Failure modes (n=1, survivor cohort, surrogate endpoint, time-window misread, "game changer" rhetoric, selective skepticism, lay distortion)
+- Application: full-paragraph quote → claim type → cited evidence → framework applied → criteria failed → convergent counter-evidence
+
+Use this reference whenever writing a rebuttal or wiki-human article that grades evidence.
+
+## Mode B — Methodology reflection (post-session lessons capture)
 
 Reflect on this conversation for literature/data errors corrected by Copper. Extract actionable rules. Update wiki.
 
