@@ -1,6 +1,6 @@
 # _admin-rules Agent Card
 
-Scope: public rules, skills, commands, and reusable agent behavior.
+Scope: public rules, commands, agent prompt templates, and reusable agent behavior. (Skill packages relocated to private `_admin-private/skills/` on 2026-05-21.)
 
 ## Canonical Role
 
@@ -13,7 +13,7 @@ Scope: public rules, skills, commands, and reusable agent behavior.
 - Rules live in `rules/`.
 - Agent prompt templates live in `agents/`.
 - Claude/Codex commands live in `commands/`.
-- Skill packages live in `skills/`.
+- Skill packages live in `_admin-private/skills/` — private portable LLM state shared across all agents (relocated 2026-05-21); this repo no longer holds a `skills/` folder.
 - Terminology: card = `AGENTS.md`; Law = workspace root `AGENTS.md`.
 - `CLAUDE.md` is a Claude auto-injection shim/symlink, not the editable card.
 - Do not duplicate root Law; reference the workspace root `AGENTS.md` for global policy.
