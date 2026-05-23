@@ -1,18 +1,11 @@
-# peak-hours
+# compute, model-tier & external-model policy
 
-## Peak hour window (Copper directive 2026-04-20)
-
-- **Peak = 21:00-02:00 TST** (5 hours, narrowed from prior 14:00-02:00). US-side prime usage → CC tokens ~2× cost + rate-limit pressure.
-- **CC posture during peak = stay OFFLINE**. No new CC scheduled jobs in window. No interactive heavy CC work unless emergency. Existing schedules audited by vault-steward.
-- **Non-CC workers absorb intensive work in peak window** (CC's quota saved for off-peak):
-  - **Codex (gpt-5.4)** — code review, dep audit, adversarial review, fact-check
-  - **Gemini CLI (Flash/Pro, free via sub)** — web search, grounded queries, n8n
-  - **Hermes (OpenRouter)** — secretary, briefing, general
-  - **Cloud Gemma 4** — quota-limited, fallback to Sonnet on 429
-  - **Local Gemma 4 (Ollama)** — async housekeeping queue (summarize/tag/image-desc)
-- **Vault-steward must keep CC schedules out of 21:00-02:00**; if a CC job's natural cadence lands in peak → either shift to nearest off-peak slot OR replace with non-CC equivalent.
-- Burn window = Tue 03:00-09:00 only (off-peak, low-traffic day).
-- Off-peak = 02:00-21:00 TST (19 hours) — preferred for any CC work.
+> **Peak-hour / peak-window throttling is ABOLISHED (Copper directive 2026-05-22).**
+> There is NO time-of-day restriction on Claude Code work — CC runs whenever
+> there is work to do. Anthropic removed Pro/Max peak-hour limits (2026-05-07);
+> the lingering "peak window 21:00-02:00" belief was a stale wrong cognition and
+> a major bug. Gate scheduled LLM jobs on token budget only, never on clock
+> hour. Reintroducing any clock-hour gate is a regression — do not.
 
 ## Tool priority order
 - Obsidian/dashboard = human UI; CC = agent work

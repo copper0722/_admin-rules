@@ -45,7 +45,7 @@ Default mode = `manual` (if omitted). Examples: `dd:auto`, `plan:manual`, `bug` 
 
 ## /burn Behavior
 
-Monday burn window (off-peak hours): `vault-todo.py` scans all cards → filters `mode=auto`:
+Burn run (gated on token budget, never on clock hour): `vault-todo.py` scans all cards → filters `mode=auto`:
 1. `dd:auto` → Opus agent per topic → deep dive → write to project KB
 2. `review:auto` → Sonnet agent → read past + new → update note
 3. `bug:auto` → fix
