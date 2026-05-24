@@ -70,7 +70,18 @@ _tx() {
   if [ "$target" = "$DEVICE" ]; then
     _tx_attach_or_create_local "$session" "$legacy_session" "$cmd"
   else
-    ssh -t "$target" "if tmux has-session -t '$session' 2>/dev/null; then exec tmux attach-session -t '$session'; fi; if tmux has-session -t '$legacy_session' 2>/dev/null; then exec tmux attach-session -t '$legacy_session'; fi; exec tmux new-session -s '$session' -c \$HOME/repos \"$cmd\""
+    # Remote dispatch via Mosh (Copper directive 2026-05-24): mosh gives
+    # client-side connection persistence — survives wifi/cellular switches,
+    # client sleep/wake, IP changes — so iPad/laptop can resume tmux session
+    # across days without re-dialing. Falls back to ssh if `mosh` not found
+    # locally OR mosh-server not installed on the remote (mosh prints a
+    # clear error in that case; user can install or fall back manually).
+    local remote_cmd="if tmux has-session -t '$session' 2>/dev/null; then exec tmux attach-session -t '$session'; fi; if tmux has-session -t '$legacy_session' 2>/dev/null; then exec tmux attach-session -t '$legacy_session'; fi; exec tmux new-session -s '$session' -c \$HOME/repos \"$cmd\""
+    if command -v mosh >/dev/null 2>&1; then
+      mosh "$target" -- sh -c "$remote_cmd"
+    else
+      ssh -t "$target" "$remote_cmd"
+    fi
   fi
 }
 
