@@ -30,7 +30,7 @@ Standard format for all `AGENTS.md` TODO items. Scanned by `vault-todo.py` and d
 
 | mode | meaning | behavior |
 |---|---|---|
-| `auto` | scheduled agents can execute directly | /burn, trigger sees → does |
+| `auto` | scheduled agents can execute directly | q30m auto-routine cron sees → does |
 | `manual` | needs Copper confirmation | interactive session asks first |
 
 Default mode = `manual` (if omitted). Examples: `dd:auto`, `plan:manual`, `bug` (= bug:manual).
@@ -43,14 +43,23 @@ Default mode = `manual` (if omitted). Examples: `dd:auto`, `plan:manual`, `bug` 
 4. Completed items: keep 30 days, then may be cleared.
 5. TODOs live in `## TODO` section of `AGENTS.md` (§10.9 card structure).
 
-## /burn Behavior
+## q30m auto-routine cron behavior (formerly /burn)
 
-Burn run (gated on token budget, never on clock hour): `vault-todo.py` scans all cards → filters `mode=auto`:
-1. `dd:auto` → Opus agent per topic → deep dive → write to project KB
-2. `review:auto` → Sonnet agent → read past + new → update note
+The q30m `claude-auto-routine` LLM cron lane (charter-driven `auto-routine-spawn.sh`, spawned by hmj launchd; legacy plist `com.copper.task-train-llm` retained as rollback only; PG singleton lock job_name=`claude-auto-routine`; Claude session runs on hmj or cm1) is the canonical token-burn engine. There is no separate `/burn` skill (Copper directive
+2026-05-25「拿掉 burn 技能，將內涵整合進 agent cron task」); agent cron IS
+the burn. Inside the session, after the charter-priority items in
+`_admin-private/claude-auto-routine/AGENTS.md` yield no candidates,
+`vault-todo.py` scans all cards → filters `mode=auto`:
+1. `dd:auto` → deep dive on the topic → write to project KB
+2. `review:auto` → read past + new → update note
 3. `bug:auto` → fix
 4. `plan:auto` → execute
 5. `manual` → skip (wait for interactive session)
+
+These items rank below the charter priority list (active-target
+source-entry work, RAG repair, MinerU health, GPT-Pro NOTE admission,
+web-page bug hunting, etc.); they enter the Discovery menu when
+higher-priority items yield no candidates.
 
 ## Project KB Pipeline (§10.10)
 
