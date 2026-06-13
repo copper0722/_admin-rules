@@ -25,11 +25,14 @@
 
 ## External model policy (Copper directive 2026-04-16, scoped exception 2026-04-18, primary-axis 2026-06-13)
 
-**Primary external axis — Gemini Pro via Antigravity CLI (Copper directive 2026-06-13)**：
-- **Gemini Pro (Gemini 3 Pro) = 日常 pipeline 主軸外部模型**；預設模式 = **Google Search grounding**（「先以 google search 為主，但其它也都可以」）。
-- 走 **OAuth CLI**（file-based creds，cron/SSH-safe，非 macOS Keychain）：`agy`（Antigravity CLI）優先 = forward path（Gemini CLI 於 2026-06-18 停止對 Google AI Pro/Ultra 服務），未登入時 fall back 現役 `gemini` CLI。**無 API-key 路徑**（generativelanguage 金鑰未部署於任何 Copper-personal Mac）。
-- 確定性 wrapper：`.script/gemini-pro.py`（auto backend、預設 model `gemini-3-pro-preview`、grounding 預設開、`--json`）。pipeline lane / skill 一律呼叫 wrapper，不直接呼叫底層 CLI。
-- 此 directive **不撤銷**下方 Gemma/Codex 限制；它新增主軸，並把「web-grounded search」預設 worker 由 cloud Gemma 換成 Gemini Pro。
+**Primary external axis — Antigravity 額度優先、吃乾抹淨 (Copper directive 2026-06-13)**：
+- **日常 pipeline 主軸 = Antigravity 額度**；以 **Gemini 3.1 Pro (High)** 為主、預設 **Google Search grounding**。**優先把 Antigravity 額度吃乾抹淨**：兩個訂閱帳號（`copper.wang` + `hemodialysis.taiwan`）round-robin 輪替 + per-account quota cooldown，兩帳號都榨乾/cooling 後才 fallback。
+- 路徑（全 OAuth、file-based creds、cron/SSH-safe、**無 macOS Keychain、無 API-key**）：
+  1. `agy -p`（Antigravity CLI）輪替 2 帳號。帳號以 **HOME profile 隔離**（agy creds 落 `$HOME/.gemini/antigravity-cli/antigravity-oauth-token`；帳號#2 跑在 `HOME=~/.agy-profiles/hemodialysis`，靠 `~/.agy-profiles/<acct>/.local/bin/agy` symlink 指回真 binary）。agy 互動式登入需一次性 browser OAuth（`agy` TUI 選 Google OAuth → 貼 code）。forward path——Gemini CLI 於 2026-06-18 停止對 AI Pro/Ultra 服務。
+  2. 兩帳號 exhausted/cooling → fallback `gemini -p`（model `gemini-3-pro-preview`，`~/.gemini/oauth_creds.json` 現役）。
+- 確定性 wrapper：`.script/gemini-pro.py`（auto rotation + cooldown、`--status` / `--account` / `--backend` / `--json`、grounding 預設開）。pipeline lane / skill 一律呼叫 wrapper，不直接呼叫底層 CLI。
+- agy 也能用 **Claude Sonnet/Opus 4.6 (Thinking)、GPT-OSS 120B**（同一份 Antigravity 額度）；且 agy 本身是 full agentic coding CLI（worktree / 改檔 / MCP / skills / subagents），可做 local agent work。
+- 此 directive **不撤銷**下方 Gemma 4 / Codex call-out 限制；它新增主軸並把「web-grounded search」預設 worker 由 cloud Gemma 換成 Antigravity。
 
 **Default rule (interactive sessions + ad-hoc agent work)**：
 - **禁止 vault 內 call out cloud Gemma 4** (Google AI API gemma-4-31b-it)
