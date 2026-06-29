@@ -43,7 +43,17 @@ Default mode = `manual` (if omitted). Examples: `dd:auto`, `plan:manual`, `bug` 
 4. Completed items: keep 30 days, then may be cleared.
 5. TODOs live in `## TODO` section of `AGENTS.md` (§10.9 card structure).
 
-## q30m auto-routine cron behavior (formerly /burn)
+## q30m auto-routine cron behavior (formerly /burn) — RETIRED 2026-06-29
+
+> **RETIRED 2026-06-29 (Copper directive 「token-gate and auto-routine 全都停止」).**
+> The q30m `claude-auto-routine` LLM cron lane AND the token-budget gate are
+> FULLY STOPPED. No launchd fires `auto-routine-spawn.sh`; the spawner itself
+> early-exits; `mode=auto` TODO scanning by this lane no longer happens (there
+> is no LLM runner — `mode:auto` TODOs are now executed only by interactive /
+> manually-invoked sessions). The q5m deterministic `com.copper.task-train-script`
+> lane is UNAFFECTED. Section below is historical. Retirement detail +
+> revert recipe: retirement commit + `_admin-private/claude-auto-routine/AGENTS.md`
+> RETIRED banner.
 
 The q30m `claude-auto-routine` LLM cron lane (charter-driven `auto-routine-spawn.sh`, spawned by hmj launchd; legacy plist `com.copper.task-train-llm` retained as rollback only; PG singleton lock job_name=`claude-auto-routine`; Claude session runs on hmj or cm1) is the canonical token-burn engine. There is no separate `/burn` skill (Copper directive
 2026-05-25「拿掉 burn 技能，將內涵整合進 agent cron task」); agent cron IS
