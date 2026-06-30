@@ -4,8 +4,10 @@
 > There is NO time-of-day restriction on Claude Code work — CC runs whenever
 > there is work to do. Anthropic removed Pro/Max peak-hour limits (2026-05-07);
 > the lingering "peak window 21:00-02:00" belief was a stale wrong cognition and
-> a major bug. Gate scheduled LLM jobs on token budget only, never on clock
-> hour. Reintroducing any clock-hour gate is a regression — do not.
+> a major bug. Do not gate scheduled LLM jobs on clock hour; reintroducing
+> any clock-hour gate is a regression. The token-budget gate + the q30m
+> auto-routine lane it gated were retired 2026-06-29 — no token-budget
+> gating remains.
 
 ## Tool priority order
 - Obsidian/dashboard = human UI; CC = agent work
