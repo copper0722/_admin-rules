@@ -8,11 +8,11 @@ Always query in this order; stop when answer found:
    state). PG is canonical.
 2. `wiki_raw.raw_index` for raw payload lookup by citation key, title, source
    type, tags, and corpus bundle path
-   (`~/我的雲端硬碟/agent-share/<subtype>/<source_uid>/`; vault retired
+   (`~/agent-share/<subtype>/<source_uid>/`; vault retired
    2026-05-22).
 3. Zotero API + frontmatter for bibliographic metadata when PG lacks a row.
 4. bounded file search → `rg` / `find` inside the relevant repo, usually
-   `~/我的雲端硬碟/agent-share/<subtype>/` for knowledge-corpus payloads
+   `~/agent-share/<subtype>/` for knowledge-corpus payloads
    (vault retired 2026-05-22; corpus = canonical).
 5. Historical SQLite/CSV/TSV exports only as read-only migration evidence; do
    not treat them as canonical and do not create new ones.
