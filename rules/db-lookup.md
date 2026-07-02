@@ -20,6 +20,18 @@ Always query in this order; stop when answer found:
    journals, scheduler, and audit state. Public rules must not publish
    hostnames, DSNs, replication topology, or private fallback paths.
 
+## Semantic / conceptual retrieval (knowledge corpus)
+
+The numbered ladder above finds a *known* structured row. For a *conceptual*
+clinical / medical question ("what does the corpus say about X"), prefer
+semantic retrieval over ad-hoc `rg`: use the private runtime's unified
+corpus-retrieve entrypoint, which runs three axes over the local corpus —
+dense-vector (pgvector), full-text (Postgres FTS), and a textbook-TOC index —
+merges/ranks them, and **logs every query** so retrieval efficacy is
+measurable. Vector is the primary recall path for zh-TW (the FTS config does
+not segment CJK). The concrete command, scope, and evidence layers live in the
+private ops card; public rules keep the axis principle only.
+
 ## Write authority
 - The private runtime declares write authority per database.
 - Public rules may define normalization, provenance, and audit principles, but not private database endpoints.
